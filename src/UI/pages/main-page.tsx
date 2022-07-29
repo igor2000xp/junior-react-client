@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import { useQuery } from '@apollo/client';
 // import { GetProductsByCategoryDocument } from '../../graphql/generated';
 
 class MainPage extends Component {
   render() {
     return (
-      <div>
-        <header className="App-header">
+      <>
+        {/*<header className="App-header">*/}
+        <article>
           <h1>All cat page</h1>
-          <nav
-            style={{
-              borderBottom: 'solid 1px',
-              paddingBottom: '1rem',
-            }}
-          >
-            <Link to="/invoices">Invoices</Link> |{' '}
-            <Link to="/expenses">Expenses</Link>
-          </nav>
-        </header>
-      </div>
+          <h2>Main page</h2>
+          {/*<nav*/}
+          {/*  style={{*/}
+          {/*    borderBottom: 'solid 1px',*/}
+          {/*    paddingBottom: '1rem',*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  <Link to="/tech">Tech category</Link> |{' '}*/}
+          {/*  <Link to="/clothes">Clothes</Link>*/}
+          {/*</nav>*/}
+        </article>
+        {/*</header>*/}
+      </>
     );
   }
 }

@@ -4,8 +4,10 @@ import './App.css';
 import MainPage from './UI/pages/main-page';
 // import { useQuery } from '@apollo/client';
 // import { GetProductsByCategoryDocument } from './graphql/generated';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import TechPage from './UI/pages/tech-page';
+import ClothesPage from './UI/pages/clothes-page';
+import Header from './UI/pages/common/header';
 
 function App() {
   // const [currentPage, setCurrentPage] = useState(1);
@@ -14,7 +16,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Header</h1>
+      {/*<h1>Header</h1>*/}
+      <Header />
       {/*<Switch>*/}
       {/*  <Route path={`/${currentPage}`}*/}
       {/*         render={() => <Characters currentPage={currentPage}*/}
@@ -25,8 +28,12 @@ function App() {
       {/*  <Redirect exact from='/' to={`/${currentPage}`} />*/}
       {/*</Switch>*/}
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/home" element={<MainPage />} />
+        <Route path="/" element={<Navigate replace to="/home" />} />
+
+        {/*<Route path="/" element={<MainPage />} />*/}
         <Route path="tech" element={<TechPage />} />
+        <Route path="clothes" element={<ClothesPage />} />
       </Routes>
 
       <h2>Footer</h2>
