@@ -4,7 +4,9 @@ class TechPage extends Component {
   render() {
     return (
       <>
-        <h1>Tech page</h1>
+        <article>
+          <h1>Tech category page</h1>
+        </article>
       </>
     );
   }

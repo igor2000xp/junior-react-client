@@ -12,8 +12,17 @@ class Header extends Component {
             paddingBottom: '1rem',
           }}
         >
-          <Link to="/tech">Tech category</Link> |{' '}
-          <Link to="/clothes">Clothes</Link>
+          <ul>
+            <li>
+              <Link to="/">All category</Link>
+            </li>
+            <li>
+              <Link to="/tech">Tech category</Link>
+            </li>
+            <li>
+              <Link to="/clothes">Clothes category</Link>
+            </li>
+          </ul>
         </nav>
       </div>
     );
