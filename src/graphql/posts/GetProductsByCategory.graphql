@@ -1,0 +1,15 @@
+query GetProductsByCategory(
+  $category: String = "all"
+) {
+  category(
+    input: {
+      title:
+      $category
+    }
+  ) {
+    products {
+      id
+      # name
+    }
+  }
+}
