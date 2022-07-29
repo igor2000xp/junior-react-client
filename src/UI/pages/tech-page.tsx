@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-class TechPage extends Component{
+class TechPage extends Component {
   render() {
     return (
-      <div>
-        
-      </div>
+      <>
+        <h1>Tech page</h1>
+      </>
     );
   }
 }
