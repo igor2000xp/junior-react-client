@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { useQuery, gql } from '@apollo/client';
-import StrapiApolloProvider from '../../../graphql/apollo';
+import React from 'react';
+// import { useQuery, gql } from '@apollo/client';
+// import StrapiApolloProvider from '../../../graphql/apollo';
 
 // const GET_CHARACTER = gql`
 // query {
@@ -32,12 +32,12 @@ const ProductSmallCard = () => {
   // })
 
   return (
-    <StrapiApolloProvider>
+    // <StrapiApolloProvider>
       <div>
 
 
       </div>
-    </StrapiApolloProvider>
+    // </StrapiApolloProvider>
   );
 };
 
