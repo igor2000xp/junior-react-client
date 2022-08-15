@@ -1,44 +1,12 @@
-import React from 'react';
-// import { useQuery, gql } from '@apollo/client';
-// import StrapiApolloProvider from '../../../graphql/apollo';
+import React, { Component } from 'react';
 
-// const GET_CHARACTER = gql`
-// query {
-//   characters {
-//     results {
-//       id
-//       name
-//       image
-//     }
-//   }
-// }
-// `;
-
-const ProductSmallCard = () => {
-
-  // const something = useQuery(GET_CHARACTER);
-  // client.query({
-  //   query: gql`
-  //   query {
-  //     characters {
-  //       results {
-  //         id
-  //         name
-  //         image
-  //       }
-  //     }
-  //   }
-  //   `,
-  // })
-
-  return (
-    // <StrapiApolloProvider>
+class ProductSmallCard extends Component{
+  render() {
+    return (
       <div>
 
-
       </div>
-    // </StrapiApolloProvider>
-  );
-};
+    );
+  }
+}
 
-export default ProductSmallCard;
