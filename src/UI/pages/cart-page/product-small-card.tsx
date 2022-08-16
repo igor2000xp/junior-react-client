@@ -1,12 +1,22 @@
 import React, { Component } from 'react';
+import classes from './product-small-card.module.css';
 
-class ProductSmallCard extends Component{
+export class ProductSmallCard extends Component {
   render() {
     return (
-      <div>
-
-      </div>
+      <section className={classes.card}>
+        <div className={classes.imageWrapper}>
+          <img src="" alt="product image" />
+        </div>
+        <summary className={classes.textBlock}>
+          <div className={classes.nameBlock}>
+            <p>Apollo Running Short</p>
+          </div>
+          <div className={classes.priceBlock}>
+            <p>$50.0</p>
+          </div>
+        </summary>
+      </section>
     );
   }
 }
-
