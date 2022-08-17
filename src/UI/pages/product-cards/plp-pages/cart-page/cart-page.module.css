@@ -1,0 +1,72 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  /*border: #2B2B2B 1px solid;*/
+  border-top: #E5E5E5 1px solid;
+}
+.wrapper h1 {
+  color: black;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  text-transform: uppercase;
+}
+.wrapper h2 {
+  color: black;
+}
+.leftSide {
+  padding: 24px 0 0 0;
+  /*border: blue 1px solid;*/
+}
+.rightSide {
+  padding: 24px 0 0 0;
+  width: 269px;
+  /*border: blue 1px solid;*/
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.buttonSide {
+  height: 288px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*border: black 1px solid;*/
+}
+.buttonQuality {
+  margin: 0 auto;
+  width: 45px;
+  height: 45px;
+  text-align: center;
+  background-color: white;
+  border: black 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.plus {
+  width: 15px;
+  height: 15px;
+  background-image: url("../../../../../data/images/Icon/plus-svgrepo-com.svg");
+}
+.minus {
+  width: 15px;
+  height: 15px;
+  background-image: url("../../../../../data/images/Icon/minus-svgrepo-com.svg");
+}
+.numberInBasket {
+  text-align: center;
+}
+.numberInBasket p {
+  text-align: center;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 160%;
+}
+.imageBlock {
+  width: 200px;
+  height: 288px;
+  border: #0F6450 1px solid;
+}

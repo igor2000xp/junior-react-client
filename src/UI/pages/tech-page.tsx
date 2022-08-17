@@ -4,7 +4,7 @@ import {
   GetProductsByCategoryDocument,
   GetProductsByCategoryQuery,
 } from '../../graphql/generated';
-import { ProductSmallCard } from './product-cards/page-cart/product-small-card';
+import { ProductSmallCard } from './product-cards/product-small-cart/product-small-card';
 import './Page.css';
 
 import { Link } from 'react-router-dom';

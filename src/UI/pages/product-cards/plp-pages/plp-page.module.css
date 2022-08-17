@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.wrapper h1 {
+  color: black;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  text-transform: uppercase;
+}
+.wrapper h2 {
+  color: black;
+}
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /*border-top: #E5E5E5 1px solid;*/
+}

@@ -3,6 +3,7 @@ import styles from './pdp-card.module.css';
 import BasicBlock from './cartBlocks/basic-block';
 import ButtonBlock from './cartBlocks/button-block';
 import TextBlock from './cartBlocks/text-block';
+import { Link } from 'react-router-dom';
 
 class PdpCard extends Component {
   render() {
@@ -24,7 +25,9 @@ class PdpCard extends Component {
         </section>
         <section className={styles.rightBlock}>
           <BasicBlock />
-          <ButtonBlock />
+          <Link to="/cart">
+            <ButtonBlock />
+          </Link>
           <TextBlock />
         </section>
       </div>
