@@ -1,13 +1,13 @@
 .header {
-  padding: 0 101px;
+  /*padding: 0 101px;*/
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  /*border: red 1px solid;*/
+  border: red 1px solid;
 }
 .navigation {
-  margin: 26px 0 0 0;
-  /*border: blue 1px solid;*/
+  /*margin: 26px 0 0 0;*/
+  border: blue 1px solid;
 }
 .menu {
   margin: 0;

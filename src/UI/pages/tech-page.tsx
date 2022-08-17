@@ -5,7 +5,8 @@ import {
   GetProductsByCategoryQuery,
 } from '../../graphql/generated';
 import { ProductSmallCard } from './product-cards/page-cart/product-small-card';
-// import styles from './common/header.module.css';
+import './Page.css';
+
 import { Link } from 'react-router-dom';
 
 class TechPage extends Component {
