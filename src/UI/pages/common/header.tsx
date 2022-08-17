@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './header.module.css';
-// import img from '../../../data/images/Icon/dolars.svg'
 
 class Header extends Component {
   render() {

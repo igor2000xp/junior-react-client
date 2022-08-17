@@ -4,7 +4,9 @@ import {
   GetProductsByCategoryDocument,
   GetProductsByCategoryQuery,
 } from '../../graphql/generated';
-import { ProductSmallCard } from './cart-page/product-small-card';
+import { ProductSmallCard } from './product-cards/page-cart/product-small-card';
+// import styles from './common/header.module.css';
+import { Link } from 'react-router-dom';
 
 class TechPage extends Component {
   async myQuery() {
@@ -21,7 +23,9 @@ class TechPage extends Component {
         <article>
           <h1>Tech category page</h1>
           {/*<p>{this.myQuery()}</p>*/}
-          <ProductSmallCard />
+          <Link to="/pdp">
+            <ProductSmallCard />
+          </Link>
         </article>
       </>
     );

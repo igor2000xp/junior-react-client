@@ -8,14 +8,14 @@ export class ProductSmallCard extends Component {
         <div className={classes.imageWrapper}>
           <img src="" alt="product image" />
         </div>
-        <summary className={classes.textBlock}>
+        <article className={classes.textBlock}>
           <div className={classes.nameBlock}>
             <p>Apollo Running Short</p>
           </div>
           <div className={classes.priceBlock}>
             <p>$50.0</p>
           </div>
-        </summary>
+        </article>
       </section>
     );
   }
