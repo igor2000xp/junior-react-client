@@ -68,5 +68,34 @@
 .imageBlock {
   width: 200px;
   height: 288px;
+  position: relative;
   border: #0F6450 1px solid;
+  /*background-color: #5ECE7B;*/
+}
+.arrow {
+  position: absolute;
+  height: 24px;
+  width: 24px;
+  bottom: 16px;
+  border: 0px;
+  background: rgba(0, 0, 0, 0.55);
+}
+.arrowLeft {
+  right: 48px;
+}
+.arrowRight {
+  right: 16px;
+}
+.arrowSvgLeft {
+  width: 15px;
+  height: 15px;
+  background-image: url("../../../../../data/images/Icon/left-arrow-next-svgrepo-com.svg");
+  opacity: 1;
+}
+.arrowSvgRight {
+  width: 15px;
+  height: 15px;
+  fill: white;
+  background-image: url("../../../../../data/images/Icon/right-arrow-next-svgrepo-com.svg");
+  opacity: 1;
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styles from './cart-page.module.css';
 import BasicBlock from '../../pdp-card/cartBlocks/basic-block';
+// import '../../../../../data/images/Icon/right-arrow-next-svgrepo-com.svg'
 
 class CartPage extends Component {
   render() {
@@ -27,9 +28,13 @@ class CartPage extends Component {
           <section>
             <div className={styles.imageBlock}>
               <img src="" alt="product image" />
+              <button className={`${styles.arrow} ${styles.arrowLeft}`}>
+                <div className={`${styles.arrowSvgLeft}`}></div>
+              </button>
+              <button className={`${styles.arrow} ${styles.arrowRight}`}>
+                <div className={`${styles.arrowSvgRight}`}></div>
+              </button>
             </div>
-            {/*<button></button>*/}
-            {/*<button></button>*/}
           </section>
         </aside>
       </article>
