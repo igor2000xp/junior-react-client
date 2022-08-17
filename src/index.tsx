@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client';
 import client from './graphql/apollo';
+import { Normalize } from 'styled-normalize';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -15,6 +16,7 @@ root.render(
   <React.StrictMode>
     <Router>
       <ApolloProvider client={client}>
+        <Normalize />
         <App />
       </ApolloProvider>
     </Router>
