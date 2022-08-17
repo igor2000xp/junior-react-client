@@ -1,0 +1,12 @@
+.wrapper {
+  width: 100%;
+  min-height: 103px;
+  /*height: 100%;*/
+  /*border: red 1px solid;*/
+}
+p {
+  text-align: left;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 159.96%;
+}

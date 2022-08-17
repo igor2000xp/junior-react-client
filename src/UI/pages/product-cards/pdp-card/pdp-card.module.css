@@ -29,7 +29,7 @@
   margin: 0 0 0 100px;
   width: 292px;
   height: 595px;
-  border: blue 1px solid;
+  /*border: blue 1px solid;*/
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
