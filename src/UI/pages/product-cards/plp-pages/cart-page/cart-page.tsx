@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import styles from './cart-page.module.css';
 import BasicBlock from '../../pdp-card/cartBlocks/basic-block';
-// import '../../../../../data/images/Icon/right-arrow-next-svgrepo-com.svg'
 
 class CartPage extends Component {
   render() {
@@ -9,7 +8,6 @@ class CartPage extends Component {
       <article className={styles.wrapper}>
         <aside className={styles.leftSide}>
           <BasicBlock />
-          {/*<h2>left</h2>*/}
         </aside>
 
         <aside className={styles.rightSide}>

@@ -7,6 +7,7 @@ import ClothesPage from './UI/pages/clothes-page';
 import Header from './UI/pages/common/header';
 import PdpCard from './UI/pages/product-cards/pdp-card/pdp-card';
 import PlpPage from './UI/pages/product-cards/plp-pages/plp-page';
+import MiniCart from './UI/pages/product-cards/minicart-pages/mini-cart';
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route path="clothes" element={<ClothesPage />} />
           <Route path="pdp" element={<PdpCard />} />
           <Route path="cart" element={<PlpPage />} />
+          <Route path="mini-cart" element={<MiniCart />} />
         </Routes>
         {/*<h2>Footer</h2>*/}
       </div>

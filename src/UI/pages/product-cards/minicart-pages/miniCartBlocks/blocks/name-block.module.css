@@ -1,0 +1,24 @@
+.wrapper {
+  height: 52px;
+}
+.brand {
+  text-align: left;
+}
+.name {
+  text-align: left;
+}
+.brand h2 {
+  margin: 0;
+  color: black;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  text-transform: none;
+}
+.name h3 {
+  margin: 0;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  text-transform: none;
+}
