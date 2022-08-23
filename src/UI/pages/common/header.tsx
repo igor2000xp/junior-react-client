@@ -9,18 +9,18 @@ class Header extends Component {
         <nav className={styles.navigation}>
           <ul className={styles.menu}>
             <li>
-              <Link className={styles.link} to="/">
-                WOMEN
+              <Link className={styles.link} to="/category/:all">
+                all
               </Link>
             </li>
             <li>
-              <Link className={styles.link} to="/tech">
-                MEN
+              <Link className={styles.link} to="/category/:tech">
+                tech
               </Link>
             </li>
             <li className={styles.chosenLink}>
-              <Link className={styles.link} to="/clothes">
-                KIDS
+              <Link className={styles.link} to="/category/:clothes">
+                clothes
               </Link>
             </li>
           </ul>

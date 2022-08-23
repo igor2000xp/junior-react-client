@@ -1,0 +1,21 @@
+.wrapper {
+  color: blue;
+  text-align: center;
+}
+.wrapper h1 {
+  color: black;
+  text-align: center;
+}
+.btnGo {
+  height: 40px;
+  border-radius: 5px;
+  background-color: #5ECE7B;
+}
+/*.wrapper a:link, a:visited, a:hover, a:active {*/
+/*  text-decoration: underline;*/
+/*  color: blue;*/
+/*}*/
+/*{*/
+/*  text-decoration: blue underline;*/
+/*  color: blue;*/
+/*}*/

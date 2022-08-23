@@ -24,11 +24,13 @@
   color: black;
   /*margin: 0 16px;*/
 }
-.link {
+.header link {
   text-decoration: none;
+  text-transform: uppercase;
 }
-a:link, a:visited, a:hover, a:active {
+li a:link, a:visited, a:hover, a:active {
   text-decoration: none;
+  text-transform: uppercase;
   color: black;
 }
 .chosenLink {
