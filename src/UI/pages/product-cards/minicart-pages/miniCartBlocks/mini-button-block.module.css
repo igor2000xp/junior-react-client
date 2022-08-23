@@ -12,7 +12,7 @@
   font-weight: 600;
   font-size: 14px;
   line-height: 120%;
-
+  text-transform: uppercase;
 }
 .viewButton {
   margin: 0 12px 0 0;

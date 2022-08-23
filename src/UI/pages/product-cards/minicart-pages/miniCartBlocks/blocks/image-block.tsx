@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import stylesImage from './image-block.module.css';
+import img1 from '../../../../../../data/images/Icon/dolars.svg';
 
 class ImageBlock extends Component {
   render() {
@@ -19,7 +20,7 @@ class ImageBlock extends Component {
 
         <section>
           <div className={stylesImage.imageBlock}>
-            <img src="" alt="product image" />
+            <img src={img1} alt="product image" />
           </div>
         </section>
       </aside>
