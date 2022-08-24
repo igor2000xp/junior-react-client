@@ -11,11 +11,6 @@
   border-radius: 5px;
   background-color: #5ECE7B;
 }
-/*.wrapper a:link, a:visited, a:hover, a:active {*/
-/*  text-decoration: underline;*/
-/*  color: blue;*/
-/*}*/
-/*{*/
-/*  text-decoration: blue underline;*/
-/*  color: blue;*/
-/*}*/
+.img404Block {
+  margin: 30px 0 0 0;
+}

@@ -9,7 +9,14 @@ query GetProductsByCategory(
   ) {
     products {
       id
-      # name
+      name
+      prices {
+        currency {
+          label
+          symbol
+        }
+        amount
+      }
     }
   }
 }

@@ -1,4 +1,7 @@
-h1 {
+.mainWrapper {
+  /*text-transform: uppercase;*/
+}
+.mainWrapper h1 {
   margin: 80px 0 101px 0;
   text-align: left;
   font-style: normal;

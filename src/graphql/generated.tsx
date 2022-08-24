@@ -2,9 +2,7 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K]
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 const defaultOptions = {} as const;
@@ -96,7 +94,7 @@ export type GetProductsByCategoryQueryVariables = Exact<{
 }>;
 
 
-export type GetProductsByCategoryQuery = { __typename?: 'Query', category?: { __typename?: 'Category', products: Array<{ __typename?: 'Product', id: string } | null> } | null };
+export type GetProductsByCategoryQuery = { __typename?: 'Query', category?: { __typename?: 'Category', products: Array<{ __typename?: 'Product', id: string, name: string, prices: Array<{ __typename?: 'Price', amount: number, currency: { __typename?: 'Currency', label: string, symbol: string } }> } | null> } | null };
 
 
 export const GetProductsByCategoryDocument = gql`
@@ -104,6 +102,14 @@ export const GetProductsByCategoryDocument = gql`
   category(input: {title: $category}) {
     products {
       id
+      name
+      prices {
+        currency {
+          label
+          symbol
+        }
+        amount
+      }
     }
   }
 }

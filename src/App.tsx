@@ -9,12 +9,6 @@ import NoMatch from './UI/pages/no-match/no-match';
 import MainPage from './UI/pages/main-page';
 
 class App extends Component {
-  // private category: string;
-  //
-  // constructor(props: any) {
-  //   super(props);
-  //   this.category = 'all';
-  // }
   render() {
     return (
       <div className="App">
