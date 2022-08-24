@@ -22,15 +22,15 @@ class App extends Component {
         <Routes>
           <Route path="/category/:categoryId" element={<MainPage />} />
           <Route path="/" element={<Navigate replace to="/category/:all" />} />
-          <Route path="/junior-react-client" element={<Navigate replace to="/category/:all" />} />
-          {/*<Route path="tech" element={<TechPage />} />*/}
-          {/*<Route path="clothes" element={<ClothesPage />} />*/}
+          <Route
+            path="/junior-react-client"
+            element={<Navigate replace to="/category/:all" />}
+          />
           <Route path="pdp" element={<PdpCard />} />
           <Route path="cart" element={<PlpPage />} />
           <Route path="mini-cart" element={<MiniCart />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
-        {/*<h2>Footer</h2>*/}
       </div>
     );
   }

@@ -1,6 +1,7 @@
-import React, { Component, PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import client from '../../graphql/apollo';
 import { Link } from 'react-router-dom';
+import equal from 'fast-deep-equal';
 import {
   GetProductsByCategoryDocument,
   GetProductsByCategoryQuery,
@@ -8,8 +9,6 @@ import {
 import { ProductSmallCard } from './product-cards/product-small-cart/product-small-card';
 import './Page.css';
 import { withRouter, WithRouterProps } from './with-router/with-router';
-import equal from 'fast-deep-equal';
-import { ApolloQueryResult } from '@apollo/client';
 
 interface IParams {
   categoryId: string;
