@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-// import MainPage from './UI/pages/main-page';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import TechPage from './UI/pages/tech-page';
-// import ClothesPage from './UI/pages/clothes-page';
 import Header from './UI/pages/common/header';
 import PdpCard from './UI/pages/product-cards/pdp-card/pdp-card';
 import PlpPage from './UI/pages/product-cards/plp-pages/plp-page';
 import MiniCart from './UI/pages/product-cards/minicart-pages/mini-cart';
 import NoMatch from './UI/pages/no-match/no-match';
+import MainPage from './UI/pages/main-page';
 
 class App extends Component {
   // private category: string;
@@ -22,7 +20,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Routes>
-          <Route path="/category/:categoryId" element={<TechPage />} />
+          <Route path="/category/:categoryId" element={<MainPage />} />
           <Route path="/" element={<Navigate replace to="/category/:all" />} />
           <Route path="/junior-react-client" element={<Navigate replace to="/category/:all" />} />
           {/*<Route path="tech" element={<TechPage />} />*/}
