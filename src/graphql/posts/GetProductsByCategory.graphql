@@ -10,6 +10,7 @@ query GetProductsByCategory(
     products {
       id
       name
+      gallery
       prices {
         currency {
           label

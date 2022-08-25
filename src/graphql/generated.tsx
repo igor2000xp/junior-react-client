@@ -89,20 +89,80 @@ export type QueryProductArgs = {
   id: Scalars['String'];
 };
 
+export type GetProductByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetProductByIdQuery = { __typename?: 'Query', product?: { __typename?: 'Product', name: string, gallery?: Array<string | null> | null, description: string, brand: string, attributes?: Array<{ __typename?: 'AttributeSet', id: string, name?: string | null, items?: Array<{ __typename?: 'Attribute', displayValue?: string | null } | null> | null } | null> | null, prices: Array<{ __typename?: 'Price', amount: number, currency: { __typename?: 'Currency', label: string, symbol: string } }> } | null };
+
 export type GetProductsByCategoryQueryVariables = Exact<{
   category?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetProductsByCategoryQuery = { __typename?: 'Query', category?: { __typename?: 'Category', products: Array<{ __typename?: 'Product', id: string, name: string, prices: Array<{ __typename?: 'Price', amount: number, currency: { __typename?: 'Currency', label: string, symbol: string } }> } | null> } | null };
+export type GetProductsByCategoryQuery = { __typename?: 'Query', category?: { __typename?: 'Category', products: Array<{ __typename?: 'Product', id: string, name: string, gallery?: Array<string | null> | null, prices: Array<{ __typename?: 'Price', amount: number, currency: { __typename?: 'Currency', label: string, symbol: string } }> } | null> } | null };
 
 
+export const GetProductByIdDocument = gql`
+    query GetProductById($id: String!) {
+  product(id: $id) {
+    name
+    gallery
+    description
+    attributes {
+      id
+      name
+      items {
+        displayValue
+      }
+    }
+    prices {
+      currency {
+        label
+        symbol
+      }
+      amount
+    }
+    brand
+  }
+}
+    `;
+
+/**
+ * __useGetProductByIdQuery__
+ *
+ * To run a query within a React component, call `useGetProductByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetProductByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetProductByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetProductByIdQuery(baseOptions: Apollo.QueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(GetProductByIdDocument, options);
+      }
+export function useGetProductByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetProductByIdQuery, GetProductByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetProductByIdQuery, GetProductByIdQueryVariables>(GetProductByIdDocument, options);
+        }
+export type GetProductByIdQueryHookResult = ReturnType<typeof useGetProductByIdQuery>;
+export type GetProductByIdLazyQueryHookResult = ReturnType<typeof useGetProductByIdLazyQuery>;
+export type GetProductByIdQueryResult = Apollo.QueryResult<GetProductByIdQuery, GetProductByIdQueryVariables>;
 export const GetProductsByCategoryDocument = gql`
     query GetProductsByCategory($category: String = "all") {
   category(input: {title: $category}) {
     products {
       id
       name
+      gallery
       prices {
         currency {
           label
