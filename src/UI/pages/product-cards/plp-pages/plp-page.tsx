@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './plp-page.module.css';
 // import BasicBlock from '../pdp-card/cartBlocks/basic-block';
-import '../../../../data/images/Icon/minus-svgrepo-com.svg';
+import '../../../../assets/images/Icon/minus-svgrepo-com.svg';
 import CartPage from './cart-page/cart-page';
 import TotalBlock from './cart-page/total-block';
 

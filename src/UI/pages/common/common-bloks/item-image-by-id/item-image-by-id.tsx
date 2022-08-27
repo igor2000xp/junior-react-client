@@ -9,14 +9,13 @@ interface IProps {
   productId: string;
 }
 
-class ItemImageById extends Component{
-
+class ItemImageById extends Component {
   constructor(props: IProps) {
     super(props);
   }
-  componentDidMount() {
-
-  }
+  // componentDidMount() {
+  //
+  // }
   async myQuery(categoryId: string) {
     const queryResult = await client.query<GetProductByIdQuery>({
       query: GetProductByIdDocument,
@@ -31,9 +30,7 @@ class ItemImageById extends Component{
   }
 
   render() {
-    return (
-      <></>
-    );
+    return <></>;
   }
 }
 

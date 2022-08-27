@@ -20,6 +20,7 @@ import {
   IItem,
   itemInit,
 } from './main-page-madel/main-page.model';
+import Header from './common/header';
 
 class MainPage extends PureComponent<IProps, IState> {
   private print: IPrint;
@@ -99,6 +100,7 @@ class MainPage extends PureComponent<IProps, IState> {
     });
     return (
       <>
+        <Header />
         <article className={'mainWrapper'}>
           <h1>{`Category ${String(this.categoryId)}`}</h1>
           <section className={'mainProductSection'}>

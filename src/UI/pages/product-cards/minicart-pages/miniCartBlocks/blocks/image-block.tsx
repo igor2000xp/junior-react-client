@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import stylesImage from './image-block.module.css';
-import img1 from '../../../../../../data/images/Icon/dolars.svg';
+import img1 from '../../../../../../assets/images/Icon/dolars.svg';
 
 class ImageBlock extends Component {
   render() {
@@ -8,13 +8,13 @@ class ImageBlock extends Component {
       <aside className={stylesImage.rightSide}>
         <section className={stylesImage.buttonSide}>
           <button className={`${stylesImage.buttonQuality}`}>
-            <p className={stylesImage.plus}></p>
+            <p className={stylesImage.plus}> </p>
           </button>
           <div className={stylesImage.numberInBasket}>
             <p>1</p>
           </div>
           <button className={stylesImage.buttonQuality}>
-            <p className={stylesImage.minus}></p>
+            <p className={stylesImage.minus}> </p>
           </button>
         </section>
 

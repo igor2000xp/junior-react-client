@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import Header from './UI/pages/common/header';
 import PdpCard from './UI/pages/product-cards/pdp-card/pdp-card';
 import PlpPage from './UI/pages/product-cards/plp-pages/plp-page';
 import MiniCart from './UI/pages/product-cards/minicart-pages/mini-cart';
@@ -12,7 +11,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
         <Routes>
           <Route path="/category/:categoryId" element={<MainPage />} />
           <Route path="/" element={<Navigate replace to="/category/:all" />} />

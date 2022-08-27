@@ -16,6 +16,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "lint": "eslint src --no-error-on-unmatched-pattern",
+    "lint:fix": "eslint src --no-error-on-unmatched-pattern --fix",
     "generate-types": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {

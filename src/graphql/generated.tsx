@@ -133,13 +133,13 @@ export const GetProductByIdDocument = gql`
  * __useGetProductByIdQuery__
  *
  * To run a query within a React component, call `useGetProductByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProductByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useGetProductByIdQuery` returns an object from Apollo Client that contains loading, error, and assets properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetProductByIdQuery({
+ * const { assets, loading, error } = useGetProductByIdQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
@@ -179,13 +179,13 @@ export const GetProductsByCategoryDocument = gql`
  * __useGetProductsByCategoryQuery__
  *
  * To run a query within a React component, call `useGetProductsByCategoryQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProductsByCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useGetProductsByCategoryQuery` returns an object from Apollo Client that contains loading, error, and assets properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetProductsByCategoryQuery({
+ * const { assets, loading, error } = useGetProductsByCategoryQuery({
  *   variables: {
  *      category: // value for 'category'
  *   },
