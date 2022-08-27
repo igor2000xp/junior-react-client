@@ -5,40 +5,6 @@
   justify-content: space-between;
   /*border: red 1px solid;*/
 }
-.navigation {
-  margin: 24px 0 0 0;
-  /*border: blue 1px solid;*/
-}
-.menu {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  /*border: blue 1px solid;*/
-  list-style: none;
-}
-.menu li {
-  padding: 0 16px;
-  height: 56px;
-  /*border: red 1px solid;*/
-  color: black;
-  /*margin: 0 16px;*/
-}
-.header link {
-  text-decoration: none;
-  text-transform: uppercase;
-}
-li a:link, a:visited, a:hover, a:active {
-  text-decoration: none;
-  text-transform: uppercase;
-  color: black;
-}
-.chosenLink {
-  border-bottom: #5ECE7B 2px solid;
-}
-.chosenLink a {
-  color: #5ECE7B;
-}
 .logo {
   margin: 24px 0 0 0;
   width: 41px;

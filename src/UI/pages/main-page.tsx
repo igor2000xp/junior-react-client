@@ -100,8 +100,9 @@ class MainPage extends PureComponent<IProps, IState> {
     });
     return (
       <>
-        <Header />
+        {/*<Header />*/}
         <article className={'mainWrapper'}>
+          <Header />
           <h1>{`Category ${String(this.categoryId)}`}</h1>
           <section className={'mainProductSection'}>
             {newItems.map((item) => {

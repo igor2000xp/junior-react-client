@@ -1,5 +1,7 @@
 .mainWrapper {
   /*text-transform: uppercase;*/
+  max-width: 1240px;
+  margin: 0 auto;
 }
 .mainWrapper h1 {
   margin: 80px 0 101px 0;
