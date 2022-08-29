@@ -1,0 +1,6 @@
+query GetAllCurrency {
+  currencies {
+    label
+    symbol
+  }
+}

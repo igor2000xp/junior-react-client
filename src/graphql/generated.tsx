@@ -89,6 +89,11 @@ export type QueryProductArgs = {
   id: Scalars['String'];
 };
 
+export type GetAllCurrencyQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllCurrencyQuery = { __typename?: 'Query', currencies?: Array<{ __typename?: 'Currency', label: string, symbol: string } | null> | null };
+
 export type GetProductByIdQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -104,6 +109,41 @@ export type GetProductsByCategoryQueryVariables = Exact<{
 export type GetProductsByCategoryQuery = { __typename?: 'Query', category?: { __typename?: 'Category', products: Array<{ __typename?: 'Product', id: string, name: string, gallery?: Array<string | null> | null, prices: Array<{ __typename?: 'Price', amount: number, currency: { __typename?: 'Currency', label: string, symbol: string } }> } | null> } | null };
 
 
+export const GetAllCurrencyDocument = gql`
+    query GetAllCurrency {
+  currencies {
+    label
+    symbol
+  }
+}
+    `;
+
+/**
+ * __useGetAllCurrencyQuery__
+ *
+ * To run a query within a React component, call `useGetAllCurrencyQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllCurrencyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllCurrencyQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllCurrencyQuery(baseOptions?: Apollo.QueryHookOptions<GetAllCurrencyQuery, GetAllCurrencyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetAllCurrencyQuery, GetAllCurrencyQueryVariables>(GetAllCurrencyDocument, options);
+      }
+export function useGetAllCurrencyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllCurrencyQuery, GetAllCurrencyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetAllCurrencyQuery, GetAllCurrencyQueryVariables>(GetAllCurrencyDocument, options);
+        }
+export type GetAllCurrencyQueryHookResult = ReturnType<typeof useGetAllCurrencyQuery>;
+export type GetAllCurrencyLazyQueryHookResult = ReturnType<typeof useGetAllCurrencyLazyQuery>;
+export type GetAllCurrencyQueryResult = Apollo.QueryResult<GetAllCurrencyQuery, GetAllCurrencyQueryVariables>;
 export const GetProductByIdDocument = gql`
     query GetProductById($id: String!) {
   product(id: $id) {
@@ -133,13 +173,13 @@ export const GetProductByIdDocument = gql`
  * __useGetProductByIdQuery__
  *
  * To run a query within a React component, call `useGetProductByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProductByIdQuery` returns an object from Apollo Client that contains loading, error, and assets properties
+ * When your component renders, `useGetProductByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { assets, loading, error } = useGetProductByIdQuery({
+ * const { data, loading, error } = useGetProductByIdQuery({
  *   variables: {
  *      id: // value for 'id'
  *   },
@@ -179,13 +219,13 @@ export const GetProductsByCategoryDocument = gql`
  * __useGetProductsByCategoryQuery__
  *
  * To run a query within a React component, call `useGetProductsByCategoryQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetProductsByCategoryQuery` returns an object from Apollo Client that contains loading, error, and assets properties
+ * When your component renders, `useGetProductsByCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { assets, loading, error } = useGetProductsByCategoryQuery({
+ * const { data, loading, error } = useGetProductsByCategoryQuery({
  *   variables: {
  *      category: // value for 'category'
  *   },

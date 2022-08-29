@@ -23,10 +23,48 @@
   align-items: center;
 }
 .currency {
+  position: relative;
   width: 38px;
   height: 29px;
   margin-right: 22px;
-  background-image: url("../../../assets/images/Icon/dolars.svg");
+  display: flex;
+  flex-direction: row;
+  /*background-image: url("../../../assets/images/Icon/dolars.svg");*/
+}
+.currencyLabel{
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 160%;
+}
+.currencyArrow {
+  height: 29px;
+  width: 6px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*background-image: url("../../../assets/images/Icon/currencyClose.svg");*/
+}
+.currencyBlock {
+  position: relative;
+  top: 36px;
+  left: -11px;
+  width: 114px;
+}
+.currencyDroppingBox {
+  /*border: solid 1px red;*/
+  box-shadow: 0 4px 35px rgba(168, 172, 176, 0.28);
+}
+.currencyItem {
+  display: flex;
+  justify-content: left;
+  height: 45px;
+  width: 114px;
+  cursor: pointer;
+  /*border: rgba(43, 43, 43, 0.34) 1px solid;*/
+}
+.currencyItem .active {
+  background-color: #EEE;
 }
 .basket {
   height: 20px;

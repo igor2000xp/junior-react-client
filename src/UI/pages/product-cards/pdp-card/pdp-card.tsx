@@ -7,10 +7,18 @@ import { Link } from 'react-router-dom';
 import Header from '../../common/header';
 
 class PdpCard extends Component {
+  constructor(props: any) {
+    super(props);
+    this.getCurrency = this.getCurrency.bind(this);
+  }
+  getCurrency(label: string, symbol: string) {
+    console.log('Get currency to plp to state');
+    console.log(label, symbol);
+  }
   render() {
     return (
       <>
-        <Header />
+        <Header getCurrency={this.getCurrency} />
         <div className={styles.wrapper}>
           <section className={styles.leftBlock}>
             <div className={styles.smallImage}>

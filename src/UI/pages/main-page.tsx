@@ -33,6 +33,7 @@ class MainPage extends PureComponent<IProps, IState> {
     this.categoryId = '';
     this.state = { ...stateInit };
     this.printItems = [{ ...itemInit }];
+    this.getCurrency = this.getCurrency.bind(this);
   }
 
   async componentDidMount() {
@@ -92,6 +93,11 @@ class MainPage extends PureComponent<IProps, IState> {
     });
   }
 
+  getCurrency(label: string, symbol: string) {
+    console.log('Get currency to plp to state');
+    console.log(label, symbol);
+  }
+
   render() {
     const items =
       typeof this.printItems !== 'undefined' ? this.printItems : [itemInit];
@@ -102,7 +108,7 @@ class MainPage extends PureComponent<IProps, IState> {
       <>
         {/*<Header />*/}
         <article className={'mainWrapper'}>
-          <Header />
+          <Header getCurrency={this.getCurrency} />
           <h1>{`Category ${String(this.categoryId)}`}</h1>
           <section className={'mainProductSection'}>
             {newItems.map((item) => {

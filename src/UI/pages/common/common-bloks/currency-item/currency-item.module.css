@@ -1,0 +1,11 @@
+.currencyText {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 45px;
+  margin-left: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-content: center;
+}
