@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-// import styles from './header.module.css';
 import { Link } from 'react-router-dom';
-import { IState, StateInit } from './header-model';
+import { INavigateState, navigateStateInit } from './models/header.model';
 import stylesNav from './navigate-block.module.css';
 
-class NavigateBlock extends Component<any, IState> {
-  private active = { ...StateInit };
+class NavigateBlock extends Component<any, INavigateState> {
+  private active = { ...navigateStateInit };
 
   constructor(props: any) {
     super(props);
-    this.state = { ...StateInit };
+    this.state = { ...navigateStateInit };
     this.chosenHandler = this.chosenHandler.bind(this);
   }
 
@@ -19,7 +18,7 @@ class NavigateBlock extends Component<any, IState> {
   }
 
   categoryClean = () => {
-    this.active = { ...StateInit };
+    this.active = { ...navigateStateInit };
   };
 
   categorySwitch = (category: string) => {
