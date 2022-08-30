@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './basic-block.module.css';
+import PriceBlock from '../../../common/common-bloks/price-block/price-block';
 
 class BasicBlock extends Component {
   render() {
@@ -56,6 +57,7 @@ class BasicBlock extends Component {
           <h4>PRICE:</h4>
           <div>
             <h5>$50.0</h5>
+            {/*<PriceBlock />*/}
           </div>
         </div>
       </article>

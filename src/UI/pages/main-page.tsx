@@ -11,25 +11,23 @@ import './Page.css';
 import { withRouter } from './with-router/with-router';
 import { WithRouterProps } from './with-router/with-router.model';
 import {
-  IParams,
-  IProps,
-  IState,
-  stateInit,
-  printInit,
-  IPrint,
   IItem,
+  IParams,
+  IPropsMainPage,
+  IState,
   itemInit,
+  stateInit,
 } from './main-page-madel/main-page.model';
 import Header from './common/header';
+import { Label, SymbolCurrency } from './common/models/header.model';
+import { LOCAL_CURRENT_CURRENCY } from '../../constants';
 
-class MainPage extends PureComponent<IProps, IState> {
-  private print: IPrint;
+class MainPage extends PureComponent<IPropsMainPage, IState> {
   private categoryId: string;
   private printItems: IItem[] | undefined;
 
   constructor(props: any) {
     super(props);
-    this.print = { ...printInit };
     this.categoryId = '';
     this.state = { ...stateInit };
     this.printItems = [{ ...itemInit }];
@@ -37,13 +35,15 @@ class MainPage extends PureComponent<IProps, IState> {
   }
 
   async componentDidMount() {
+    const currency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
+    const currentCurrency = JSON.parse(currency ? currency : '');
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
     await this.checkQueryData();
     this.setState(() => {
       return {
-        isLoaded: true,
         categoryIdState: this.categoryId,
+        currentCurrency: currentCurrency.symbol,
       };
     });
   }
@@ -57,32 +57,37 @@ class MainPage extends PureComponent<IProps, IState> {
   }
 
   async myQuery(categoryId: string) {
-    const queryResult = await client.query<GetProductsByCategoryQuery>({
-      query: GetProductsByCategoryDocument,
-      variables: {
-        category: categoryId,
-      },
-    });
-    this.print = { ...queryResult };
-    return queryResult;
+    try {
+      return await client.query<GetProductsByCategoryQuery>({
+        query: GetProductsByCategoryDocument,
+        variables: {
+          category: categoryId,
+        },
+      });
+    } catch (err) {
+      console.log('Error loading data from server = ', err);
+    }
   }
+
   async checkQueryData() {
     const allData = await this.myQuery(this.categoryId);
-    this.printItems = allData.data.category?.products.map((item) => {
+    const data = allData ? allData.data : { category: { products: [] } };
+    const category = data.category ? data.category : { products: [] };
+    this.printItems = category.products.map((item) => {
       return {
-        id: item && typeof item !== 'undefined' ? item.id : '',
-        name: item != null && typeof item !== 'undefined' ? item.name : '',
-        gallery: item && typeof item !== 'undefined' ? item.gallery : '',
-        prices:
-          item && typeof item !== 'undefined'
-            ? item.prices.map((pr) => {
-                return {
-                  label: pr.currency.label,
-                  symbol: pr.currency.symbol,
-                  amount: pr.amount,
-                };
-              })
-            : { label: '', symbol: '', amount: 0 },
+        id: item ? item.id : '',
+        name: item ? item.name : '',
+        brand: item ? item.brand : '',
+        gallery: item ? item.gallery : '',
+        prices: item
+          ? item.prices.map((pr) => {
+              return {
+                label: pr.currency.label,
+                symbol: pr.currency.symbol,
+                amount: pr.amount,
+              };
+            })
+          : { label: '', symbol: '', amount: 0 },
       };
     });
     this.setState(() => {
@@ -93,35 +98,43 @@ class MainPage extends PureComponent<IProps, IState> {
     });
   }
 
-  getCurrency(label: string, symbol: string) {
-    console.log('Get currency to plp to state');
-    console.log(label, symbol);
+  async getCurrency(label: Label, symbol: SymbolCurrency) {
+    await this.setState(() => {
+      return {
+        currentCurrency: symbol,
+      };
+    });
   }
 
   render() {
-    const items =
-      typeof this.printItems !== 'undefined' ? this.printItems : [itemInit];
+    const items = this.printItems ? this.printItems : [itemInit];
     const newItems = items.map((item) => {
-      return typeof item !== 'undefined' && item !== null ? item : itemInit;
+      return item !== null ? item : itemInit;
     });
-    return (
-      <>
-        {/*<Header />*/}
-        <article className={'mainWrapper'}>
-          <Header getCurrency={this.getCurrency} />
-          <h1>{`Category ${String(this.categoryId)}`}</h1>
-          <section className={'mainProductSection'}>
-            {newItems.map((item) => {
-              return (
-                <Link to="/pdp" key={item.id}>
-                  <ProductSmallCard item={item} key={item.id} />
-                </Link>
-              );
-            })}
-          </section>
-        </article>
-      </>
-    );
+    const symbolCurrency = this.state.currentCurrency;
+    if (this.state.isLoaded) {
+      return (
+        <>
+          <article className={'mainWrapper'}>
+            <Header getCurrency={this.getCurrency} />
+            <h1>{`Category ${String(this.categoryId)}`}</h1>
+            <section className={'mainProductSection'}>
+              {newItems.map((item) => {
+                return (
+                  <Link to="/pdp" key={item.id}>
+                    <ProductSmallCard
+                      item={item}
+                      symbolCurrency={symbolCurrency}
+                      key={item.id}
+                    />
+                  </Link>
+                );
+              })}
+            </section>
+          </article>
+        </>
+      );
+    } else return <h1>Loading...</h1>;
   }
 }
 export default withRouter(MainPage);

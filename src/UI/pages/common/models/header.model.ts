@@ -42,5 +42,5 @@ export const currencyInit = [
 ];
 
 export interface IProps {
-  getCurrency: (label: string, symbol: string) => void;
+  getCurrency: (label: Label, symbol: SymbolCurrency) => void;
 }

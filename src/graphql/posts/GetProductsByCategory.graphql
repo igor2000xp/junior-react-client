@@ -11,6 +11,7 @@ query GetProductsByCategory(
       id
       name
       gallery
+      brand
       prices {
         currency {
           label
