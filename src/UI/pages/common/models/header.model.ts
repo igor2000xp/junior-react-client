@@ -7,18 +7,19 @@ export interface IState {
   symbol: SymbolCurrency;
   isShown: boolean;
 }
-// export interface INavigateState {
-//   activeAll: string;
-//   activeTech: string;
-//   activeClothes: string;
-// }
-//
-// export const navigateStateInit = {
-//   activeAll: '',
-//   activeTech: '',
-//   activeClothes: '',
-// };
+export interface ICategory {
+  name: string;
+}
 
+export interface ICategoryWithActive {
+  name: string;
+  isActive: boolean;
+}
+export const categoriesInit = [
+  { name: 'all', isActive: true },
+  { name: 'tech', isActive: false },
+  { name: 'clothes', isActive: false },
+];
 export enum Label {
   Usd = 'USD',
   Aud = 'AUD',
