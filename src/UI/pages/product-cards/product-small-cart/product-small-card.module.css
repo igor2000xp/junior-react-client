@@ -7,6 +7,11 @@
   align-items: center;
   flex-direction: column;
 }
+/*box-shadow: 5px 3px 5px rgba(3, 3, 3, 0.13);*/
+.card:hover {
+  /*box-shadow: 5px 3px 5px rgba(3, 3, 3, 0.13), -5px -3px 5px rgba(3, 3, 3, 0.13);*/
+  box-shadow: 10px 10px 35px rgba(168, 172, 176, 0.31), -10px -10px 35px rgba(168, 172, 176, 0.31);
+}
 .imageWrapper {
   margin: 16px 0 0 0;
   width: 354px;
@@ -34,7 +39,7 @@
   margin: 0;
   text-align: left;
 }
-p {
+.nameBlock p {
   margin: 0;
   font-family: 'Raleway', serif;
   font-style: normal;

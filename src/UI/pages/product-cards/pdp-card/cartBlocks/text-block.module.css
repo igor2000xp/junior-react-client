@@ -1,12 +1,54 @@
 .wrapper {
   width: 100%;
-  min-height: 103px;
-  /*height: 100%;*/
-  /*border: red 1px solid;*/
+  max-height: 203px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  text-align: left;
+  overflow-y: scroll;
 }
-p {
+.wrapper section {
   text-align: left;
   font-weight: 400;
   font-size: 15px;
-  line-height: 159.96%;
+  line-height: 160%;
+}
+.wrapper ul {
+  margin: 0;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  text-align: left;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  padding-inline-start: 22px;
+}
+.wrapper p {
+  display: block;
+  margin: 0;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 160%;
+  text-align: left;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+}
+.wrapper h3 {
+  margin: 5px 0;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 160%;
+  text-align: left;
+}
+.wrapper h1 {
+  margin: 5px 0;
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 160%;
+  text-align: left;
+}
+.wrapper span {
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }

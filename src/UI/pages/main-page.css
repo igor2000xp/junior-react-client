@@ -20,7 +20,12 @@
   justify-content: space-between;
   /*border: #0F6450 1px solid;*/
 }
-.mainProductSection a:link, a:visited, a:hover, a:active {
+.mainProductSection :link a:link, a:visited, a:hover, a:active {
   text-decoration: none;
   text-transform: none;
+}
+link, a:link, a:visited, a:hover, a:active {
+  text-decoration: none;
+  text-transform: none;
+  color: black;
 }

@@ -7,7 +7,7 @@ import {
   GetProductsByCategoryQuery,
 } from '../../graphql/generated';
 import { ProductSmallCard } from './product-cards/product-small-cart/product-small-card';
-import './Page.css';
+import './main-page.css';
 import { withRouter } from './with-router/with-router';
 import { WithRouterProps } from './with-router/with-router.model';
 import {
@@ -121,7 +121,7 @@ class MainPage extends PureComponent<IPropsMainPage, IState> {
             <section className={'mainProductSection'}>
               {newItems.map((item) => {
                 return (
-                  <Link to="/pdp" key={item.id}>
+                  <Link to={`/pdp/:${item.id}`} key={item.id}>
                     <ProductSmallCard
                       item={item}
                       symbolCurrency={symbolCurrency}

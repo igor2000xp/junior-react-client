@@ -18,7 +18,7 @@ class App extends Component {
             path="/junior-react-client"
             element={<Navigate replace to="/category/:all" />}
           />
-          <Route path="pdp" element={<PdpCard />} />
+          <Route path="pdp/:productId" element={<PdpCard />} />
           <Route path="cart" element={<PlpPage />} />
           <Route path="mini-cart" element={<MiniCart />} />
           <Route path="*" element={<NoMatch />} />

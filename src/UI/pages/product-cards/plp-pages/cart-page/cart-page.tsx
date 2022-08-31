@@ -6,9 +6,7 @@ class CartPage extends Component {
   render() {
     return (
       <article className={styles.wrapper}>
-        <aside className={styles.leftSide}>
-          <BasicBlock />
-        </aside>
+        <aside className={styles.leftSide}>{/*<BasicBlock />*/}</aside>
 
         <aside className={styles.rightSide}>
           <section className={styles.buttonSide}>

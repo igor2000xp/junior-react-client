@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
 import styles from './basic-block.module.css';
 import PriceBlock from '../../../common/common-bloks/price-block/price-block';
+import { IProduct } from '../pdp-card';
 
-class BasicBlock extends Component {
+interface IProps {
+  product: IProduct;
+}
+
+class BasicBlock extends Component<IProps> {
+  constructor(props: IProps) {
+    super(props);
+  }
   render() {
     return (
       <article className={styles.wrapper}>
         <div className={styles.brand}>
-          <h2>Apollo</h2>
+          <h2>{this.props.product.brand}</h2>
         </div>
 
         <div className={styles.name}>
-          <h3>Running Short</h3>
+          <h3>{this.props.product.name}</h3>
         </div>
 
         <div className={styles.sizeBlock}>
