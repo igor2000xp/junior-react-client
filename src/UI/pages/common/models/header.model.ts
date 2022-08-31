@@ -7,17 +7,17 @@ export interface IState {
   symbol: SymbolCurrency;
   isShown: boolean;
 }
-export interface INavigateState {
-  activeAll: string;
-  activeTech: string;
-  activeClothes: string;
-}
-
-export const navigateStateInit = {
-  activeAll: '',
-  activeTech: '',
-  activeClothes: '',
-};
+// export interface INavigateState {
+//   activeAll: string;
+//   activeTech: string;
+//   activeClothes: string;
+// }
+//
+// export const navigateStateInit = {
+//   activeAll: '',
+//   activeTech: '',
+//   activeClothes: '',
+// };
 
 export enum Label {
   Usd = 'USD',
