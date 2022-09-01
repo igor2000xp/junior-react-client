@@ -32,7 +32,7 @@ export class ProductSmallCard extends Component<IProps, any> {
       this.gallery = '';
     } else if (Array.isArray(firstGallery))
       this.gallery = firstGallery[0] ? firstGallery[0] : '';
-    const price = this.props.item.prices;
+    const id = this.props.item.id;
 
     return (
       <section className={classes.card}>
@@ -44,10 +44,7 @@ export class ProductSmallCard extends Component<IProps, any> {
             <p>{name}</p>
           </div>
           <div className={classes.priceBlock}>
-            <PriceBlock
-              price={price}
-              symbolCurrency={this.props.symbolCurrency}
-            />
+            <PriceBlock id={id} symbolCurrency={this.props.symbolCurrency} />
           </div>
         </article>
       </section>

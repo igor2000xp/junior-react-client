@@ -7,61 +7,66 @@ import { Link } from 'react-router-dom';
 import Header from '../../common/header';
 import client from '../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../graphql/generated';
+import { Label, SymbolCurrency } from '../../common/models/header.model';
+import { LOCAL_CURRENT_CURRENCY } from '../../../../constants';
+import { IProduct, IState, productInit, stateInit } from './models/pdp-card.model';
 
-export interface IState {
-  isLoaded: boolean;
-  bigImage: string;
-}
-export const stateInit = {
-  isLoaded: false,
-  bigImage: '',
-};
-
-export interface IProduct {
-  id: string;
-  name: string;
-  inStock: boolean;
-  gallery: string[];
-  description: string;
-  category: string;
-  attributes: IAttributeSet[];
-  price: IPrice[];
-  brand: string;
-}
-
-export interface IAttributeSet {
-  id: string;
-  name: string;
-  type: string;
-  items: IAttribute[];
-}
-export interface IPrice {
-  currency: string;
-  amount: number;
-}
-export interface IAttribute {
-  displayValue: string;
-  value: string;
-  id: string;
-}
-export const productInit = {
-  id: '',
-  name: '',
-  inStock: true,
-  gallery: [''],
-  description: '',
-  category: '',
-  attributes: [
-    {
-      id: '',
-      name: '',
-      type: '',
-      items: [{ displayValue: '', value: '', id: '' }],
-    },
-  ],
-  price: Array({ currency: '', amount: 0 }),
-  brand: '',
-};
+// export interface IState {
+//   isLoaded: boolean;
+//   bigImage: string;
+//   currentCurrency: SymbolCurrency;
+// }
+// export const stateInit = {
+//   isLoaded: true,
+//   bigImage: '',
+//   currentCurrency: SymbolCurrency.SymbolUsd,
+// };
+//
+// export interface IProduct {
+//   id: string;
+//   name: string;
+//   inStock: boolean;
+//   gallery: string[];
+//   description: string;
+//   category: string;
+//   attributes: IAttributeSet[];
+//   prices: IPrice[];
+//   brand: string;
+// }
+//
+// export interface IAttributeSet {
+//   id: string;
+//   name: string;
+//   type: string;
+//   items: IAttribute[];
+// }
+// export interface IPrice {
+//   currency: string;
+//   amount: number;
+// }
+// export interface IAttribute {
+//   displayValue: string;
+//   value: string;
+//   id: string;
+// }
+// export const productInit = {
+//   id: '',
+//   name: '',
+//   inStock: true,
+//   gallery: [''],
+//   description: '',
+//   category: '',
+//   attributes: [
+//     {
+//       id: '',
+//       name: '',
+//       type: '',
+//       items: [{ displayValue: '', value: '', id: '' }],
+//     },
+//   ],
+//   prices: Array({ currency: '', amount: 0 }),
+//   brand: '',
+// };
 class PdpCard extends Component<any, IState> {
   product: IProduct;
   constructor(props: any) {
@@ -70,19 +75,20 @@ class PdpCard extends Component<any, IState> {
     this.getCurrency = this.getCurrency.bind(this);
     this.switchImage = this.switchImage.bind(this);
     this.product = { ...productInit };
-    this.state = {
-      isLoaded: true,
-      bigImage: '',
-    };
   }
 
   async componentDidMount() {
     const id = window.location.pathname.split(':')[1];
     await this.productQuery(id);
+    const localCurrency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
+    const currentCurrency = JSON.parse(
+      localCurrency ? localCurrency : '',
+    ).symbol;
     await this.setState(() => {
       return {
         isLoaded: true,
         bigImage: this.product.gallery[0],
+        currentCurrency,
       };
     });
   }
@@ -95,11 +101,6 @@ class PdpCard extends Component<any, IState> {
     this.product = { ...(data.product as IProduct), id };
   }
 
-  getCurrency(label: string, symbol: string) {
-    console.log('Get currency to plp to state');
-    console.log(label, symbol);
-  }
-
   async switchImage(index: number) {
     const i = index ? index : 0;
     const pic = this.product.gallery[i];
@@ -109,12 +110,22 @@ class PdpCard extends Component<any, IState> {
       };
     });
   }
+
+  async getCurrency(label: Label, symbol: SymbolCurrency) {
+    await this.setState(() => {
+      return {
+        currentCurrency: symbol,
+      };
+    });
+  }
+
   render() {
     const bigImage = this.state.bigImage;
     const hidden = this.product.gallery.length === 1 ? styles.hidden : '';
     return (
       <article className={styles.wrapperWithHeader}>
         <Header getCurrency={this.getCurrency} />
+
         <div className={styles.wrapper}>
           <section className={`${styles.leftBlock} ${hidden}`}>
             {this.product.gallery.map((item, index) => {
@@ -129,14 +140,21 @@ class PdpCard extends Component<any, IState> {
               );
             })}
           </section>
+
           <section className={styles.imageBlock}>
             <img src={bigImage} alt="product image" />
           </section>
+
           <section className={styles.rightBlock}>
-            <BasicBlock product={this.product} />
+            <BasicBlock
+              product={this.product}
+              currentCurrency={this.state.currentCurrency}
+            />
+
             <Link to="/cart">
               <ButtonBlock />
             </Link>
+
             <TextBlock text={this.product.description} />
           </section>
         </div>

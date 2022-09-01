@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 import styles from './basic-block.module.css';
 import PriceBlock from '../../../common/common-bloks/price-block/price-block';
-import { IProduct } from '../pdp-card';
+import { IProduct } from '../models/pdp-card.model';
+import { SymbolCurrency } from '../../../common/models/header.model';
+// import { IPrice } from '../models/pdp-card.model';
 
 interface IProps {
   product: IProduct;
+  currentCurrency: SymbolCurrency;
 }
 
 class BasicBlock extends Component<IProps> {
-  constructor(props: IProps) {
-    super(props);
-  }
+  // constructor(props: IProps) {
+  //   super(props);
+  // }
   render() {
+    // console.log(this.props.product.prices);
+    console.log(this.props.product.id);
+    console.log(this.props.currentCurrency);
+    // const arrPrises: IPrice[] = this.props.product.prices;
+    // const prises: IPrice | IPrice[] =
+    //   this.props.product.prices.length === 1
+    //     ? this.props.product.prices[0]
+    //     : this.props.product.prices;
+    // const prises = this.props.product.prices;
+    // console.log(prises);
     return (
       <article className={styles.wrapper}>
         <div className={styles.brand}>
@@ -64,8 +77,11 @@ class BasicBlock extends Component<IProps> {
         <div className={styles.priceBlock}>
           <h4>PRICE:</h4>
           <div>
-            <h5>$50.0</h5>
-            {/*<PriceBlock />*/}
+            {/*<h5>$50.0</h5>*/}
+            <PriceBlock
+              id={this.props.product.id}
+              symbolCurrency={this.props.currentCurrency}
+            />
           </div>
         </div>
       </article>
