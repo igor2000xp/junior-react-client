@@ -52,20 +52,21 @@ class NavigateBlock extends Component {
   }
 
   render() {
-    const chosenLink = stylesNav.chosenLink;
     return (
       <>
         <nav className={stylesNav.navigation}>
-          <ul className={stylesNav.menu}>
+          <ul className={stylesNav.navMenu}>
             {this.categories.map((item) => {
               return (
                 <li
                   onClick={this.chosenHandler(item.name)}
-                  className={item.isActive ? chosenLink : ''}
+                  className={item.isActive ? stylesNav.chosenBorder : ''}
                   key={item.name}
                 >
                   <Link
-                    className={stylesNav.link}
+                    className={`${stylesNav.navLink} ${
+                      item.isActive ? stylesNav.chosenLink : ''
+                    }`}
                     to={`/category/:${item.name}`}
                   >
                     {item.name}

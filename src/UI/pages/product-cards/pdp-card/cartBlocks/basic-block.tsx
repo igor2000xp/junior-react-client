@@ -3,7 +3,6 @@ import styles from './basic-block.module.css';
 import PriceBlock from '../../../common/common-bloks/price-block/price-block';
 import { IProduct } from '../models/pdp-card.model';
 import { SymbolCurrency } from '../../../common/models/header.model';
-// import { IPrice } from '../models/pdp-card.model';
 
 interface IProps {
   product: IProduct;
@@ -14,6 +13,16 @@ class BasicBlock extends Component<IProps> {
   // constructor(props: IProps) {
   //   super(props);
   // }
+
+  // async componentDidMount() {
+  //   await const { data } = client.query({
+  //     query: useGetProductByIdQuery,
+  //     variables: {
+  //       i
+  //     }
+  //   })
+  // }
+
   render() {
     // console.log(this.props.product.prices);
     console.log(this.props.product.id);

@@ -104,7 +104,7 @@ export type GetProductByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetProductByIdQuery = { __typename?: 'Query', product?: { __typename?: 'Product', name: string, gallery?: Array<string | null> | null, description: string, brand: string, attributes?: Array<{ __typename?: 'AttributeSet', id: string, name?: string | null, items?: Array<{ __typename?: 'Attribute', displayValue?: string | null } | null> | null } | null> | null, prices: Array<{ __typename?: 'Price', amount: number, currency: { __typename?: 'Currency', label: string, symbol: string } }> } | null };
+export type GetProductByIdQuery = { __typename?: 'Query', product?: { __typename?: 'Product', id: string, name: string, inStock?: boolean | null, gallery?: Array<string | null> | null, description: string, brand: string, attributes?: Array<{ __typename?: 'AttributeSet', id: string, name?: string | null, type?: string | null, items?: Array<{ __typename?: 'Attribute', displayValue?: string | null, value?: string | null, id: string } | null> | null } | null> | null, prices: Array<{ __typename?: 'Price', amount: number, currency: { __typename?: 'Currency', label: string, symbol: string } }> } | null };
 
 export type GetProductsByCategoryQueryVariables = Exact<{
   category?: InputMaybe<Scalars['String']>;
@@ -186,14 +186,19 @@ export type GetAllCurrencyQueryResult = Apollo.QueryResult<GetAllCurrencyQuery, 
 export const GetProductByIdDocument = gql`
     query GetProductById($id: String!) {
   product(id: $id) {
+    id
     name
+    inStock
     gallery
     description
     attributes {
       id
       name
+      type
       items {
         displayValue
+        value
+        id
       }
     }
     prices {

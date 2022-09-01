@@ -9,7 +9,12 @@ import client from '../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../graphql/generated';
 import { Label, SymbolCurrency } from '../../common/models/header.model';
 import { LOCAL_CURRENT_CURRENCY } from '../../../../constants';
-import { IProduct, IState, productInit, stateInit } from './models/pdp-card.model';
+import {
+  IProduct,
+  IState,
+  productInit,
+  stateInit,
+} from './models/pdp-card.model';
 
 // export interface IState {
 //   isLoaded: boolean;
@@ -94,11 +99,15 @@ class PdpCard extends Component<any, IState> {
   }
 
   async productQuery(id: string) {
-    const { data } = await client.query({
-      query: GetProductByIdDocument,
-      variables: { id },
-    });
-    this.product = { ...(data.product as IProduct), id };
+    try {
+      const { data } = await client.query({
+        query: GetProductByIdDocument,
+        variables: { id },
+      });
+      this.product = { ...(data.product as IProduct), id };
+    } catch (err) {
+      console.log(`Error getting data from server ${err}`);
+    }
   }
 
   async switchImage(index: number) {

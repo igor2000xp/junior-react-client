@@ -7,7 +7,7 @@ import {
   GetProductsByCategoryQuery,
 } from '../../graphql/generated';
 import { ProductSmallCard } from './product-cards/product-small-cart/product-small-card';
-import './main-page.css';
+import stylesMain from './main-page.module.css';
 import { withRouter } from './with-router/with-router';
 import { WithRouterProps } from './with-router/with-router.model';
 import {
@@ -115,13 +115,17 @@ class MainPage extends PureComponent<IPropsMainPage, IState> {
     if (this.state.isLoaded) {
       return (
         <>
-          <article className={'mainWrapper'}>
+          <article className={stylesMain.mainWrapper}>
             <Header getCurrency={this.getCurrency} />
             <h1>{`Category ${String(this.categoryId)}`}</h1>
-            <section className={'mainProductSection'}>
+            <section className={stylesMain.mainProductSection}>
               {newItems.map((item) => {
                 return (
-                  <Link to={`/pdp/:${item.id}`} key={item.id}>
+                  <Link
+                    to={`/pdp/:${item.id}`}
+                    key={item.id}
+                    className={stylesMain.mainLink}
+                  >
                     <ProductSmallCard
                       item={item}
                       symbolCurrency={symbolCurrency}

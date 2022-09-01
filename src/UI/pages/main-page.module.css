@@ -1,5 +1,4 @@
 .mainWrapper {
-  /*text-transform: uppercase;*/
   max-width: 1240px;
   margin: 0 auto;
 }
@@ -18,13 +17,8 @@
   flex-wrap: wrap;
   row-gap: 10px;
   justify-content: space-between;
-  /*border: #0F6450 1px solid;*/
 }
-.mainProductSection :link a:link, a:visited, a:hover, a:active {
-  text-decoration: none;
-  text-transform: none;
-}
-link, a:link, a:visited, a:hover, a:active {
+.mainLink {
   text-decoration: none;
   text-transform: none;
   color: black;
