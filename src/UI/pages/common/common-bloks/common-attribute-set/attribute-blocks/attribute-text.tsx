@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import stylesAttr from './attribute-text.module.css';
+import { IAttribute } from '../common-attribute-set';
 
-class AttributeText extends Component {
+export interface IProps {
+  textAttribute: IAttribute;
+}
+
+class AttributeText extends Component<IProps> {
   render() {
+    console.log(this.props.textAttribute);
+    const attr = this.props.textAttribute.items;
     return (
       <div className={stylesAttr.sizeBlock}>
-        <h4>SIZE:</h4>
+        <h4>{`${this.props.textAttribute.name}:`}</h4>
         <div className={stylesAttr.sizeLine}>
-          <div className={stylesAttr.sizeItem}>
-            <p>XS</p>
-          </div>
-          <div className={`${stylesAttr.sizeItem} ${stylesAttr.active}`}>
-            <p>S</p>
-          </div>
-          <div className={stylesAttr.sizeItem}>
-            <p>M</p>
-          </div>
-          <div className={stylesAttr.sizeItem}>
-            <p>L</p>
-          </div>
+          {attr.map((item) => {
+            return (
+              <div className={stylesAttr.sizeItem} key={item.id}>
+                <p>{item.value}</p>
+              </div>
+            );
+          })}
         </div>
       </div>
     );

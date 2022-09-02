@@ -3,7 +3,9 @@ import styles from './basic-block.module.css';
 import PriceBlock from '../../../common/common-bloks/price-block/price-block';
 import { IProduct } from '../models/pdp-card.model';
 import { SymbolCurrency } from '../../../common/models/header.model';
-import CommonAttributeSet from '../../../common/common-bloks/common-attribute-set/common-attribute-set';
+import CommonAttributeSet, {
+  IAttribute,
+} from '../../../common/common-bloks/common-attribute-set/common-attribute-set';
 
 interface IProps {
   product: IProduct;
@@ -11,24 +13,8 @@ interface IProps {
 }
 
 class BasicBlock extends Component<IProps> {
-  // constructor(props: IProps) {
-  //   super(props);
-  // }
-
-  // async componentDidMount() {
-  //   await const { data } = client.query({
-  //     query: useGetProductByIdQuery,
-  //     variables: {
-  //       i
-  //     }
-  //   })
-  // }
-
   render() {
-    console.log(this.props.product.attributes);
-    console.log(this.props.product.id);
-    console.log(this.props.currentCurrency);
-
+    const arrAttributes = this.props.product.attributes as IAttribute[];
     return (
       <article className={styles.wrapper}>
         <div className={styles.brand}>
@@ -39,7 +25,7 @@ class BasicBlock extends Component<IProps> {
           <h3>{this.props.product.name}</h3>
         </div>
 
-        <CommonAttributeSet />
+        <CommonAttributeSet attributes={arrAttributes} />
 
         <div className={styles.priceBlock}>
           <h4>PRICE:</h4>
