@@ -1,0 +1,38 @@
+/*.sizeBlock {*/
+/*  margin: 43px 0 0 0;*/
+/*  height: 71px;*/
+/*  !*border: yellow 1px solid;*!*/
+/*  display: flex;*/
+/*  flex-direction: column;*/
+/*}*/
+/*.sizeBlock h4 {*/
+/*  margin: 0;*/
+/*  text-align: left;*/
+/*  font-weight: 700;*/
+/*  font-size: 18px;*/
+/*  line-height: 18px;*/
+/*}*/
+/*.sizeLine {*/
+/*  margin: 8px 0 0 0;*/
+/*  height: 45px;*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*}*/
+/*.sizeItem {*/
+/*  margin: 0 12px 0 0 ;*/
+/*  width: 63px;*/
+/*  height: 45px;*/
+/*  border: black 1px solid;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: center;*/
+/*}*/
+/*.active {*/
+/*  background: black;*/
+/*  color: white;*/
+/*}*/
+/*.sizeBlock p {*/
+/*  font-weight: 400;*/
+/*  font-size: 16px;*/
+/*  line-height: 18px;*/
+/*}*/

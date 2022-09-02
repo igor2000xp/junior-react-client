@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './cart-page.module.css';
-import BasicBlock from '../../pdp-card/cartBlocks/basic-block';
+// import BasicBlock from '../../pdp-card/cartBlocks/basic-block';
 
 class CartPage extends Component {
   render() {

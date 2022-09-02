@@ -21,7 +21,7 @@ class PriceBlock extends PureComponent<IProps, IState> {
   async componentDidUpdate(
     prevProps: Readonly<IProps>,
     prevState: Readonly<IState>,
-    snapshot?: any,
+    // snapshot?: any,
   ) {
     const currentCurrency = this.props.symbolCurrency;
     const prePrice = this.prices.find((item) => {

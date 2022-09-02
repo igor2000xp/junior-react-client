@@ -1,0 +1,39 @@
+.colorBlock {
+  margin: 24px 0 0 0 ;
+  height: 62px;
+  /*border: green 1px solid;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.colorLine {
+  display: flex;
+  flex-direction: row;
+  /*border: blue 1px solid;*/
+}
+.colorItem {
+  margin: 0 8px 0 0;
+  height: 36px;
+  width: 36px;
+  /*border: red 1px solid;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.colorItemInside {
+  height: 32px;
+  width: 32px;
+}
+.itemGrey {
+  background: #D3D2D5;
+}
+.itemDarkGray {
+  background: #2B2B2B;
+}
+.itemGreen {
+  background: #0F6450;
+}
+.activeColor {
+  border: 1px solid #5ECE7B;
+  /*padding: 5px;*/
+}
