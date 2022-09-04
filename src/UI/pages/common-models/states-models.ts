@@ -15,3 +15,18 @@ export interface IHeaderState {
   symbol: SymbolCurrency;
   isShown: boolean;
 }
+
+export interface IAttributeColorSwatchState {
+  productId: string;
+  activeAttributes: IAttrActive;
+}
+export interface IAttrActive {
+  id: string;
+  value: string;
+  attrID: string;
+}
+export const activeAttributesInit = {
+  id: '',
+  value: '',
+  attrID: '',
+};

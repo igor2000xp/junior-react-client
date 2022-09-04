@@ -75,6 +75,10 @@ class PdpCard extends Component<any, IState> {
     });
   }
 
+  handleToCart() {
+    console.log('to cart');
+  }
+
   render() {
     const bigImage = this.state.bigImage;
     const hidden = this.product.gallery.length === 1 ? styles.hidden : '';

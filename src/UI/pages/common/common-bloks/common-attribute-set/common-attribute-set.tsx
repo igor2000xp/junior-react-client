@@ -1,44 +1,16 @@
 import React, { Component } from 'react';
-// import AttributeText from './attribute-blocks/attribute-text';
-import AttributeColorSwatch, {
-  IAttributeColorSwatchState,
-  activeAttributesInit,
-  IAttrActive,
-} from './attribute-blocks/attribute-color-swatch';
+import AttributeColorSwatch from './attribute-blocks/attribute-color-swatch';
 import AttributeTextExtended from './attribute-blocks/attribute-text-extended';
 import { ACTIVE_PRODUCT_ATTRIBUTES } from '../../../../../constants';
-
-export interface ICommonAttributeSetProps {
-  attributes: IAttribute[];
-  productID: string;
-}
-export interface IAttribute {
-  id: string;
-  name: string;
-  type: string;
-  items: IAttrItem[];
-}
-export interface IAttrItem {
-  id: string;
-  displayValue: string;
-  value: string;
-}
-export const printToLocalStorageInit = {
-  productId: '',
-  activeAttributes: [{ ...activeAttributesInit }],
-};
-// export interface IAttributeColorSwatchState {
-//   productId: string;
-//   activeAttributes: IAttrActive;
-// }
-// export interface IAttrActive {
-//   id: string;
-//   value: string;
-// }
-// export interface ICommonAttributeSetState extends IAttributeColorSwatchState {}
+import {
+  activeAttributesInit,
+  IAttrActive,
+  IAttributeColorSwatchState,
+  ICommonAttributeSetProps,
+  printToLocalStorageInit,
+} from '../../../common-models';
 
 type IProps = Readonly<ICommonAttributeSetProps>;
-// type IState = Readonly<IAttributeColorSwatchState>;
 
 class CommonAttributeSet extends Component<IProps> {
   private readonly arrResultToStorage: IAttrActive[];
@@ -65,7 +37,6 @@ class CommonAttributeSet extends Component<IProps> {
       ACTIVE_PRODUCT_ATTRIBUTES,
       JSON.stringify(printToLocalStorage),
     );
-    console.log(printToLocalStorage);
   }
   private checkHandleAttributes(value: IAttributeColorSwatchState) {
     // This is a test to see if this is the initial step.

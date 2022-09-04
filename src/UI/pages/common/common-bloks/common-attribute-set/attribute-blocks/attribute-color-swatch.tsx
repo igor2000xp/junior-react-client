@@ -1,38 +1,28 @@
 import React, { Component } from 'react';
 import stylesColor from './attribute-color-swatch.module.css';
-import { IAttribute, IAttrItem } from '../common-attribute-set';
-
-export interface IAttributeColorSwatchState {
-  productId: string;
-  activeAttributes: IAttrActive;
-}
-export interface IAttrActive {
-  id: string;
-  value: string;
-  attrID: string;
-}
-export const activeAttributesInit = {
-  id: '',
-  value: '',
-  attrID: '',
-};
+import {
+  activeAttributesInit,
+  IAttribute,
+  IAttributeColorSwatchState,
+  IProductAttribute,
+} from '../../../../common-models';
 
 export type IProps = Readonly<IAttributeColorSwatchProps>;
 type IState = Readonly<IAttributeColorSwatchState>;
 
 export interface IAttributeColorSwatchProps {
-  attribute: IAttribute;
+  attribute: IProductAttribute;
   getAttrState: (value: IAttributeColorSwatchState) => void;
 }
 
 class AttributeColorSwatch extends Component<IProps, IState> {
-  private locationPage: string;
+  private readonly locationPage: string;
   constructor(props: IProps) {
     super(props);
     this.choiceHandle = this.choiceHandle.bind(this);
-    this.locationPage = window.location.pathname;
+    this.locationPage = window.location.pathname.split(':')[1];
     this.state = {
-      productId: this.locationPage.split(':')[1],
+      productId: this.locationPage,
       activeAttributes: activeAttributesInit,
     };
   }
@@ -53,10 +43,10 @@ class AttributeColorSwatch extends Component<IProps, IState> {
       };
     });
   }
-
-  async choiceHandle(item: IAttrItem) {
+  async choiceHandle(item: IAttribute) {
     await this.setState(() => {
       return {
+        productId: this.locationPage,
         activeAttributes: {
           id: item.id,
           value: item.value,
@@ -64,7 +54,6 @@ class AttributeColorSwatch extends Component<IProps, IState> {
         },
       };
     });
-    // console.log(this.state);
     this.props.getAttrState(this.state);
   }
   render() {

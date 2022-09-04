@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styles from './basic-block.module.css';
 import PriceBlock from '../../../common/common-bloks/price-block/price-block';
-import CommonAttributeSet, {
-  IAttribute,
-} from '../../../common/common-bloks/common-attribute-set/common-attribute-set';
-import { IProduct, SymbolCurrency } from '../../../common-models';
+import CommonAttributeSet from '../../../common/common-bloks/common-attribute-set/common-attribute-set';
+import {
+  IProduct,
+  SymbolCurrency,
+  IProductAttribute,
+} from '../../../common-models';
 
 interface IProps {
   product: IProduct;
@@ -13,7 +15,7 @@ interface IProps {
 
 class BasicBlock extends Component<IProps> {
   render() {
-    const arrAttributes = this.props.product.attributes as IAttribute[];
+    const arrAttributes = this.props.product.attributes as IProductAttribute[];
     return (
       <article className={styles.wrapper}>
         <div className={styles.brand}>

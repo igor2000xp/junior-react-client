@@ -5,9 +5,20 @@ export interface IProduct {
   gallery: string[];
   description: string;
   category: string;
-  attributes: IAttributeSet[];
+  attributes: IProductAttribute[];
   prices: IPrice[];
   brand: string;
+}
+export interface IProductAttribute {
+  id: string;
+  name: string;
+  type: string;
+  items: IAttribute[];
+}
+export interface IAttribute {
+  id: string;
+  displayValue: string;
+  value: string;
 }
 export const productInit = {
   id: '',
@@ -27,17 +38,6 @@ export const productInit = {
   prices: Array({ currency: '', amount: 0 }),
   brand: '',
 };
-export interface IAttributeSet {
-  id: string;
-  name: string;
-  type: string;
-  items: IAttribute[];
-}
-export interface IAttribute {
-  displayValue: string;
-  value: string;
-  id: string;
-}
 export interface IPrice {
   currency: string;
   amount: number;
