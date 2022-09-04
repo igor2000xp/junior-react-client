@@ -8,16 +8,19 @@ import {
 } from '../../../graphql/generated';
 import CurrencyItem from './common-bloks/currency-item/currency-item';
 import { LOCAL_CURRENT_CURRENCY } from '../../../constants';
+import currencyArrowOpen from '../../../assets/images/Icon/currencyOpen.svg';
+import currencyArrowClose from '../../../assets/images/Icon/currencyClose.svg';
 import {
   currencyInit,
   ICurrency,
-  IProps,
-  IState,
+  IHeaderProps,
+  IHeaderState,
   Label,
   SymbolCurrency,
-} from './models/header.model';
-import currencyArrowOpen from '../../../assets/images/Icon/currencyOpen.svg';
-import currencyArrowClose from '../../../assets/images/Icon/currencyClose.svg';
+} from '../common-models';
+
+type IState = Readonly<IHeaderState>;
+type IProps = Readonly<IHeaderProps>;
 
 class Header extends Component<IProps, IState> {
   private currencies: ICurrency[];

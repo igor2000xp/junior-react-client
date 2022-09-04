@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ICurrency } from '../../models/header.model';
 import stylesCurrency from './currency-item.module.css';
+import { ICurrency } from '../../../common-models';
 
 interface IProps {
   currentLabel: string;

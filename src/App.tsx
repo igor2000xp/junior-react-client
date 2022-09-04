@@ -12,10 +12,10 @@ class App extends Component {
     return (
       <div className="App">
         <Routes>
-          <Route path="/category/:categoryId" element={<MainPage />} />
-          <Route path="/" element={<Navigate replace to="/category/:all" />} />
+          <Route path="category/:categoryId" element={<MainPage />} />
+          <Route path="/" element={<Navigate replace to="category/:all" />} />
           <Route
-            path="/junior-react-client"
+            path="junior-react-client"
             element={<Navigate replace to="/category/:all" />}
           />
           <Route path="pdp/:productId" element={<PdpCard />} />

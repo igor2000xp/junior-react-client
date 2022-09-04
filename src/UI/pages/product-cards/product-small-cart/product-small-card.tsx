@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classes from './product-small-card.module.css';
 import { IItem, IPrice } from '../../main-page-madel/main-page.model';
 import PriceBlock from '../../common/common-bloks/price-block/price-block';
-import { SymbolCurrency } from '../../common/models/header.model';
+import { SymbolCurrency } from '../../common-models';
 
 interface IProps {
   item: IItem;

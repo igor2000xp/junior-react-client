@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import styles from './basic-block.module.css';
 import PriceBlock from '../../../common/common-bloks/price-block/price-block';
-import { IProduct } from '../models/pdp-card.model';
-import { SymbolCurrency } from '../../../common/models/header.model';
 import CommonAttributeSet, {
   IAttribute,
 } from '../../../common/common-bloks/common-attribute-set/common-attribute-set';
+import { IProduct, SymbolCurrency } from '../../../common-models';
 
 interface IProps {
   product: IProduct;
@@ -25,7 +24,10 @@ class BasicBlock extends Component<IProps> {
           <h3>{this.props.product.name}</h3>
         </div>
 
-        <CommonAttributeSet attributes={arrAttributes} />
+        <CommonAttributeSet
+          attributes={arrAttributes}
+          productID={this.props.product.id}
+        />
 
         <div className={styles.priceBlock}>
           <h4>PRICE:</h4>

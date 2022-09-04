@@ -1,5 +1,5 @@
 import { WithRouterProps } from '../with-router/with-router.model';
-import { SymbolCurrency } from '../common/models/header.model';
+import { SymbolCurrency } from '../common-models';
 
 export interface IParams {
   categoryId: string;

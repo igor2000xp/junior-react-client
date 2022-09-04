@@ -7,20 +7,23 @@ import { Link } from 'react-router-dom';
 import Header from '../../common/header';
 import client from '../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../graphql/generated';
-import { Label, SymbolCurrency } from '../../common/models/header.model';
 import { LOCAL_CURRENT_CURRENCY } from '../../../../constants';
 import {
   IProduct,
-  IState,
+  Label,
   productInit,
-  stateInit,
-} from './models/pdp-card.model';
+  SymbolCurrency,
+  IPdpCardState,
+  IPdpCardStateInit,
+} from '../../common-models';
+
+type IState = Readonly<IPdpCardState>;
 
 class PdpCard extends Component<any, IState> {
   product: IProduct;
   constructor(props: any) {
     super(props);
-    this.state = { ...stateInit };
+    this.state = { ...IPdpCardStateInit };
     this.getCurrency = this.getCurrency.bind(this);
     this.switchImage = this.switchImage.bind(this);
     this.product = { ...productInit };

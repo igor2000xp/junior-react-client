@@ -19,8 +19,8 @@ import {
   stateInit,
 } from './main-page-madel/main-page.model';
 import Header from './common/header';
-import { Label, SymbolCurrency } from './common/models/header.model';
 import { LOCAL_CURRENT_CURRENCY } from '../../constants';
+import { Label, SymbolCurrency } from './common-models';
 
 class MainPage extends PureComponent<IPropsMainPage, IState> {
   private categoryId: string;
@@ -112,33 +112,34 @@ class MainPage extends PureComponent<IPropsMainPage, IState> {
       return item !== null ? item : itemInit;
     });
     const symbolCurrency = this.state.currentCurrency;
-    if (this.state.isLoaded) {
-      return (
-        <>
-          <article className={stylesMain.mainWrapper}>
-            <Header getCurrency={this.getCurrency} />
-            <h1>{`Category ${String(this.categoryId)}`}</h1>
-            <section className={stylesMain.mainProductSection}>
-              {newItems.map((item) => {
-                return (
-                  <Link
-                    to={`/pdp/:${item.id}`}
+    if (!this.state.isLoaded) {
+      return <h1>Loading...</h1>;
+    }
+    return (
+      <>
+        <article className={stylesMain.mainWrapper}>
+          <Header getCurrency={this.getCurrency} />
+          <h1>{`Category ${String(this.categoryId)}`}</h1>
+          <section className={stylesMain.mainProductSection}>
+            {newItems.map((item) => {
+              return (
+                <Link
+                  to={`/pdp/:${item.id}`}
+                  key={item.id}
+                  className={stylesMain.mainLink}
+                >
+                  <ProductSmallCard
+                    item={item}
+                    symbolCurrency={symbolCurrency}
                     key={item.id}
-                    className={stylesMain.mainLink}
-                  >
-                    <ProductSmallCard
-                      item={item}
-                      symbolCurrency={symbolCurrency}
-                      key={item.id}
-                    />
-                  </Link>
-                );
-              })}
-            </section>
-          </article>
-        </>
-      );
-    } else return <h1>Loading...</h1>;
+                  />
+                </Link>
+              );
+            })}
+          </section>
+        </article>
+      </>
+    );
   }
 }
 export default withRouter(MainPage);

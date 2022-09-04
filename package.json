@@ -18,7 +18,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --no-error-on-unmatched-pattern",
     "lint:fix": "eslint src --no-error-on-unmatched-pattern --fix",
-    "generate-types": "graphql-codegen --config codegen.yml"
+    "generate-types": "graphql-codegen --config codegen.yml",
+    "component": "npx generate-react-cli component"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -52,6 +53,7 @@
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "generate-react-cli": "^7.3.0",
     "prettier": "^2.7.1"
   },
   "eslintConfig": {

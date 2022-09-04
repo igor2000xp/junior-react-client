@@ -1,2 +1,3 @@
 src/graphql/gen*.*
-/src/assets/*
+src/UI/templates/*
+src/assets/*

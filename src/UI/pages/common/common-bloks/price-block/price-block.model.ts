@@ -1,4 +1,4 @@
-import { SymbolCurrency } from '../../models/header.model';
+import { SymbolCurrency } from '../../../common-models';
 
 export interface IProps {
   id: string;
