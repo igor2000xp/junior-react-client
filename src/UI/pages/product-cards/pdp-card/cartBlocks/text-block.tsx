@@ -13,7 +13,7 @@ class TextBlock extends Component<IProps> {
       <section
         className={styles.wrapper}
         dangerouslySetInnerHTML={this.createMarkup()}
-      ></section>
+      />
     );
   }
 }

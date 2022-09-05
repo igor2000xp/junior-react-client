@@ -1,6 +1,14 @@
-import { IActiveAttr, ILocalBasket, localActiveAttributesInit, localBasketItemInit } from '../../../../common-models';
+import {
+  IActiveAttr,
+  ILocalBasket,
+  localActiveAttributesInit,
+  localBasketItemInit,
+} from '../../../../common-models';
 import equal from 'fast-deep-equal/es6/react';
-import { ACTIVE_PRODUCT_ATTRIBUTES, LOCAL_BASKET } from '../../../../../../constants';
+import {
+  ACTIVE_PRODUCT_ATTRIBUTES,
+  LOCAL_BASKET,
+} from '../../../../../../constants';
 
 export const settleFullBasket = (
   basket: ILocalBasket[],
@@ -36,13 +44,11 @@ export const settleFullBasket = (
 export const getLocalBasket = async (): Promise<ILocalBasket[]> => {
   const localBasket = localStorage.getItem(LOCAL_BASKET);
   return localBasket ? JSON.parse(localBasket) : [localBasketItemInit];
-}
+};
 
 export const getActiveAttr = async (): Promise<IActiveAttr> => {
-  const activeDraftAttr = await localStorage.getItem(
-    ACTIVE_PRODUCT_ATTRIBUTES,
-  );
+  const activeDraftAttr = await localStorage.getItem(ACTIVE_PRODUCT_ATTRIBUTES);
   return activeDraftAttr
     ? JSON.parse(activeDraftAttr)
     : localActiveAttributesInit;
-}
+};

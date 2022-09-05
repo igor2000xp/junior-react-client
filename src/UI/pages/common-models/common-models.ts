@@ -6,7 +6,7 @@ export interface IProduct {
   inStock: boolean;
   gallery: string[];
   description: string;
-  category: string;
+  // category: string;
   attributes: IProductAttribute[];
   prices: IPrice[];
   brand: string;
@@ -40,6 +40,7 @@ export const productInit = {
   prices: Array({ currency: '', amount: 0 }),
   brand: '',
 };
+
 export interface IPrice {
   currency: string;
   amount: number;

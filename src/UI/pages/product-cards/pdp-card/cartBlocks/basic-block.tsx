@@ -2,16 +2,9 @@ import React, { Component } from 'react';
 import styles from './basic-block.module.css';
 import PriceBlock from '../../../common/common-bloks/price-block/price-block';
 import CommonAttributeSet from '../../../common/common-bloks/common-attribute-set/common-attribute-set';
-import {
-  IProduct,
-  SymbolCurrency,
-  IProductAttribute,
-} from '../../../common-models';
+import { IProductAttribute, IBasicBlockProps } from '../../../common-models';
 
-interface IProps {
-  product: IProduct;
-  currentCurrency: SymbolCurrency;
-}
+type IProps = Readonly<IBasicBlockProps>;
 
 class BasicBlock extends Component<IProps> {
   render() {

@@ -6,8 +6,8 @@
   "component": {
     "default": {
       "customTemplates": {
-        "component": "src/UI/templates/default/template-name.tsx",
-        "style": "src/UI/templates/default/template-name.module.css"
+        "component": "src/UI/templates/default/templateName.tsx",
+        "style": "src/UI/templates/default/templateName.module.css"
       },
       "path": "src/UI/pages",
       "withLazy": false,

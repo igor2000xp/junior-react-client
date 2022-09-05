@@ -3,7 +3,6 @@ import styles from './pdp-card.module.css';
 import BasicBlock from './cartBlocks/basic-block';
 import ButtonBlock from './cartBlocks/button-block';
 import TextBlock from './cartBlocks/text-block';
-// import { Link } from 'react-router-dom';
 import Header from '../../common/header';
 import client from '../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../graphql/generated';
@@ -110,11 +109,7 @@ class PdpCard extends Component<any, IState> {
               product={this.product}
               currentCurrency={this.state.currentCurrency}
             />
-
-            {/*<Link to="/cart">*/}
             <ButtonBlock />
-            {/*</Link>*/}
-
             <TextBlock text={this.product.description} />
           </section>
         </div>

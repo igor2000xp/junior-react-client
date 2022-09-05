@@ -6,6 +6,7 @@ import PlpPage from './UI/pages/product-cards/plp-pages/plp-page';
 import MiniCart from './UI/pages/product-cards/minicart-pages/mini-cart';
 import NoMatch from './UI/pages/no-match/no-match';
 import MainPage from './UI/pages/main-page';
+import ModalWindow from './UI/pages/product-cards/minicart-pages/modal-window/modal-window';
 
 class App extends Component {
   render() {
@@ -20,7 +21,7 @@ class App extends Component {
           />
           <Route path="pdp/:productId" element={<PdpCard />} />
           <Route path="cart" element={<PlpPage />} />
-          <Route path="mini-cart" element={<MiniCart />} />
+          <Route path="mini-cart" element={<ModalWindow />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </div>
