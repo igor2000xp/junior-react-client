@@ -1,3 +1,5 @@
+import { IAttrActive } from './states-models';
+
 export interface IProduct {
   id: string;
   name: string;
@@ -80,3 +82,34 @@ export const categoriesInit = [
   { name: 'clothes', isActive: false },
   { name: 'tech', isActive: false },
 ];
+
+export interface ILocalBasket {
+  productId: string;
+  quantity: number;
+  activeAttributes: IAttrActive[];
+}
+export const localBasketItemInit: ILocalBasket = {
+  productId: '',
+  quantity: 0,
+  activeAttributes: [
+    {
+      id: '',
+      value: '',
+      attrID: '',
+    },
+  ],
+};
+export interface IActiveAttr {
+  productId: string;
+  activeAttributes: IAttrActive[];
+}
+export const localActiveAttributesInit: IActiveAttr = {
+  productId: '',
+  activeAttributes: [
+    {
+      id: '',
+      value: '',
+      attrID: '',
+    },
+  ],
+};
