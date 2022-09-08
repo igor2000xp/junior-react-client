@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import styles from './cart-page.module.css';
+import styles from './card-item.module.css';
 import {
   activeAttributesInit,
-  IActiveAttr,
+  IActiveBasketAttr,
   ICurrency,
   ILocalBasket,
   IProduct,
@@ -34,10 +34,10 @@ export interface IState {
 }
 type IProps = Readonly<ICartPageProps>;
 
-class CartPage extends Component<IProps, IState> {
+class CardItem extends Component<IProps, IState> {
   private product: IProduct = productInit;
-  private activeAttr: IActiveAttr[] = [localActiveAttributesInit];
-  private activeAttrItem: IActiveAttr = localActiveAttributesInit;
+  private activeAttr: IActiveBasketAttr[] = [localActiveAttributesInit];
+  private activeAttrItem: IActiveBasketAttr = localActiveAttributesInit;
 
   constructor(props: IProps) {
     super(props);
@@ -66,7 +66,7 @@ class CartPage extends Component<IProps, IState> {
       }
       this.activeAttrItem = this.activeAttr.find((item) => {
         return item.productId === this.product.id;
-      }) as IActiveAttr;
+      }) as IActiveBasketAttr;
       // console.log(this.activeAttrItem);
     }
   }
@@ -132,4 +132,4 @@ class CartPage extends Component<IProps, IState> {
   }
 }
 
-export default CartPage;
+export default CardItem;

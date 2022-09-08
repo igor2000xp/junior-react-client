@@ -1,5 +1,5 @@
 import {
-  IActiveAttr,
+  IActiveAttrPdp,
   ILocalBasket,
   localActiveAttributesInit,
   localBasketItemInit,
@@ -11,42 +11,45 @@ import {
 } from '../../../../../../constants';
 
 export const settleFullBasket = (
-  basket: ILocalBasket[],
-  activeAttr: IActiveAttr,
-) => {
+  localBaskets: ILocalBasket[],
+  activeAttr: IActiveAttrPdp[],
+  productId: string,
+): ILocalBasket[] => {
   // Check for the same product id and set of attributes
   let isAttributes = false;
   const newBasketItem: ILocalBasket = {
+    productId,
     quantity: 1,
-    ...activeAttr,
+    activeAttributes: activeAttr,
   };
-  const isProduct = basket.findIndex((item) => {
-    return item.productId === activeAttr.productId;
+  const isProduct = localBaskets.findIndex((item) => {
+    return item.productId === productId;
   });
   if (isProduct !== -1) {
-    isAttributes = equal(
-      basket[isProduct].activeAttributes,
-      activeAttr.activeAttributes,
-    );
+    isAttributes = equal(localBaskets[isProduct].activeAttributes, activeAttr);
     // if it true it adds the same product +1
     if (isAttributes) {
-      basket[isProduct].quantity += 1;
+      localBaskets[isProduct].quantity += 1;
     } else {
-      basket.push(newBasketItem);
+      localBaskets.push(newBasketItem);
     }
     //  else just push the basket
   } else {
-    basket.push(newBasketItem);
+    if (localBaskets[0].productId === '') {
+      localBaskets[0] = newBasketItem;
+    } else {
+      localBaskets.push(newBasketItem);
+    }
   }
-  localStorage.setItem(LOCAL_BASKET, JSON.stringify(basket));
+  return localBaskets;
 };
 
-export const getLocalBasket = async (): Promise<ILocalBasket[]> => {
+export const getFromLocalBasket = async (): Promise<ILocalBasket[]> => {
   const localBasket = localStorage.getItem(LOCAL_BASKET);
   return localBasket ? JSON.parse(localBasket) : [localBasketItemInit];
 };
 
-export const getActiveAttr = async (): Promise<IActiveAttr> => {
+export const getActiveAttrFromLocal = async (): Promise<IActiveAttrPdp[]> => {
   const activeDraftAttr = await localStorage.getItem(ACTIVE_PRODUCT_ATTRIBUTES);
   return activeDraftAttr
     ? JSON.parse(activeDraftAttr)

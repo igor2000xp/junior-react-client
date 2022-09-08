@@ -6,7 +6,6 @@ import {
   IAttributeColorSwatchState,
   IProductAttribute,
 } from '../../../../common-models';
-import attrColorPlp from '../../../../product-cards/plp-card/plp-card-blocks/attr-color-plp/attr-color-plp';
 
 export type IProps = Readonly<IAttributeColorSwatchProps>;
 type IState = Readonly<IAttributeColorSwatchState>;
@@ -32,19 +31,13 @@ class AttributeColorSwatch extends Component<IProps, IState> {
   async componentDidMount() {
     await this.setFirstAttrActive();
     this.props.getAttrState(this.state);
-    // console.log(this.props.activeAttributeInRow);
   }
 
   componentDidUpdate(
     prevProps: Readonly<IProps>,
     prevState: Readonly<IState>,
     snapshot?: any,
-  ) {
-    // if (prevProps.activeAttributeInRow !== this.props.activeAttributeInRow) {
-    //   console.log(this.props.activeAttributeInRow);
-    // }
-    console.log(this.props.activeAttributeInRow);
-  }
+  ) {}
 
   async setFirstAttrActive() {
     await this.setState(() => {
@@ -72,7 +65,6 @@ class AttributeColorSwatch extends Component<IProps, IState> {
   }
   render() {
     const attr = this.props.attribute.items;
-    // console.log(this.state.productId);
     return (
       <>
         <div className={stylesColor.colorBlock}>

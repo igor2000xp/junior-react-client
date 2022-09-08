@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styles from './plp-card.module.css';
 import '../../../../assets/images/Icon/minus-svgrepo-com.svg';
-import CartPage from './cart-page/cart-page';
-import TotalBlock from './cart-page/total-block';
+import CardItem from './card-item/card-item';
+import TotalBlock from './card-item/total-block';
 import Header from '../../common/header';
 import {
   Label,
@@ -46,7 +46,7 @@ class PlpCard extends Component<any, IState> {
     this.localBasket = JSON.parse(
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, ' ');
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const currency = JSON.parse(
       (await localStorage.getItem(LOCAL_CURRENT_CURRENCY)) as string,
     );
@@ -73,7 +73,7 @@ class PlpCard extends Component<any, IState> {
               const basket = item;
               const currency = this.state.currentCurrency;
               return (
-                <CartPage
+                <CardItem
                   basket={basket}
                   currency={currency}
                   key={item.productId + index}

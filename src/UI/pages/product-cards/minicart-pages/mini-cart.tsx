@@ -1,10 +1,10 @@
 import React from 'react';
 import stylesCart from './mini-cart.module.css';
-import CartPage from '../plp-card/cart-page/cart-page';
+import CardItem from '../plp-card/card-item/card-item';
 import MiniBasicBlock from './miniCartBlocks/mini-basic-block';
 import MiniButtonBlock from './miniCartBlocks/mini-button-block';
 
-class MiniCart extends CartPage {
+class MiniCart extends CardItem {
   render() {
     return (
       <article className={stylesCart.wrapper}>

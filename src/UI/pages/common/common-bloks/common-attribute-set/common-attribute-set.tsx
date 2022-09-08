@@ -7,14 +7,12 @@ import {
   IAttrActive,
   IAttributeColorSwatchState,
   ICommonAttributeSetProps,
-  printToLocalStorageInit,
 } from '../../../common-models';
 
 type IProps = Readonly<ICommonAttributeSetProps>;
 
 class CommonAttributeSet extends Component<IProps> {
   private readonly arrResultToStorage: IAttrActive[];
-  private activeAttributeInRow = '';
   constructor(props: IProps) {
     super(props);
     this.handleAttributes = this.handleAttributes.bind(this);
@@ -23,50 +21,33 @@ class CommonAttributeSet extends Component<IProps> {
 
   async componentDidMount() {
     localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-    console.log(this.props);
   }
 
   private handleAttributes(value: IAttributeColorSwatchState) {
-    this.checkHandleAttributes(value);
-    const printToLocalStorage = {
-      productId: this.props.productID,
-      activeAttributes: this.arrResultToStorage,
-    };
-    // if (printToLocalStorage.productId === '') {
-    // localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-    // }
-    console.log(printToLocalStorage);
-    const localPrintToLocalStorage = JSON.parse(
-      localStorage.getItem(ACTIVE_PRODUCT_ATTRIBUTES) as string,
-    );
-    localPrintToLocalStorage.push(printToLocalStorage);
-    console.log(localPrintToLocalStorage);
-    this.activeAttributeInRow = value.activeAttributes.value;
-    // console.log(this.activeAttributeInRow);
+    this.renewHandleAttributes(value);
     localStorage.setItem(
       ACTIVE_PRODUCT_ATTRIBUTES,
-      JSON.stringify(localPrintToLocalStorage),
+      JSON.stringify(this.arrResultToStorage),
     );
   }
-  private checkHandleAttributes(value: IAttributeColorSwatchState) {
+  private renewHandleAttributes(value: IAttributeColorSwatchState) {
     // This is a test to see if this is the initial step.
-    if (!this.arrResultToStorage[0].id) {
+    if (this.arrResultToStorage[0].id === '') {
       this.arrResultToStorage[0] = value.activeAttributes;
     }
     // This is a test to see if there is an element in the array that looks like new.
-    const isItem = this.arrResultToStorage.findIndex((item) => {
+    const isItemSame = this.arrResultToStorage.findIndex((item) => {
       return item.attrID === value.activeAttributes.attrID;
     });
-    if (isItem === -1) {
+    if (isItemSame === -1) {
       this.arrResultToStorage.push(value.activeAttributes);
-    } else if (isItem > -1) {
-      this.arrResultToStorage[isItem] = { ...value.activeAttributes };
+    } else if (isItemSame > -1) {
+      this.arrResultToStorage[isItemSame] = { ...value.activeAttributes };
     }
   }
 
   render() {
     const attr = this.props.attributes;
-    const activeAttributeInRow = this.activeAttributeInRow;
     return (
       <>
         {attr.map((item) => {

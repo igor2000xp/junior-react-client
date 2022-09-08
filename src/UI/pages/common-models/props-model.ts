@@ -1,12 +1,11 @@
 import {
-  IActiveAttr,
+  IActiveBasketAttr,
   IProduct,
   IProductAttribute,
   Label,
   SymbolCurrency,
 } from './common-models';
 import { activeAttributesInit } from './states-models';
-import exp from 'constants';
 
 export interface IHeaderProps {
   getCurrency: (label: Label, symbol: SymbolCurrency) => void;
@@ -23,8 +22,8 @@ export const printToLocalStorageInit = {
 export interface IBasicBlockProps {
   product: IProduct;
   currentCurrency: SymbolCurrency;
-  activeAttributes?: IActiveAttr;
+  activeAttributes?: IActiveBasketAttr;
 }
 export interface ICartBasicBlockProps extends IBasicBlockProps {
-  activeAttributes: IActiveAttr;
+  activeAttributes: IActiveBasketAttr;
 }

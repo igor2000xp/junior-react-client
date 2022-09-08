@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import styles from './button-block.module.css';
-import {
-  IActiveAttr,
-  ILocalBasket,
-  localActiveAttributesInit,
-} from '../../../common-models';
+import { IActiveAttrPdp, localBasketItemInit } from '../../../common-models';
 import {
   ACTIVE_PRODUCT_ATTRIBUTES,
   LOCAL_BASKET,
 } from '../../../../../constants';
 import { Link } from 'react-router-dom';
-import { getActiveAttr, getLocalBasket, settleFullBasket } from './helpers';
+import {
+  getActiveAttrFromLocal,
+  getFromLocalBasket,
+  settleFullBasket,
+} from './helpers';
 
 class ButtonBlock extends Component {
   private isGoToBasket = false;
+  private localBaskets = [localBasketItemInit];
+  private productId = location.pathname.split(':')[1];
   constructor(props: any) {
     super(props);
     this.clickToOut = this.clickToOut.bind(this);
@@ -24,40 +26,36 @@ class ButtonBlock extends Component {
   }
 
   async goToBasket() {
-    const activeAttr: IActiveAttr = await getActiveAttr();
-    let currentBasket = await getLocalBasket();
-    // Check if the basket was empty
+    const activeAttr: IActiveAttrPdp[] = await getActiveAttrFromLocal();
+    const productId = this.productId;
+    this.localBaskets = await getFromLocalBasket();
+    // check if the basket is empty
     if (
-      !currentBasket[0].productId &&
-      currentBasket[0].productId !== '' &&
-      !currentBasket
+      !this.localBaskets[0].productId &&
+      this.localBaskets[0].productId !== '' &&
+      !this.localBaskets
     ) {
-      currentBasket = [
+      console.log('Check if the basket was empty then init it');
+      this.localBaskets = [
         {
           quantity: 1,
-          productId: activeAttr.productId,
-          activeAttributes: [...activeAttr.activeAttributes],
+          productId,
+          activeAttributes: activeAttr,
         },
       ];
-      // localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, '');
-      // activeAttr = localActiveAttributesInit;
     }
     // Other cart checks
-    this.settleBasket(currentBasket, activeAttr);
-  }
-
-  settleBasket(basket: ILocalBasket[], activeAttr: IActiveAttr) {
-    // If it is a first record to the basket
-    if (activeAttr.productId !== '' && !activeAttr) {
-      // Check right way add goods into basket
-      settleFullBasket(basket, activeAttr);
-    }
-    localStorage.setItem(LOCAL_BASKET, JSON.stringify(basket));
-    localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, '');
+    this.localBaskets = settleFullBasket(
+      this.localBaskets,
+      activeAttr,
+      this.productId,
+    );
+    localStorage.setItem(LOCAL_BASKET, JSON.stringify(this.localBaskets));
   }
 
   async componentWillUnmount() {
     if (this.isGoToBasket) await this.goToBasket();
+    localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 
   render() {

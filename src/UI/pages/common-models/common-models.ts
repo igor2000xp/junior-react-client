@@ -95,7 +95,7 @@ export interface ILocalBasket {
 }
 export const localBasketItemInit: ILocalBasket = {
   productId: '',
-  quantity: 0,
+  quantity: 1,
   activeAttributes: [
     {
       id: '',
@@ -104,11 +104,11 @@ export const localBasketItemInit: ILocalBasket = {
     },
   ],
 };
-export interface IActiveAttr {
+export interface IActiveBasketAttr {
   productId: string;
   activeAttributes: IAttrActive[];
 }
-export const localActiveAttributesInit: IActiveAttr = {
+export const localActiveAttributesInit: IActiveBasketAttr = {
   productId: '',
   activeAttributes: [
     {
@@ -117,4 +117,14 @@ export const localActiveAttributesInit: IActiveAttr = {
       attrID: '',
     },
   ],
+};
+export interface IActiveAttrPdp {
+  id: string;
+  value: string;
+  attrID: string;
+}
+export const localActiveAttributesPdpInit: IActiveAttrPdp = {
+  id: '',
+  value: '',
+  attrID: '',
 };
