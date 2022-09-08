@@ -16,7 +16,8 @@ import {
   IHeaderProps,
   IHeaderState,
   Label,
-  SymbolCurrency, zeroCurrencyInit,
+  SymbolCurrency,
+  zeroCurrencyInit,
 } from '../common-models';
 
 type IState = Readonly<IHeaderState>;
@@ -88,7 +89,10 @@ class Header extends Component<IProps, IState> {
     let currentCurrency: typeof zeroCurrencyInit;
     if (!localCurrentCurrency) {
       currentCurrency = zeroCurrencyInit;
-      localStorage.setItem(LOCAL_CURRENT_CURRENCY, JSON.stringify(currentCurrency));
+      localStorage.setItem(
+        LOCAL_CURRENT_CURRENCY,
+        JSON.stringify(currentCurrency),
+      );
     } else {
       currentCurrency = JSON.parse(localCurrentCurrency);
     }

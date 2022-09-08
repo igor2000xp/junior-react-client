@@ -35,7 +35,11 @@ class AttributeColorSwatch extends Component<IProps, IState> {
     // console.log(this.props.activeAttributeInRow);
   }
 
-  componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
+  componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    prevState: Readonly<IState>,
+    snapshot?: any,
+  ) {
     // if (prevProps.activeAttributeInRow !== this.props.activeAttributeInRow) {
     //   console.log(this.props.activeAttributeInRow);
     // }

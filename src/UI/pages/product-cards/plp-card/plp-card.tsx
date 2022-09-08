@@ -9,7 +9,11 @@ import {
   localBasketItemInit,
   SymbolCurrency,
 } from '../../common-models';
-import { ACTIVE_PRODUCT_ATTRIBUTES, LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../../constants';
+import {
+  ACTIVE_PRODUCT_ATTRIBUTES,
+  LOCAL_BASKET,
+  LOCAL_CURRENT_CURRENCY,
+} from '../../../../constants';
 
 export interface IState {
   productId: string;
@@ -34,8 +38,8 @@ class PlpCard extends Component<any, IState> {
     this.setState(() => {
       return {
         currentCurrency: symbol,
-      }
-    })
+      };
+    });
   }
 
   async componentDidMount() {
@@ -43,18 +47,22 @@ class PlpCard extends Component<any, IState> {
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );
     await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, ' ');
-    const currency = JSON.parse( await localStorage.getItem(LOCAL_CURRENT_CURRENCY) as string);
+    const currency = JSON.parse(
+      (await localStorage.getItem(LOCAL_CURRENT_CURRENCY)) as string,
+    );
     // this.setState({
     //   productId: this.localBasket[0].productId,
     // });
     this.setState({
       productId: 'xbox-series-s',
       currentCurrency: currency.symbol,
-    })
+    });
   }
 
   render() {
-    this.localBasket = this.localBasket ? this.localBasket : [localBasketItemInit];
+    this.localBasket = this.localBasket
+      ? this.localBasket
+      : [localBasketItemInit];
     return (
       <>
         <Header getCurrency={this.getCurrency} />
@@ -71,8 +79,7 @@ class PlpCard extends Component<any, IState> {
                   key={item.productId + index}
                 />
               );
-            })
-            }
+            })}
             <TotalBlock />
           </div>
         </article>

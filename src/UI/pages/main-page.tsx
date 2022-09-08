@@ -20,7 +20,12 @@ import {
 } from './main-page-madel/main-page.model';
 import Header from './common/header';
 import { LOCAL_CURRENT_CURRENCY } from '../../constants';
-import { currencyInit, Label, SymbolCurrency, zeroCurrencyInit } from './common-models';
+import {
+  currencyInit,
+  Label,
+  SymbolCurrency,
+  zeroCurrencyInit,
+} from './common-models';
 
 class MainPage extends PureComponent<IPropsMainPage, IState> {
   private categoryId: string;
@@ -37,7 +42,9 @@ class MainPage extends PureComponent<IPropsMainPage, IState> {
 
   async componentDidMount() {
     const currency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
-    this.currentCurrency = JSON.parse(currency ? currency : JSON.stringify(zeroCurrencyInit));
+    this.currentCurrency = JSON.parse(
+      currency ? currency : JSON.stringify(zeroCurrencyInit),
+    );
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
     await this.checkQueryData();

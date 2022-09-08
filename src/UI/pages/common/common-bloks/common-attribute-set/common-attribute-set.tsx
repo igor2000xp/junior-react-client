@@ -22,10 +22,7 @@ class CommonAttributeSet extends Component<IProps> {
   }
 
   async componentDidMount() {
-    localStorage.setItem(
-      ACTIVE_PRODUCT_ATTRIBUTES,
-      JSON.stringify([]),
-    );
+    localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     console.log(this.props);
   }
 
@@ -36,10 +33,12 @@ class CommonAttributeSet extends Component<IProps> {
       activeAttributes: this.arrResultToStorage,
     };
     // if (printToLocalStorage.productId === '') {
-      // localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+    // localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     // }
     console.log(printToLocalStorage);
-    let localPrintToLocalStorage = JSON.parse(localStorage.getItem(ACTIVE_PRODUCT_ATTRIBUTES) as string);
+    const localPrintToLocalStorage = JSON.parse(
+      localStorage.getItem(ACTIVE_PRODUCT_ATTRIBUTES) as string,
+    );
     localPrintToLocalStorage.push(printToLocalStorage);
     console.log(localPrintToLocalStorage);
     this.activeAttributeInRow = value.activeAttributes.value;

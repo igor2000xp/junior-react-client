@@ -37,7 +37,7 @@ type IProps = Readonly<ICartPageProps>;
 class CartPage extends Component<IProps, IState> {
   private product: IProduct = productInit;
   private activeAttr: IActiveAttr[] = [localActiveAttributesInit];
-  private  activeAttrItem: IActiveAttr = localActiveAttributesInit;
+  private activeAttrItem: IActiveAttr = localActiveAttributesInit;
 
   constructor(props: IProps) {
     super(props);
@@ -72,7 +72,6 @@ class CartPage extends Component<IProps, IState> {
   }
 
   async componentDidUpdate() {
-
     const id = this.props.basket.productId;
     if (id !== '' || !id) {
       try {
@@ -81,7 +80,7 @@ class CartPage extends Component<IProps, IState> {
           variables: {
             id: id,
           },
-        }) ;
+        });
         this.product = { ...(data.product as IProduct), id };
         console.log(this.activeAttr);
       } catch (err) {

@@ -24,10 +24,14 @@ class ButtonBlock extends Component {
   }
 
   async goToBasket() {
-    let activeAttr: IActiveAttr = await getActiveAttr();
+    const activeAttr: IActiveAttr = await getActiveAttr();
     let currentBasket = await getLocalBasket();
     // Check if the basket was empty
-    if ( (!currentBasket[0].productId && currentBasket[0].productId !== '') && !currentBasket) {
+    if (
+      !currentBasket[0].productId &&
+      currentBasket[0].productId !== '' &&
+      !currentBasket
+    ) {
       currentBasket = [
         {
           quantity: 1,

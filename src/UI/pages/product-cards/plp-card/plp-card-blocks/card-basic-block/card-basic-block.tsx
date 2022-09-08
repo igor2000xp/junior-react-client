@@ -21,7 +21,8 @@ class CardBasicBlock extends BasicBlock {
   render() {
     const arrAttributes = this.props.product.attributes as IProductAttribute[];
     // console.log(arrAttributes);
-    const productId = this.props.product.id === '' ? 'xbox-series-s' : this.props.product.id;
+    const productId =
+      this.props.product.id === '' ? 'xbox-series-s' : this.props.product.id;
     const symbolCurrency = this.props.currentCurrency;
     // console.log(productId, symbolCurrency);
     // console.log(arrAttributes);
@@ -42,10 +43,7 @@ class CardBasicBlock extends BasicBlock {
 
         <div className={styles.priceBlock}>
           <div>
-            <PriceBlock
-              id={productId}
-              symbolCurrency={symbolCurrency}
-            />
+            <PriceBlock id={productId} symbolCurrency={symbolCurrency} />
           </div>
         </div>
       </article>
