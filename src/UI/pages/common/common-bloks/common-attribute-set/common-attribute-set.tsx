@@ -14,6 +14,7 @@ type IProps = Readonly<ICommonAttributeSetProps>;
 
 class CommonAttributeSet extends Component<IProps> {
   private readonly arrResultToStorage: IAttrActive[];
+  private activeAttributeInRow = '';
   constructor(props: IProps) {
     super(props);
     this.handleAttributes = this.handleAttributes.bind(this);
@@ -23,8 +24,9 @@ class CommonAttributeSet extends Component<IProps> {
   async componentDidMount() {
     localStorage.setItem(
       ACTIVE_PRODUCT_ATTRIBUTES,
-      JSON.stringify(printToLocalStorageInit),
+      JSON.stringify([]),
     );
+    console.log(this.props);
   }
 
   private handleAttributes(value: IAttributeColorSwatchState) {
@@ -33,9 +35,18 @@ class CommonAttributeSet extends Component<IProps> {
       productId: this.props.productID,
       activeAttributes: this.arrResultToStorage,
     };
+    // if (printToLocalStorage.productId === '') {
+      // localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+    // }
+    console.log(printToLocalStorage);
+    let localPrintToLocalStorage = JSON.parse(localStorage.getItem(ACTIVE_PRODUCT_ATTRIBUTES) as string);
+    localPrintToLocalStorage.push(printToLocalStorage);
+    console.log(localPrintToLocalStorage);
+    this.activeAttributeInRow = value.activeAttributes.value;
+    // console.log(this.activeAttributeInRow);
     localStorage.setItem(
       ACTIVE_PRODUCT_ATTRIBUTES,
-      JSON.stringify(printToLocalStorage),
+      JSON.stringify(localPrintToLocalStorage),
     );
   }
   private checkHandleAttributes(value: IAttributeColorSwatchState) {
@@ -56,6 +67,7 @@ class CommonAttributeSet extends Component<IProps> {
 
   render() {
     const attr = this.props.attributes;
+    const activeAttributeInRow = this.activeAttributeInRow;
     return (
       <>
         {attr.map((item) => {
@@ -66,6 +78,7 @@ class CommonAttributeSet extends Component<IProps> {
             return (
               <AttributeTextExtended
                 attribute={item}
+                activeAttributeInRow={''}
                 key={item.id}
                 getAttrState={this.handleAttributes}
               />
@@ -74,6 +87,7 @@ class CommonAttributeSet extends Component<IProps> {
             return (
               <AttributeColorSwatch
                 attribute={item}
+                activeAttributeInRow={''}
                 key={item.id}
                 getAttrState={this.handleAttributes}
               />

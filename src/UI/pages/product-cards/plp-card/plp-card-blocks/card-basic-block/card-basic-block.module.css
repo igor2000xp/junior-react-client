@@ -29,9 +29,9 @@
   text-transform: uppercase;
 }
 .priceBlock {
-  margin: 36px 0 0 0;
+  margin: 20px 0 20px 0;
 }
-p {
+wrapper p {
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styles from './pdp-card.module.css';
-import BasicBlock from './cartBlocks/basic-block';
-import ButtonBlock from './cartBlocks/button-block';
-import TextBlock from './cartBlocks/text-block';
+import BasicBlock from './cardBlocks/basic-block';
+import ButtonBlock from './cardBlocks/button-block';
+import TextBlock from './cardBlocks/text-block';
 import Header from '../../common/header';
 import client from '../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../graphql/generated';
@@ -29,7 +29,7 @@ class PdpCard extends Component<any, IState> {
   }
 
   async componentDidMount() {
-    const id = window.location.pathname.split(':')[1];
+    const id = location.pathname.split(':')[1];
     await this.productQuery(id);
     const localCurrency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
     const currentCurrency = JSON.parse(

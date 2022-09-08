@@ -20,11 +20,12 @@ import {
 } from './main-page-madel/main-page.model';
 import Header from './common/header';
 import { LOCAL_CURRENT_CURRENCY } from '../../constants';
-import { Label, SymbolCurrency } from './common-models';
+import { currencyInit, Label, SymbolCurrency, zeroCurrencyInit } from './common-models';
 
 class MainPage extends PureComponent<IPropsMainPage, IState> {
   private categoryId: string;
   private printItems: IItem[] | undefined;
+  private currentCurrency = zeroCurrencyInit;
 
   constructor(props: any) {
     super(props);
@@ -36,14 +37,14 @@ class MainPage extends PureComponent<IPropsMainPage, IState> {
 
   async componentDidMount() {
     const currency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
-    const currentCurrency = JSON.parse(currency ? currency : '');
+    this.currentCurrency = JSON.parse(currency ? currency : JSON.stringify(zeroCurrencyInit));
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
     await this.checkQueryData();
     this.setState(() => {
       return {
         categoryIdState: this.categoryId,
-        currentCurrency: currentCurrency.symbol,
+        currentCurrency: this.currentCurrency.symbol,
       };
     });
   }

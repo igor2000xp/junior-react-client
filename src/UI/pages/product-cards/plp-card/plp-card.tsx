@@ -1,37 +1,29 @@
 import React, { Component } from 'react';
-import styles from './plp-page.module.css';
-// import BasicBlock from '../pdp-card/cartBlocks/basic-block';
+import styles from './plp-card.module.css';
 import '../../../../assets/images/Icon/minus-svgrepo-com.svg';
 import CartPage from './cart-page/cart-page';
 import TotalBlock from './cart-page/total-block';
 import Header from '../../common/header';
 import {
-  ICurrency,
-  ILocalBasket,
   Label,
   localBasketItemInit,
   SymbolCurrency,
 } from '../../common-models';
-import { LOCAL_BASKET } from '../../../../constants';
+import { ACTIVE_PRODUCT_ATTRIBUTES, LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../../constants';
 
 export interface IState {
   productId: string;
   currentCurrency: SymbolCurrency;
 }
 
-class PlpPage extends Component<any, IState> {
-  // private localBasket = localBasketItemInit;
+class PlpCard extends Component<any, IState> {
   private localBasket = [localBasketItemInit];
-  // private currency: ICurrency = {
-  //   label: Label.Usd,
-  //   symbol: SymbolCurrency.SymbolUsd,
-  // };
 
   constructor(props: any) {
     super(props);
     this.getCurrency = this.getCurrency.bind(this);
     this.state = {
-      productId: '',
+      productId: 'xbox-series-s',
       currentCurrency: SymbolCurrency.SymbolUsd,
     };
   }
@@ -39,44 +31,48 @@ class PlpPage extends Component<any, IState> {
     this.setState({
       currentCurrency: symbol,
     });
+    this.setState(() => {
+      return {
+        currentCurrency: symbol,
+      }
+    })
   }
 
   async componentDidMount() {
     this.localBasket = JSON.parse(
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, ' ');
+    const currency = JSON.parse( await localStorage.getItem(LOCAL_CURRENT_CURRENCY) as string);
+    // this.setState({
+    //   productId: this.localBasket[0].productId,
+    // });
     this.setState({
-      productId: this.localBasket[0].productId,
-    });
-    // console.log(this.localBasket);
+      productId: 'xbox-series-s',
+      currentCurrency: currency.symbol,
+    })
   }
 
   render() {
+    this.localBasket = this.localBasket ? this.localBasket : [localBasketItemInit];
     return (
       <>
         <Header getCurrency={this.getCurrency} />
         <article className={styles.wrapper}>
           <h1>Cart</h1>
           <div className={styles.mainBlock}>
-            {this.localBasket.map((item) => {
-              // console.log(item);
+            {this.localBasket.map((item, index) => {
               const basket = item;
               const currency = this.state.currentCurrency;
-              // const props = {
-              //   basket: item,
-              //   currency: this.currency,
-              // }
-              // console.log(props);
               return (
                 <CartPage
                   basket={basket}
                   currency={currency}
-                  key={item.productId}
+                  key={item.productId + index}
                 />
               );
-            })}
-            {/*<CartPage />*/}
-            {/*<CartPage />*/}
+            })
+            }
             <TotalBlock />
           </div>
         </article>
@@ -85,4 +81,4 @@ class PlpPage extends Component<any, IState> {
   }
 }
 
-export default PlpPage;
+export default PlpCard;

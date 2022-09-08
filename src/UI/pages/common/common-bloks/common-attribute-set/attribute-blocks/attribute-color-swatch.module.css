@@ -23,15 +23,6 @@
   width: 31px;
   border: rgba(43, 43, 43, 0.24) 1px solid;
 }
-/*.itemGrey {*/
-/*  background: #D3D2D5;*/
-/*}*/
-/*.itemDarkGray {*/
-/*  background: #2B2B2B;*/
-/*}*/
-/*.itemGreen {*/
-/*  background: #0F6450;*/
-/*}*/
 .activeColor {
   border: 1px solid #5ECE7B;
 }

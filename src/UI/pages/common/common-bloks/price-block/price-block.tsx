@@ -4,6 +4,7 @@ import client from '../../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../../graphql/generated';
 import { LOCAL_CURRENT_CURRENCY } from '../../../../../constants';
 import { IState, IProps, ISlimPrice, IPrice } from './price-block.model';
+import { zeroCurrencyInit } from '../../../common-models';
 
 class PriceBlock extends PureComponent<IProps, IState> {
   private prices: ISlimPrice[] = [{ symbol: '', amount: 0 }];
@@ -43,11 +44,11 @@ class PriceBlock extends PureComponent<IProps, IState> {
 
   async priceQuery() {
     try {
-      const idFromAddress = window.location.pathname.split(':')[1];
+      const idFromAddress = location.pathname.split(':')[1];
       const id = this.props.id ? this.props.id : idFromAddress;
       const localCurrency = await localStorage.getItem(LOCAL_CURRENT_CURRENCY);
       const currentCurrency: string = JSON.parse(
-        localCurrency ? localCurrency : '',
+        localCurrency ? localCurrency : JSON.stringify(zeroCurrencyInit),
       ).symbol;
       const { data } = await client.query({
         query: GetProductByIdDocument,

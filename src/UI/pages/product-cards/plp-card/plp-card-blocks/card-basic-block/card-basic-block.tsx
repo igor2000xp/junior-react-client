@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styles from './cart-basic-block.module.css';
-import BasicBlock from '../../../pdp-card/cartBlocks/basic-block';
+import styles from './card-basic-block.module.css';
+import BasicBlock from '../../../pdp-card/cardBlocks/basic-block';
 import {
   ICartBasicBlockProps,
   IProduct,
@@ -17,10 +17,14 @@ import PriceBlock from '../../../../common/common-bloks/price-block/price-block'
 // }
 // type IProps = Readonly<ICartBasicBlockProps>;
 
-class CartBasicBlock extends BasicBlock {
+class CardBasicBlock extends BasicBlock {
   render() {
     const arrAttributes = this.props.product.attributes as IProductAttribute[];
-    console.log(arrAttributes);
+    // console.log(arrAttributes);
+    const productId = this.props.product.id === '' ? 'xbox-series-s' : this.props.product.id;
+    const symbolCurrency = this.props.currentCurrency;
+    // console.log(productId, symbolCurrency);
+    // console.log(arrAttributes);
     return (
       <article className={styles.wrapper}>
         <div className={styles.brand}>
@@ -37,12 +41,11 @@ class CartBasicBlock extends BasicBlock {
         />
 
         <div className={styles.priceBlock}>
-          <h4>PRICE:</h4>
           <div>
-            {/*<PriceBlock*/}
-            {/*  id={this.props.product.id}*/}
-            {/*  symbolCurrency={this.props.currentCurrency}*/}
-            {/*/>*/}
+            <PriceBlock
+              id={productId}
+              symbolCurrency={symbolCurrency}
+            />
           </div>
         </div>
       </article>
@@ -50,4 +53,4 @@ class CartBasicBlock extends BasicBlock {
   }
 }
 
-export default CartBasicBlock;
+export default CardBasicBlock;

@@ -16,7 +16,7 @@ import {
   IHeaderProps,
   IHeaderState,
   Label,
-  SymbolCurrency,
+  SymbolCurrency, zeroCurrencyInit,
 } from '../common-models';
 
 type IState = Readonly<IHeaderState>;
@@ -49,31 +49,55 @@ class Header extends Component<IProps, IState> {
 
   async componentDidMount() {
     try {
+      await this.initFirst();
       document.addEventListener('mousedown', this.handleClickOutside);
       const currencyResponse = await client.query<GetAllCurrencyQuery>({
         query: GetAllCurrencyDocument,
       });
       this.currencies = currencyResponse.data.currencies as ICurrency[];
-      const currentCurrency = JSON.parse(
-        localStorage.getItem(LOCAL_CURRENT_CURRENCY) as string,
-      );
-      if (!currentCurrency)
-        localStorage.setItem(
-          LOCAL_CURRENT_CURRENCY,
-          JSON.stringify({
-            label: this.state.label,
-            symbol: this.state.symbol,
-          }),
-        );
-      await this.setState(() => {
-        return {
-          label: currentCurrency.label,
-          symbol: currentCurrency.symbol,
-        };
-      });
+
+      // const localCurrentCurrency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
+      // let currentCurrency: typeof zeroCurrencyInit;
+      // if (!localCurrentCurrency) {
+      //   currentCurrency = zeroCurrencyInit;
+      //   localStorage.setItem(LOCAL_CURRENT_CURRENCY, JSON.stringify(currentCurrency));
+      // } else {
+      //   currentCurrency = JSON.parse(localCurrentCurrency);
+      // }
+      // if (!currentCurrency)
+      //   localStorage.setItem(
+      //     LOCAL_CURRENT_CURRENCY,
+      //     JSON.stringify({
+      //       label: this.state.label,
+      //       symbol: this.state.symbol,
+      //     }),
+      //   );
+      // await this.setState(() => {
+      //   return {
+      //     label: currentCurrency.label,
+      //     symbol: currentCurrency.symbol,
+      //   };
+      // });
     } catch (err) {
       console.log(`Server error ${err}`);
     }
+  }
+
+  async initFirst() {
+    const localCurrentCurrency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
+    let currentCurrency: typeof zeroCurrencyInit;
+    if (!localCurrentCurrency) {
+      currentCurrency = zeroCurrencyInit;
+      localStorage.setItem(LOCAL_CURRENT_CURRENCY, JSON.stringify(currentCurrency));
+    } else {
+      currentCurrency = JSON.parse(localCurrentCurrency);
+    }
+    await this.setState(() => {
+      return {
+        label: currentCurrency.label,
+        symbol: currentCurrency.symbol,
+      };
+    });
   }
 
   async toggleCurrencyMenu() {

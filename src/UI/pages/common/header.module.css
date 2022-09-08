@@ -50,6 +50,7 @@
   top: 36px;
   left: -11px;
   width: 114px;
+  z-index: 10;
 }
 .currencyDroppingBox {
   /*border: solid 1px red;*/
@@ -61,7 +62,10 @@
   height: 45px;
   width: 114px;
   cursor: pointer;
-  /*border: rgba(43, 43, 43, 0.34) 1px solid;*/
+  background-color: white;
+  position: relative;
+  z-index: 10;
+  opacity: 0.8;
 }
 .currencyItem .active {
   background-color: #EEE;

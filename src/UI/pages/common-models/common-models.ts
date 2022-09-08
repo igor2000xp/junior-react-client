@@ -66,6 +66,9 @@ export const currencyInit = [
   { label: Label.Jpy, symbol: SymbolCurrency.SymbolJpy },
   { label: Label.Rub, symbol: SymbolCurrency.SymbolRub },
 ];
+export const zeroCurrencyInit = {
+  label: Label.Usd, symbol: SymbolCurrency.SymbolUsd
+  }
 
 export interface ICurrency {
   label: Label;

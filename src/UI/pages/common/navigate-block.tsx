@@ -23,7 +23,7 @@ class NavigateBlock extends Component {
   }
 
   async componentDidMount() {
-    const urlString = window.location.pathname.split(':');
+    const urlString = location.pathname.split(':');
     if (urlString[0] === '/category/') this.categorySwitch(urlString[1]);
     this.categories = [...(await this.myQuery())];
     this.categories = this.categories.map((item) => {

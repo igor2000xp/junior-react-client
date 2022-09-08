@@ -27,7 +27,7 @@ class ButtonBlock extends Component {
     let activeAttr: IActiveAttr = await getActiveAttr();
     let currentBasket = await getLocalBasket();
     // Check if the basket was empty
-    if (!currentBasket[0].productId) {
+    if ( (!currentBasket[0].productId && currentBasket[0].productId !== '') && !currentBasket) {
       currentBasket = [
         {
           quantity: 1,
@@ -35,8 +35,8 @@ class ButtonBlock extends Component {
           activeAttributes: [...activeAttr.activeAttributes],
         },
       ];
-      localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, '');
-      activeAttr = localActiveAttributesInit;
+      // localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, '');
+      // activeAttr = localActiveAttributesInit;
     }
     // Other cart checks
     this.settleBasket(currentBasket, activeAttr);
@@ -44,11 +44,12 @@ class ButtonBlock extends Component {
 
   settleBasket(basket: ILocalBasket[], activeAttr: IActiveAttr) {
     // If it is a first record to the basket
-    if (activeAttr.productId !== '') {
+    if (activeAttr.productId !== '' && !activeAttr) {
       // Check right way add goods into basket
       settleFullBasket(basket, activeAttr);
     }
     localStorage.setItem(LOCAL_BASKET, JSON.stringify(basket));
+    localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, '');
   }
 
   async componentWillUnmount() {
