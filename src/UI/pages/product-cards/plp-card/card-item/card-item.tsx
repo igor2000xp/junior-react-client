@@ -16,7 +16,7 @@ import {
   GetProductByIdQuery,
 } from '../../../../../graphql/generated';
 import BasicBlock from '../../pdp-card/cardBlocks/basic-block';
-import CardBasicBlock from '../plp-card-blocks/card-basic-block/card-basic-block';
+import CardBasicBlockPlp from '../plp-card-blocks/card-basic-block/card-basic-block-plp';
 import {
   ACTIVE_PRODUCT_ATTRIBUTES,
   LOCAL_BASKET,
@@ -25,14 +25,14 @@ import {
 // import BasicBlock from '../../pdp-card/cardBlocks/basic-block';
 
 // export interface IProps
-export interface ICartPageProps {
+export interface ICardItemProps {
   basket: ILocalBasket;
-  currency: SymbolCurrency;
+  currency: ICurrency;
 }
 export interface IState {
   id: string;
 }
-type IProps = Readonly<ICartPageProps>;
+type IProps = Readonly<ICardItemProps>;
 
 class CardItem extends Component<IProps, IState> {
   private product: IProduct = productInit;
@@ -43,14 +43,14 @@ class CardItem extends Component<IProps, IState> {
     super(props);
     this.state = { id: 'xbox-series-s' };
   }
-  // componentD
-  // componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any) {
-  // }
+
   async componentDidMount() {
-    this.activeAttr = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
-    const id = this.props.basket.productId;
-    if (id !== '' && !id) {
-      console.log(id);
+    const activeAttr = await JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
+    // console.log(activeAttr);
+    this.activeAttr = activeAttr;
+    const id = this.props.basket.productId && this.props.basket.productId !== '' ? this.props.basket.productId : this.state.id;
+    // if (id) {
+    //   console.log(id);
       try {
         const { data } = await client.query({
           query: GetProductByIdDocument,
@@ -60,45 +60,54 @@ class CardItem extends Component<IProps, IState> {
         });
         this.product = { ...(data.product as IProduct), id };
         this.setState({ id: id });
-        // console.log(this.activeAttr);
+        // console.log(this.product);
       } catch (err) {
         console.log(`Error ${err} ${id}`, id);
       }
+      // this.activeAttrItem = this.activeAttr.find((item) => {
+      //   return item.productId === this.product.id;
+      // }) as IActiveBasketAttr;
+      // console.log(this.activeAttrItem);
+    // }
+  }
+
+  // componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any) {
+  //
+  // }
+  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
+    if (prevProps.basket.productId !== this.state.id) {
+      const id = this.props.basket.productId && this.props.basket.productId !== '' ? this.props.basket.productId : this.state.id;
+      // if (id !== '' || !id) {
+        try {
+          const {data} = await client.query({
+            query: GetProductByIdDocument,
+            variables: {
+              id: id,
+            },
+          });
+          this.product = {...(data.product as IProduct), id};
+          // console.log(this.activeAttr);
+        } catch (err) {
+          console.log(`Error ${err} ${id}`, id);
+        }
       this.activeAttrItem = this.activeAttr.find((item) => {
         return item.productId === this.product.id;
       }) as IActiveBasketAttr;
-      // console.log(this.activeAttrItem);
-    }
-  }
-
-  async componentDidUpdate() {
-    const id = this.props.basket.productId;
-    if (id !== '' || !id) {
-      try {
-        const { data } = await client.query({
-          query: GetProductByIdDocument,
-          variables: {
-            id: id,
-          },
-        });
-        this.product = { ...(data.product as IProduct), id };
-        console.log(this.activeAttr);
-      } catch (err) {
-        console.log(`Error ${err} ${id}`, id);
-      }
+      // }
     }
   }
 
   render() {
     // console.log(this.props.currency);
     // const currencySymbol = this.props.
+    const prodGallery = typeof this.product.gallery !== 'undefined' ? this.product.gallery[0] : '';
     return (
       <article className={styles.wrapper}>
         <aside className={styles.leftSide}>
-          <CardBasicBlock
+          <CardBasicBlockPlp
             product={this.product}
             activeAttributes={this.activeAttrItem}
-            currentCurrency={this.props.currency}
+            currentCurrency={this.props.currency.symbol}
           />
         </aside>
 
@@ -117,7 +126,7 @@ class CardItem extends Component<IProps, IState> {
 
           <section>
             <div className={styles.imageBlock}>
-              <img src={this.product.gallery[0]} alt="product image" />
+              <img src={prodGallery} alt="product image" />
               <button className={`${styles.arrow} ${styles.arrowLeft}`}>
                 <div className={`${styles.arrowSvgLeft}`} />
               </button>

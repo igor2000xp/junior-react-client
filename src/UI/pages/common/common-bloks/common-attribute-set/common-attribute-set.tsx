@@ -12,7 +12,7 @@ import {
 type IProps = Readonly<ICommonAttributeSetProps>;
 
 class CommonAttributeSet extends Component<IProps> {
-  private readonly arrResultToStorage: IAttrActive[];
+  protected readonly arrResultToStorage: IAttrActive[];
   constructor(props: IProps) {
     super(props);
     this.handleAttributes = this.handleAttributes.bind(this);
@@ -23,14 +23,14 @@ class CommonAttributeSet extends Component<IProps> {
     localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 
-  private handleAttributes(value: IAttributeColorSwatchState) {
+  protected handleAttributes(value: IAttributeColorSwatchState) {
     this.renewHandleAttributes(value);
     localStorage.setItem(
       ACTIVE_PRODUCT_ATTRIBUTES,
       JSON.stringify(this.arrResultToStorage),
     );
   }
-  private renewHandleAttributes(value: IAttributeColorSwatchState) {
+  protected renewHandleAttributes(value: IAttributeColorSwatchState) {
     // This is a test to see if this is the initial step.
     if (this.arrResultToStorage[0].id === '') {
       this.arrResultToStorage[0] = value.activeAttributes;
@@ -49,7 +49,7 @@ class CommonAttributeSet extends Component<IProps> {
   render() {
     const attr = this.props.attributes;
     return (
-      <>
+      < >
         {attr.map((item) => {
           const isText = item.type === 'text';
           const isColor = item.type === 'swatch';

@@ -19,10 +19,10 @@ import {
   stateInit,
 } from './main-page-madel/main-page.model';
 import Header from './common/header';
-import { LOCAL_CURRENT_CURRENCY } from '../../constants';
+import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../constants';
 import {
   currencyInit,
-  Label,
+  Label, localBasketItemInit,
   SymbolCurrency,
   zeroCurrencyInit,
 } from './common-models';
@@ -31,6 +31,7 @@ class MainPage extends PureComponent<IPropsMainPage, IState> {
   private categoryId: string;
   private printItems: IItem[] | undefined;
   private currentCurrency = zeroCurrencyInit;
+  private localBaskets = [localBasketItemInit];
 
   constructor(props: any) {
     super(props);
@@ -45,6 +46,10 @@ class MainPage extends PureComponent<IPropsMainPage, IState> {
     this.currentCurrency = JSON.parse(
       currency ? currency : JSON.stringify(zeroCurrencyInit),
     );
+    const isInit = await localStorage.getItem(LOCAL_BASKET);
+    if (!isInit) {
+      await localStorage.setItem(LOCAL_BASKET, JSON.stringify(this.localBaskets));
+    }
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
     await this.checkQueryData();

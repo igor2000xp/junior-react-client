@@ -15,4 +15,5 @@ export interface ISlimPrice {
 export interface IState {
   symbol: string;
   amount: number;
+  prodId: string;
 }

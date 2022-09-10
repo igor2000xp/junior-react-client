@@ -17,13 +17,23 @@ export interface IProductAttribute {
   type: string;
   items: IAttribute[];
 }
+export const productAttributeInit = {
+  id: '',
+  name: '',
+  type: '',
+  items: [{
+    id: '',
+    displayValue: '',
+    value: '',
+  }]
+}
 export interface IAttribute {
   id: string;
   displayValue: string;
   value: string;
 }
 export const productInit = {
-  id: '',
+  id: 'xbox-series-s',
   name: '',
   inStock: true,
   gallery: [''],
@@ -109,7 +119,7 @@ export interface IActiveBasketAttr {
   activeAttributes: IAttrActive[];
 }
 export const localActiveAttributesInit: IActiveBasketAttr = {
-  productId: '',
+  productId: 'xbox-series-s',
   activeAttributes: [
     {
       id: '',

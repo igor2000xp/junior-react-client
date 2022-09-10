@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import styles from './card-basic-block.module.css';
+import styles from './card-basic-block-plp.module.css';
 import BasicBlock from '../../../pdp-card/cardBlocks/basic-block';
 import {
+  IActiveBasketAttr, IAttrActive, IBasicBlockProps,
   ICartBasicBlockProps,
   IProduct,
   IProductAttribute,
@@ -9,15 +10,25 @@ import {
 } from '../../../../common-models';
 import CommonAttributeSet from '../../../../common/common-bloks/common-attribute-set/common-attribute-set';
 import PriceBlock from '../../../../common/common-bloks/price-block/price-block';
+import CommonAttributeSetPlp from '../common-atribute-set-plp/common-attribute-set-plp';
 
-// export interface CartBasicBlockProps {}
-// export interface ICartBasicBlockProps {
-//   product: IProduct;
-//   currentCurrency: SymbolCurrency;
+// export interface ICartBasicBlockProps extends IBasicBlockProps {
+//   activeAttributes: IActiveBasketAttr;
 // }
-// type IProps = Readonly<ICartBasicBlockProps>;
+// export interface IActiveBasketAttr {
+//   productId: string;
+//   activeAttributes: IAttrActive[];
+// }
+// export interface IAttrActive{
+//   id: string;
+//   value: string;
+//   attrID: string;
+// }
 
-class CardBasicBlock extends BasicBlock {
+// type IProps = Readonly<IBasicBlockProps>;
+
+
+class CardBasicBlockPlp extends BasicBlock {
   render() {
     const arrAttributes = this.props.product.attributes as IProductAttribute[];
     // console.log(arrAttributes);
@@ -36,9 +47,9 @@ class CardBasicBlock extends BasicBlock {
           <h3>{this.props.product.name}</h3>
         </div>
 
-        <CommonAttributeSet
+        <CommonAttributeSetPlp
           attributes={arrAttributes}
-          productID={this.props.product.id}
+          productID={productId}
         />
 
         <div className={styles.priceBlock}>
@@ -51,4 +62,4 @@ class CardBasicBlock extends BasicBlock {
   }
 }
 
-export default CardBasicBlock;
+export default CardBasicBlockPlp;
