@@ -1,27 +1,18 @@
 import React, { Component } from 'react';
 import styles from './card-item.module.css';
 import {
-  activeAttributesInit,
   IActiveBasketAttr,
   ICurrency,
   ILocalBasket,
   IProduct,
   localActiveAttributesInit,
   productInit,
-  SymbolCurrency,
 } from '../../../common-models';
 import client from '../../../../../graphql/apollo';
-import {
-  GetProductByIdDocument,
-  GetProductByIdQuery,
-} from '../../../../../graphql/generated';
-import BasicBlock from '../../pdp-card/cardBlocks/basic-block';
+import { GetProductByIdDocument } from '../../../../../graphql/generated';
+// import BasicBlock from '../../pdp-card/cardBlocks/basic-block';
 import CardBasicBlockPlp from '../plp-card-blocks/card-basic-block/card-basic-block-plp';
-import {
-  ACTIVE_PRODUCT_ATTRIBUTES,
-  LOCAL_BASKET,
-  LOCAL_CURRENT_CURRENCY,
-} from '../../../../../constants';
+import { LOCAL_BASKET } from '../../../../../constants';
 // import BasicBlock from '../../pdp-card/cardBlocks/basic-block';
 
 // export interface IProps
@@ -45,12 +36,51 @@ class CardItem extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const activeAttr = await JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
+    const activeAttr = await JSON.parse(
+      localStorage.getItem(LOCAL_BASKET) as string,
+    );
     // console.log(activeAttr);
     this.activeAttr = activeAttr;
-    const id = this.props.basket.productId && this.props.basket.productId !== '' ? this.props.basket.productId : this.state.id;
+    const id =
+      this.props.basket.productId && this.props.basket.productId !== ''
+        ? this.props.basket.productId
+        : this.state.id;
     // if (id) {
     //   console.log(id);
+    try {
+      const { data } = await client.query({
+        query: GetProductByIdDocument,
+        variables: {
+          id: id,
+        },
+      });
+      this.product = { ...(data.product as IProduct), id };
+      this.setState({ id: id });
+      // console.log(this.product);
+    } catch (err) {
+      console.log(`Error ${err} ${id}`, id);
+    }
+    // this.activeAttrItem = this.activeAttr.find((item) => {
+    //   return item.productId === this.product.id;
+    // }) as IActiveBasketAttr;
+    // console.log(this.activeAttrItem);
+    // }
+  }
+
+  // componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any) {
+  //
+  // }
+  async componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    // prevState: Readonly<IState>,
+    // snapshot?: any,
+  ) {
+    if (prevProps.basket.productId !== this.state.id) {
+      const id =
+        this.props.basket.productId && this.props.basket.productId !== ''
+          ? this.props.basket.productId
+          : this.state.id;
+      // if (id !== '' || !id) {
       try {
         const { data } = await client.query({
           query: GetProductByIdDocument,
@@ -59,37 +89,10 @@ class CardItem extends Component<IProps, IState> {
           },
         });
         this.product = { ...(data.product as IProduct), id };
-        this.setState({ id: id });
-        // console.log(this.product);
+        // console.log(this.activeAttr);
       } catch (err) {
         console.log(`Error ${err} ${id}`, id);
       }
-      // this.activeAttrItem = this.activeAttr.find((item) => {
-      //   return item.productId === this.product.id;
-      // }) as IActiveBasketAttr;
-      // console.log(this.activeAttrItem);
-    // }
-  }
-
-  // componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<{}>, snapshot?: any) {
-  //
-  // }
-  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
-    if (prevProps.basket.productId !== this.state.id) {
-      const id = this.props.basket.productId && this.props.basket.productId !== '' ? this.props.basket.productId : this.state.id;
-      // if (id !== '' || !id) {
-        try {
-          const {data} = await client.query({
-            query: GetProductByIdDocument,
-            variables: {
-              id: id,
-            },
-          });
-          this.product = {...(data.product as IProduct), id};
-          // console.log(this.activeAttr);
-        } catch (err) {
-          console.log(`Error ${err} ${id}`, id);
-        }
       this.activeAttrItem = this.activeAttr.find((item) => {
         return item.productId === this.product.id;
       }) as IActiveBasketAttr;
@@ -100,7 +103,10 @@ class CardItem extends Component<IProps, IState> {
   render() {
     // console.log(this.props.currency);
     // const currencySymbol = this.props.
-    const prodGallery = typeof this.product.gallery !== 'undefined' ? this.product.gallery[0] : '';
+    const prodGallery =
+      typeof this.product.gallery !== 'undefined'
+        ? this.product.gallery[0]
+        : '';
     return (
       <article className={styles.wrapper}>
         <aside className={styles.leftSide}>

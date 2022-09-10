@@ -49,7 +49,7 @@ class CommonAttributeSet extends Component<IProps> {
   render() {
     const attr = this.props.attributes;
     return (
-      < >
+      <>
         {attr.map((item) => {
           const isText = item.type === 'text';
           const isColor = item.type === 'swatch';

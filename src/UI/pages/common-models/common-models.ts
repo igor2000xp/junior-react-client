@@ -21,12 +21,14 @@ export const productAttributeInit = {
   id: '',
   name: '',
   type: '',
-  items: [{
-    id: '',
-    displayValue: '',
-    value: '',
-  }]
-}
+  items: [
+    {
+      id: '',
+      displayValue: '',
+      value: '',
+    },
+  ],
+};
 export interface IAttribute {
   id: string;
   displayValue: string;

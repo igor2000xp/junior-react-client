@@ -21,8 +21,8 @@ import {
 import Header from './common/header';
 import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../constants';
 import {
-  currencyInit,
-  Label, localBasketItemInit,
+  Label,
+  localBasketItemInit,
   SymbolCurrency,
   zeroCurrencyInit,
 } from './common-models';
@@ -48,7 +48,10 @@ class MainPage extends PureComponent<IPropsMainPage, IState> {
     );
     const isInit = await localStorage.getItem(LOCAL_BASKET);
     if (!isInit) {
-      await localStorage.setItem(LOCAL_BASKET, JSON.stringify(this.localBaskets));
+      await localStorage.setItem(
+        LOCAL_BASKET,
+        JSON.stringify(this.localBaskets),
+      );
     }
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];

@@ -33,12 +33,6 @@ class AttributeColorSwatch extends Component<IProps, IState> {
     this.props.getAttrState(this.state);
   }
 
-  componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-    snapshot?: any,
-  ) {}
-
   async setFirstAttrActive() {
     await this.setState(() => {
       return {

@@ -44,14 +44,14 @@ class PlpCard extends Component<any, IState> {
     });
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     this.localBasket = JSON.parse(
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );
     await this.setState(() => {
       return {
         localBasket: this.localBasket,
-      }
+      };
     });
     await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const currency: ICurrency = JSON.parse(
@@ -64,16 +64,10 @@ class PlpCard extends Component<any, IState> {
     });
   }
 
-  async componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<IState>, snapshot?: any) {
+  async componentDidUpdate() {
     this.localBasket = JSON.parse(
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );
-    console.log(this.localBasket);
-    // if (prevState.isChanged !== this.state.isChanged) {
-    //   await this.setState({
-    //     isChanged: false,
-    //   });
-    // }
   }
 
   render() {
@@ -88,7 +82,10 @@ class PlpCard extends Component<any, IState> {
           <div className={styles.mainBlock}>
             {localBasket.map((item, index) => {
               const basket = item;
-              const currency: ICurrency = { symbol: this.state.currentCurrency, label: this.currentCurrencyLabel};
+              const currency: ICurrency = {
+                symbol: this.state.currentCurrency,
+                label: this.currentCurrencyLabel,
+              };
               return (
                 <CardItem
                   basket={basket}

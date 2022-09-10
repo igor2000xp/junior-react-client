@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import styles from './common-attribute-set-plp.module.css';
 import CommonAttributeSet from '../../../../common/common-bloks/common-attribute-set/common-attribute-set';
-import AttributeTextExtended
-  from '../../../../common/common-bloks/common-attribute-set/attribute-blocks/attribute-text-extended';
-import AttributeColorSwatch
-  from '../../../../common/common-bloks/common-attribute-set/attribute-blocks/attribute-color-swatch';
+import AttributeTextExtended from '../../../../common/common-bloks/common-attribute-set/attribute-blocks/attribute-text-extended';
+import AttributeColorSwatch from '../../../../common/common-bloks/common-attribute-set/attribute-blocks/attribute-color-swatch';
 import {
   activeAttributesInit,
   IAttrActive,
   IAttributeColorSwatchState,
-  ICommonAttributeSetProps, productAttributeInit
+  ICommonAttributeSetProps,
+  productAttributeInit,
 } from '../../../../common-models';
 import { ACTIVE_PRODUCT_ATTRIBUTES } from '../../../../../../constants';
 
@@ -32,9 +31,11 @@ class CommonAttributeSetPlp extends CommonAttributeSet {
   //   );
   // }
 
-
   render() {
-    const attr = typeof this.props.attributes !== 'undefined' ? this.props.attributes: [{ ...productAttributeInit }] ;
+    const attr =
+      typeof this.props.attributes !== 'undefined'
+        ? this.props.attributes
+        : [{ ...productAttributeInit }];
     return (
       <>
         {attr.map((item) => {
