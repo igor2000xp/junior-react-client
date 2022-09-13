@@ -1,11 +1,14 @@
 import {
-  IActiveBasketAttr,
+  IModifiedProducts,
   IProduct,
   IProductAttribute,
   Label,
   SymbolCurrency,
 } from './common-models';
-import { activeAttributesInit } from './states-models';
+import {
+  activeAttributesInit,
+  IAttributeColorSwatchState,
+} from './states-models';
 
 export interface IHeaderProps {
   getCurrency: (label: Label, symbol: SymbolCurrency) => void;
@@ -13,6 +16,7 @@ export interface IHeaderProps {
 export interface ICommonAttributeSetProps {
   attributes: IProductAttribute[];
   productID: string;
+  modifiedProducts?: IModifiedProducts[];
 }
 
 export const printToLocalStorageInit = {
@@ -22,8 +26,13 @@ export const printToLocalStorageInit = {
 export interface IBasicBlockProps {
   product: IProduct;
   currentCurrency: SymbolCurrency;
-  activeAttributes?: IActiveBasketAttr;
+  modifiedProducts?: IModifiedProducts[];
 }
-export interface ICartBasicBlockProps extends IBasicBlockProps {
-  activeAttributes: IActiveBasketAttr;
+// export interface ICartBasicBlockProps extends IBasicBlockProps {
+//   activeAttributes: IActiveBasketAttr;
+// }
+export interface IAttributeColorSwatchProps {
+  attribute: IProductAttribute;
+  activeAttribute?: string;
+  getAttrState: (value: IAttributeColorSwatchState) => void;
 }

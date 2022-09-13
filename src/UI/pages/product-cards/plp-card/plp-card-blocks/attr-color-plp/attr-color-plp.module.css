@@ -1,3 +1,27 @@
-.attrColorPlp {
-
+.colorBlock {
+  margin: 24px 0 0 0 ;
+  height: 62px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.colorLine {
+  display: flex;
+  flex-direction: row;
+}
+.colorItem {
+  margin: 0 10px 0 0;
+  height: 36px;
+  width: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.colorItemInside {
+  height: 32px;
+  width: 31px;
+  border: rgba(43, 43, 43, 0.24) 1px solid;
+}
+.activeColor {
+  border: 1px solid #5ECE7B;
 }

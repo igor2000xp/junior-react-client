@@ -20,13 +20,28 @@ export interface IAttributeColorSwatchState {
   productId: string;
   activeAttributes: IAttrActive;
 }
+export const activeAttributesInit: IAttrActive = {
+  id: '',
+  value: '',
+  attrID: '',
+};
+
 export interface IAttrActive {
   id: string;
   value: string;
   attrID: string;
 }
-export const activeAttributesInit = {
-  id: '',
-  value: '',
-  attrID: '',
-};
+
+export interface ICommonAttributeSet {
+  prodId: string;
+}
+
+// export interface IAttributeColorPlp {
+//   productId: string;
+//   activeAttributes: IAttrActive[];
+// }
+
+// export const IAttributeColorPlpInit: IAttributeColorPlp = {
+//   productId: '',
+//   activeAttributes: [activeAttributesInit],
+// }

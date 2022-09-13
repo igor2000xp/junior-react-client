@@ -1,11 +1,61 @@
-import React, { Component } from 'react';
-import styles from './attrTextPlp.module.css';
+import React from 'react';
+import stylesAttr from './attr-text-plp.module.css';
+import AttributeTextExtended from '../../../../common/common-bloks/common-attribute-set/attribute-blocks/attribute-text-extended';
+import { IAttribute } from '../../../../common-models';
 
-export interface AttrTextPlpProps {}
+class AttrTextPlp extends AttributeTextExtended {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      productId: '',
+      activeAttributes: {
+        id: this.props.activeAttribute ? this.props.activeAttribute : '',
+        value: this.props.attribute.items[0].value,
+        attrID: this.props.attribute.id,
+      },
+    };
+  }
 
-class AttrTextPlp extends Component {
+  async setFirstAttrActive() {
+    await this.setState(() => {
+      return {
+        activeAttributes: {
+          id: this.props.activeAttribute ? this.props.activeAttribute : '',
+          value: this.props.attribute.items[0].value,
+          attrID: this.props.attribute.id,
+        },
+      };
+    });
+  }
+
+  async choiceHandle(item: IAttribute): Promise<void> {
+    return super.choiceHandle(item);
+  }
+
   render() {
-    return <div className={styles.attrTextPlp}></div>;
+    const attr = this.props.attribute.items;
+    return (
+      <div className={stylesAttr.sizeBlock}>
+        <h4>{`${this.props.attribute.name}:`}</h4>
+        <div className={stylesAttr.sizeLine}>
+          {attr.map((item) => {
+            const active =
+              item.id === this.state.activeAttributes.id
+                ? stylesAttr.active
+                : '';
+            return (
+              <div
+                className={`${stylesAttr.sizeItem} ${active}`}
+                key={item.id}
+                onClick={() => this.choiceHandle(item)}
+              >
+                <p>{item.value}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
   }
 }
 

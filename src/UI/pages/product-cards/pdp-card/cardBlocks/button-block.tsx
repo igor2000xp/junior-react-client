@@ -61,7 +61,7 @@ class ButtonBlock extends Component {
   render() {
     return (
       <div onClick={this.clickToOut}>
-        <Link to="/cart">
+        <Link to="/">
           <button className={styles.wrapper}>
             <h2>ADD TO CART</h2>
           </button>

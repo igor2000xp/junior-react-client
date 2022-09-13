@@ -1,4 +1,16 @@
 import { IAttrActive } from './states-models';
+import { ICommonAttributeSetProps } from './props-model';
+
+export interface IActiveAttrPdp {
+  id: string;
+  value: string;
+  attrID: string;
+}
+export const localActiveAttributesPdpInit: IActiveAttrPdp = {
+  id: '',
+  value: '',
+  attrID: '',
+};
 
 export interface IProduct {
   id: string;
@@ -6,7 +18,6 @@ export interface IProduct {
   inStock: boolean;
   gallery: string[];
   description: string;
-  // category: string;
   attributes: IProductAttribute[];
   prices: IPrice[];
   brand: string;
@@ -17,17 +28,16 @@ export interface IProductAttribute {
   type: string;
   items: IAttribute[];
 }
-export const productAttributeInit = {
+export const productAttributeItemInit: IAttribute = {
+  id: '',
+  displayValue: '',
+  value: '',
+};
+export const productAttributeInit: IProductAttribute = {
   id: '',
   name: '',
   type: '',
-  items: [
-    {
-      id: '',
-      displayValue: '',
-      value: '',
-    },
-  ],
+  items: [{ ...productAttributeItemInit }],
 };
 export interface IAttribute {
   id: string;
@@ -51,6 +61,20 @@ export const productInit = {
   ],
   prices: Array({ currency: '', amount: 0 }),
   brand: '',
+};
+// ICommonAttributeSetProps
+export interface IProductAttrForPrint extends ICommonAttributeSetProps {
+  activeAttributes: IActiveAttrPdp[];
+  quantity: number;
+  additionalId: string;
+}
+
+export const productAttrForPrintInit: IProductAttrForPrint = {
+  productID: '',
+  attributes: [{ ...productAttributeInit }],
+  activeAttributes: [{ ...localActiveAttributesPdpInit }],
+  quantity: 0,
+  additionalId: '',
 };
 
 export interface IPrice {
@@ -108,13 +132,7 @@ export interface ILocalBasket {
 export const localBasketItemInit: ILocalBasket = {
   productId: '',
   quantity: 1,
-  activeAttributes: [
-    {
-      id: '',
-      value: '',
-      attrID: '',
-    },
-  ],
+  activeAttributes: [{ ...localActiveAttributesPdpInit }],
 };
 export interface IActiveBasketAttr {
   productId: string;
@@ -122,21 +140,22 @@ export interface IActiveBasketAttr {
 }
 export const localActiveAttributesInit: IActiveBasketAttr = {
   productId: 'xbox-series-s',
-  activeAttributes: [
-    {
-      id: '',
-      value: '',
-      attrID: '',
-    },
-  ],
+  activeAttributes: [{ ...localActiveAttributesPdpInit }],
 };
-export interface IActiveAttrPdp {
+
+export interface IModifiedProducts {
+  productID: string;
   id: string;
-  value: string;
-  attrID: string;
+  type: string; // text, color
+  name: string; // "Shoe Size" === attrId
+  items: IAttribute[];
+  activeItem: string;
 }
-export const localActiveAttributesPdpInit: IActiveAttrPdp = {
+export const modifiedProductsInit: IModifiedProducts = {
+  productID: '',
   id: '',
-  value: '',
-  attrID: '',
+  type: '', // text, color
+  name: '', // "Shoe Size" === attrId
+  items: [productAttributeItemInit],
+  activeItem: '',
 };

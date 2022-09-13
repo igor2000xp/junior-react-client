@@ -6,17 +6,20 @@ import {
   activeAttributesInit,
   IAttrActive,
   IAttributeColorSwatchState,
+  ICommonAttributeSet,
   ICommonAttributeSetProps,
 } from '../../../common-models';
 
 type IProps = Readonly<ICommonAttributeSetProps>;
+type IState = Readonly<ICommonAttributeSet>;
 
-class CommonAttributeSet extends Component<IProps> {
+class CommonAttributeSet extends Component<IProps, IState> {
   protected readonly arrResultToStorage: IAttrActive[];
   constructor(props: IProps) {
     super(props);
     this.handleAttributes = this.handleAttributes.bind(this);
     this.arrResultToStorage = [{ ...activeAttributesInit }];
+    this.state = { prodId: '' };
   }
 
   async componentDidMount() {
@@ -58,7 +61,7 @@ class CommonAttributeSet extends Component<IProps> {
             return (
               <AttributeTextExtended
                 attribute={item}
-                activeAttributeInRow={''}
+                activeAttribute={''}
                 key={item.id}
                 getAttrState={this.handleAttributes}
               />
@@ -67,7 +70,7 @@ class CommonAttributeSet extends Component<IProps> {
             return (
               <AttributeColorSwatch
                 attribute={item}
-                activeAttributeInRow={''}
+                activeAttribute={''}
                 key={item.id}
                 getAttrState={this.handleAttributes}
               />

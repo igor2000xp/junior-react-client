@@ -1,7 +1,9 @@
 import React from 'react';
 import AttributeColorSwatch from './attribute-color-swatch';
 import stylesAttr from './attribute-text.module.css';
-import { IProps } from './attribute-color-swatch';
+import { IAttributeColorSwatchProps } from '../../../../common-models';
+
+type IProps = Readonly<IAttributeColorSwatchProps>;
 
 class AttributeTextExtended extends AttributeColorSwatch {
   constructor(props: IProps) {

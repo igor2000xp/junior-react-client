@@ -3,21 +3,15 @@ import stylesColor from './attribute-color-swatch.module.css';
 import {
   activeAttributesInit,
   IAttribute,
+  IAttributeColorSwatchProps,
   IAttributeColorSwatchState,
-  IProductAttribute,
 } from '../../../../common-models';
 
-export type IProps = Readonly<IAttributeColorSwatchProps>;
+type IProps = Readonly<IAttributeColorSwatchProps>;
 type IState = Readonly<IAttributeColorSwatchState>;
 
-export interface IAttributeColorSwatchProps {
-  attribute: IProductAttribute;
-  activeAttributeInRow?: string;
-  getAttrState: (value: IAttributeColorSwatchState) => void;
-}
-
 class AttributeColorSwatch extends Component<IProps, IState> {
-  private readonly locationPage: string;
+  protected readonly locationPage: string;
   constructor(props: IProps) {
     super(props);
     this.choiceHandle = this.choiceHandle.bind(this);

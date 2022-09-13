@@ -25,6 +25,7 @@ class CardBasicBlockPlp extends BasicBlock {
         <CommonAttributeSetPlp
           attributes={arrAttributes}
           productID={productId}
+          modifiedProducts={this.props.modifiedProducts}
         />
 
         <div className={styles.priceBlock}>
