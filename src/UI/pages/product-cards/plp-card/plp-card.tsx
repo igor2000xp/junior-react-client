@@ -6,7 +6,7 @@ import TotalBlock from './card-item/total-block';
 import Header from '../../common/header';
 import {
   ICurrency,
-  ILocalBasket,
+  IPlpCardState,
   Label,
   localBasketItemInit,
   SymbolCurrency,
@@ -17,12 +17,7 @@ import {
   LOCAL_CURRENT_CURRENCY,
 } from '../../../../constants';
 
-export interface IState {
-  productId: string;
-  currentCurrency: SymbolCurrency;
-  localBasket: ILocalBasket[];
-  isChanged: boolean;
-}
+type IState = Readonly<IPlpCardState>
 
 class PlpCard extends Component<any, IState> {
   private localBasket = [localBasketItemInit];

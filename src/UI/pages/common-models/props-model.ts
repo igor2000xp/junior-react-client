@@ -1,4 +1,6 @@
 import {
+  ICurrency,
+  ILocalBasket,
   IModifiedProducts,
   IProduct,
   IProductAttribute,
@@ -35,4 +37,9 @@ export interface IAttributeColorSwatchProps {
   attribute: IProductAttribute;
   activeAttribute?: string;
   getAttrState: (value: IAttributeColorSwatchState) => void;
+}
+
+export interface ICardItemProps {
+  basket: ILocalBasket;
+  currency: ICurrency;
 }

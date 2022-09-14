@@ -1,4 +1,4 @@
-import { Label, SymbolCurrency } from './common-models';
+import { ILocalBasket, Label, SymbolCurrency } from './common-models';
 
 export interface IPdpCardState {
   isLoaded: boolean;
@@ -34,6 +34,18 @@ export interface IAttrActive {
 
 export interface ICommonAttributeSet {
   prodId: string;
+}
+
+export interface IPlpCardState {
+  productId: string;
+  currentCurrency: SymbolCurrency;
+  localBasket: ILocalBasket[];
+  isChanged: boolean;
+}
+
+export interface ICardItemState {
+  id: string;
+  isModified: boolean;
 }
 
 // export interface IAttributeColorPlp {

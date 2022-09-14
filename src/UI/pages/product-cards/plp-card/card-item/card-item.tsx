@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import styles from './card-item.module.css';
 import {
   IActiveBasketAttr,
-  ICurrency,
-  ILocalBasket,
+  ICardItemProps,
+  ICardItemState,
   IModifiedProducts,
   IProduct,
   localActiveAttributesInit,
@@ -16,15 +16,8 @@ import { GetProductByIdDocument } from '../../../../../graphql/generated';
 import CardBasicBlockPlp from '../plp-card-blocks/card-basic-block/card-basic-block-plp';
 import { LOCAL_BASKET } from '../../../../../constants';
 
-export interface ICardItemProps {
-  basket: ILocalBasket;
-  currency: ICurrency;
-}
-export interface IState {
-  id: string;
-  isModified: boolean;
-}
 type IProps = Readonly<ICardItemProps>;
+type IState = Readonly<ICardItemState>;
 
 class CardItem extends Component<IProps, IState> {
   private product: IProduct = productInit;
@@ -55,8 +48,9 @@ class CardItem extends Component<IProps, IState> {
     prevProps: Readonly<IProps>,
     prevState: Readonly<IState>,
   ) {
-    if (prevProps.currency.symbol !== this.currencySymbol)
+    if (this.props.currency.symbol !== this.currencySymbol) {
       this.currencySymbol = this.props.currency.symbol;
+    }
     if (prevProps.basket.productId !== this.state.id) {
       await this.getProductFromDB();
       this.activeAttrItem = this.activeAttr.find((item) => {
@@ -113,7 +107,7 @@ class CardItem extends Component<IProps, IState> {
           <CardBasicBlockPlp
             product={this.product}
             modifiedProducts={modifiedProducts}
-            currentCurrency={this.currencySymbol}
+            currentCurrency={this.props.currency.symbol}
           />
         </aside>
 
