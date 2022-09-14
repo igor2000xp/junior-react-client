@@ -47,4 +47,5 @@ export interface ICardItemState {
   id: string;
   isModified: boolean;
   quantityInBasket: number;
+  mainImageIndex: number;
 }

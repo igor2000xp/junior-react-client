@@ -26,6 +26,7 @@ class CardItem extends Component<IProps, IState> {
   private activeAttrItem: IActiveBasketAttr = localActiveAttributesInit;
   private modifiedProducts: IModifiedProducts[] = [modifiedProductsInit];
   private currencySymbol: SymbolCurrency = SymbolCurrency.SymbolUsd;
+  private imageIndex: number = 0;
 
   constructor(props: IProps) {
     super(props);
@@ -33,6 +34,7 @@ class CardItem extends Component<IProps, IState> {
       id: 'xbox-series-s',
       isModified: false,
       quantityInBasket: 1,
+      mainImageIndex: 0,
     };
     this.plusHandle = this.plusHandle.bind(this);
     this.minusHandle = this.minusHandle.bind(this);
@@ -125,13 +127,26 @@ class CardItem extends Component<IProps, IState> {
       console.log(`Error ${err} ${id}`, id);
     }
   }
+  async handleImagePrev() {
+    const images = this.product.gallery;
+    this.imageIndex = this.imageIndex > 0 ? this.imageIndex - 1 : images.length - 1;
+    await this.setState({mainImageIndex: this.imageIndex});
+  }
+  async handleImageNext() {
+    const images = this.product.gallery;
+    this.imageIndex = this.imageIndex < images.length - 1 ? this.imageIndex + 1 : 0;
+    await this.setState({mainImageIndex: this.imageIndex});
+  }
+
 
   render() {
     const modifiedProducts = this.modifiedProducts;
     const prodGallery =
       typeof this.product.gallery !== 'undefined'
-        ? this.product.gallery[0]
+        ? this.product.gallery[this.state.mainImageIndex]
         : '';
+    const isArrowButtons = !(this.product.gallery.length === 1);
+
     return (
       <article className={styles.wrapper}>
         <aside className={styles.leftSide}>
@@ -161,12 +176,25 @@ class CardItem extends Component<IProps, IState> {
           <section>
             <div className={styles.imageBlock}>
               <img src={prodGallery} alt="product image" />
-              <button className={`${styles.arrow} ${styles.arrowLeft}`}>
-                <div className={`${styles.arrowSvgLeft}`} />
-              </button>
-              <button className={`${styles.arrow} ${styles.arrowRight}`}>
-                <div className={`${styles.arrowSvgRight}`} />
-              </button>
+              {isArrowButtons ? (
+                  <button
+                    className={`${styles.arrow} ${styles.arrowLeft}`}
+                    onClick={() => this.handleImagePrev()}
+                  >
+                    <div className={`${styles.arrowSvgLeft}`} />
+                  </button>
+                )
+                : (<div/>)
+              }
+              {isArrowButtons ?
+                <button
+                  className={`${styles.arrow} ${styles.arrowRight}`}
+                  onClick={() => this.handleImageNext()}
+                >
+                  <div className={`${styles.arrowSvgRight}`} />
+                </button>
+               : (<div/>)
+              }
             </div>
           </section>
         </aside>
