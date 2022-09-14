@@ -17,7 +17,7 @@ import {
   LOCAL_CURRENT_CURRENCY,
 } from '../../../../constants';
 
-type IState = Readonly<IPlpCardState>
+type IState = Readonly<IPlpCardState>;
 
 class PlpCard extends Component<any, IState> {
   private localBasket = [localBasketItemInit];

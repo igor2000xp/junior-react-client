@@ -46,14 +46,5 @@ export interface IPlpCardState {
 export interface ICardItemState {
   id: string;
   isModified: boolean;
+  quantityInBasket: number;
 }
-
-// export interface IAttributeColorPlp {
-//   productId: string;
-//   activeAttributes: IAttrActive[];
-// }
-
-// export const IAttributeColorPlpInit: IAttributeColorPlp = {
-//   productId: '',
-//   activeAttributes: [activeAttributesInit],
-// }

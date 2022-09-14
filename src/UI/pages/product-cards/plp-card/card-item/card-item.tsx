@@ -15,6 +15,7 @@ import client from '../../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../../graphql/generated';
 import CardBasicBlockPlp from '../plp-card-blocks/card-basic-block/card-basic-block-plp';
 import { LOCAL_BASKET } from '../../../../../constants';
+import { changeQuantityInBasket } from '../helpers';
 
 type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
@@ -28,7 +29,13 @@ class CardItem extends Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
-    this.state = { id: 'xbox-series-s', isModified: false };
+    this.state = {
+      id: 'xbox-series-s',
+      isModified: false,
+      quantityInBasket: 1,
+    };
+    this.plusHandle = this.plusHandle.bind(this);
+    this.minusHandle = this.minusHandle.bind(this);
   }
 
   async componentDidMount() {
@@ -36,12 +43,36 @@ class CardItem extends Component<IProps, IState> {
       localStorage.getItem(LOCAL_BASKET) as string,
     );
     await this.getProductFromDB();
+    await this.setState({
+      quantityInBasket: this.props.basket.quantity,
+    });
 
     const id =
       this.props.basket.productId && this.props.basket.productId !== ''
         ? this.props.basket.productId
         : this.state.id;
     this.setState({ id: id });
+  }
+
+  private async plusHandle() {
+    await this.setState({
+      quantityInBasket: this.state.quantityInBasket + 1,
+    });
+    await changeQuantityInBasket(
+      this.state.quantityInBasket,
+      this.props.basket,
+    );
+  }
+  private async minusHandle() {
+    const minus =
+      this.state.quantityInBasket === 0 ? 0 : this.state.quantityInBasket - 1;
+    await this.setState({
+      quantityInBasket: minus,
+    });
+    await changeQuantityInBasket(
+      this.state.quantityInBasket,
+      this.props.basket,
+    );
   }
 
   async componentDidUpdate(
@@ -113,13 +144,16 @@ class CardItem extends Component<IProps, IState> {
 
         <aside className={styles.rightSide}>
           <section className={styles.buttonSide}>
-            <button className={`${styles.buttonQuality}`}>
+            <button
+              className={`${styles.buttonQuality}`}
+              onClick={this.plusHandle}
+            >
               <p className={styles.plus} />
             </button>
             <div className={styles.numberInBasket}>
-              {/*<p>{this.activeAttr}</p>*/}
+              {this.state.quantityInBasket}
             </div>
-            <button className={styles.buttonQuality}>
+            <button className={styles.buttonQuality} onClick={this.minusHandle}>
               <p className={styles.minus} />
             </button>
           </section>
