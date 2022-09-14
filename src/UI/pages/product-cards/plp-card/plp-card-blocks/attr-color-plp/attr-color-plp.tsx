@@ -29,7 +29,7 @@ class AttrColorPlp extends AttributeColorSwatch {
   }
 
   async choiceHandle(item: IAttribute): Promise<void> {
-    return super.choiceHandle(item);
+    // return super.choiceHandle(item);
   }
 
   render() {
