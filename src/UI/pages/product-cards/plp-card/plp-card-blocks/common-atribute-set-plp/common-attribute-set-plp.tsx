@@ -29,7 +29,7 @@ class CommonAttributeSetPlp extends CommonAttributeSet {
   }
 
   async componentDidMount(): Promise<void> {
-    // await super.componentDidMount();
+    await super.componentDidMount();
     await this.getActiveAttributes();
   }
 

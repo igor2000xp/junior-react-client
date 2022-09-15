@@ -20,6 +20,7 @@ class AttrTextPlp extends AttributeTextExtended {
     await this.setState(() => {
       return {
         activeAttributes: {
+          // id: this.props.activeAttribute ? this.props.activeAttribute : '',
           id: this.props.activeAttribute ? this.props.activeAttribute : '',
           value: this.props.attribute.items[0].value,
           attrID: this.props.attribute.id,

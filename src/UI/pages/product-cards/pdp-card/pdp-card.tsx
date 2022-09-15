@@ -19,7 +19,7 @@ import {
 type IState = Readonly<IPdpCardState>;
 
 class PdpCard extends Component<any, IState> {
-  product: IProduct;
+  private product: IProduct;
   constructor(props: any) {
     super(props);
     this.state = { ...IPdpCardStateInit };
@@ -46,11 +46,16 @@ class PdpCard extends Component<any, IState> {
 
   async productQuery(id: string) {
     try {
+      console.log(id);
       const { data } = await client.query({
         query: GetProductByIdDocument,
         variables: { id },
+        fetchPolicy: "no-cache",
       });
-      this.product = { ...(data.product as IProduct), id };
+      // this.product = { ...(data.product as IProduct), id };
+      this.product = data.product as IProduct;
+      console.log(id);
+      console.log(this.product.attributes[0].items);
     } catch (err) {
       console.log(`Error getting data from server ${err}`);
     }
