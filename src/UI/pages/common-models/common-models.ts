@@ -1,6 +1,10 @@
 import { IAttrActive } from './states-models';
 import { ICommonAttributeSetProps } from './props-model';
 
+export interface IParams {
+  categoryId: string;
+}
+
 export interface IActiveAttrPdp {
   id: string;
   value: string;
@@ -11,6 +15,36 @@ export const localActiveAttributesPdpInit: IActiveAttrPdp = {
   value: '',
   attrID: '',
 };
+export enum Label {
+  Usd = 'USD',
+  Aud = 'AUD',
+  Gbr = 'GBR',
+  Jpy = 'JPY',
+  Rub = 'RUB',
+}
+export enum SymbolCurrency {
+  SymbolUsd = '$',
+  SymbolAud = '£',
+  SymbolGbr = 'A$',
+  SymbolJpy = '¥',
+  SymbolRub = '₽',
+}
+export const currencyInit = [
+  { label: Label.Usd, symbol: SymbolCurrency.SymbolUsd },
+  { label: Label.Gbr, symbol: SymbolCurrency.SymbolGbr },
+  { label: Label.Aud, symbol: SymbolCurrency.SymbolAud },
+  { label: Label.Jpy, symbol: SymbolCurrency.SymbolJpy },
+  { label: Label.Rub, symbol: SymbolCurrency.SymbolRub },
+];
+export const zeroCurrencyInit = {
+  label: Label.Usd,
+  symbol: SymbolCurrency.SymbolUsd,
+};
+
+export interface ICurrency {
+  label: Label;
+  symbol: SymbolCurrency;
+}
 
 export interface IProduct {
   id: string;
@@ -19,7 +53,7 @@ export interface IProduct {
   gallery: string[];
   description: string;
   attributes: IProductAttribute[];
-  prices: IPrice[];
+  prices: IPrice[] | IPrice;
   brand: string;
 }
 export interface IProductAttribute {
@@ -59,16 +93,19 @@ export const productInit = {
       items: [{ displayValue: '', value: '', id: '' }],
     },
   ],
-  prices: Array({ currency: '', amount: 0 }),
+  prices: [
+    {
+      amount: 0,
+      currency: {symbol: SymbolCurrency.SymbolUsd, label: Label.Usd},
+    }],
   brand: '',
 };
-// ICommonAttributeSetProps
+
 export interface IProductAttrForPrint extends ICommonAttributeSetProps {
   activeAttributes: IActiveAttrPdp[];
   quantity: number;
   additionalId: string;
 }
-
 export const productAttrForPrintInit: IProductAttrForPrint = {
   productID: '',
   attributes: [{ ...productAttributeInit }],
@@ -77,40 +114,6 @@ export const productAttrForPrintInit: IProductAttrForPrint = {
   additionalId: '',
 };
 
-export interface IPrice {
-  currency: string;
-  amount: number;
-}
-export enum Label {
-  Usd = 'USD',
-  Aud = 'AUD',
-  Gbr = 'GBR',
-  Jpy = 'JPY',
-  Rub = 'RUB',
-}
-export enum SymbolCurrency {
-  SymbolUsd = '$',
-  SymbolAud = '£',
-  SymbolGbr = 'A$',
-  SymbolJpy = '¥',
-  SymbolRub = '₽',
-}
-export const currencyInit = [
-  { label: Label.Usd, symbol: SymbolCurrency.SymbolUsd },
-  { label: Label.Gbr, symbol: SymbolCurrency.SymbolGbr },
-  { label: Label.Aud, symbol: SymbolCurrency.SymbolAud },
-  { label: Label.Jpy, symbol: SymbolCurrency.SymbolJpy },
-  { label: Label.Rub, symbol: SymbolCurrency.SymbolRub },
-];
-export const zeroCurrencyInit = {
-  label: Label.Usd,
-  symbol: SymbolCurrency.SymbolUsd,
-};
-
-export interface ICurrency {
-  label: Label;
-  symbol: SymbolCurrency;
-}
 export interface ICategory {
   name: string;
 }
@@ -159,3 +162,16 @@ export const modifiedProductsInit: IModifiedProducts = {
   items: [productAttributeItemInit],
   activeItem: '',
 };
+export interface IPrice {
+  amount: number;
+  currency: ICurrency;
+}
+
+export interface ILocalCurrency {
+  label: Label,
+  symbol: SymbolCurrency,
+}
+export const localCurrencyInit: ILocalCurrency = {
+  label: Label.Usd,
+  symbol: SymbolCurrency.SymbolUsd,
+}

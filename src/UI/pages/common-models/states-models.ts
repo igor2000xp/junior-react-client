@@ -1,5 +1,18 @@
 import { ILocalBasket, Label, SymbolCurrency } from './common-models';
 
+export interface IMainPageState {
+  error: null;
+  isLoaded: boolean;
+  categoryIdState: string;
+  currentCurrency: SymbolCurrency;
+}
+export const mainPageStateInit = {
+  error: null,
+  isLoaded: false,
+  categoryIdState: 'all',
+  currentCurrency: SymbolCurrency.SymbolUsd,
+};
+
 export interface IPdpCardState {
   isLoaded: boolean;
   bigImage: string;

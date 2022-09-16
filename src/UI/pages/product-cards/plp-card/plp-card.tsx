@@ -33,8 +33,8 @@ class PlpCard extends Component<any, IState> {
       isChanged: false,
     };
   }
-  getCurrency(label: Label, symbol: SymbolCurrency) {
-    this.setState({
+  async getCurrency(label: Label, symbol: SymbolCurrency) {
+    await this.setState({
       currentCurrency: symbol,
     });
   }
@@ -70,7 +70,7 @@ class PlpCard extends Component<any, IState> {
       ? this.localBasket
       : [localBasketItemInit];
     return (
-      <>
+      <article className={styles.cartWrapper}>
         <Header getCurrency={this.getCurrency} />
         <article className={styles.wrapper}>
           <h1>Cart</h1>
@@ -89,10 +89,13 @@ class PlpCard extends Component<any, IState> {
                 />
               );
             })}
-            <TotalBlock />
+            <TotalBlock
+              localBasket={this.state.localBasket}
+              currentCurrency={this.state.currentCurrency}
+            />
           </div>
         </article>
-      </>
+      </article>
     );
   }
 }

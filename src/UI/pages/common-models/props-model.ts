@@ -1,7 +1,7 @@
 import {
   ICurrency,
   ILocalBasket,
-  IModifiedProducts,
+  IModifiedProducts, IParams,
   IProduct,
   IProductAttribute,
   Label,
@@ -11,6 +11,7 @@ import {
   activeAttributesInit,
   IAttributeColorSwatchState,
 } from './states-models';
+import { WithRouterProps } from '../with-router/with-router.model';
 
 export interface IHeaderProps {
   getCurrency: (label: Label, symbol: SymbolCurrency) => void;
@@ -33,6 +34,8 @@ export interface IBasicBlockProps {
 // export interface ICartBasicBlockProps extends IBasicBlockProps {
 //   activeAttributes: IActiveBasketAttr;
 // }
+export type IPropsMainPage = WithRouterProps<IParams>;
+
 export interface IAttributeColorSwatchProps {
   attribute: IProductAttribute;
   activeAttribute?: string;

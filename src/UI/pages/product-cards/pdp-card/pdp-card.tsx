@@ -52,10 +52,7 @@ class PdpCard extends Component<any, IState> {
         variables: { id },
         fetchPolicy: "no-cache",
       });
-      // this.product = { ...(data.product as IProduct), id };
       this.product = data.product as IProduct;
-      console.log(id);
-      console.log(this.product.attributes[0].items);
     } catch (err) {
       console.log(`Error getting data from server ${err}`);
     }

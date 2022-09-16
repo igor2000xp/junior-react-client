@@ -48,6 +48,7 @@ class PriceBlock extends PureComponent<IProps, IState> {
         variables: {
           id: this.id,
         },
+        fetchPolicy: "no-cache",
       });
 
       const prices: ISlimPrice[] = data.product.prices.map((item: IPrice) => {

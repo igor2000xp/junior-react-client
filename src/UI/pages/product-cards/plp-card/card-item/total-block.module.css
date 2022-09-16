@@ -7,7 +7,6 @@
   margin: 33px 0 0 0;
   width: 279px;
   height: 159px;
-  /*border: #282c34 1px solid;*/
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,18 +16,19 @@
   flex-direction: row;
 }
 .leftTotal {
-  width: 104px;
-  /*border: blue 1px solid;*/
+  width: 120px;
 }
 .leftTotal p {
   font-weight: 400;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 32px;
+  text-align: left;
 }
 .rightTotal p {
   font-weight: 700;
-  font-size: 24px;
+  font-size: 22px;
   line-height: 32px;
+  text-align: left;
 }
 .sendButton {
 
@@ -39,7 +39,6 @@
 .orderButton {
   width: 279px;
   height: 43px;
-  /*border: #0F6450 1px solid;*/
   background-color: #5ECE7B;
 }
 .orderButton p {

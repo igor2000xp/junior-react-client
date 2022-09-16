@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import classes from './product-small-card.module.css';
-import { IItem, IPrice } from '../../main-page-madel/main-page.model';
 import PriceBlock from '../../common/common-bloks/price-block/price-block';
-import { SymbolCurrency } from '../../common-models';
+import { IProduct, SymbolCurrency, IPrice } from '../../common-models';
 
 interface IProps {
-  item: IItem;
+  item: IProduct;
   symbolCurrency: SymbolCurrency;
 }
 
