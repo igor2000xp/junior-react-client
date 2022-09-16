@@ -26,7 +26,7 @@ class CardItem extends Component<IProps, IState> {
   private activeAttrItem: IActiveBasketAttr = localActiveAttributesInit;
   private modifiedProducts: IModifiedProducts[] = [modifiedProductsInit];
   private currencySymbol: SymbolCurrency = SymbolCurrency.SymbolUsd;
-  private imageIndex: number = 0;
+  private imageIndex = 0;
 
   constructor(props: IProps) {
     super(props);
@@ -57,6 +57,7 @@ class CardItem extends Component<IProps, IState> {
   }
 
   private async plusHandle() {
+    this.props.handlePlusMinusButtons();
     await this.setState({
       quantityInBasket: this.state.quantityInBasket + 1,
     });
@@ -66,6 +67,7 @@ class CardItem extends Component<IProps, IState> {
     );
   }
   private async minusHandle() {
+    this.props.handlePlusMinusButtons();
     const minus =
       this.state.quantityInBasket === 0 ? 0 : this.state.quantityInBasket - 1;
     await this.setState({
@@ -129,15 +131,16 @@ class CardItem extends Component<IProps, IState> {
   }
   async handleImagePrev() {
     const images = this.product.gallery;
-    this.imageIndex = this.imageIndex > 0 ? this.imageIndex - 1 : images.length - 1;
-    await this.setState({mainImageIndex: this.imageIndex});
+    this.imageIndex =
+      this.imageIndex > 0 ? this.imageIndex - 1 : images.length - 1;
+    await this.setState({ mainImageIndex: this.imageIndex });
   }
   async handleImageNext() {
     const images = this.product.gallery;
-    this.imageIndex = this.imageIndex < images.length - 1 ? this.imageIndex + 1 : 0;
-    await this.setState({mainImageIndex: this.imageIndex});
+    this.imageIndex =
+      this.imageIndex < images.length - 1 ? this.imageIndex + 1 : 0;
+    await this.setState({ mainImageIndex: this.imageIndex });
   }
-
 
   render() {
     const modifiedProducts = this.modifiedProducts;
@@ -177,24 +180,25 @@ class CardItem extends Component<IProps, IState> {
             <div className={styles.imageBlock}>
               <img src={prodGallery} alt="product image" />
               {isArrowButtons ? (
-                  <button
-                    className={`${styles.arrow} ${styles.arrowLeft}`}
-                    onClick={() => this.handleImagePrev()}
-                  >
-                    <div className={`${styles.arrowSvgLeft}`} />
-                  </button>
-                )
-                : (<div/>)
-              }
-              {isArrowButtons ?
+                <button
+                  className={`${styles.arrow} ${styles.arrowLeft}`}
+                  onClick={() => this.handleImagePrev()}
+                >
+                  <div className={`${styles.arrowSvgLeft}`} />
+                </button>
+              ) : (
+                <div />
+              )}
+              {isArrowButtons ? (
                 <button
                   className={`${styles.arrow} ${styles.arrowRight}`}
                   onClick={() => this.handleImageNext()}
                 >
                   <div className={`${styles.arrowSvgRight}`} />
                 </button>
-               : (<div/>)
-              }
+              ) : (
+                <div />
+              )}
             </div>
           </section>
         </aside>

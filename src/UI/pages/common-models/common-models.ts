@@ -96,8 +96,9 @@ export const productInit = {
   prices: [
     {
       amount: 0,
-      currency: {symbol: SymbolCurrency.SymbolUsd, label: Label.Usd},
-    }],
+      currency: { symbol: SymbolCurrency.SymbolUsd, label: Label.Usd },
+    },
+  ],
   brand: '',
 };
 
@@ -137,6 +138,19 @@ export const localBasketItemInit: ILocalBasket = {
   quantity: 1,
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
 };
+export interface ILocalBasketForTotal {
+  productId: string;
+  quantity: number;
+  symbolPrice: SymbolCurrency;
+  amount: number;
+}
+export const localBasketForTotalInit: ILocalBasketForTotal = {
+  productId: '',
+  quantity: 0,
+  symbolPrice: SymbolCurrency.SymbolUsd,
+  amount: 0,
+};
+
 export interface IActiveBasketAttr {
   productId: string;
   activeAttributes: IAttrActive[];
@@ -168,10 +182,10 @@ export interface IPrice {
 }
 
 export interface ILocalCurrency {
-  label: Label,
-  symbol: SymbolCurrency,
+  label: Label;
+  symbol: SymbolCurrency;
 }
 export const localCurrencyInit: ILocalCurrency = {
   label: Label.Usd,
   symbol: SymbolCurrency.SymbolUsd,
-}
+};

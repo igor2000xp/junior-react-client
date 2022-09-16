@@ -1,7 +1,8 @@
 import {
   ICurrency,
   ILocalBasket,
-  IModifiedProducts, IParams,
+  IModifiedProducts,
+  IParams,
   IProduct,
   IProductAttribute,
   Label,
@@ -31,9 +32,7 @@ export interface IBasicBlockProps {
   currentCurrency: SymbolCurrency;
   modifiedProducts?: IModifiedProducts[];
 }
-// export interface ICartBasicBlockProps extends IBasicBlockProps {
-//   activeAttributes: IActiveBasketAttr;
-// }
+
 export type IPropsMainPage = WithRouterProps<IParams>;
 
 export interface IAttributeColorSwatchProps {
@@ -45,4 +44,11 @@ export interface IAttributeColorSwatchProps {
 export interface ICardItemProps {
   basket: ILocalBasket;
   currency: ICurrency;
+  handlePlusMinusButtons: () => void;
+}
+
+export interface ITotalBlockProps {
+  localBasket: ILocalBasket[];
+  currentCurrency: SymbolCurrency;
+  isChangedPlusMinusButtons: boolean;
 }

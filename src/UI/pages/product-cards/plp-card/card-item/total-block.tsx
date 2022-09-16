@@ -3,79 +3,54 @@ import totalStyle from './total-block.module.css';
 import {
   ILocalBasket,
   ILocalCurrency,
+  ITotalBlockProps,
+  ITotalBlockState,
+  localBasketItemInit,
   localCurrencyInit,
-  SymbolCurrency
+  totalBlockStateInit,
 } from '../../../common-models';
-import { getProductsListFromBasket } from '../../../main-page-helpers/main-page-helpers';
-import { LOCAL_CURRENT_CURRENCY, VAT_RATE } from '../../../../../constants';
+import {
+  getProductsListFromBasket,
+  getTotalItems,
+} from '../../../main-page-helpers/main-page-helpers';
+import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../../../constants';
+import { Link } from 'react-router-dom';
 
-export interface ILocalBasketForTotal {
-  productId: string;
-  quantity: number;
-  symbolPrice: SymbolCurrency;
-  amount: number;
-}
-export const localBasketForTotalInit: ILocalBasketForTotal = {
-  productId: '',
-  quantity: 0,
-  symbolPrice: SymbolCurrency.SymbolUsd,
-  amount: 0,
-}
-export interface ITotal {
-  quantity: number;
-  sum: number;
-  vat: number;
-}
-export const totalInit = { quantity: 0, sum: 0, vat: 0 }
-
-export interface ITotalBlockProps {
-  localBasket: ILocalBasket[];
-  currentCurrency: SymbolCurrency;
-}
-export interface ITotalBlockState {
-  quantity: number;
-  sum: number;
-  vat: number;
-}
-export const totalBlockStateInit: ITotalBlockState = {
-  quantity: 0,
-  sum: 0,
-  vat: 0,
-}
 type IState = Readonly<ITotalBlockState>;
 type IProps = Readonly<ITotalBlockProps>;
 
 class TotalBlock extends Component<IProps, IState> {
-  private localBasketForTotal: ILocalBasketForTotal[] = [localBasketForTotalInit];
   private localCurrency: ILocalCurrency = localCurrencyInit;
-  // private total: ITotal = totalInit;
+  private localBasket: ILocalBasket[] = [localBasketItemInit];
 
   constructor(props: IProps) {
     super(props);
     this.state = totalBlockStateInit;
   }
 
-  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
-    this.localBasketForTotal = await getProductsListFromBasket(this.props.localBasket, this.props.currentCurrency);
-    const sumTotal = (this.localBasketForTotal.reduce((acc, item) => {
-      return acc + item.quantity * item.amount;
-    },0 ));
-    const sum = Number(sumTotal.toFixed(2));
-    const quantity = this.localBasketForTotal.reduce((acc, item) => {
-      return acc + item.quantity;
-    },0 );
-    const vat = Number((sumTotal * VAT_RATE).toFixed(2));
-    if (prevState.sum === this.state.sum) {
-      this.setState({
-        sum,
-        quantity,
-        vat,
-      });
+  async componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    prevState: Readonly<IState>,
+  ) {
+    this.localBasket = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
+    const localBasketForTotal = await getProductsListFromBasket(
+      this.localBasket,
+      this.props.currentCurrency,
+    );
+    const { sum, quantity, vat } = getTotalItems(localBasketForTotal);
+    const isChangedPlusMinusButtons = this.props.isChangedPlusMinusButtons;
+    if (
+      prevState.sum !== sum ||
+      prevProps.isChangedPlusMinusButtons !== isChangedPlusMinusButtons
+    ) {
+      this.setState({ sum, quantity, vat, isChangedPlusMinusButtons });
     }
   }
 
   componentDidMount() {
-    this.localCurrency = JSON.parse(localStorage.getItem(LOCAL_CURRENT_CURRENCY) as string);
+    this.localCurrency = JSON.parse(
+      localStorage.getItem(LOCAL_CURRENT_CURRENCY) as string,
+    );
   }
 
   render() {
@@ -96,9 +71,11 @@ class TotalBlock extends Component<IProps, IState> {
               <p>{`${this.props.currentCurrency}${this.state.sum}`}</p>
             </section>
           </div>
-          <button className={totalStyle.orderButton}>
-            <p>Order</p>
-          </button>
+          <Link to={'/'}>
+            <button className={totalStyle.orderButton}>
+              <p>Order</p>
+            </button>
+          </Link>
         </div>
       </article>
     );

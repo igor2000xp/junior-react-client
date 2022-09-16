@@ -54,6 +54,7 @@ export interface IPlpCardState {
   currentCurrency: SymbolCurrency;
   localBasket: ILocalBasket[];
   isChanged: boolean;
+  isChangedPlusMinusButtons: boolean;
 }
 
 export interface ICardItemState {
@@ -62,3 +63,15 @@ export interface ICardItemState {
   quantityInBasket: number;
   mainImageIndex: number;
 }
+export interface ITotalBlockState {
+  quantity: number;
+  sum: number;
+  vat: number;
+  isChangedPlusMinusButtons: boolean;
+}
+export const totalBlockStateInit: ITotalBlockState = {
+  quantity: 0,
+  sum: 0,
+  vat: 0,
+  isChangedPlusMinusButtons: false,
+};

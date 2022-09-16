@@ -9,11 +9,13 @@ import Header from './common/header';
 import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../constants';
 import {
   IMainPageState,
-  IParams, IProduct,
+  IParams,
+  IProduct,
   IPropsMainPage,
   Label,
   localBasketItemInit,
-  mainPageStateInit, productInit,
+  mainPageStateInit,
+  productInit,
   SymbolCurrency,
   zeroCurrencyInit,
 } from './common-models';
@@ -66,7 +68,7 @@ class MainPage extends PureComponent<IPropsMainPage, IState> {
   }
 
   async checkQueryData() {
-    const products = await getProductsList(this.categoryId) as IProduct[];
+    const products = (await getProductsList(this.categoryId)) as IProduct[];
     this.products = products ? products : [productInit];
     this.setState(() => {
       return {

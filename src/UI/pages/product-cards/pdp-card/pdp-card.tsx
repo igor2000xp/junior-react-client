@@ -50,7 +50,7 @@ class PdpCard extends Component<any, IState> {
       const { data } = await client.query({
         query: GetProductByIdDocument,
         variables: { id },
-        fetchPolicy: "no-cache",
+        fetchPolicy: 'no-cache',
       });
       this.product = data.product as IProduct;
     } catch (err) {

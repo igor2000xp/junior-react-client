@@ -22,15 +22,18 @@ type IState = Readonly<IPlpCardState>;
 class PlpCard extends Component<any, IState> {
   private localBasket = [localBasketItemInit];
   private currentCurrencyLabel = Label.Usd;
+  private isChangedPlusMinusButtons = false;
 
   constructor(props: any) {
     super(props);
     this.getCurrency = this.getCurrency.bind(this);
+    this.handlePlusMinusButtons = this.handlePlusMinusButtons.bind(this);
     this.state = {
       productId: 'xbox-series-s',
       currentCurrency: SymbolCurrency.SymbolUsd,
       localBasket: [localBasketItemInit],
       isChanged: false,
+      isChangedPlusMinusButtons: false,
     };
   }
   async getCurrency(label: Label, symbol: SymbolCurrency) {
@@ -65,6 +68,12 @@ class PlpCard extends Component<any, IState> {
     );
   }
 
+  handlePlusMinusButtons() {
+    const isToggle = !this.isChangedPlusMinusButtons;
+    this.isChangedPlusMinusButtons = isToggle;
+    this.setState({ isChangedPlusMinusButtons: isToggle });
+  }
+
   render() {
     const localBasket = this.state.localBasket
       ? this.localBasket
@@ -85,11 +94,13 @@ class PlpCard extends Component<any, IState> {
                 <CardItem
                   basket={basket}
                   currency={currency}
+                  handlePlusMinusButtons={this.handlePlusMinusButtons}
                   key={item.productId + index}
                 />
               );
             })}
             <TotalBlock
+              isChangedPlusMinusButtons={this.isChangedPlusMinusButtons}
               localBasket={this.state.localBasket}
               currentCurrency={this.state.currentCurrency}
             />
