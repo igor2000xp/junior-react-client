@@ -21,7 +21,7 @@ class App extends Component {
           />
           <Route path="pdp/:productId" element={<PdpCard />} />
           <Route path="cart" element={<PlpCard />} />
-          <Route path="mini-cart" element={<ModalWindow />} />
+          <Route path="mini-cart" element={<MiniCart />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </div>

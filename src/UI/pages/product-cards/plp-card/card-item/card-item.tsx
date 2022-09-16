@@ -21,12 +21,12 @@ type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
 
 class CardItem extends Component<IProps, IState> {
-  private product: IProduct = productInit;
-  private activeAttr: IActiveBasketAttr[] = [localActiveAttributesInit];
-  private activeAttrItem: IActiveBasketAttr = localActiveAttributesInit;
-  private modifiedProducts: IModifiedProducts[] = [modifiedProductsInit];
-  private currencySymbol: SymbolCurrency = SymbolCurrency.SymbolUsd;
-  private imageIndex = 0;
+  protected product: IProduct = productInit;
+  protected activeAttr: IActiveBasketAttr[] = [localActiveAttributesInit];
+  protected activeAttrItem: IActiveBasketAttr = localActiveAttributesInit;
+  protected modifiedProducts: IModifiedProducts[] = [modifiedProductsInit];
+  protected currencySymbol: SymbolCurrency = SymbolCurrency.SymbolUsd;
+  protected imageIndex = 0;
 
   constructor(props: IProps) {
     super(props);

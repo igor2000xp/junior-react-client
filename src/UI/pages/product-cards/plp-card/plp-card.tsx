@@ -20,9 +20,9 @@ import {
 type IState = Readonly<IPlpCardState>;
 
 class PlpCard extends Component<any, IState> {
-  private localBasket = [localBasketItemInit];
-  private currentCurrencyLabel = Label.Usd;
-  private isChangedPlusMinusButtons = false;
+  protected localBasket = [localBasketItemInit];
+  protected currentCurrencyLabel = Label.Usd;
+  protected isChangedPlusMinusButtons = false;
 
   constructor(props: any) {
     super(props);
@@ -83,6 +83,7 @@ class PlpCard extends Component<any, IState> {
         <Header getCurrency={this.getCurrency} />
         <article className={styles.wrapper}>
           <h1>Cart</h1>
+
           <div className={styles.mainBlock}>
             {localBasket.map((item, index) => {
               const basket = item;

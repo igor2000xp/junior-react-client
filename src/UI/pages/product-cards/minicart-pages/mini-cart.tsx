@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react';
 import stylesCart from './mini-cart.module.css';
 import CardItem from '../plp-card/card-item/card-item';
-import MiniBasicBlock from './miniCartBlocks/mini-basic-block';
+import MiniCartItem from './miniCartBlocks/mini-cart-item';
 import MiniButtonBlock from './miniCartBlocks/mini-button-block';
+import PlpCard from '../plp-card/plp-card';
+import { ICurrency, localBasketItemInit } from '../../common-models';
+import styles from '../plp-card/plp-card.module.css';
+import TotalBlock from '../plp-card/card-item/total-block';
 
-class MiniCart extends CardItem {
+class MiniCart extends PlpCard {
   render() {
+    const localBasket = this.state.localBasket
+      ? this.localBasket
+      : [localBasketItemInit];
     return (
       <article className={stylesCart.wrapper}>
         <div className={stylesCart.insideWrapper}>
@@ -16,8 +23,32 @@ class MiniCart extends CardItem {
             </div>
           </section>
 
-          <MiniBasicBlock />
-          <MiniBasicBlock />
+          <div className={styles.mainBlock}>
+            {localBasket.map((item, index) => {
+              const basket = item;
+              const currency: ICurrency = {
+                symbol: this.state.currentCurrency,
+                label: this.currentCurrencyLabel,
+              };
+              return (
+                <CardItem
+                  basket={basket}
+                  currency={currency}
+                  handlePlusMinusButtons={this.handlePlusMinusButtons}
+                  key={item.productId + index}
+                />
+              );
+            })}
+            {/*<TotalBlock*/}
+            {/*  isChangedPlusMinusButtons={this.isChangedPlusMinusButtons}*/}
+            {/*  localBasket={this.state.localBasket}*/}
+            {/*  currentCurrency={this.state.currentCurrency}*/}
+            {/*/>*/}
+          </div>
+
+
+
+
 
           <section className={stylesCart.miniTotal}>
             <div className={stylesCart.miniTotalLeft}>

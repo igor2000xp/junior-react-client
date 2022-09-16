@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import stylesSize from './size-block.module.css';
+import stylesSize from './mini-cart-text-block.module.css';
+import AttrTextPlp from '../../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp';
 
-class SizeBlock extends Component {
+class MiniCartTextBlock extends AttrTextPlp {
   render() {
     return (
       <section className={stylesSize.sizeBlock}>
@@ -25,4 +26,4 @@ class SizeBlock extends Component {
   }
 }
 
-export default SizeBlock;
+export default MiniCartTextBlock;

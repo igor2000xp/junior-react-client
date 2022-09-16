@@ -19,6 +19,7 @@ import {
   SymbolCurrency,
   zeroCurrencyInit,
 } from '../common-models';
+import { Link } from 'react-router-dom';
 
 type IState = Readonly<IHeaderState>;
 type IProps = Readonly<IHeaderProps>;
@@ -184,7 +185,10 @@ class Header extends Component<IProps, IState> {
               </div>
             </div>
           </div>
-          <div className={stylesHeader.basket} />
+          <Link to={'/mini-cart'} >
+            <div className={stylesHeader.basket} />
+          </Link>
+
         </div>
       </div>
     );
