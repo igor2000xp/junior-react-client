@@ -1,3 +1,26 @@
-.miniCartBasicBlock {
-
+.wrapper {
+  height: 52px;
+}
+.brand {
+  text-align: left;
+}
+.name {
+  text-align: left;
+}
+.brand h2 {
+  margin: 0;
+  color: black;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 160%;
+  text-transform: none;
+}
+.name h3 {
+  margin: 0;
+  font-weight: 200;
+  font-size: 14px;
+  line-height: 160%;
+  text-transform: none;
+  letter-spacing: 1px;
+  white-space: nowrap;
 }

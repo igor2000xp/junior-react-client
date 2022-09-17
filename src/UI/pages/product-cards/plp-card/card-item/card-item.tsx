@@ -56,7 +56,7 @@ class CardItem extends Component<IProps, IState> {
     this.setState({ id: id });
   }
 
-  private async plusHandle() {
+  protected async plusHandle() {
     this.props.handlePlusMinusButtons();
     await this.setState({
       quantityInBasket: this.state.quantityInBasket + 1,
@@ -66,7 +66,7 @@ class CardItem extends Component<IProps, IState> {
       this.props.basket,
     );
   }
-  private async minusHandle() {
+  protected async minusHandle() {
     this.props.handlePlusMinusButtons();
     const minus =
       this.state.quantityInBasket === 0 ? 0 : this.state.quantityInBasket - 1;

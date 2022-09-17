@@ -19,7 +19,6 @@ class MiniCartBasicBlock extends CardBasicBlockPlp {
         <div className={styles.brand}>
           <h2>{this.props.product.brand}</h2>
         </div>
-
         <div className={styles.name}>
           <h3>{this.props.product.name}</h3>
         </div>
