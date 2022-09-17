@@ -39,10 +39,6 @@ class MiniCartItem extends CardItem {
             modifiedProducts={modifiedProducts}
             currentCurrency={this.props.currency.symbol}
           />
-          {/*<PriceBlock />*/}
-          {/*<MiniCartTextBlock />*/}
-          {/*<MiniCartColorBlock />*/}
-
         </section>
 
         {/*<section className={stylesMBlock.rightSide}>*/}
