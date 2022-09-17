@@ -7,8 +7,10 @@ import PlpCard from '../plp-card/plp-card';
 import { ICurrency, localBasketItemInit } from '../../common-models';
 import styles from '../plp-card/plp-card.module.css';
 import TotalBlock from '../plp-card/card-item/total-block';
+import MiniCartBasicBlock from './mini-cart-basic-block/mini-cart-basic-block';
 
 class MiniCart extends PlpCard {
+
   render() {
     const localBasket = this.state.localBasket
       ? this.localBasket
@@ -31,7 +33,7 @@ class MiniCart extends PlpCard {
                 label: this.currentCurrencyLabel,
               };
               return (
-                <CardItem
+                <MiniCartItem
                   basket={basket}
                   currency={currency}
                   handlePlusMinusButtons={this.handlePlusMinusButtons}

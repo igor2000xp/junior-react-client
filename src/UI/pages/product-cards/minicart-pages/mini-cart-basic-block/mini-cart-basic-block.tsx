@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './miniCartBasicBlock.module.css';
+import styles from './mini-cart-basic-block.module.css';
 import CardBasicBlockPlp from '../../plp-card/plp-card-blocks/card-basic-block/card-basic-block-plp';
 import { IProductAttribute } from '../../../common-models';
 import CommonAttributeSetPlp from '../../plp-card/plp-card-blocks/common-atribute-set-plp/common-attribute-set-plp';

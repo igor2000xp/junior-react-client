@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
 import stylesSize from './mini-cart-text-block.module.css';
 import AttrTextPlp from '../../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp';
+// import stylesAttr from '../../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp.module.css';
 
 class MiniCartTextBlock extends AttrTextPlp {
   render() {
+    const attr = this.props.attribute.items;
     return (
       <section className={stylesSize.sizeBlock}>
-        <h4>Size:</h4>
+        <h4>{`${this.props.attribute.name}:`}</h4>
         <div className={stylesSize.sizeLine}>
-          <div className={stylesSize.sizeItem}>
-            <p>XS</p>
-          </div>
-          <div className={`${stylesSize.sizeItem} ${stylesSize.active}`}>
-            <p>S</p>
-          </div>
-          <div className={stylesSize.sizeItem}>
-            <p>M</p>
-          </div>
-          <div className={stylesSize.sizeItem}>
-            <p>L</p>
-          </div>
+          {attr.map((item) => {
+            const active =
+              item.id === this.state.activeAttributes.id
+                ? stylesSize.active
+                : '';
+            return (
+              <div
+                className={`${stylesSize.sizeItem} ${active}`}
+                key={item.id}
+                onClick={() => this.choiceHandle(item)}
+              >
+                <p>{item.value}</p>
+              </div>
+            );
+          })}
         </div>
       </section>
     );

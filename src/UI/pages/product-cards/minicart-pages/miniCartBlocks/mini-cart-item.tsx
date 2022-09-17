@@ -19,12 +19,10 @@ type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
 
 class MiniCartItem extends CardItem {
-  // private product: IProduct = productInit;
-  // private activeAttr: IActiveBasketAttr[] = [localActiveAttributesInit];
-  // private activeAttrItem: IActiveBasketAttr = localActiveAttributesInit;
-  // private modifiedProducts: IModifiedProducts[] = [modifiedProductsInit];
-  // private currencySymbol: SymbolCurrency = SymbolCurrency.SymbolUsd;
-  // private imageIndex = 0;
+
+  constructor(props: IProps) {
+    super(props);
+  }
 
   render() {
     const modifiedProducts = this.modifiedProducts;

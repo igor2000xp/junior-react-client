@@ -5,6 +5,7 @@ import { IProductAttribute } from '../../../common-models';
 import AttrTextPlp from '../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp';
 import AttrColorPlp from '../../plp-card/plp-card-blocks/attr-color-plp/attr-color-plp';
 import MiniCartTextBlock from '../miniCartBlocks/blocks/mini-cart-text-block';
+import MiniCartColorBlock from '../miniCartBlocks/blocks/mini-cart-color-block';
 
 export interface MiniCartCommonAttributesProps {}
 
@@ -33,7 +34,7 @@ class MiniCartCommonAttributes extends CommonAttributeSetPlp {
             );
           } else if (isColor) {
             return (
-              <AttrColorPlp
+              <MiniCartColorBlock
                 attribute={attribute}
                 getAttrState={this.handleAttributes}
                 key={item.id}
