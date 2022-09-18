@@ -4,6 +4,7 @@ import MiniCartItem from './miniCartBlocks/mini-cart-item';
 import MiniButtonBlock from './miniCartBlocks/mini-button-block';
 import PlpCard from '../plp-card/plp-card';
 import { ICurrency, localBasketItemInit } from '../../common-models';
+import MiniTotalBlock from './mini-total-block/mini-total-block';
 
 class MiniCart extends PlpCard {
   render() {
@@ -39,12 +40,17 @@ class MiniCart extends PlpCard {
           </section>
 
           <section className={stylesCart.miniTotal}>
-            <div className={stylesCart.miniTotalLeft}>
-              <h5>Total</h5>
-            </div>
-            <div className={stylesCart.miniTotalRight}>
-              <h3>$200.00</h3>
-            </div>
+            <MiniTotalBlock
+              localBasket={this.state.localBasket}
+              currentCurrency={this.state.currentCurrency}
+              isChangedPlusMinusButtons={this.isChangedPlusMinusButtons}
+              />
+            {/*<div className={stylesCart.miniTotalLeft}>*/}
+            {/*  <h5>Total</h5>*/}
+            {/*</div>*/}
+            {/*<div className={stylesCart.miniTotalRight}>*/}
+            {/*  <h3>$200.00</h3>*/}
+            {/*</div>*/}
           </section>
 
           <section>

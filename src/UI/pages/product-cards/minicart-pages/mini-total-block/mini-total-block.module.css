@@ -1,0 +1,50 @@
+.totalWrapper {
+  width: 100%;
+  min-height: 100px;
+  border-top: #E5E5E5 1px solid;
+}
+.totalSection {
+  margin: 33px 0 0 0;
+  width: 279px;
+  height: 159px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sectionColumns {
+  display: flex;
+  flex-direction: row;
+}
+.leftTotal {
+  width: 120px;
+}
+.leftTotal p {
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 32px;
+  text-align: left;
+}
+.rightTotal p {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 32px;
+  text-align: left;
+}
+.sendButton {
+
+}
+.totalBold p {
+  font-weight: 600;
+}
+.orderButton {
+  width: 279px;
+  height: 43px;
+  background-color: #5ECE7B;
+}
+.orderButton p {
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 120%;
+}
