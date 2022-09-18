@@ -51,4 +51,5 @@ export interface ITotalBlockProps {
   localBasket: ILocalBasket[];
   currentCurrency: SymbolCurrency;
   isChangedPlusMinusButtons: boolean;
+  getTotalItemsQuality?: (value: number) => void;
 }

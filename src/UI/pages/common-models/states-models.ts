@@ -55,6 +55,7 @@ export interface IPlpCardState {
   localBasket: ILocalBasket[];
   isChanged: boolean;
   isChangedPlusMinusButtons: boolean;
+  totalItems: number;
 }
 
 export interface ICardItemState {

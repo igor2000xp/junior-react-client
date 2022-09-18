@@ -19,7 +19,10 @@ import { Link } from 'react-router-dom';
 type IState = Readonly<ITotalBlockState>;
 type IProps = Readonly<ITotalBlockProps>;
 
-class TotalBlock extends Component<IProps, IState> {
+class TotalBlock<ITotalBlockProps, ITotalBlockState> extends Component<
+  IProps,
+  IState
+> {
   private localCurrency: ILocalCurrency = localCurrencyInit;
   private localBasket: ILocalBasket[] = [localBasketItemInit];
 

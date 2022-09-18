@@ -28,12 +28,14 @@ class PlpCard extends Component<any, IState> {
     super(props);
     this.getCurrency = this.getCurrency.bind(this);
     this.handlePlusMinusButtons = this.handlePlusMinusButtons.bind(this);
+    this.getTotalItemsQuality = this.getTotalItemsQuality.bind(this);
     this.state = {
       productId: 'xbox-series-s',
       currentCurrency: SymbolCurrency.SymbolUsd,
       localBasket: [localBasketItemInit],
       isChanged: false,
       isChangedPlusMinusButtons: false,
+      totalItems: 0,
     };
   }
   async getCurrency(label: Label, symbol: SymbolCurrency) {
@@ -72,6 +74,11 @@ class PlpCard extends Component<any, IState> {
     const isToggle = !this.isChangedPlusMinusButtons;
     this.isChangedPlusMinusButtons = isToggle;
     this.setState({ isChangedPlusMinusButtons: isToggle });
+  }
+
+  protected getTotalItemsQuality(totalItems: number) {
+    console.log('getTotalItemsQuality');
+    this.setState({ totalItems });
   }
 
   render() {
