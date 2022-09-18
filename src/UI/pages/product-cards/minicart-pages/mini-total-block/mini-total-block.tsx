@@ -3,14 +3,11 @@ import TotalBlock from '../../plp-card/card-item/total-block';
 import stylesCart from '../mini-cart.module.css';
 import { ITotalBlockProps, ITotalBlockState } from '../../../common-models';
 
-type IProps = Readonly<ITotalBlockProps>;
-type IState = Readonly<ITotalBlockState>;
-
-class MiniTotalBlock<ITotalBlockProps, ITotalBlockState> extends TotalBlock<
+class MiniTotalBlock extends TotalBlock<
   ITotalBlockProps,
-  IState
+  ITotalBlockState
 > {
-  constructor(props: IProps) {
+  constructor(props: ITotalBlockProps) {
     super(props);
   }
 
