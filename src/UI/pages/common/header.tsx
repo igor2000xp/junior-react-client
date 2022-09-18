@@ -20,6 +20,7 @@ import {
   zeroCurrencyInit,
 } from '../common-models';
 import { Link } from 'react-router-dom';
+import CartBadge from './cart-badge/cart-badge';
 
 type IState = Readonly<IHeaderState>;
 type IProps = Readonly<IHeaderProps>;
@@ -53,33 +54,10 @@ class Header extends Component<IProps, IState> {
     try {
       await this.initFirst();
       document.addEventListener('mousedown', this.handleClickOutside);
-      const currencyResponse = await client.query<GetAllCurrencyQuery>({
+      const { data } = await client.query<GetAllCurrencyQuery>({
         query: GetAllCurrencyDocument,
       });
-      this.currencies = currencyResponse.data.currencies as ICurrency[];
-
-      // const localCurrentCurrency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
-      // let currentCurrency: typeof zeroCurrencyInit;
-      // if (!localCurrentCurrency) {
-      //   currentCurrency = zeroCurrencyInit;
-      //   localStorage.setItem(LOCAL_CURRENT_CURRENCY, JSON.stringify(currentCurrency));
-      // } else {
-      //   currentCurrency = JSON.parse(localCurrentCurrency);
-      // }
-      // if (!currentCurrency)
-      //   localStorage.setItem(
-      //     LOCAL_CURRENT_CURRENCY,
-      //     JSON.stringify({
-      //       label: this.state.label,
-      //       symbol: this.state.symbol,
-      //     }),
-      //   );
-      // await this.setState(() => {
-      //   return {
-      //     label: currentCurrency.label,
-      //     symbol: currentCurrency.symbol,
-      //   };
-      // });
+      this.currencies = data.currencies as ICurrency[];
     } catch (err) {
       console.log(`Server error ${err}`);
     }
@@ -186,7 +164,9 @@ class Header extends Component<IProps, IState> {
             </div>
           </div>
           <Link to={'/mini-cart'}>
-            <div className={stylesHeader.basket} />
+            <div className={stylesHeader.basket}>
+              <CartBadge count={0} />
+            </div>
           </Link>
         </div>
       </div>
