@@ -31,7 +31,7 @@ class CardItem extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
-      id: 'xbox-series-s',
+      id: '',
       isModified: false,
       quantityInBasket: 1,
       mainImageIndex: 0,
@@ -112,7 +112,7 @@ class CardItem extends Component<IProps, IState> {
     }
   }
 
-  private async getProductFromDB() {
+  protected async getProductFromDB() {
     const id =
       this.props.basket.productId && this.props.basket.productId !== ''
         ? this.props.basket.productId
@@ -123,6 +123,7 @@ class CardItem extends Component<IProps, IState> {
         variables: {
           id: id,
         },
+        fetchPolicy: 'no-cache',
       });
       this.product = { ...(data.product as IProduct), id };
     } catch (err) {

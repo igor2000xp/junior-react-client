@@ -6,7 +6,6 @@ import PlpCard from './UI/pages/product-cards/plp-card/plp-card';
 import MiniCart from './UI/pages/product-cards/minicart-pages/mini-cart';
 import NoMatch from './UI/pages/no-match/no-match';
 import MainPage from './UI/pages/main-page';
-import ModalWindow from './UI/pages/product-cards/minicart-pages/modal-window/modal-window';
 
 class App extends Component {
   render() {

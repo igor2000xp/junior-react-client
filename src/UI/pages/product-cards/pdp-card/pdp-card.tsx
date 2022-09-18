@@ -46,7 +46,6 @@ class PdpCard extends Component<any, IState> {
 
   async productQuery(id: string) {
     try {
-      console.log(id);
       const { data } = await client.query({
         query: GetProductByIdDocument,
         variables: { id },

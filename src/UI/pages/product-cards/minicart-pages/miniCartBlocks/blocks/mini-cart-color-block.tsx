@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import stylesColor from './mini-cart-color-block.module.css';
 import AttrColorPlp from '../../../plp-card/plp-card-blocks/attr-color-plp/attr-color-plp';
 
@@ -28,7 +28,6 @@ class MiniCartColorBlock extends AttrColorPlp {
               </div>
             );
           })}
-
         </div>
       </section>
     );

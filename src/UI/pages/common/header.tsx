@@ -185,10 +185,9 @@ class Header extends Component<IProps, IState> {
               </div>
             </div>
           </div>
-          <Link to={'/mini-cart'} >
+          <Link to={'/mini-cart'}>
             <div className={stylesHeader.basket} />
           </Link>
-
         </div>
       </div>
     );

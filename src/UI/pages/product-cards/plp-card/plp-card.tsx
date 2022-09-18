@@ -82,9 +82,11 @@ class PlpCard extends Component<any, IState> {
       <article className={styles.cartWrapper}>
         <Header getCurrency={this.getCurrency} />
         <article className={styles.wrapper}>
-          <h1>Cart</h1>
+          <section className={styles.header}>
+            <h1>Cart</h1>
+          </section>
 
-          <div className={styles.mainBlock}>
+          <section className={styles.mainBlock}>
             {localBasket.map((item, index) => {
               const basket = item;
               const currency: ICurrency = {
@@ -105,7 +107,7 @@ class PlpCard extends Component<any, IState> {
               localBasket={this.state.localBasket}
               currentCurrency={this.state.currentCurrency}
             />
-          </div>
+          </section>
         </article>
       </article>
     );

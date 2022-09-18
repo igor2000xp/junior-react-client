@@ -1,13 +1,8 @@
-import React, { Component } from 'react';
-import styles from './miniCartCommonAttributes.module.css';
+import React from 'react';
 import CommonAttributeSetPlp from '../../plp-card/plp-card-blocks/common-atribute-set-plp/common-attribute-set-plp';
 import { IProductAttribute } from '../../../common-models';
-import AttrTextPlp from '../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp';
-import AttrColorPlp from '../../plp-card/plp-card-blocks/attr-color-plp/attr-color-plp';
 import MiniCartTextBlock from '../miniCartBlocks/blocks/mini-cart-text-block';
 import MiniCartColorBlock from '../miniCartBlocks/blocks/mini-cart-color-block';
-
-export interface MiniCartCommonAttributesProps {}
 
 class MiniCartCommonAttributes extends CommonAttributeSetPlp {
   render() {

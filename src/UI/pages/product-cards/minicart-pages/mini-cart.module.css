@@ -1,15 +1,23 @@
 .wrapper {
   width: 325px;
-  height: 677px;
+  max-height: 95vh;
+  overflow: auto;
   border: rgba(2, 2, 2, 0.1) 1px solid;
   border-radius: 10px;
   box-shadow: 5px 3px 5px rgba(3, 3, 3, 0.13);
 }
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .insideWrapper {
   margin: 32px 16px;
+  display: flex;
+  flex-direction: column;
 }
 .MiniCartHeader {
-  margin: 32px 0 32px 0;
+  margin: 0 0 32px 0;
   display: flex;
   flex-direction: row;
 }

@@ -1,16 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import stylesCart from './mini-cart.module.css';
-import CardItem from '../plp-card/card-item/card-item';
 import MiniCartItem from './miniCartBlocks/mini-cart-item';
 import MiniButtonBlock from './miniCartBlocks/mini-button-block';
 import PlpCard from '../plp-card/plp-card';
 import { ICurrency, localBasketItemInit } from '../../common-models';
-import styles from '../plp-card/plp-card.module.css';
-import TotalBlock from '../plp-card/card-item/total-block';
-import MiniCartBasicBlock from './mini-cart-basic-block/mini-cart-basic-block';
 
 class MiniCart extends PlpCard {
-
   render() {
     const localBasket = this.state.localBasket
       ? this.localBasket
@@ -25,7 +20,7 @@ class MiniCart extends PlpCard {
             </div>
           </section>
 
-          <div className={styles.mainBlock}>
+          <section className={stylesCart.mainBlock}>
             {localBasket.map((item, index) => {
               const basket = item;
               const currency: ICurrency = {
@@ -41,16 +36,7 @@ class MiniCart extends PlpCard {
                 />
               );
             })}
-            {/*<TotalBlock*/}
-            {/*  isChangedPlusMinusButtons={this.isChangedPlusMinusButtons}*/}
-            {/*  localBasket={this.state.localBasket}*/}
-            {/*  currentCurrency={this.state.currentCurrency}*/}
-            {/*/>*/}
-          </div>
-
-
-
-
+          </section>
 
           <section className={stylesCart.miniTotal}>
             <div className={stylesCart.miniTotalLeft}>
@@ -61,7 +47,9 @@ class MiniCart extends PlpCard {
             </div>
           </section>
 
-          <MiniButtonBlock />
+          <section>
+            <MiniButtonBlock />
+          </section>
         </div>
       </article>
     );

@@ -1,16 +1,23 @@
 .sizeBlock {
   margin: 8px 0 0 0;
-  height: 48px;
+  /*max-height: 32px;*/
   display: flex;
   flex-direction: column;
 }
-.sizeBlock h4 {
+/*overflow-block: hidden;*/
+.blockHeader {
+  /*height: 100%;*/
+  max-height: 36px;
+  overflow: hidden;
+}
+.blockHeader h4 {
   margin: 0;
   text-align: left;
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
   text-transform: none;
+  overflow: hidden;
 }
 .sizeLine {
   margin: 8px 0 0 0;
@@ -20,7 +27,7 @@
 }
 .sizeItem {
   margin: 0 8px 0 0 ;
-  width: 24px;
+  width: 100%;
   height: 24px;
   border: black 1px solid;
   display: flex;

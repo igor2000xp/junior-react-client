@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import stylesSize from './mini-cart-text-block.module.css';
 import AttrTextPlp from '../../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp';
 // import stylesAttr from '../../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp.module.css';
@@ -8,7 +8,9 @@ class MiniCartTextBlock extends AttrTextPlp {
     const attr = this.props.attribute.items;
     return (
       <section className={stylesSize.sizeBlock}>
-        <h4>{`${this.props.attribute.name}:`}</h4>
+        <div className={stylesSize.blockHeader}>
+          <h4>{`${this.props.attribute.name}:`}</h4>
+        </div>
         <div className={stylesSize.sizeLine}>
           {attr.map((item) => {
             const active =

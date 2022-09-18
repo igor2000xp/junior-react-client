@@ -1,26 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import stylesMBlock from './mini-cart-item.module.css';
-// import NameBlock from './blocks/name-block';
-// import PriceBlock from '../../../common/common-bloks/price-block/price-block';
-// import MiniCartTextBlock from './blocks/mini-cart-text-block';
-// import MiniCartColorBlock from './blocks/mini-cart-color-block';
-// import ImageBlock from './blocks/image-block';
 import MiniCartBasicBlock from '../mini-cart-basic-block/mini-cart-basic-block';
-import {
-  IActiveBasketAttr, ICardItemProps, ICardItemState,
-  IModifiedProducts,
-  IProduct,
-  localActiveAttributesInit, modifiedProductsInit,
-  productInit, SymbolCurrency
-} from '../../../common-models';
+import { ICardItemProps } from '../../../common-models';
 import CardItem from '../../plp-card/card-item/card-item';
-import styles from '../../plp-card/card-item/card-item.module.css';
 
 type IProps = Readonly<ICardItemProps>;
-type IState = Readonly<ICardItemState>;
 
 class MiniCartItem extends CardItem {
-
   constructor(props: IProps) {
     super(props);
   }
@@ -42,41 +28,44 @@ class MiniCartItem extends CardItem {
           />
         </section>
 
-        <aside className={styles.rightSide}>
-          <section className={styles.buttonSide}>
+        <aside className={stylesMBlock.rightSide}>
+          <section className={stylesMBlock.buttonSide}>
             <button
-              className={`${styles.buttonQuality}`}
+              className={`${stylesMBlock.buttonQuality}`}
               onClick={this.plusHandle}
             >
-              <p className={styles.plus} />
+              <p className={stylesMBlock.plus} />
             </button>
-            <div className={styles.numberInBasket}>
+            <div className={stylesMBlock.numberInBasket}>
               {this.state.quantityInBasket}
             </div>
-            <button className={styles.buttonQuality} onClick={this.minusHandle}>
-              <p className={styles.minus} />
+            <button
+              className={stylesMBlock.buttonQuality}
+              onClick={this.minusHandle}
+            >
+              <p className={stylesMBlock.minus} />
             </button>
           </section>
 
           <section>
-            <div className={styles.imageBlock}>
+            <div className={stylesMBlock.imageBlock}>
               <img src={prodGallery} alt="product image" />
               {isArrowButtons ? (
                 <button
-                  className={`${styles.arrow} ${styles.arrowLeft}`}
+                  className={`${stylesMBlock.arrow} ${stylesMBlock.arrowLeft}`}
                   onClick={() => this.handleImagePrev()}
                 >
-                  <div className={`${styles.arrowSvgLeft}`} />
+                  <div className={`${stylesMBlock.arrowSvgLeft}`} />
                 </button>
               ) : (
                 <div />
               )}
               {isArrowButtons ? (
                 <button
-                  className={`${styles.arrow} ${styles.arrowRight}`}
+                  className={`${stylesMBlock.arrow} ${stylesMBlock.arrowRight}`}
                   onClick={() => this.handleImageNext()}
                 >
-                  <div className={`${styles.arrowSvgRight}`} />
+                  <div className={`${stylesMBlock.arrowSvgRight}`} />
                 </button>
               ) : (
                 <div />
@@ -84,10 +73,6 @@ class MiniCartItem extends CardItem {
             </div>
           </section>
         </aside>
-
-        {/*<section className={stylesMBlock.rightSide}>*/}
-
-        {/*</section>*/}
       </article>
     );
   }

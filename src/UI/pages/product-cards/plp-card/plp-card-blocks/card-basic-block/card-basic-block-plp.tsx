@@ -14,25 +14,25 @@ class CardBasicBlockPlp extends BasicBlock {
     const symbolCurrency = this.props.currentCurrency;
     return (
       <article className={styles.wrapper}>
-        <div className={styles.brand}>
+        <section className={styles.brand}>
           <h2>{this.props.product.brand}</h2>
-        </div>
+        </section>
 
-        <div className={styles.name}>
+        <section className={styles.name}>
           <h3>{this.props.product.name}</h3>
-        </div>
+        </section>
 
-        <CommonAttributeSetPlp
-          attributes={arrAttributes}
-          productID={productId}
-          modifiedProducts={this.props.modifiedProducts}
-        />
+        <section className={styles.priceBlock}>
+          <PriceBlock id={productId} symbolCurrency={symbolCurrency} />
+        </section>
 
-        <div className={styles.priceBlock}>
-          <div>
-            <PriceBlock id={productId} symbolCurrency={symbolCurrency} />
-          </div>
-        </div>
+        <section className={styles.attributes}>
+          <CommonAttributeSetPlp
+            attributes={arrAttributes}
+            productID={productId}
+            modifiedProducts={this.props.modifiedProducts}
+          />
+        </section>
       </article>
     );
   }

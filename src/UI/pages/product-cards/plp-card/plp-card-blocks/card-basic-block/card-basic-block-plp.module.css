@@ -29,12 +29,14 @@
   text-transform: uppercase;
 }
 .priceBlock {
-  margin: 20px 0 20px 0;
+  margin-top: 20px;
 }
-wrapper p {
+.wrapper p {
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
   text-transform: uppercase;
 }
-
+.attributes {
+  margin: 20px 0 10px 0;
+}
