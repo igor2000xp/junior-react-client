@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './card-basic-block-plp.module.css';
 import BasicBlock from '../../../pdp-card/cardBlocks/basic-block';
 import { IProductAttribute } from '../../../../common-models';
-// import CommonAttributeSet from '../../../../common/common-bloks/common-attribute-set/common-attribute-set';
 import PriceBlock from '../../../../common/common-bloks/price-block/price-block';
 import CommonAttributeSetPlp from '../common-atribute-set-plp/common-attribute-set-plp';
 

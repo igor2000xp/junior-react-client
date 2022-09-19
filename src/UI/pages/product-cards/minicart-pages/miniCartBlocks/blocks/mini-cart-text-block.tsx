@@ -1,7 +1,6 @@
 import React from 'react';
 import stylesSize from './mini-cart-text-block.module.css';
 import AttrTextPlp from '../../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp';
-// import stylesAttr from '../../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp.module.css';
 
 class MiniCartTextBlock extends AttrTextPlp {
   render() {

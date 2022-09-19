@@ -6,8 +6,9 @@ import {
   IProduct,
   productInit,
   SymbolCurrency,
+  zeroCurrencyInit,
 } from '../common-models';
-import { VAT_RATE } from '../../../constants';
+import { LOCAL_CURRENT_CURRENCY, VAT_RATE } from '../../../constants';
 
 export const getProductsList = async (
   categoryId: string,
@@ -64,4 +65,19 @@ export const getTotalItems = (localBasketForTotal: ILocalBasketForTotal[]) => {
   }, 0);
   const vat = Number((sumTotal * VAT_RATE).toFixed(2));
   return { sum, quantity, vat };
+};
+
+export const initFirstLocalCurrency = async () => {
+  const localCurrentCurrency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
+  let currentCurrency: typeof zeroCurrencyInit;
+  if (!localCurrentCurrency) {
+    currentCurrency = zeroCurrencyInit;
+    localStorage.setItem(
+      LOCAL_CURRENT_CURRENCY,
+      JSON.stringify(currentCurrency),
+    );
+  } else {
+    currentCurrency = JSON.parse(localCurrentCurrency);
+  }
+  return currentCurrency;
 };

@@ -26,7 +26,8 @@ export const IPdpCardStateInit = {
 export interface IHeaderState {
   label: Label;
   symbol: SymbolCurrency;
-  isShown: boolean;
+  isShownCurrency: boolean;
+  isShownCart: boolean;
 }
 
 export interface IAttributeColorSwatchState {
@@ -76,3 +77,11 @@ export const totalBlockStateInit: ITotalBlockState = {
   vat: 0,
   isChangedPlusMinusButtons: false,
 };
+
+export interface ICartBadgeState {
+  count: number;
+}
+
+export interface ICartCountProviderState {
+  count: number;
+}

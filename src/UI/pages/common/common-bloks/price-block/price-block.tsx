@@ -23,10 +23,7 @@ class PriceBlock extends PureComponent<IProps, IState> {
     await this.priceQuery();
   }
 
-  async componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    // prevState: Readonly<IState>,
-  ) {
+  async componentDidUpdate(prevProps: Readonly<IProps>) {
     if (
       prevProps.id !== this.props.id ||
       prevProps.symbolCurrency !== this.props.symbolCurrency

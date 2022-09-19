@@ -17,17 +17,20 @@ import {
   IHeaderState,
   Label,
   SymbolCurrency,
-  zeroCurrencyInit,
 } from '../common-models';
-import { Link } from 'react-router-dom';
 import CartBadge from './cart-badge/cart-badge';
+import CartCountProvider from './cart-count-provider/cart-count-provider';
+import MiniCart from '../product-cards/minicart-pages/mini-cart';
+import { initFirstLocalCurrency } from '../main-page-helpers/main-page-helpers';
 
 type IState = Readonly<IHeaderState>;
 type IProps = Readonly<IHeaderProps>;
 
 class Header extends Component<IProps, IState> {
   private currencies: ICurrency[];
-  wrapperRef: RefObject<HTMLDivElement>;
+  private activeCart = '';
+  protected wrapperCurrencyRef: RefObject<HTMLDivElement>;
+  protected wrapperCartRef: RefObject<HTMLDivElement>;
 
   constructor(props: any) {
     super(props);
@@ -35,25 +38,42 @@ class Header extends Component<IProps, IState> {
     this.state = {
       label: Label.Usd,
       symbol: SymbolCurrency.SymbolUsd,
-      isShown: false,
+      isShownCurrency: false,
+      isShownCart: false,
     };
-    this.wrapperRef = React.createRef();
-    this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.wrapperCurrencyRef = React.createRef();
+    this.wrapperCartRef = React.createRef();
+    this.handleCartClick = this.handleCartClick.bind(this);
+    this.handleClickOutsideCart = this.handleClickOutsideCart.bind(this);
+    this.handleClickOutsideCurrency =
+      this.handleClickOutsideCurrency.bind(this);
   }
 
-  async handleClickOutside(event: MouseEvent) {
+  async handleClickOutsideCurrency(event: MouseEvent) {
     if (
-      this.wrapperRef.current &&
-      !this.wrapperRef.current.contains(event.target as Node)
+      this.wrapperCurrencyRef.current &&
+      !this.wrapperCurrencyRef.current.contains(event.target as Node) &&
+      !this.state.isShownCart
     ) {
       await this.closeCurrencyMenu();
     }
   }
 
+  handleClickOutsideCart(event: MouseEvent) {
+    if (
+      this.wrapperCartRef.current &&
+      !this.wrapperCartRef.current.contains(event.target as Node)
+    ) {
+      this.closeCart();
+    }
+  }
+
   async componentDidMount() {
     try {
-      await this.initFirst();
-      document.addEventListener('mousedown', this.handleClickOutside);
+      document.addEventListener('mousedown', this.handleClickOutsideCurrency);
+      document.addEventListener('mousedown', this.handleClickOutsideCart);
+      const { label, symbol } = await initFirstLocalCurrency();
+      this.setState({ label, symbol });
       const { data } = await client.query<GetAllCurrencyQuery>({
         query: GetAllCurrencyDocument,
       });
@@ -63,49 +83,41 @@ class Header extends Component<IProps, IState> {
     }
   }
 
-  async initFirst() {
-    const localCurrentCurrency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
-    let currentCurrency: typeof zeroCurrencyInit;
-    if (!localCurrentCurrency) {
-      currentCurrency = zeroCurrencyInit;
-      localStorage.setItem(
-        LOCAL_CURRENT_CURRENCY,
-        JSON.stringify(currentCurrency),
-      );
-    } else {
-      currentCurrency = JSON.parse(localCurrentCurrency);
-    }
-    await this.setState(() => {
-      return {
-        label: currentCurrency.label,
-        symbol: currentCurrency.symbol,
-      };
-    });
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutsideCurrency);
+    document.removeEventListener('mousedown', this.handleClickOutsideCart);
   }
 
   async toggleCurrencyMenu() {
-    await this.setState(() => {
-      return this.state.isShown ? { isShown: false } : { isShown: true };
-    });
+    const isShownCurrency = !this.state.isShownCurrency;
+    this.setState({ isShownCurrency });
   }
 
-  async closeCurrencyMenu() {
-    await this.setState(() => {
-      return { isShown: false };
-    });
+  closeCurrencyMenu() {
+    this.setState({ isShownCurrency: false });
   }
 
-  async handlerClick(currency: ICurrency): Promise<ICurrency> {
+  async handleCurrencyClick(currency: ICurrency): Promise<ICurrency> {
     this.props.getCurrency(currency.label, currency.symbol);
     await this.setState(() => {
       return {
-        isShown: false,
+        isShownCurrency: false,
         label: currency.label,
         symbol: currency.symbol,
       };
     });
     localStorage.setItem(LOCAL_CURRENT_CURRENCY, JSON.stringify(currency));
     return currency;
+  }
+
+  handleCartClick() {
+    const isShownCart = !this.state.isShownCart;
+    this.activeCart = isShownCart ? stylesHeader.activeCart : '';
+    this.setState({ isShownCart });
+  }
+  closeCart() {
+    this.activeCart = '';
+    this.setState({ isShownCart: false });
   }
 
   render() {
@@ -124,7 +136,7 @@ class Header extends Component<IProps, IState> {
             </div>
 
             <div className={stylesHeader.currencyArrow}>
-              {this.state.isShown ? (
+              {this.state.isShownCurrency ? (
                 <img src={currencyArrowOpen} alt="arrow" />
               ) : (
                 <img src={currencyArrowClose} alt="arrow" />
@@ -140,9 +152,9 @@ class Header extends Component<IProps, IState> {
             >
               <div
                 className={stylesHeader.currencyDroppingBox}
-                ref={this.wrapperRef}
+                ref={this.wrapperCurrencyRef}
               >
-                {this.state.isShown &&
+                {this.state.isShownCurrency &&
                   this.currencies.map((item, index) => {
                     return (
                       <div key={index} className={stylesHeader.currencyItem}>
@@ -151,7 +163,7 @@ class Header extends Component<IProps, IState> {
                           label={item.label}
                           currencySymbol={item.symbol}
                           onClick={() => {
-                            return this.handlerClick({
+                            return this.handleCurrencyClick({
                               label: item.label,
                               symbol: item.symbol,
                             });
@@ -163,11 +175,23 @@ class Header extends Component<IProps, IState> {
               </div>
             </div>
           </div>
-          <Link to={'/mini-cart'}>
-            <div className={stylesHeader.basket}>
-              <CartBadge count={0} />
+          <section className={stylesHeader.miniCartBlockWrapper}>
+            <div onClick={this.handleCartClick}>
+              <CartCountProvider
+                renderCount={(count) => <CartBadge count={count} />}
+                isChangedQuantity={this.state.isShownCart}
+                isChangedCurrency={true}
+              />
             </div>
-          </Link>
+
+            {/* ------------------------------------------  */}
+            <div
+              className={`${stylesHeader.miniCartBlock} ${this.activeCart}`}
+              ref={this.wrapperCartRef}
+            >
+              <MiniCart symbol={this.state.symbol} />
+            </div>
+          </section>
         </div>
       </div>
     );

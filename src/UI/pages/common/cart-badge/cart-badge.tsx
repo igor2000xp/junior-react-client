@@ -1,37 +1,32 @@
 import React, { Component } from 'react';
 import stylesCount from './cart-badge.module.css';
+import { ICartBadgeProps, ICartBadgeState } from '../../common-models';
 
-export interface CartBadgeProps {
-  count: number;
-}
-export interface ICartBadgeState {
-  count: number;
-}
-
-type IProps = Readonly<CartBadgeProps>;
-type IState = Readonly<ICartBadgeState>
+type IProps = Readonly<ICartBadgeProps>;
+type IState = Readonly<ICartBadgeState>;
 
 class CartBadge extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
-    this.state = {
-      count: 0,
-    }
+    this.state = { count: 0 };
   }
 
-  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
+  async componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    prevState: Readonly<IState>,
+  ) {
     if (prevState.count !== this.props.count) {
-      this.setState({
-        count: this.props.count,
-      })
+      this.setState({ count: this.props.count });
     }
   }
 
   render() {
     return (
+      <div className={stylesCount.basket}>
         <div className={stylesCount.cartBadge}>
           <p>{this.state.count}</p>
         </div>
+      </div>
     );
   }
 }

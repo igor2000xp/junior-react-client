@@ -36,7 +36,6 @@ class CommonAttributeSetPlp extends CommonAttributeSet {
   async componentDidUpdate(
     prevProps: Readonly<IProps>,
     prevState: Readonly<IState>,
-    // snapshot?: any,
   ) {
     if (
       this.props.productID !== prevProps.productID ||

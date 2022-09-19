@@ -3,10 +3,16 @@ import stylesCart from './mini-cart.module.css';
 import MiniCartItem from './miniCartBlocks/mini-cart-item';
 import MiniButtonBlock from './miniCartBlocks/mini-button-block';
 import PlpCard from '../plp-card/plp-card';
-import { ICurrency, localBasketItemInit } from '../../common-models';
+import {
+  ICurrency,
+  IPlpCardProps,
+  localBasketItemInit,
+  SymbolCurrency,
+} from '../../common-models';
 import MiniTotalBlock from './mini-total-block/mini-total-block';
+import { LOCAL_BASKET } from '../../../../constants';
 
-type IProps = Readonly<any>;
+type IProps = Readonly<IPlpCardProps>;
 
 class MiniCart extends PlpCard {
   constructor(props: IProps) {
@@ -16,6 +22,18 @@ class MiniCart extends PlpCard {
   protected getTotalItemsQuality(totalItems: number) {
     if (this.state.totalItems !== totalItems) {
       this.setState({ totalItems });
+    }
+  }
+
+  async componentDidUpdate(prevProps: Readonly<IProps>): Promise<void> {
+    if (prevProps.symbol !== this.state.currentCurrency) {
+      this.localBasket = JSON.parse(
+        (await localStorage.getItem(LOCAL_BASKET)) as string,
+      );
+      const currentCurrency = this.props.symbol
+        ? this.props.symbol
+        : SymbolCurrency.SymbolUsd;
+      this.setState({ currentCurrency });
     }
   }
 

@@ -15,15 +15,6 @@
   text-decoration: none;
   text-transform: uppercase;
 }
-/*.navigation link {*/
-/*  text-decoration: none;*/
-/*  text-transform: uppercase;*/
-/*}*/
-/*.navLink a:link, a:visited, a:hover, a:active {*/
-/*  text-decoration: none;*/
-/*  text-transform: uppercase;*/
-/*  color: black;*/
-/*}*/
 .navLink {
   text-decoration: none;
   text-transform: uppercase;
@@ -41,14 +32,7 @@
 .chosenLink {
   text-decoration: none;
   color: #5ECE7B;
-  /*border-bottom: #5ECE7B 2px solid;*/
 }
-/*a a:link a:visited a:hover a:active*/
 .chosenLink:link {
-  /*border-bottom: #5ECE7B 2px solid;*/
-  /*text-decoration: none;*/
   color: #5ECE7B;
 }
-/*.chosenLink {*/
-/*  color: #5ECE7B;*/
-/*}*/

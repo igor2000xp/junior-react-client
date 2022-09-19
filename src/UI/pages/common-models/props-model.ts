@@ -53,3 +53,17 @@ export interface ITotalBlockProps {
   isChangedPlusMinusButtons: boolean;
   getTotalItemsQuality?: (value: number) => void;
 }
+
+export interface ICartBadgeProps {
+  count: number;
+}
+
+export interface ICartCountProviderProps {
+  renderCount: (count: number) => void;
+  isChangedQuantity: boolean;
+  isChangedCurrency: boolean;
+}
+
+export interface IPlpCardProps {
+  symbol?: SymbolCurrency;
+}

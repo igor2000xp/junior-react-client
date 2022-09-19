@@ -29,7 +29,6 @@ class ButtonBlock extends Component {
     const activeAttr: IActiveAttrPdp[] = await getActiveAttrFromLocal();
     const productId = this.productId;
     this.localBaskets = await getFromLocalBasket();
-    // check if the basket is empty
     if (
       !this.localBaskets[0].productId &&
       this.localBaskets[0].productId !== '' &&

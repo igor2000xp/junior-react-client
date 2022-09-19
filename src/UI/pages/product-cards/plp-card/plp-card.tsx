@@ -6,6 +6,7 @@ import TotalBlock from './card-item/total-block';
 import Header from '../../common/header';
 import {
   ICurrency,
+  IPlpCardProps,
   IPlpCardState,
   Label,
   localBasketItemInit,
@@ -17,12 +18,14 @@ import {
   LOCAL_CURRENT_CURRENCY,
 } from '../../../../constants';
 
+type IProps = Readonly<IPlpCardProps>;
 type IState = Readonly<IPlpCardState>;
 
-class PlpCard extends Component<any, IState> {
+class PlpCard extends Component<IProps, IState> {
   protected localBasket = [localBasketItemInit];
   protected currentCurrencyLabel = Label.Usd;
   protected isChangedPlusMinusButtons = false;
+  protected symbol = SymbolCurrency.SymbolUsd;
 
   constructor(props: any) {
     super(props);
@@ -64,7 +67,7 @@ class PlpCard extends Component<any, IState> {
     });
   }
 
-  async componentDidUpdate() {
+  async componentDidUpdate(prevProps: Readonly<IProps>) {
     this.localBasket = JSON.parse(
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );

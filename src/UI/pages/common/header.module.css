@@ -64,9 +64,15 @@
 .currencyItem .active {
   background-color: #EEE;
 }
-.basket {
+.miniCartBlockWrapper {
   position: relative;
-  height: 20px;
-  width: 20px;
-  background-image: url("../../../assets/images/Icon/empty-cart.svg");
+}
+.miniCartBlock {
+  position: absolute;
+  top: -1500px;
+  right: -15px;
+  transition: all 0.6s ease-out;
+}
+.activeCart {
+  transform: translateY(1525px);
 }

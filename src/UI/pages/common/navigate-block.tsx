@@ -8,11 +8,6 @@ import {
   ICategory,
   ICategoryWithActive,
 } from '../common-models';
-// import {
-//   categoriesInit,
-//   ICategory,
-//   ICategoryWithActive,
-// } from './models/header.model';
 
 class NavigateBlock extends Component {
   private categories = categoriesInit;
