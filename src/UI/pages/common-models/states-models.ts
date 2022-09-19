@@ -6,7 +6,7 @@ export interface IMainPageState {
   categoryIdState: string;
   currentCurrency: SymbolCurrency;
 }
-export const mainPageStateInit = {
+export const mainPageStateInit: IMainPageState = {
   error: null,
   isLoaded: false,
   categoryIdState: 'all',

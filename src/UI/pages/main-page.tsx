@@ -22,8 +22,9 @@ import {
 import { getProductsList } from './main-page-helpers/main-page-helpers';
 
 type IState = Readonly<IMainPageState>;
+type IProps = Readonly<IPropsMainPage>;
 
-class MainPage extends PureComponent<IPropsMainPage, IState> {
+class MainPage extends PureComponent<IProps, IState> {
   private categoryId: string;
   private products: IProduct[] = [productInit];
   private currentCurrency = zeroCurrencyInit;
