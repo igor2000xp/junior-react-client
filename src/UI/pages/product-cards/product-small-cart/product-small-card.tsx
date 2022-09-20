@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import classes from './product-small-card.module.css';
+import styles from './product-small-card.module.css';
 import PriceBlock from '../../common/common-bloks/price-block/price-block';
 import { IProduct, SymbolCurrency, IPrice } from '../../common-models';
+import cartImage from '../../../../assets/images/Icon/CircleIcon.svg';
 
 interface IProps {
   item: IProduct;
@@ -32,17 +33,25 @@ export class ProductSmallCard extends Component<IProps, any> {
     } else if (Array.isArray(firstGallery))
       this.gallery = firstGallery[0] ? firstGallery[0] : '';
     const id = this.props.item.id;
+    const outStore = !this.props.item.inStock
+      ? styles.outStore
+      : styles.greenButtonCart;
 
     return (
-      <section className={classes.card}>
-        <div className={classes.imageWrapper}>
-          <img src={this.gallery} alt="product image" />
+      <section className={styles.card}>
+        <div className={styles.imageWrapper}>
+          <div className={styles.bigImage}>
+            <img src={this.gallery} alt="product image" />
+          </div>
         </div>
-        <article className={classes.textBlock}>
-          <div className={classes.nameBlock}>
+        <div className={outStore}>
+          <img src={cartImage} alt="to Cart button" />
+        </div>
+        <article className={styles.textBlock}>
+          <div className={styles.nameBlock}>
             <p>{name}</p>
           </div>
-          <div className={classes.priceBlock}>
+          <div className={styles.priceBlock}>
             <PriceBlock id={id} symbolCurrency={this.props.symbolCurrency} />
           </div>
         </article>

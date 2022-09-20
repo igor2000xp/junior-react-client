@@ -16,3 +16,7 @@
   font-size: 16px;
   line-height: 120%;
 }
+.notActive {
+ opacity: 0.5;
+  cursor: auto;
+}

@@ -12,7 +12,11 @@ import {
   settleFullBasket,
 } from './helpers';
 
-class ButtonBlock extends Component {
+interface IProps {
+  inStock: boolean;
+}
+
+class ButtonBlock extends Component<IProps> {
   private isGoToBasket = false;
   private localBaskets = [localBasketItemInit];
   private productId = location.pathname.split(':')[1];
@@ -22,7 +26,7 @@ class ButtonBlock extends Component {
   }
 
   clickToOut() {
-    this.isGoToBasket = true;
+    if (this.props.inStock) this.isGoToBasket = true;
   }
 
   async goToBasket() {
@@ -58,10 +62,12 @@ class ButtonBlock extends Component {
   }
 
   render() {
+    const linkOut = this.props.inStock ? '/' : '';
+    const buttonOut = this.props.inStock ? '' : styles.notActive;
     return (
       <div onClick={this.clickToOut}>
-        <Link to="/">
-          <button className={styles.wrapper}>
+        <Link to={linkOut}>
+          <button className={`${styles.wrapper} ${buttonOut}`}>
             <h2>ADD TO CART</h2>
           </button>
         </Link>

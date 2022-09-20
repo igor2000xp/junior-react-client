@@ -66,6 +66,7 @@
 }
 .miniCartBlockWrapper {
   position: relative;
+  cursor: pointer;
 }
 .miniCartBlock {
   position: absolute;

@@ -111,7 +111,7 @@ export type GetProductsByCategoryQueryVariables = Exact<{
 }>;
 
 
-export type GetProductsByCategoryQuery = { __typename?: 'Query', category?: { __typename?: 'Category', products: Array<{ __typename?: 'Product', id: string, name: string, gallery?: Array<string | null> | null, brand: string, prices: Array<{ __typename?: 'Price', amount: number, currency: { __typename?: 'Currency', label: string, symbol: string } }> } | null> } | null };
+export type GetProductsByCategoryQuery = { __typename?: 'Query', category?: { __typename?: 'Category', products: Array<{ __typename?: 'Product', id: string, name: string, inStock?: boolean | null, gallery?: Array<string | null> | null, brand: string, prices: Array<{ __typename?: 'Price', amount: number, currency: { __typename?: 'Currency', label: string, symbol: string } }> } | null> } | null };
 
 
 export const GetAllCategoriesDocument = gql`
@@ -246,6 +246,7 @@ export const GetProductsByCategoryDocument = gql`
     products {
       id
       name
+      inStock
       gallery
       brand
       prices {

@@ -1,7 +1,6 @@
 .sizeBlock {
   margin: 43px 0 0 0;
   height: 71px;
-  /*border: yellow 1px solid;*/
   display: flex;
   flex-direction: column;
 }

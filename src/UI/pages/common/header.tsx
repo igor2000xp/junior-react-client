@@ -184,7 +184,6 @@ class Header extends Component<IProps, IState> {
               />
             </div>
 
-            {/* ------------------------------------------  */}
             <div
               className={`${stylesHeader.miniCartBlock} ${this.activeCart}`}
               ref={this.wrapperCartRef}

@@ -77,6 +77,7 @@ class PdpCard extends Component<any, IState> {
 
   render() {
     const bigImage = this.state.bigImage;
+    const outStock = !this.product.inStock ? styles.outStock : '';
     const hidden = this.product.gallery.length === 1 ? styles.hidden : '';
     return (
       <article className={styles.wrapperWithHeader}>
@@ -97,7 +98,7 @@ class PdpCard extends Component<any, IState> {
             })}
           </section>
 
-          <section className={styles.imageBlock}>
+          <section className={`${styles.imageBlock} ${outStock}`}>
             <img src={bigImage} alt="product image" />
           </section>
 
@@ -106,7 +107,7 @@ class PdpCard extends Component<any, IState> {
               product={this.product}
               currentCurrency={this.state.currentCurrency}
             />
-            <ButtonBlock />
+            <ButtonBlock inStock={this.product.inStock} />
             <TextBlock text={this.product.description} />
           </section>
         </div>

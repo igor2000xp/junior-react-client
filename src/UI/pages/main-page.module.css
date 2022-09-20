@@ -18,6 +18,25 @@
   row-gap: 10px;
   justify-content: space-between;
 }
+.outStock {
+  position: relative;
+  opacity: 0.5;
+}
+.itemBlock {
+  position: relative;
+}
+
+.outStock::after {
+  position: absolute;
+  content: "OUT OF STOCK";
+  width: 100%;
+  text-align: center;
+  top: 35%;
+  left: 0;
+  font-size: 24px;
+  line-height: 160%;
+  color: #8D8F9A;
+}
 .mainLink {
   text-decoration: none;
   text-transform: none;

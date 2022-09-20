@@ -17,7 +17,7 @@ class MiniCartItem extends CardItem {
       typeof this.product.gallery !== 'undefined'
         ? this.product.gallery[this.state.mainImageIndex]
         : '';
-    const isArrowButtons = !(this.product.gallery.length === 1);
+    const isArrowButtons = false;
     return (
       <article className={stylesMBlock.wrapper}>
         <section className={stylesMBlock.leftSide}>

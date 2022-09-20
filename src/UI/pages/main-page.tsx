@@ -51,7 +51,7 @@ class MainPage extends PureComponent<IProps, IState> {
     }
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
-    await this.checkQueryData();
+    await this.getAndCheckQueryData();
     this.setState(() => {
       return {
         categoryIdState: this.categoryId,
@@ -64,11 +64,11 @@ class MainPage extends PureComponent<IProps, IState> {
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
     if (!equal(prevProps.match.params.categoryId, `:${this.categoryId}`)) {
-      await this.checkQueryData();
+      await this.getAndCheckQueryData();
     }
   }
 
-  async checkQueryData() {
+  async getAndCheckQueryData() {
     const products = (await getProductsList(this.categoryId)) as IProduct[];
     this.products = products ? products : [productInit];
     this.setState(() => {
@@ -100,18 +100,23 @@ class MainPage extends PureComponent<IProps, IState> {
           <h1>{`Category ${String(this.categoryId)}`}</h1>
           <section className={stylesMain.mainProductSection}>
             {items.map((item) => {
+              const outStock = item.inStock ? '' : `${stylesMain.outStock}`;
               return (
-                <Link
-                  to={`/pdp/:${item.id}`}
+                <section
+                  className={`${stylesMain.itemBlock} ${outStock}`}
                   key={item.id}
-                  className={stylesMain.mainLink}
                 >
-                  <ProductSmallCard
-                    item={item}
-                    symbolCurrency={symbolCurrency}
-                    key={item.id}
-                  />
-                </Link>
+                  <Link
+                    to={`/pdp/:${item.id}`}
+                    className={`${stylesMain.mainLink}`}
+                  >
+                    <ProductSmallCard
+                      item={item}
+                      symbolCurrency={symbolCurrency}
+                      key={item.id}
+                    />
+                  </Link>
+                </section>
               );
             })}
           </section>

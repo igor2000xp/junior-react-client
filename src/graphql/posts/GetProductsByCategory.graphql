@@ -10,6 +10,7 @@ query GetProductsByCategory(
     products {
       id
       name
+      inStock
       gallery
       brand
       prices {
