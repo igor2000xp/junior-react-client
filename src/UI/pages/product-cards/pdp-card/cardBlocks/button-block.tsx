@@ -17,7 +17,6 @@ interface IProps {
 }
 
 class ButtonBlock extends Component<IProps> {
-  // private isGoToBasket = false;
   private localBaskets = [localBasketItemInit];
   private productId = location.pathname.split(':')[1];
   constructor(props: any) {

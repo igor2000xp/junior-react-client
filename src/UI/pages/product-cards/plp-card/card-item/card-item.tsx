@@ -148,8 +148,8 @@ class CardItem extends Component<IProps, IState> {
     const prodGallery =
       typeof this.product.gallery !== 'undefined'
         ? this.product.gallery[this.state.mainImageIndex]
-        : '';
-    const isArrowButtons = !(this.product.gallery.length === 1);
+        : ' ';
+    const isArrowButtons = !(prodGallery === ' ' || this.product.gallery.length === 1);
 
     return (
       <article className={styles.wrapper}>

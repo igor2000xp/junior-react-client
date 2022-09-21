@@ -11,10 +11,12 @@ class CardBasicBlockPlp extends BasicBlock {
     const productId =
       this.props.product.id === '' ? 'xbox-series-s' : this.props.product.id;
     const symbolCurrency = this.props.currentCurrency;
+    const isEmpty: boolean = this.props.product.id === '';
+    const brand = isEmpty ? 'Your cart is empty' : this.props.product.brand;
     return (
       <article className={styles.wrapper}>
         <section className={styles.brand}>
-          <h2>{this.props.product.brand}</h2>
+          <h2>{brand}</h2>
         </section>
 
         <section className={styles.name}>
@@ -22,7 +24,7 @@ class CardBasicBlockPlp extends BasicBlock {
         </section>
 
         <section className={styles.priceBlock}>
-          <PriceBlock id={productId} symbolCurrency={symbolCurrency} />
+          <PriceBlock id={productId} symbolCurrency={symbolCurrency} isEmpty={isEmpty}/>
         </section>
 
         <section className={styles.attributes}>

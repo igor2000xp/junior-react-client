@@ -3,6 +3,7 @@ import { SymbolCurrency } from '../../../common-models';
 export interface IProps {
   id: string;
   symbolCurrency: SymbolCurrency;
+  isEmpty?: boolean;
 }
 export interface IPrice {
   currency: { label: string; symbol: string };
