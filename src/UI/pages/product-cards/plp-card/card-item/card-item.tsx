@@ -127,7 +127,7 @@ class CardItem extends Component<IProps, IState> {
       });
       this.product = { ...(data.product as IProduct), id };
     } catch (err) {
-      console.log(`Error ${err} ${id}`, id);
+      console.log(`Error loading data from server ${err} ${id}`, id);
     }
   }
   async handleImagePrev() {

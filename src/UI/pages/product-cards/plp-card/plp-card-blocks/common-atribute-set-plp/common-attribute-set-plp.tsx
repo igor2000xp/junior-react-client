@@ -2,13 +2,9 @@ import React from 'react';
 import CommonAttributeSet from '../../../../common/common-bloks/common-attribute-set/common-attribute-set';
 import {
   ICommonAttributeSetProps,
-  ILocalBasket,
-  IProductAttrForPrint,
   IProductAttribute,
-  localActiveAttributesPdpInit,
-  productAttrForPrintInit,
 } from '../../../../common-models';
-import { LOCAL_BASKET } from '../../../../../../constants';
+import { ACTIVE_PRODUCT_ATTRIBUTES } from '../../../../../../constants';
 import AttrColorPlp from '../attr-color-plp/attr-color-plp';
 import AttrTextPlp from '../attr-text-plp/attr-text-plp';
 
@@ -18,53 +14,20 @@ export interface IState {
 }
 
 class CommonAttributeSetPlp extends CommonAttributeSet {
-  protected productAttrForPrint: IProductAttrForPrint[] = [
-    productAttrForPrintInit,
-  ];
-
   constructor(props: IProps) {
     super(props);
     this.handleAttributes = this.handleAttributes.bind(this);
     this.state = { prodId: '' };
   }
+  protected handleAttributes() {
+  }
 
   async componentDidMount(): Promise<void> {
     await super.componentDidMount();
-    await this.getActiveAttributes();
   }
 
-  async componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-  ) {
-    if (
-      this.props.productID !== prevProps.productID ||
-      prevState.prodId != this.state.prodId
-    ) {
-      await this.getActiveAttributes();
-    }
-  }
-
-  async getActiveAttributes() {
-    const act: ILocalBasket[] = await JSON.parse(
-      localStorage.getItem(LOCAL_BASKET) as string,
-    );
-    const localBasketItem: ILocalBasket | undefined = act.find((item) => {
-      return item.productId === this.props.productID;
-    });
-    this.productAttrForPrint = act.map((item) => {
-      return {
-        productID: item.productId,
-        quantity: localBasketItem?.quantity ? localBasketItem.quantity : 0,
-        additionalId: item.activeAttributes.reduce((acc, reducedItem) => {
-          return `${acc}=${reducedItem.id}`;
-        }, item.productId),
-        activeAttributes: localBasketItem?.activeAttributes
-          ? localBasketItem.activeAttributes
-          : [{ ...localActiveAttributesPdpInit }],
-        attributes: this.props.attributes,
-      };
-    });
+  protected async renewHandleAttributes(value: any) {
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 
   render() {

@@ -65,7 +65,7 @@ class PriceBlock extends PureComponent<IProps, IState> {
         prodId: this.id,
       });
     } catch (err) {
-      console.log(`Error of server query ${err}`);
+      console.log(`Error loading data from server ${err}`);
     }
   }
 

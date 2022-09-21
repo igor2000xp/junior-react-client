@@ -17,7 +17,7 @@ interface IProps {
 }
 
 class ButtonBlock extends Component<IProps> {
-  private isGoToBasket = false;
+  // private isGoToBasket = false;
   private localBaskets = [localBasketItemInit];
   private productId = location.pathname.split(':')[1];
   constructor(props: any) {
@@ -25,12 +25,15 @@ class ButtonBlock extends Component<IProps> {
     this.clickToOut = this.clickToOut.bind(this);
   }
 
-  clickToOut() {
-    if (this.props.inStock) this.isGoToBasket = true;
+  async clickToOut() {
+    if (this.props.inStock) {
+     await this.goToBasket();
+    }
   }
 
   async goToBasket() {
     const activeAttr: IActiveAttrPdp[] = await getActiveAttrFromLocal();
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const productId = this.productId;
     this.localBaskets = await getFromLocalBasket();
     if (
@@ -38,7 +41,7 @@ class ButtonBlock extends Component<IProps> {
       this.localBaskets[0].productId !== '' &&
       !this.localBaskets
     ) {
-      console.log('Check if the basket was empty then init it');
+      // 'Check if the basket was empty then init it'
       this.localBaskets = [
         {
           quantity: 1,
@@ -53,12 +56,12 @@ class ButtonBlock extends Component<IProps> {
       activeAttr,
       this.productId,
     );
-    localStorage.setItem(LOCAL_BASKET, JSON.stringify(this.localBaskets));
+    await localStorage.setItem(LOCAL_BASKET, JSON.stringify(this.localBaskets));
   }
 
   async componentWillUnmount() {
-    if (this.isGoToBasket) await this.goToBasket();
-    localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+    // if (this.isGoToBasket) await this.goToBasket();
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 
   render() {

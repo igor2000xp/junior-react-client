@@ -11,6 +11,16 @@ query GetProductsByCategory(
       id
       name
       inStock
+      attributes {
+        id
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
+      }
       gallery
       brand
       prices {

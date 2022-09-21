@@ -33,18 +33,30 @@
   display: none;
 }
 .greenButtonCart {
+  border: rgba(45, 176, 51, 0.44) 1px solid;
+  border-radius: 50%;
   position: absolute;
-  bottom: 82px;
+  bottom: 87px;
   right: 35px;
   width: 52px;
   height: 52px;
   z-index: 15;
+  background-color: #5ECE7B;
+  box-shadow: 3px 3px 8px rgba(63, 70, 59, 0.41);
+  transition: all 0.5s ease-out;
+}
+.greenButtonCart:hover {
+  width: 64px;
+  height: 64px;
+  box-shadow: 3px 3px 8px rgba(63, 70, 59, 0.09);
 }
 .greenButtonCart img {
+  border-radius: 50%;
   z-index: 15;
   height: 100%;
   width: 100%;
   object-fit: contain;
+  cursor: pointer;
 }
 .textBlock {
   width: 354px;

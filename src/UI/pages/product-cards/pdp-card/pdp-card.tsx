@@ -6,7 +6,7 @@ import TextBlock from './cardBlocks/text-block';
 import Header from '../../common/header';
 import client from '../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../graphql/generated';
-import { LOCAL_CURRENT_CURRENCY } from '../../../../constants';
+import { ACTIVE_PRODUCT_ATTRIBUTES, LOCAL_CURRENT_CURRENCY } from '../../../../constants';
 import {
   IProduct,
   Label,
@@ -15,6 +15,7 @@ import {
   IPdpCardState,
   IPdpCardStateInit,
 } from '../../common-models';
+import { getFirstProdAttrAsActiveAttr } from './cardBlocks/helpers';
 
 type IState = Readonly<IPdpCardState>;
 
@@ -23,14 +24,18 @@ class PdpCard extends Component<any, IState> {
   constructor(props: any) {
     super(props);
     this.state = { ...IPdpCardStateInit };
-    this.getCurrency = this.getCurrency.bind(this);
+    this.getCurrencyFromHeader = this.getCurrencyFromHeader.bind(this);
     this.switchImage = this.switchImage.bind(this);
     this.product = { ...productInit };
   }
 
   async componentDidMount() {
     const id = location.pathname.split(':')[1];
-    await this.productQuery(id);
+    this.product = await this.productQuery(id) as IProduct;
+    const activeAttrFromFirsts = getFirstProdAttrAsActiveAttr(this.product);
+    this.setState({attrActive: [...activeAttrFromFirsts]});
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify(activeAttrFromFirsts));
+
     const localCurrency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
     const currentCurrency = JSON.parse(
       localCurrency ? localCurrency : '',
@@ -44,14 +49,18 @@ class PdpCard extends Component<any, IState> {
     });
   }
 
-  async productQuery(id: string) {
+  componentWillUnmount() {
+    localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+  }
+
+  async productQuery(id: string): Promise<IProduct | undefined> {
     try {
       const { data } = await client.query({
         query: GetProductByIdDocument,
         variables: { id },
         fetchPolicy: 'no-cache',
       });
-      this.product = data.product as IProduct;
+      return data.product as IProduct;
     } catch (err) {
       console.log(`Error getting data from server ${err}`);
     }
@@ -67,7 +76,7 @@ class PdpCard extends Component<any, IState> {
     });
   }
 
-  async getCurrency(label: Label, symbol: SymbolCurrency) {
+  async getCurrencyFromHeader(label: Label, symbol: SymbolCurrency) {
     await this.setState(() => {
       return {
         currentCurrency: symbol,
@@ -81,7 +90,7 @@ class PdpCard extends Component<any, IState> {
     const hidden = this.product.gallery.length === 1 ? styles.hidden : '';
     return (
       <article className={styles.wrapperWithHeader}>
-        <Header getCurrency={this.getCurrency} />
+        <Header getCurrency={this.getCurrencyFromHeader} />
 
         <div className={styles.wrapper}>
           <section className={`${styles.leftBlock} ${hidden}`}>

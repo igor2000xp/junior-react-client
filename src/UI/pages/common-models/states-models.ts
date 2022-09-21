@@ -17,19 +17,8 @@ export interface IPdpCardState {
   isLoaded: boolean;
   bigImage: string;
   currentCurrency: SymbolCurrency;
+  attrActive: IAttrActive[];
 }
-export const IPdpCardStateInit = {
-  isLoaded: true,
-  bigImage: '',
-  currentCurrency: SymbolCurrency.SymbolUsd,
-};
-export interface IHeaderState {
-  label: Label;
-  symbol: SymbolCurrency;
-  isShownCurrency: boolean;
-  isShownCart: boolean;
-}
-
 export interface IAttributeColorSwatchState {
   productId: string;
   activeAttributes: IAttrActive;
@@ -39,6 +28,18 @@ export const activeAttributesInit: IAttrActive = {
   value: '',
   attrID: '',
 };
+export const IPdpCardStateInit: IPdpCardState = {
+  isLoaded: true,
+  bigImage: '',
+  currentCurrency: SymbolCurrency.SymbolUsd,
+  attrActive: [activeAttributesInit],
+};
+export interface IHeaderState {
+  label: Label;
+  symbol: SymbolCurrency;
+  isShownCurrency: boolean;
+  isShownCart: boolean;
+}
 
 export interface IAttrActive {
   id: string;

@@ -135,7 +135,7 @@ export interface ILocalBasket {
 }
 export const localBasketItemInit: ILocalBasket = {
   productId: '',
-  quantity: 1,
+  quantity: 0,
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
 };
 export interface ILocalBasketForTotal {

@@ -79,7 +79,7 @@ class Header extends Component<IProps, IState> {
       });
       this.currencies = data.currencies as ICurrency[];
     } catch (err) {
-      console.log(`Server error ${err}`);
+      console.log(`Error loading data from server ${err}`);
     }
   }
 

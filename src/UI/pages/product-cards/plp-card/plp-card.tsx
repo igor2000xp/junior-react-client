@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from './plp-card.module.css';
-import '../../../../assets/images/Icon/minus-svgrepo-com.svg';
 import CardItem from './card-item/card-item';
 import TotalBlock from './card-item/total-block';
 import Header from '../../common/header';
@@ -41,6 +40,11 @@ class PlpCard extends Component<IProps, IState> {
       totalItems: 0,
     };
   }
+
+  async componentWillUnmount() {
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+  }
+
   async getCurrency(label: Label, symbol: SymbolCurrency) {
     await this.setState({
       currentCurrency: symbol,
@@ -71,6 +75,7 @@ class PlpCard extends Component<IProps, IState> {
     this.localBasket = JSON.parse(
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 
   handlePlusMinusButtons() {
@@ -80,7 +85,6 @@ class PlpCard extends Component<IProps, IState> {
   }
 
   protected getTotalItemsQuality(totalItems: number) {
-    console.log('getTotalItemsQuality');
     this.setState({ totalItems });
   }
 

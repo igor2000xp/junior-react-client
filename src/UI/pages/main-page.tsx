@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 import equal from 'fast-deep-equal';
-import { ProductSmallCard } from './product-cards/product-small-cart/product-small-card';
+import ProductSmallCard from './product-cards/product-small-cart/product-small-card';
 import stylesMain from './main-page.module.css';
 import { withRouter } from './with-router/with-router';
 import { WithRouterProps } from './with-router/with-router.model';
 import Header from './common/header';
-import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../constants';
+import { ACTIVE_PRODUCT_ATTRIBUTES, LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../constants';
 import {
   IMainPageState,
   IParams,
@@ -35,9 +34,11 @@ class MainPage extends PureComponent<IProps, IState> {
     this.categoryId = '';
     this.state = { ...mainPageStateInit };
     this.getCurrency = this.getCurrency.bind(this);
+    this.handleGoToProductLink = this.handleGoToProductLink.bind(this);
   }
 
   async componentDidMount() {
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const currency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
     this.currentCurrency = JSON.parse(
       currency ? currency : JSON.stringify(zeroCurrencyInit),
@@ -87,6 +88,10 @@ class MainPage extends PureComponent<IProps, IState> {
     });
   }
 
+  handleGoToProductLink(id: string) {
+    this.props.history.push(`/pdp/:${id}`);
+  }
+
   render() {
     const items = this.products;
     const symbolCurrency = this.state.currentCurrency;
@@ -106,16 +111,13 @@ class MainPage extends PureComponent<IProps, IState> {
                   className={`${stylesMain.itemBlock} ${outStock}`}
                   key={item.id}
                 >
-                  <Link
-                    to={`/pdp/:${item.id}`}
-                    className={`${stylesMain.mainLink}`}
-                  >
+                  <div onClick={() => this.handleGoToProductLink(item.id)}>
                     <ProductSmallCard
                       item={item}
                       symbolCurrency={symbolCurrency}
                       key={item.id}
                     />
-                  </Link>
+                  </div>
                 </section>
               );
             })}
