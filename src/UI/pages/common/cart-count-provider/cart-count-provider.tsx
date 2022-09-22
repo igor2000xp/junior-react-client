@@ -30,7 +30,8 @@ class CartCountProvider extends Component<IProps, IState> {
     prevState: Readonly<IState>,
   ) {
     if (
-      prevProps.isChangedCurrencyOrCart !== this.props.isChangedCurrencyOrCart ||
+      prevProps.isChangedCurrencyOrCart !==
+        this.props.isChangedCurrencyOrCart ||
       prevProps.isChangedQuantityToggle !== this.props.isChangedQuantityToggle
     ) {
       await this.getLocalBasket();

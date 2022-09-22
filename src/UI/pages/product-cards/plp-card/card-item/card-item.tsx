@@ -112,7 +112,7 @@ class CardItem extends Component<IProps, IState> {
       this.state.quantityInBasket,
       this.props.basket,
     );
-    await this.setState({quantityInBasket: count});
+    await this.setState({ quantityInBasket: count });
     this.props.handlePlusMinusButtons();
   }
 
@@ -150,7 +150,10 @@ class CardItem extends Component<IProps, IState> {
   }
 
   render() {
-    const modifiedProducts = this.state.quantityInBasket !== 0 ? this.modifiedProducts : [modifiedProductsInit];
+    const modifiedProducts =
+      this.state.quantityInBasket !== 0
+        ? this.modifiedProducts
+        : [modifiedProductsInit];
     const prodGallery =
       typeof this.product.gallery !== 'undefined'
         ? this.product.gallery[this.state.mainImageIndex]

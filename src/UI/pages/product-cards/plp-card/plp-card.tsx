@@ -61,7 +61,10 @@ class PlpCard extends PureComponent<IProps, IState> {
     });
   }
 
-  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>) {
+  async componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    prevState: Readonly<IState>,
+  ) {
     this.localBasket = JSON.parse(
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );
@@ -81,8 +84,10 @@ class PlpCard extends PureComponent<IProps, IState> {
   handlePlusMinusButtons() {
     const isToggle = !this.isChangedPlusMinusButtons;
     this.isChangedPlusMinusButtons = isToggle;
-    const localBasket = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
-    this.setState({localBasket});
+    const localBasket = JSON.parse(
+      localStorage.getItem(LOCAL_BASKET) as string,
+    );
+    this.setState({ localBasket });
     this.setState({ isChangedPlusMinusButtons: isToggle });
   }
 

@@ -15,11 +15,17 @@ export const changeQuantityInBasket = async (
     ? newBasketItem
     : localBasketItemInit;
   newBasketItemChecked.quantity = quantityInBasketState;
-  if (newBasketItemChecked.quantity === 0 && newBasketItemChecked.productId !== '') {
+  if (
+    newBasketItemChecked.quantity === 0 &&
+    newBasketItemChecked.productId !== ''
+  ) {
     newBasketForRecord = newBasket.filter((item) => {
       return basketItemCurrentId !== getBasketItemID(item);
     });
-    newBasketForRecord = typeof newBasketForRecord[0] === 'undefined' ? [localBasketItemInit] : newBasketForRecord;
+    newBasketForRecord =
+      typeof newBasketForRecord[0] === 'undefined'
+        ? [localBasketItemInit]
+        : newBasketForRecord;
   } else {
     newBasketForRecord = newBasket.map((item) => {
       return getBasketItemID(item) === basketItemCurrentId
