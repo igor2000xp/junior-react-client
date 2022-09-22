@@ -57,7 +57,6 @@ class CardItem extends Component<IProps, IState> {
   }
 
   protected async plusHandle() {
-    console.log('plusHandle+');
     this.props.handlePlusMinusButtons();
     await this.setState({
       quantityInBasket: this.state.quantityInBasket + 1,

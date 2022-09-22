@@ -19,6 +19,7 @@ export const getProductsList = async (
       variables: {
         category: categoryId,
       },
+      fetchPolicy: 'no-cache',
     });
     const { category } = data;
     const { products } = category;
