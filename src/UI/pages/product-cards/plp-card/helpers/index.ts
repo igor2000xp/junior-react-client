@@ -4,7 +4,8 @@ import { LOCAL_BASKET } from '../../../../../constants';
 export const changeQuantityInBasket = async (
   quantityInBasketState: number,
   propsBasket: ILocalBasket,
-) => {
+): Promise<number> => {
+  let newBasketForRecord: ILocalBasket[];
   const basketItemCurrentId = getBasketItemID(propsBasket);
   const newBasket: ILocalBasket[] = await getLocalBasket();
   const newBasketItem: ILocalBasket | undefined = newBasket.find((item) => {
@@ -14,13 +15,22 @@ export const changeQuantityInBasket = async (
     ? newBasketItem
     : localBasketItemInit;
   newBasketItemChecked.quantity = quantityInBasketState;
-  const newBasketForRecord: ILocalBasket[] = newBasket.map((item) => {
-    return getBasketItemID(item) === basketItemCurrentId
-      ? newBasketItemChecked
-      : item;
-  });
+  if (newBasketItemChecked.quantity === 0 && newBasketItemChecked.productId !== '') {
+    newBasketForRecord = newBasket.filter((item) => {
+      return basketItemCurrentId !== getBasketItemID(item);
+    });
+    newBasketForRecord = typeof newBasketForRecord[0] === 'undefined' ? [localBasketItemInit] : newBasketForRecord;
+  } else {
+    newBasketForRecord = newBasket.map((item) => {
+      return getBasketItemID(item) === basketItemCurrentId
+        ? newBasketItemChecked
+        : item;
+    });
+  }
   localStorage.setItem(LOCAL_BASKET, JSON.stringify(newBasketForRecord));
+  return newBasketItemChecked.quantity;
 };
+
 export const getBasketItemID = (item: ILocalBasket) => {
   return item.activeAttributes.reduce((acc, attrItem) => {
     return `${acc}-${attrItem.id}`;

@@ -4,8 +4,8 @@ import PriceBlock from '../../../../../common/common-bloks/price-block/price-blo
 
 class MiniPriceBlock extends PriceBlock {
   render() {
-    const currency = this.state.symbol;
-    const price: number = this.state.amount;
+    const currency = !this.props.isEmpty ? this.state.symbol : '';
+    const price: number = !this.props.isEmpty ? this.state.amount : 0;
 
     return (
       <>

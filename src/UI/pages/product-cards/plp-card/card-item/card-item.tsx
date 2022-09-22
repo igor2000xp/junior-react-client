@@ -48,35 +48,11 @@ class CardItem extends Component<IProps, IState> {
     await this.setState({
       quantityInBasket: this.props.basket.quantity,
     });
-
     const id =
       this.props.basket.productId && this.props.basket.productId !== ''
         ? this.props.basket.productId
         : this.state.id;
-    this.setState({ id: id });
-  }
-
-  protected async plusHandle() {
-    this.props.handlePlusMinusButtons();
-    await this.setState({
-      quantityInBasket: this.state.quantityInBasket + 1,
-    });
-    await changeQuantityInBasket(
-      this.state.quantityInBasket,
-      this.props.basket,
-    );
-  }
-  protected async minusHandle() {
-    this.props.handlePlusMinusButtons();
-    const minus =
-      this.state.quantityInBasket === 0 ? 0 : this.state.quantityInBasket - 1;
-    await this.setState({
-      quantityInBasket: minus,
-    });
-    await changeQuantityInBasket(
-      this.state.quantityInBasket,
-      this.props.basket,
-    );
+    await this.setState({ id: id });
   }
 
   async componentDidUpdate(
@@ -110,6 +86,34 @@ class CardItem extends Component<IProps, IState> {
       });
       this.setState({ isModified: true });
     }
+    if (this.state.quantityInBasket === 0) {
+      this.product = productInit;
+    }
+  }
+
+  protected async plusHandle() {
+    this.props.handlePlusMinusButtons();
+    await this.setState({
+      quantityInBasket: this.state.quantityInBasket + 1,
+    });
+    await changeQuantityInBasket(
+      this.state.quantityInBasket,
+      this.props.basket,
+    );
+    this.props.handlePlusMinusButtons();
+  }
+  protected async minusHandle() {
+    const minus =
+      this.state.quantityInBasket === 0 ? 0 : this.state.quantityInBasket - 1;
+    await this.setState({
+      quantityInBasket: minus,
+    });
+    const count = await changeQuantityInBasket(
+      this.state.quantityInBasket,
+      this.props.basket,
+    );
+    await this.setState({quantityInBasket: count});
+    this.props.handlePlusMinusButtons();
   }
 
   protected async getProductFromDB() {
@@ -118,14 +122,16 @@ class CardItem extends Component<IProps, IState> {
         ? this.props.basket.productId
         : this.state.id;
     try {
-      const { data } = await client.query({
-        query: GetProductByIdDocument,
-        variables: {
-          id: id,
-        },
-        fetchPolicy: 'no-cache',
-      });
-      this.product = { ...(data.product as IProduct), id };
+      if (id !== '') {
+        const { data } = await client.query({
+          query: GetProductByIdDocument,
+          variables: {
+            id: id,
+          },
+          fetchPolicy: 'no-cache',
+        });
+        this.product = { ...(data.product as IProduct), id };
+      }
     } catch (err) {
       console.log(`Error loading data from server ${err} ${id}`, id);
     }
@@ -144,7 +150,7 @@ class CardItem extends Component<IProps, IState> {
   }
 
   render() {
-    const modifiedProducts = this.modifiedProducts;
+    const modifiedProducts = this.state.quantityInBasket !== 0 ? this.modifiedProducts : [modifiedProductsInit];
     const prodGallery =
       typeof this.product.gallery !== 'undefined'
         ? this.product.gallery[this.state.mainImageIndex]
@@ -152,12 +158,19 @@ class CardItem extends Component<IProps, IState> {
     const isArrowButtons = !(
       prodGallery === ' ' || this.product.gallery.length === 1
     );
+    let product: IProduct;
+    if (this.state.quantityInBasket === 0) {
+      product = productInit;
+      product.id = '';
+    } else {
+      product = this.product;
+    }
 
     return (
       <article className={styles.wrapper}>
         <aside className={styles.leftSide}>
           <CardBasicBlockPlp
-            product={this.product}
+            product={product}
             modifiedProducts={modifiedProducts}
             currentCurrency={this.props.currency.symbol}
           />

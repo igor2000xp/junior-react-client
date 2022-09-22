@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styles from './plp-card.module.css';
 import CardItem from './card-item/card-item';
 import TotalBlock from './card-item/total-block';
@@ -20,7 +20,7 @@ import {
 type IProps = Readonly<IPlpCardProps>;
 type IState = Readonly<IPlpCardState>;
 
-class PlpCard extends Component<IProps, IState> {
+class PlpCard extends PureComponent<IProps, IState> {
   protected localBasket = [localBasketItemInit];
   protected currentCurrencyLabel = Label.Usd;
   protected isChangedPlusMinusButtons = false;
@@ -39,16 +39,6 @@ class PlpCard extends Component<IProps, IState> {
       isChangedPlusMinusButtons: false,
       totalItems: 0,
     };
-  }
-
-  async componentWillUnmount() {
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-  }
-
-  async getCurrency(label: Label, symbol: SymbolCurrency) {
-    await this.setState({
-      currentCurrency: symbol,
-    });
   }
 
   async componentDidMount() {
@@ -71,16 +61,28 @@ class PlpCard extends Component<IProps, IState> {
     });
   }
 
-  async componentDidUpdate(prevProps: Readonly<IProps>) {
+  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>) {
     this.localBasket = JSON.parse(
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );
     await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 
+  async componentWillUnmount() {
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+  }
+
+  async getCurrency(label: Label, symbol: SymbolCurrency) {
+    await this.setState({
+      currentCurrency: symbol,
+    });
+  }
+
   handlePlusMinusButtons() {
     const isToggle = !this.isChangedPlusMinusButtons;
     this.isChangedPlusMinusButtons = isToggle;
+    const localBasket = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
+    this.setState({localBasket});
     this.setState({ isChangedPlusMinusButtons: isToggle });
   }
 
@@ -90,7 +92,7 @@ class PlpCard extends Component<IProps, IState> {
 
   render() {
     const localBasket = this.state.localBasket
-      ? this.localBasket
+      ? this.state.localBasket
       : [localBasketItemInit];
     return (
       <article className={styles.cartWrapper}>

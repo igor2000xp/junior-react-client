@@ -1,7 +1,7 @@
 import React from 'react';
 import stylesMBlock from './mini-cart-item.module.css';
 import MiniCartBasicBlock from '../mini-cart-basic-block/mini-cart-basic-block';
-import { ICardItemProps, ICardItemState } from '../../../common-models';
+import { ICardItemProps, ICardItemState, IProduct, modifiedProductsInit, productInit } from '../../../common-models';
 import CardItem from '../../plp-card/card-item/card-item';
 
 type IProps = Readonly<ICardItemProps>;
@@ -20,17 +20,25 @@ class MiniCartItem extends CardItem {
   }
 
   render() {
-    const modifiedProducts = this.modifiedProducts;
+    const modifiedProducts = this.state.quantityInBasket !== 0 ? this.modifiedProducts : [modifiedProductsInit];
     const prodGallery =
       typeof this.product.gallery !== 'undefined'
         ? this.product.gallery[this.state.mainImageIndex]
         : '';
     const isArrowButtons = false;
+    let product: IProduct;
+    if (this.state.quantityInBasket === 0) {
+      product = productInit;
+      product.id = '';
+    } else {
+      product = this.product;
+    }
+
     return (
       <article className={stylesMBlock.wrapper}>
         <section className={stylesMBlock.leftSide}>
           <MiniCartBasicBlock
-            product={this.product}
+            product={product}
             modifiedProducts={modifiedProducts}
             currentCurrency={this.props.currency.symbol}
           />
