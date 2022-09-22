@@ -1,16 +1,20 @@
-import { ILocalBasket, Label, SymbolCurrency } from './common-models';
+import { ILocalBasket, Label, localBasketItemInit, SymbolCurrency } from './common-models';
 
 export interface IMainPageState {
   error: null;
   isLoaded: boolean;
   categoryIdState: string;
   currentCurrency: SymbolCurrency;
+  localBaskets: ILocalBasket[];
+  isNewBasketToggle: boolean;
 }
 export const mainPageStateInit: IMainPageState = {
   error: null,
   isLoaded: false,
   categoryIdState: 'all',
   currentCurrency: SymbolCurrency.SymbolUsd,
+  localBaskets: [localBasketItemInit],
+  isNewBasketToggle: false,
 };
 
 export interface IPdpCardState {
@@ -39,6 +43,7 @@ export interface IHeaderState {
   symbol: SymbolCurrency;
   isShownCurrency: boolean;
   isShownCart: boolean;
+  isNewBasketToggle: boolean,
 }
 
 export interface IAttrActive {

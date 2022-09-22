@@ -26,10 +26,19 @@ class MiniCart extends PlpCard {
   }
 
   async componentDidUpdate(prevProps: Readonly<IProps>): Promise<void> {
-    if (prevProps.symbol !== this.state.currentCurrency) {
+    const isNewCurrency = prevProps.symbol !== this.state.currentCurrency;
+    const isNewBasketToggle = prevProps.isNewBasketToggle !== this.props.isNewBasketToggle;
+    if (isNewBasketToggle) {
       this.localBasket = JSON.parse(
         (await localStorage.getItem(LOCAL_BASKET)) as string,
       );
+      const isChanged = !this.state.isChanged;
+      await this.setState({
+        isChanged,
+        localBasket: this.localBasket,
+      });
+    }
+    if (isNewCurrency) {
       const currentCurrency = this.props.symbol
         ? this.props.symbol
         : SymbolCurrency.SymbolUsd;
@@ -39,7 +48,7 @@ class MiniCart extends PlpCard {
 
   render() {
     const localBasket = this.state.localBasket
-      ? this.localBasket
+      ? this.state.localBasket
       : [localBasketItemInit];
     return (
       <article className={stylesCart.wrapper}>

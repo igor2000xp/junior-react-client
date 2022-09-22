@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import equal from 'fast-deep-equal';
-import ProductSmallCard from './product-cards/product-small-cart/product-small-card';
+import ProductSmallCard from './product-cards/product-small-cart-item/product-small-card';
 import stylesMain from './main-page.module.css';
 import { withRouter } from './with-router/with-router';
 import { WithRouterProps } from './with-router/with-router.model';
 import Header from './common/header';
 import { ACTIVE_PRODUCT_ATTRIBUTES, LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../constants';
 import {
+  ILocalBasket,
   IMainPageState,
   IParams,
   IProduct,
@@ -27,7 +28,7 @@ class MainPage extends PureComponent<IProps, IState> {
   private categoryId: string;
   private products: IProduct[] = [productInit];
   private currentCurrency = zeroCurrencyInit;
-  private localBaskets = [localBasketItemInit];
+  private localBaskets: ILocalBasket[] = [localBasketItemInit];
 
   constructor(props: any) {
     super(props);
@@ -35,6 +36,7 @@ class MainPage extends PureComponent<IProps, IState> {
     this.state = { ...mainPageStateInit };
     this.getCurrency = this.getCurrency.bind(this);
     this.handleGoToProductLink = this.handleGoToProductLink.bind(this);
+    this.handleGreenButtonFromSmallCart = this.handleGreenButtonFromSmallCart.bind(this);
   }
 
   async componentDidMount() {
@@ -49,10 +51,12 @@ class MainPage extends PureComponent<IProps, IState> {
         LOCAL_BASKET,
         JSON.stringify(this.localBaskets),
       );
+    } else {
+      this.localBaskets = JSON.parse(isInit as string);
     }
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
-    await this.getAndCheckQueryData();
+    await this.getAndCheckQueryProductsData();
     this.setState(() => {
       return {
         categoryIdState: this.categoryId,
@@ -61,15 +65,15 @@ class MainPage extends PureComponent<IProps, IState> {
     });
   }
 
-  async componentDidUpdate(prevProps: WithRouterProps<IParams>) {
+  async componentDidUpdate(prevProps: WithRouterProps<IParams>, prevState: IState) {
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
     if (!equal(prevProps.match.params.categoryId, `:${this.categoryId}`)) {
-      await this.getAndCheckQueryData();
+      await this.getAndCheckQueryProductsData();
     }
   }
 
-  async getAndCheckQueryData() {
+  async getAndCheckQueryProductsData() {
     const products = (await getProductsList(this.categoryId)) as IProduct[];
     this.products = products ? products : [productInit];
     this.setState(() => {
@@ -82,14 +86,17 @@ class MainPage extends PureComponent<IProps, IState> {
 
   async getCurrency(label: Label, symbol: SymbolCurrency) {
     await this.setState(() => {
-      return {
-        currentCurrency: symbol,
-      };
+      return { currentCurrency: symbol };
     });
   }
 
   handleGoToProductLink(id: string) {
     this.props.history.push(`/pdp/:${id}`);
+  }
+  handleGreenButtonFromSmallCart() {
+    console.log('main-isNewBasketToggle', this.state.isNewBasketToggle);
+    const toggleState = !this.state.isNewBasketToggle;
+    this.setState({isNewBasketToggle: toggleState});
   }
 
   render() {
@@ -101,7 +108,10 @@ class MainPage extends PureComponent<IProps, IState> {
     return (
       <>
         <article className={stylesMain.mainWrapper}>
-          <Header getCurrency={this.getCurrency} />
+          <Header
+            getCurrency={this.getCurrency}
+            isNewBasketToggle={this.state.isNewBasketToggle}
+          />
           <h1>{`Category ${String(this.categoryId)}`}</h1>
           <section className={stylesMain.mainProductSection}>
             {items.map((item) => {
@@ -116,6 +126,7 @@ class MainPage extends PureComponent<IProps, IState> {
                       item={item}
                       symbolCurrency={symbolCurrency}
                       key={item.id}
+                      handleGreenButtonFromSmallCart={this.handleGreenButtonFromSmallCart}
                     />
                   </div>
                 </section>

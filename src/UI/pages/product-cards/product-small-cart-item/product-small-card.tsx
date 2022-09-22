@@ -9,6 +9,7 @@ import { LOCAL_BASKET } from '../../../../constants';
 interface IProductSmallCardProps {
   item: IProduct;
   symbolCurrency: SymbolCurrency;
+  handleGreenButtonFromSmallCart: () => void;
 }
 type IProps = Readonly<IProductSmallCardProps>;
 // type IProps = WithRouterProps<IProductSmallCardProps>;
@@ -35,6 +36,7 @@ class ProductSmallCard extends Component<IProps, any> {
     const attr = getFirstProdAttrAsActiveAttr(this.props.item);
     const newLocalBasket = settleFullBasket(localBasket, attr, this.props.item.id);
     localStorage.setItem(LOCAL_BASKET, JSON.stringify(newLocalBasket));
+    this.props.handleGreenButtonFromSmallCart();
   }
 
   render() {
@@ -45,7 +47,7 @@ class ProductSmallCard extends Component<IProps, any> {
     } else if (Array.isArray(firstGallery))
       this.gallery = firstGallery[0] ? firstGallery[0] : '';
     const id = this.props.item.id;
-    const outStore = !this.props.item.inStock
+    const greenButton = !this.props.item.inStock
       ? styles.outStore
       : styles.greenButtonCart;
     return (
@@ -60,7 +62,7 @@ class ProductSmallCard extends Component<IProps, any> {
             }}
           >
             <button
-              className={outStore}
+              className={greenButton}
               onClick={this.handleGreenButton}
             >
               <img src={cartImage} alt="to Cart button" />

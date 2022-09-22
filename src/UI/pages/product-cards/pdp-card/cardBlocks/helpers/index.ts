@@ -61,7 +61,7 @@ export const getFirstProdAttrAsActiveAttr = (prod: IProduct):IAttrActive[] => {
   return  attr.map((a): IAttrActive => {
     return {
       id: a.items[0].displayValue,
-      value: a.items[0].displayValue,
+      value: a.items[0].value,
       attrID: a.id,
     }
   })

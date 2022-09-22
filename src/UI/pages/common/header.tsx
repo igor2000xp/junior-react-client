@@ -40,6 +40,7 @@ class Header extends Component<IProps, IState> {
       symbol: SymbolCurrency.SymbolUsd,
       isShownCurrency: false,
       isShownCart: false,
+      isNewBasketToggle: false,
     };
     this.wrapperCurrencyRef = React.createRef();
     this.wrapperCartRef = React.createRef();
@@ -80,6 +81,12 @@ class Header extends Component<IProps, IState> {
       this.currencies = data.currencies as ICurrency[];
     } catch (err) {
       console.log(`Error loading data from server ${err}`);
+    }
+  }
+  componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
+    if (prevProps.isNewBasketToggle !== this.props.isNewBasketToggle) {
+      const isNewBasketToggle = !this.state.isNewBasketToggle;
+      this.setState({isNewBasketToggle});
     }
   }
 
@@ -180,7 +187,7 @@ class Header extends Component<IProps, IState> {
               <CartCountProvider
                 renderCount={(count) => <CartBadge count={count} />}
                 isChangedQuantity={this.state.isShownCart}
-                isChangedCurrency={true}
+                isChangedCurrencyOrCart={this.state.isNewBasketToggle}
               />
             </div>
 
@@ -188,7 +195,10 @@ class Header extends Component<IProps, IState> {
               className={`${stylesHeader.miniCartBlock} ${this.activeCart}`}
               ref={this.wrapperCartRef}
             >
-              <MiniCart symbol={this.state.symbol} />
+              <MiniCart
+                symbol={this.state.symbol}
+                isNewBasketToggle={this.state.isNewBasketToggle}
+              />
             </div>
           </section>
         </div>

@@ -1,14 +1,23 @@
 import React from 'react';
 import stylesMBlock from './mini-cart-item.module.css';
 import MiniCartBasicBlock from '../mini-cart-basic-block/mini-cart-basic-block';
-import { ICardItemProps } from '../../../common-models';
+import { ICardItemProps, ICardItemState } from '../../../common-models';
 import CardItem from '../../plp-card/card-item/card-item';
 
 type IProps = Readonly<ICardItemProps>;
+type IState = Readonly<ICardItemState>
 
 class MiniCartItem extends CardItem {
   constructor(props: IProps) {
     super(props);
+  }
+
+  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>): Promise<void> {
+    await super.componentDidUpdate(prevProps, prevState);
+    if (this.state.quantityInBasket !== this.props.basket.quantity) {
+      const quantityInBasket = this.props.basket.quantity;
+      this.setState({quantityInBasket});
+    }
   }
 
   render() {

@@ -59,7 +59,6 @@ class ButtonBlock extends Component<IProps> {
   }
 
   async componentWillUnmount() {
-    // if (this.isGoToBasket) await this.goToBasket();
     await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 

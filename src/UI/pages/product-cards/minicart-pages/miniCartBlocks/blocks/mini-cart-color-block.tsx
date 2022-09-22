@@ -6,7 +6,7 @@ class MiniCartColorBlock extends AttrColorPlp {
   render() {
     const attr = this.props.attribute.items;
     return (
-      <section className={stylesColor.colorBlock}>
+      <div className={stylesColor.colorBlock}>
         <h4>{`${this.props.attribute.name}:`}</h4>
         <div className={stylesColor.colorLine}>
           {attr.map((item) => {
@@ -29,7 +29,7 @@ class MiniCartColorBlock extends AttrColorPlp {
             );
           })}
         </div>
-      </section>
+      </div>
     );
   }
 }

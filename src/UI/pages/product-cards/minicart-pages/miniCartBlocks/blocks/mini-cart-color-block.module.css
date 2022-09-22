@@ -29,15 +29,6 @@
   height: 16px;
   width: 16px;
 }
-.itemGrey {
-  background: #D3D2D5;
-}
-.itemDarkGray {
-  background: #2B2B2B;
-}
-.itemGreen {
-  background: #0F6450;
-}
 .activeColor {
-  border: 1px solid #5ECE7B;
+  border: 4px solid #ff0000;
 }
