@@ -83,10 +83,14 @@ class Header extends Component<IProps, IState> {
       console.log(`Error loading data from server ${err}`);
     }
   }
-  componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
+  componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    prevState: Readonly<IState>,
+    snapshot?: any,
+  ) {
     if (prevProps.isNewBasketToggle !== this.props.isNewBasketToggle) {
       const isNewBasketToggle = !this.state.isNewBasketToggle;
-      this.setState({isNewBasketToggle});
+      this.setState({ isNewBasketToggle });
     }
   }
 
@@ -182,11 +186,12 @@ class Header extends Component<IProps, IState> {
               </div>
             </div>
           </div>
+
           <section className={stylesHeader.miniCartBlockWrapper}>
             <div onClick={this.handleCartClick}>
               <CartCountProvider
                 renderCount={(count) => <CartBadge count={count} />}
-                isChangedQuantity={this.state.isShownCart}
+                isChangedQuantityToggle={this.state.isShownCart}
                 isChangedCurrencyOrCart={this.state.isNewBasketToggle}
               />
             </div>

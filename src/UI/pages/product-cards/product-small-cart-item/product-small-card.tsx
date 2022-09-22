@@ -3,7 +3,10 @@ import styles from './product-small-card.module.css';
 import PriceBlock from '../../common/common-bloks/price-block/price-block';
 import { IProduct, SymbolCurrency, IPrice } from '../../common-models';
 import cartImage from '../../../../assets/images/Icon/CircleIcon.svg';
-import { getFirstProdAttrAsActiveAttr, settleFullBasket } from '../pdp-card/cardBlocks/helpers';
+import {
+  getFirstProdAttrAsActiveAttr,
+  settleFullBasket,
+} from '../pdp-card/cardBlocks/helpers';
 import { LOCAL_BASKET } from '../../../../constants';
 
 interface IProductSmallCardProps {
@@ -32,9 +35,15 @@ class ProductSmallCard extends Component<IProps, any> {
   }
 
   async handleGreenButton() {
-    const localBasket = await JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
+    const localBasket = await JSON.parse(
+      localStorage.getItem(LOCAL_BASKET) as string,
+    );
     const attr = getFirstProdAttrAsActiveAttr(this.props.item);
-    const newLocalBasket = settleFullBasket(localBasket, attr, this.props.item.id);
+    const newLocalBasket = settleFullBasket(
+      localBasket,
+      attr,
+      this.props.item.id,
+    );
     localStorage.setItem(LOCAL_BASKET, JSON.stringify(newLocalBasket));
     this.props.handleGreenButtonFromSmallCart();
   }
@@ -51,32 +60,29 @@ class ProductSmallCard extends Component<IProps, any> {
       ? styles.outStore
       : styles.greenButtonCart;
     return (
-        <section className={styles.card}>
-            <div className={styles.bigImage}>
-              <img src={this.gallery} alt="product image" />
-            </div>
-          <div
-            onClick={(e) => {
-              e.stopPropagation();
-              e.nativeEvent.stopImmediatePropagation();
-            }}
-          >
-            <button
-              className={greenButton}
-              onClick={this.handleGreenButton}
-            >
-              <img src={cartImage} alt="to Cart button" />
-            </button>
+      <section className={styles.card}>
+        <div className={styles.bigImage}>
+          <img src={this.gallery} alt="product image" />
+        </div>
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            e.nativeEvent.stopImmediatePropagation();
+          }}
+        >
+          <button className={greenButton} onClick={this.handleGreenButton}>
+            <img src={cartImage} alt="to Cart button" />
+          </button>
+        </div>
+        <article className={styles.textBlock}>
+          <div className={styles.nameBlock}>
+            <p>{name}</p>
           </div>
-          <article className={styles.textBlock}>
-            <div className={styles.nameBlock}>
-              <p>{name}</p>
-            </div>
-            <div className={styles.priceBlock}>
-              <PriceBlock id={id} symbolCurrency={this.props.symbolCurrency} />
-            </div>
-          </article>
-        </section>
+          <div className={styles.priceBlock}>
+            <PriceBlock id={id} symbolCurrency={this.props.symbolCurrency} />
+          </div>
+        </article>
+      </section>
     );
   }
 }

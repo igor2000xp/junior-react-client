@@ -6,7 +6,10 @@ import TextBlock from './cardBlocks/text-block';
 import Header from '../../common/header';
 import client from '../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../graphql/generated';
-import { ACTIVE_PRODUCT_ATTRIBUTES, LOCAL_CURRENT_CURRENCY } from '../../../../constants';
+import {
+  ACTIVE_PRODUCT_ATTRIBUTES,
+  LOCAL_CURRENT_CURRENCY,
+} from '../../../../constants';
 import {
   IProduct,
   Label,
@@ -31,10 +34,13 @@ class PdpCard extends Component<any, IState> {
 
   async componentDidMount() {
     const id = location.pathname.split(':')[1];
-    this.product = await this.productQuery(id) as IProduct;
+    this.product = (await this.productQuery(id)) as IProduct;
     const activeAttrFromFirsts = getFirstProdAttrAsActiveAttr(this.product);
-    this.setState({attrActive: [...activeAttrFromFirsts]});
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify(activeAttrFromFirsts));
+    this.setState({ attrActive: [...activeAttrFromFirsts] });
+    await localStorage.setItem(
+      ACTIVE_PRODUCT_ATTRIBUTES,
+      JSON.stringify(activeAttrFromFirsts),
+    );
 
     const localCurrency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
     const currentCurrency = JSON.parse(

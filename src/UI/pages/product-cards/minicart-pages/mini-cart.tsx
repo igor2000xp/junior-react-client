@@ -27,7 +27,8 @@ class MiniCart extends PlpCard {
 
   async componentDidUpdate(prevProps: Readonly<IProps>): Promise<void> {
     const isNewCurrency = prevProps.symbol !== this.state.currentCurrency;
-    const isNewBasketToggle = prevProps.isNewBasketToggle !== this.props.isNewBasketToggle;
+    const isNewBasketToggle =
+      prevProps.isNewBasketToggle !== this.props.isNewBasketToggle;
     if (isNewBasketToggle) {
       this.localBasket = JSON.parse(
         (await localStorage.getItem(LOCAL_BASKET)) as string,

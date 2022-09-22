@@ -1,6 +1,8 @@
 import {
-  IActiveAttrPdp, IAttrActive,
-  ILocalBasket, IProduct,
+  IActiveAttrPdp,
+  IAttrActive,
+  ILocalBasket,
+  IProduct,
   localActiveAttributesInit,
   localBasketItemInit,
 } from '../../../../common-models';
@@ -56,13 +58,13 @@ export const getActiveAttrFromLocal = async (): Promise<IActiveAttrPdp[]> => {
     : localActiveAttributesInit;
 };
 
-export const getFirstProdAttrAsActiveAttr = (prod: IProduct):IAttrActive[] => {
+export const getFirstProdAttrAsActiveAttr = (prod: IProduct): IAttrActive[] => {
   const attr = prod.attributes;
-  return  attr.map((a): IAttrActive => {
+  return attr.map((a): IAttrActive => {
     return {
       id: a.items[0].displayValue,
       value: a.items[0].value,
       attrID: a.id,
-    }
-  })
-}
+    };
+  });
+};

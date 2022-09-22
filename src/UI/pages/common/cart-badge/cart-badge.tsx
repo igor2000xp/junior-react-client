@@ -21,9 +21,10 @@ class CartBadge extends Component<IProps, IState> {
   }
 
   render() {
+    const inActive = !this.state.count ? stylesCount.badgeInActive : '';
     return (
       <div className={stylesCount.basket}>
-        <div className={stylesCount.cartBadge}>
+        <div className={`${stylesCount.cartBadge} ${inActive}`}>
           <p>{this.state.count}</p>
         </div>
       </div>

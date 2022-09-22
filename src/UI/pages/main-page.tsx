@@ -5,7 +5,11 @@ import stylesMain from './main-page.module.css';
 import { withRouter } from './with-router/with-router';
 import { WithRouterProps } from './with-router/with-router.model';
 import Header from './common/header';
-import { ACTIVE_PRODUCT_ATTRIBUTES, LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../constants';
+import {
+  ACTIVE_PRODUCT_ATTRIBUTES,
+  LOCAL_BASKET,
+  LOCAL_CURRENT_CURRENCY,
+} from '../../constants';
 import {
   ILocalBasket,
   IMainPageState,
@@ -36,7 +40,8 @@ class MainPage extends PureComponent<IProps, IState> {
     this.state = { ...mainPageStateInit };
     this.getCurrency = this.getCurrency.bind(this);
     this.handleGoToProductLink = this.handleGoToProductLink.bind(this);
-    this.handleGreenButtonFromSmallCart = this.handleGreenButtonFromSmallCart.bind(this);
+    this.handleGreenButtonFromSmallCart =
+      this.handleGreenButtonFromSmallCart.bind(this);
   }
 
   async componentDidMount() {
@@ -65,7 +70,10 @@ class MainPage extends PureComponent<IProps, IState> {
     });
   }
 
-  async componentDidUpdate(prevProps: WithRouterProps<IParams>, prevState: IState) {
+  async componentDidUpdate(
+    prevProps: WithRouterProps<IParams>,
+    prevState: IState,
+  ) {
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
     if (!equal(prevProps.match.params.categoryId, `:${this.categoryId}`)) {
@@ -94,9 +102,8 @@ class MainPage extends PureComponent<IProps, IState> {
     this.props.history.push(`/pdp/:${id}`);
   }
   handleGreenButtonFromSmallCart() {
-    console.log('main-isNewBasketToggle', this.state.isNewBasketToggle);
     const toggleState = !this.state.isNewBasketToggle;
-    this.setState({isNewBasketToggle: toggleState});
+    this.setState({ isNewBasketToggle: toggleState });
   }
 
   render() {
@@ -126,7 +133,9 @@ class MainPage extends PureComponent<IProps, IState> {
                       item={item}
                       symbolCurrency={symbolCurrency}
                       key={item.id}
-                      handleGreenButtonFromSmallCart={this.handleGreenButtonFromSmallCart}
+                      handleGreenButtonFromSmallCart={
+                        this.handleGreenButtonFromSmallCart
+                      }
                     />
                   </div>
                 </section>

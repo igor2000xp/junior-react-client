@@ -17,7 +17,6 @@ import { WithRouterProps } from '../with-router/with-router.model';
 export interface IHeaderProps {
   getCurrency: (label: Label, symbol: SymbolCurrency) => void;
   isNewBasketToggle?: boolean;
-
 }
 export interface ICommonAttributeSetProps {
   attributes: IProductAttribute[];
@@ -62,7 +61,7 @@ export interface ICartBadgeProps {
 
 export interface ICartCountProviderProps {
   renderCount: (count: number) => void;
-  isChangedQuantity: boolean;
+  isChangedQuantityToggle: boolean;
   isChangedCurrencyOrCart: boolean;
 }
 

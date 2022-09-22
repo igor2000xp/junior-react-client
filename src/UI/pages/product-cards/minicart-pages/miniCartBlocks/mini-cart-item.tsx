@@ -5,19 +5,18 @@ import { ICardItemProps, ICardItemState } from '../../../common-models';
 import CardItem from '../../plp-card/card-item/card-item';
 
 type IProps = Readonly<ICardItemProps>;
-type IState = Readonly<ICardItemState>
+type IState = Readonly<ICardItemState>;
 
 class MiniCartItem extends CardItem {
   constructor(props: IProps) {
     super(props);
   }
 
-  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>): Promise<void> {
+  async componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    prevState: Readonly<IState>,
+  ): Promise<void> {
     await super.componentDidUpdate(prevProps, prevState);
-    if (this.state.quantityInBasket !== this.props.basket.quantity) {
-      const quantityInBasket = this.props.basket.quantity;
-      this.setState({quantityInBasket});
-    }
   }
 
   render() {
@@ -45,9 +44,11 @@ class MiniCartItem extends CardItem {
             >
               <p className={stylesMBlock.plus} />
             </button>
+
             <div className={stylesMBlock.numberInBasket}>
               {this.state.quantityInBasket}
             </div>
+
             <button
               className={stylesMBlock.buttonQuality}
               onClick={this.minusHandle}
@@ -59,6 +60,7 @@ class MiniCartItem extends CardItem {
           <section>
             <div className={stylesMBlock.imageBlock}>
               <img src={prodGallery} alt="product image" />
+
               {isArrowButtons ? (
                 <button
                   className={`${stylesMBlock.arrow} ${stylesMBlock.arrowLeft}`}
@@ -69,6 +71,7 @@ class MiniCartItem extends CardItem {
               ) : (
                 <div />
               )}
+
               {isArrowButtons ? (
                 <button
                   className={`${stylesMBlock.arrow} ${stylesMBlock.arrowRight}`}

@@ -16,6 +16,9 @@
   color: white;
   text-align: center;
 }
+.badgeInActive{
+  display: none;
+}
 .basket {
   position: relative;
   height: 20px;

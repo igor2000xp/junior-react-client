@@ -24,7 +24,11 @@ class CardBasicBlockPlp extends BasicBlock {
         </section>
 
         <section className={styles.priceBlock}>
-          <PriceBlock id={productId} symbolCurrency={symbolCurrency} isEmpty={isEmpty}/>
+          <PriceBlock
+            id={productId}
+            symbolCurrency={symbolCurrency}
+            isEmpty={isEmpty}
+          />
         </section>
 
         <section className={styles.attributes}>

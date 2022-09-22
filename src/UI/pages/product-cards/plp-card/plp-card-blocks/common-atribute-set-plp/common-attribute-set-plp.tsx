@@ -20,6 +20,7 @@ class CommonAttributeSetPlp extends CommonAttributeSet {
     this.state = { prodId: '' };
   }
   protected handleAttributes() {
+    // console.log('handleAttributes');
   }
 
   async componentDidMount(): Promise<void> {

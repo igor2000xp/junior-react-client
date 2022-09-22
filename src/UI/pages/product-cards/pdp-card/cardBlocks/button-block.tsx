@@ -26,7 +26,7 @@ class ButtonBlock extends Component<IProps> {
 
   async clickToOut() {
     if (this.props.inStock) {
-     await this.goToBasket();
+      await this.goToBasket();
     }
   }
 

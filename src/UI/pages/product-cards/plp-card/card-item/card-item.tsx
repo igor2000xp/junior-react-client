@@ -57,6 +57,7 @@ class CardItem extends Component<IProps, IState> {
   }
 
   protected async plusHandle() {
+    console.log('plusHandle+');
     this.props.handlePlusMinusButtons();
     await this.setState({
       quantityInBasket: this.state.quantityInBasket + 1,
@@ -149,7 +150,9 @@ class CardItem extends Component<IProps, IState> {
       typeof this.product.gallery !== 'undefined'
         ? this.product.gallery[this.state.mainImageIndex]
         : ' ';
-    const isArrowButtons = !(prodGallery === ' ' || this.product.gallery.length === 1);
+    const isArrowButtons = !(
+      prodGallery === ' ' || this.product.gallery.length === 1
+    );
 
     return (
       <article className={styles.wrapper}>

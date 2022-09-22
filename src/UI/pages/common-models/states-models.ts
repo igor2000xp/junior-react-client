@@ -1,4 +1,9 @@
-import { ILocalBasket, Label, localBasketItemInit, SymbolCurrency } from './common-models';
+import {
+  ILocalBasket,
+  Label,
+  localBasketItemInit,
+  SymbolCurrency,
+} from './common-models';
 
 export interface IMainPageState {
   error: null;
@@ -43,7 +48,7 @@ export interface IHeaderState {
   symbol: SymbolCurrency;
   isShownCurrency: boolean;
   isShownCart: boolean;
-  isNewBasketToggle: boolean,
+  isNewBasketToggle: boolean;
 }
 
 export interface IAttrActive {

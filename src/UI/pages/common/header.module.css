@@ -70,11 +70,11 @@
 }
 .miniCartBlock {
   position: absolute;
-  top: -1500px;
+  top: -1700px;
   right: -15px;
-  transition: all 0.6s ease-out;
+  transition: all 0.7s ease-out;
   z-index: 1000;
 }
 .activeCart {
-  transform: translateY(1525px);
+  transform: translateY(1690px);
 }
