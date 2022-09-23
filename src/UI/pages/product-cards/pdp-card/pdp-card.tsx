@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import styles from './pdp-card.module.css';
-import BasicBlock from './cardBlocks/basic-block';
-import ButtonBlock from './cardBlocks/button-block';
-import TextBlock from './cardBlocks/text-block';
+import BasicBlock from './pdp-card-blocks/basic-block';
+import ButtonBlock from './pdp-card-blocks/button-block';
+import TextBlock from './pdp-card-blocks/text-block';
 import Header from '../../common/header';
 import client from '../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../graphql/generated';
@@ -18,7 +18,7 @@ import {
   IPdpCardState,
   IPdpCardStateInit,
 } from '../../common-models';
-import { getFirstProdAttrAsActiveAttr } from './cardBlocks/helpers';
+import { getFirstProdAttrAsActiveAttr } from './pdp-card-blocks/helpers';
 
 type IState = Readonly<IPdpCardState>;
 

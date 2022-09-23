@@ -6,7 +6,7 @@ import cartImage from '../../../../assets/images/Icon/CircleIcon.svg';
 import {
   getFirstProdAttrAsActiveAttr,
   settleFullBasket,
-} from '../pdp-card/cardBlocks/helpers';
+} from '../pdp-card/pdp-card-blocks/helpers';
 import { LOCAL_BASKET } from '../../../../constants';
 
 interface IProductSmallCardProps {

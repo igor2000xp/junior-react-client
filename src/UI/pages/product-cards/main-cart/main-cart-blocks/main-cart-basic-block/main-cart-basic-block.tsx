@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './main-cart-basic-block.module.css';
-import BasicBlock from '../../../pdp-card/cardBlocks/basic-block';
+import BasicBlock from '../../../pdp-card/pdp-card-blocks/basic-block';
 import { IProductAttribute } from '../../../../common-models';
 import PriceBlock from '../../../../common/common-bloks/price-block/price-block';
 import MainCartCommonAttributeSet from '../main-cart-common-atribute-set/main-cart-common-attribute-set';
