@@ -51,6 +51,7 @@ class MiniCart extends MainCart {
     const localBasket = this.state.localBasket
       ? this.state.localBasket
       : [localBasketItemInit];
+    const symbol = this.props.symbol ? this.props.symbol : this.state.currentCurrency;
     return (
       <article className={stylesCart.wrapper}>
         <div className={stylesCart.insideWrapper}>
@@ -65,7 +66,7 @@ class MiniCart extends MainCart {
             {localBasket.map((item, index) => {
               const basket = item;
               const currency: ICurrency = {
-                symbol: this.state.currentCurrency,
+                symbol,
                 label: this.currentCurrencyLabel,
               };
               return (
