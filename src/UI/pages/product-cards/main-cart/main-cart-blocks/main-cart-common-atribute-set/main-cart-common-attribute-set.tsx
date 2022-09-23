@@ -5,15 +5,15 @@ import {
   IProductAttribute,
 } from '../../../../common-models';
 import { ACTIVE_PRODUCT_ATTRIBUTES } from '../../../../../../constants';
-import AttrColorPlp from '../attr-color-plp/attr-color-plp';
-import AttrTextPlp from '../attr-text-plp/attr-text-plp';
+import MainCartAttrColor from '../main-cart-attr-color/main-cart-attr-color';
+import MainCartAttrText from '../main-cart-attr-text-plp/main-cart-attr-text';
 
 type IProps = Readonly<ICommonAttributeSetProps>;
 export interface IState {
   prodId: string;
 }
 
-class CommonAttributeSetPlp extends CommonAttributeSet {
+class MainCartCommonAttributeSet extends CommonAttributeSet {
   constructor(props: IProps) {
     super(props);
     this.handleAttributes = this.handleAttributes.bind(this);
@@ -46,7 +46,7 @@ class CommonAttributeSetPlp extends CommonAttributeSet {
           };
           if (isText) {
             return (
-              <AttrTextPlp
+              <MainCartAttrText
                 attribute={attribute}
                 getAttrState={this.handleAttributes}
                 key={item.id}
@@ -55,7 +55,7 @@ class CommonAttributeSetPlp extends CommonAttributeSet {
             );
           } else if (isColor) {
             return (
-              <AttrColorPlp
+              <MainCartAttrColor
                 attribute={attribute}
                 getAttrState={this.handleAttributes}
                 key={item.id}
@@ -69,4 +69,4 @@ class CommonAttributeSetPlp extends CommonAttributeSet {
   }
 }
 
-export default CommonAttributeSetPlp;
+export default MainCartCommonAttributeSet;

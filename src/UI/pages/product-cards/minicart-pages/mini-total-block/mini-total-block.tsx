@@ -1,9 +1,9 @@
 import React from 'react';
-import TotalBlock from '../../plp-card/card-item/total-block';
+import MainCartTotalBlock from '../../main-cart/main-cart-item/main-cart-total-block';
 import stylesCart from '../mini-cart.module.css';
 import { ITotalBlockProps, ITotalBlockState } from '../../../common-models';
 
-class MiniTotalBlock extends TotalBlock<ITotalBlockProps, ITotalBlockState> {
+class MiniTotalBlock extends MainCartTotalBlock<ITotalBlockProps, ITotalBlockState> {
   constructor(props: ITotalBlockProps) {
     super(props);
   }

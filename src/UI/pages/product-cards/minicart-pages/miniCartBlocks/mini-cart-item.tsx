@@ -8,12 +8,12 @@ import {
   modifiedProductsInit,
   productInit,
 } from '../../../common-models';
-import CardItem from '../../plp-card/card-item/card-item';
+import MainCartItem from '../../main-cart/main-cart-item/main-cart-item';
 
 type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
 
-class MiniCartItem extends CardItem {
+class MiniCartItem extends MainCartItem {
   constructor(props: IProps) {
     super(props);
   }

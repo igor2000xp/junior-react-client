@@ -1,8 +1,8 @@
 import React from 'react';
 import stylesColor from './mini-cart-color-block.module.css';
-import AttrColorPlp from '../../../plp-card/plp-card-blocks/attr-color-plp/attr-color-plp';
+import MainCartAttrColor from '../../../main-cart/main-cart-blocks/main-cart-attr-color/main-cart-attr-color';
 
-class MiniCartColorBlock extends AttrColorPlp {
+class MiniCartColorBlock extends MainCartAttrColor {
   render() {
     const attr = this.props.attribute.items;
     return (

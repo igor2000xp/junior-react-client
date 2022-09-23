@@ -2,7 +2,7 @@ import React from 'react';
 import stylesCart from './mini-cart.module.css';
 import MiniCartItem from './miniCartBlocks/mini-cart-item';
 import MiniButtonBlock from './miniCartBlocks/mini-button-block';
-import PlpCard from '../plp-card/plp-card';
+import MainCart from '../main-cart/main-cart';
 import {
   ICurrency,
   IPlpCardProps,
@@ -14,7 +14,7 @@ import { LOCAL_BASKET } from '../../../../constants';
 
 type IProps = Readonly<IPlpCardProps>;
 
-class MiniCart extends PlpCard {
+class MiniCart extends MainCart {
   constructor(props: IProps) {
     super(props);
     this.getTotalItemsQuality = this.getTotalItemsQuality.bind(this);

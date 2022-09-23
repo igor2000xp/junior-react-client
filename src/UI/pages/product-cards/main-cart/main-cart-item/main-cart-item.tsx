@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styles from './card-item.module.css';
+import styles from './main-cart-item.module.css';
 import {
   IActiveBasketAttr,
   ICardItemProps,
@@ -13,14 +13,14 @@ import {
 } from '../../../common-models';
 import client from '../../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../../graphql/generated';
-import CardBasicBlockPlp from '../plp-card-blocks/card-basic-block/card-basic-block-plp';
+import MainCartBasicBlock from '../main-cart-blocks/main-cart-basic-block/main-cart-basic-block';
 import { LOCAL_BASKET } from '../../../../../constants';
 import { changeQuantityInBasket } from '../helpers';
 
 type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
 
-class CardItem extends Component<IProps, IState> {
+class MainCartItem extends Component<IProps, IState> {
   protected product: IProduct = productInit;
   protected activeAttr: IActiveBasketAttr[] = [localActiveAttributesInit];
   protected activeAttrItem: IActiveBasketAttr = localActiveAttributesInit;
@@ -172,7 +172,7 @@ class CardItem extends Component<IProps, IState> {
     return (
       <article className={styles.wrapper}>
         <aside className={styles.leftSide}>
-          <CardBasicBlockPlp
+          <MainCartBasicBlock
             product={product}
             modifiedProducts={modifiedProducts}
             currentCurrency={this.props.currency.symbol}
@@ -226,4 +226,4 @@ class CardItem extends Component<IProps, IState> {
   }
 }
 
-export default CardItem;
+export default MainCartItem;

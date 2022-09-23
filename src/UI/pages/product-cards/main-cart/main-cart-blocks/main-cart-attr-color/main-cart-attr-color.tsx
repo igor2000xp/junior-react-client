@@ -1,9 +1,9 @@
 import React from 'react';
-import stylesColor from './attr-color-plp.module.css';
+import stylesColor from './main-cart-attr-color.module.css';
 import AttributeColorSwatch from '../../../../common/common-bloks/common-attribute-set/attribute-blocks/attribute-color-swatch';
 import { IAttribute } from '../../../../common-models';
 
-class AttrColorPlp extends AttributeColorSwatch {
+class MainCartAttrColor extends AttributeColorSwatch {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -65,4 +65,4 @@ class AttrColorPlp extends AttributeColorSwatch {
   }
 }
 
-export default AttrColorPlp;
+export default MainCartAttrColor;

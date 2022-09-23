@@ -1,8 +1,8 @@
 import React from 'react';
 import stylesSize from './mini-cart-text-block.module.css';
-import AttrTextPlp from '../../../plp-card/plp-card-blocks/attr-text-plp/attr-text-plp';
+import MainCartAttrText from '../../../main-cart/main-cart-blocks/main-cart-attr-text-plp/main-cart-attr-text';
 
-class MiniCartTextBlock extends AttrTextPlp {
+class MiniCartTextBlock extends MainCartAttrText {
   render() {
     const attr = this.props.attribute.items;
     return (

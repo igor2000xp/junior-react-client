@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import totalStyle from './total-block.module.css';
+import totalStyle from './main-cart-total-block.module.css';
 import {
   ILocalBasket,
   ILocalCurrency,
@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 type IState = Readonly<ITotalBlockState>;
 type IProps = Readonly<ITotalBlockProps>;
 
-class TotalBlock<ITotalBlockProps, ITotalBlockState> extends Component<
+class MainCartTotalBlock<ITotalBlockProps, ITotalBlockState> extends Component<
   IProps,
   IState
 > {
@@ -85,4 +85,4 @@ class TotalBlock<ITotalBlockProps, ITotalBlockState> extends Component<
   }
 }
 
-export default TotalBlock;
+export default MainCartTotalBlock;

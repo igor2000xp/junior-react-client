@@ -1,9 +1,9 @@
 import React from 'react';
-import stylesAttr from './attr-text-plp.module.css';
+import stylesAttr from './main-cart-attr-text.module.css';
 import AttributeTextExtended from '../../../../common/common-bloks/common-attribute-set/attribute-blocks/attribute-text-extended';
 import { IAttribute } from '../../../../common-models';
 
-class AttrTextPlp extends AttributeTextExtended {
+class MainCartAttrText extends AttributeTextExtended {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -59,4 +59,4 @@ class AttrTextPlp extends AttributeTextExtended {
   }
 }
 
-export default AttrTextPlp;
+export default MainCartAttrText;

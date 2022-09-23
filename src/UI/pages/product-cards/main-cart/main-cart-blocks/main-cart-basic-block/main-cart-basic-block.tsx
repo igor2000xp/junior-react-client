@@ -1,11 +1,11 @@
 import React from 'react';
-import styles from './card-basic-block-plp.module.css';
+import styles from './main-cart-basic-block.module.css';
 import BasicBlock from '../../../pdp-card/cardBlocks/basic-block';
 import { IProductAttribute } from '../../../../common-models';
 import PriceBlock from '../../../../common/common-bloks/price-block/price-block';
-import CommonAttributeSetPlp from '../common-atribute-set-plp/common-attribute-set-plp';
+import MainCartCommonAttributeSet from '../main-cart-common-atribute-set/main-cart-common-attribute-set';
 
-class CardBasicBlockPlp extends BasicBlock {
+class MainCartBasicBlock extends BasicBlock {
   render() {
     const arrAttributes = this.props.product.attributes as IProductAttribute[];
     const productId =
@@ -32,7 +32,7 @@ class CardBasicBlockPlp extends BasicBlock {
         </section>
 
         <section className={styles.attributes}>
-          <CommonAttributeSetPlp
+          <MainCartCommonAttributeSet
             attributes={arrAttributes}
             productID={productId}
             modifiedProducts={this.props.modifiedProducts}
@@ -43,4 +43,4 @@ class CardBasicBlockPlp extends BasicBlock {
   }
 }
 
-export default CardBasicBlockPlp;
+export default MainCartBasicBlock;

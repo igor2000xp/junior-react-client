@@ -1,10 +1,10 @@
 import React from 'react';
-import CommonAttributeSetPlp from '../../plp-card/plp-card-blocks/common-atribute-set-plp/common-attribute-set-plp';
+import MainCartCommonAttributeSet from '../../main-cart/main-cart-blocks/main-cart-common-atribute-set/main-cart-common-attribute-set';
 import { IProductAttribute } from '../../../common-models';
 import MiniCartTextBlock from '../miniCartBlocks/blocks/mini-cart-text-block';
 import MiniCartColorBlock from '../miniCartBlocks/blocks/mini-cart-color-block';
 
-class MiniCartCommonAttributes extends CommonAttributeSetPlp {
+class MiniCartCommonAttributes extends MainCartCommonAttributeSet {
   render() {
     const modProd = this.props.modifiedProducts;
     return (

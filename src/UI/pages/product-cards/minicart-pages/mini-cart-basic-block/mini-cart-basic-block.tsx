@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './mini-cart-basic-block.module.css';
-import CardBasicBlockPlp from '../../plp-card/plp-card-blocks/card-basic-block/card-basic-block-plp';
+import MainCartBasicBlock from '../../main-cart/main-cart-blocks/main-cart-basic-block/main-cart-basic-block';
 import { IProductAttribute } from '../../../common-models';
 import MiniCartCommonAttributes from '../mini-cart-common-attributes/mini-cart-common-attributes';
 import MiniPriceBlock from '../miniCartBlocks/blocks/mini-price-block/mini-price-block';
 
-class MiniCartBasicBlock extends CardBasicBlockPlp {
+class MiniCartBasicBlock extends MainCartBasicBlock {
   render() {
     const arrAttributes = this.props.product.attributes as IProductAttribute[];
     const productId =

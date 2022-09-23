@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import styles from './plp-card.module.css';
-import CardItem from './card-item/card-item';
-import TotalBlock from './card-item/total-block';
+import styles from './main-cart.module.css';
+import MainCartItem from './main-cart-item/main-cart-item';
+import MainCartTotalBlock from './main-cart-item/main-cart-total-block';
 import Header from '../../common/header';
 import {
   ICurrency,
@@ -20,7 +20,7 @@ import {
 type IProps = Readonly<IPlpCardProps>;
 type IState = Readonly<IPlpCardState>;
 
-class PlpCard extends PureComponent<IProps, IState> {
+class MainCart extends PureComponent<IProps, IState> {
   protected localBasket = [localBasketItemInit];
   protected currentCurrencyLabel = Label.Usd;
   protected isChangedPlusMinusButtons = false;
@@ -115,7 +115,7 @@ class PlpCard extends PureComponent<IProps, IState> {
                 label: this.currentCurrencyLabel,
               };
               return (
-                <CardItem
+                <MainCartItem
                   basket={basket}
                   currency={currency}
                   handlePlusMinusButtons={this.handlePlusMinusButtons}
@@ -123,7 +123,7 @@ class PlpCard extends PureComponent<IProps, IState> {
                 />
               );
             })}
-            <TotalBlock
+            <MainCartTotalBlock
               isChangedPlusMinusButtons={this.isChangedPlusMinusButtons}
               localBasket={this.state.localBasket}
               currentCurrency={this.state.currentCurrency}
@@ -135,4 +135,4 @@ class PlpCard extends PureComponent<IProps, IState> {
   }
 }
 
-export default PlpCard;
+export default MainCart;
