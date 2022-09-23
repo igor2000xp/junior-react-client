@@ -8,7 +8,7 @@ import Header from './common/header';
 import {
   ACTIVE_PRODUCT_ATTRIBUTES,
   LOCAL_BASKET,
-  LOCAL_CURRENT_CURRENCY,
+  LOCAL_CURRENT_CURRENCY, PRODUCT_LIST_FIRST_ID,
 } from '../../constants';
 import {
   ILocalBasket,
@@ -33,6 +33,7 @@ class MainPage extends PureComponent<IProps, IState> {
   private products: IProduct[] = [productInit];
   private currentCurrency = zeroCurrencyInit;
   private localBaskets: ILocalBasket[] = [localBasketItemInit];
+  private productsListFirstId: string = '';
 
   constructor(props: any) {
     super(props);
@@ -62,6 +63,8 @@ class MainPage extends PureComponent<IProps, IState> {
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
     await this.getAndCheckQueryProductsData();
+    this.productsListFirstId = this.products[0].id;
+    localStorage.setItem(PRODUCT_LIST_FIRST_ID, this.productsListFirstId);
     this.setState(() => {
       return {
         categoryIdState: this.categoryId,

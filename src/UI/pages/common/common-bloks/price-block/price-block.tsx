@@ -4,35 +4,44 @@ import client from '../../../../../graphql/apollo';
 import { GetProductByIdDocument } from '../../../../../graphql/generated';
 import { IState, IProps, ISlimPrice, IPrice } from './price-block.model';
 import { SymbolCurrency } from '../../../common-models';
+import { PRODUCT_LIST_FIRST_ID } from '../../../../../constants';
 
 class PriceBlock extends PureComponent<IProps, IState> {
   prices: ISlimPrice[] = [{ symbol: '', amount: 0 }];
-  private id = 'xbox-series-s';
+  private id = '';
+  private zeroProductId: string = '';
   private isPdp = true;
   private isCategory = true;
   constructor(props: IProps) {
     super(props);
+    this.zeroProductId = localStorage.getItem(PRODUCT_LIST_FIRST_ID) as string;
     this.state = {
       symbol: '',
       amount: 0,
-      prodId: 'xbox-series-s',
+      prodId: '',
     };
   }
 
   async componentDidMount() {
-    await this.priceQuery();
+    await this.setState({prodId: this.props.id});
+    const id = this.state.prodId ? this.state.prodId : this.zeroProductId;
+    await this.priceQuery(id);
   }
 
   async componentDidUpdate(prevProps: Readonly<IProps>) {
+    if (prevProps.id !== this.props.id) {
+      await this.setState({prodId: this.props.id})
+    }
     if (
       prevProps.id !== this.props.id ||
       prevProps.symbolCurrency !== this.props.symbolCurrency
     ) {
-      await this.priceQuery();
+      const id = this.state.prodId !== '' ? this.state.prodId : this.zeroProductId;
+      await this.priceQuery(id);
     }
   }
 
-  async priceQuery() {
+  async priceQuery(id: string) {
     try {
       const idFromAddress = location.pathname.split(':')[1];
       const idCategory = location.pathname.split(':')[0];
@@ -43,7 +52,7 @@ class PriceBlock extends PureComponent<IProps, IState> {
       const { data } = await client.query({
         query: GetProductByIdDocument,
         variables: {
-          id: this.id,
+          id
         },
         fetchPolicy: 'no-cache',
       });
