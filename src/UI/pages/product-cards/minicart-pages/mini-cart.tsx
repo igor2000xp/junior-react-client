@@ -1,7 +1,7 @@
 import React from 'react';
 import stylesCart from './mini-cart.module.css';
-import MiniCartItem from './miniCartBlocks/mini-cart-item';
-import MiniButtonBlock from './miniCartBlocks/mini-button-block';
+import MiniCartItem from './mini-cart-blocks/mini-cart-item';
+import MiniButtonBlock from './mini-cart-blocks/mini-button-block';
 import MainCart from '../main-cart/main-cart';
 import {
   ICurrency,

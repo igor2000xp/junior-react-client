@@ -1,8 +1,8 @@
 import React from 'react';
 import MainCartCommonAttributeSet from '../../main-cart/main-cart-blocks/main-cart-common-atribute-set/main-cart-common-attribute-set';
 import { IProductAttribute } from '../../../common-models';
-import MiniCartTextBlock from '../miniCartBlocks/blocks/mini-cart-text-block';
-import MiniCartColorBlock from '../miniCartBlocks/blocks/mini-cart-color-block';
+import MiniCartTextBlock from '../mini-cart-blocks/blocks/mini-cart-text-block';
+import MiniCartColorBlock from '../mini-cart-blocks/blocks/mini-cart-color-block';
 
 class MiniCartCommonAttributes extends MainCartCommonAttributeSet {
   render() {

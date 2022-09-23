@@ -3,7 +3,7 @@ import styles from './mini-cart-basic-block.module.css';
 import MainCartBasicBlock from '../../main-cart/main-cart-blocks/main-cart-basic-block/main-cart-basic-block';
 import { IProductAttribute } from '../../../common-models';
 import MiniCartCommonAttributes from '../mini-cart-common-attributes/mini-cart-common-attributes';
-import MiniPriceBlock from '../miniCartBlocks/blocks/mini-price-block/mini-price-block';
+import MiniPriceBlock from '../mini-cart-blocks/blocks/mini-price-block/mini-price-block';
 
 class MiniCartBasicBlock extends MainCartBasicBlock {
   render() {
