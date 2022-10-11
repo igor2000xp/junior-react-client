@@ -22,6 +22,10 @@
   margin-block-start: 1em;
   margin-block-end: 1em;
   padding-inline-start: 22px;
+  /*list-style: disc;*/
+}
+.wrapper ul li {
+  list-style: disc;
 }
 .wrapper p {
   display: block;

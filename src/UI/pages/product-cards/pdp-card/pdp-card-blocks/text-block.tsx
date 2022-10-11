@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import styles from './text-block.module.css';
+import parse from 'html-react-parser';
 
 interface IProps {
   text: string;
 }
 class TextBlock extends Component<IProps> {
-  createMarkup() {
-    return { __html: `${this.props.text}` };
-  }
   render() {
     return (
       <section
         className={styles.wrapper}
-        dangerouslySetInnerHTML={this.createMarkup()}
-      />
+      >
+        { parse(this.props.text) }
+      </section>
     );
   }
 }
