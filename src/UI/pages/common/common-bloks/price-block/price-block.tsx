@@ -85,7 +85,7 @@ class PriceBlock extends PureComponent<IProps, IState> {
     return (
       <>
         <div className={stylesPriceBlock.priceBlock}>
-          <h5>{`${currency} ${price}`}</h5>
+          <h5>{`${currency} ${price.toFixed(2)}`}</h5>
         </div>
       </>
     );

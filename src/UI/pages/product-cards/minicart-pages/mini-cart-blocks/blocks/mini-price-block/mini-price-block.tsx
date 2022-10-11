@@ -10,7 +10,7 @@ class MiniPriceBlock extends PriceBlock {
     return (
       <>
         <div className={stylesPriceBlock.priceBlock}>
-          <h5>{`${currency} ${price}`}</h5>
+          <h5>{`${currency} ${price.toFixed(2)}`}</h5>
         </div>
       </>
     );
