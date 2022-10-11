@@ -1,0 +1,89 @@
+.card {
+  position: relative;
+  width: 386px;
+  height: 444px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+.card:hover {
+  box-shadow: 10px 10px 35px rgba(168, 172, 176, 0.31), -10px -10px 35px rgba(168, 172, 176, 0.31);
+}
+.imageWrapper {
+  position: relative;
+  margin: 16px 0 0 0;
+  width: 354px;
+  height: 330px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bigImage {
+  width: 354px;
+  height: 330px;
+}
+.bigImage img {
+  object-fit: contain;
+  width: auto;
+  height: 100%;
+}
+.outStore {
+  display: none;
+}
+.greenButtonCart {
+  border: rgba(45, 176, 51, 0.44) 1px solid;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 87px;
+  right: 35px;
+  width: 52px;
+  height: 52px;
+  z-index: 15;
+  background-color: #5ECE7B;
+  box-shadow: 3px 3px 8px rgba(63, 70, 59, 0.41);
+  transition: all 0.5s ease-out;
+}
+.greenButtonCart:hover {
+  width: 64px;
+  height: 64px;
+  box-shadow: 3px 3px 8px rgba(63, 70, 59, 0.09);
+}
+.greenButtonCart img {
+  border-radius: 50%;
+  z-index: 15;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  cursor: pointer;
+}
+.textBlock {
+  width: 354px;
+  height: 58px;
+  margin: 24px;
+}
+.nameBlock {
+  width: 100%;
+  height: 29px;
+  margin: 0;
+  text-align: left;
+}
+.nameBlock p {
+  margin: 0;
+  font-family: 'Raleway', serif;
+  font-style: normal;
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 160%;
+  text-transform: capitalize;
+}
+.priceBlock {
+  margin: 0;
+  width: 100%;
+  height: 29px;
+  text-align: left;
+}
+.priceBlock p {
+  font-weight: 600;
+ }

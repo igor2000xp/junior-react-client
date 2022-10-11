@@ -1,0 +1,38 @@
+.navigation {
+  margin: 24px 0 0 0;
+}
+.navMenu {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+.navMenu li {
+  padding: 0 16px;
+  height: 56px;
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.navLink {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+}
+.navLink:link {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: black;
+}
+.chosenBorder {
+  text-decoration: none;
+  border-bottom: #5ECE7B 2px solid;
+}
+.chosenLink {
+  text-decoration: none;
+  color: #5ECE7B;
+}
+.chosenLink:link {
+  color: #5ECE7B;
+}

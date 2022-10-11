@@ -1,0 +1,43 @@
+.sizeBlock {
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+}
+.blockHeader {
+  max-height: 36px;
+  overflow: hidden;
+}
+.blockHeader h4 {
+  margin: 0;
+  text-align: left;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: none;
+  overflow: hidden;
+}
+.sizeLine {
+  margin: 8px 0 0 0;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
+}
+.sizeItem {
+  margin: 0 8px 0 0 ;
+  width: 100%;
+  height: 24px;
+  border: black 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.active {
+  background: black;
+  color: white;
+}
+.sizeBlock p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+  text-transform: uppercase;
+}

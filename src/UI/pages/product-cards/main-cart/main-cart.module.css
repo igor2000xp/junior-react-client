@@ -1,0 +1,26 @@
+.cartWrapper {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.header h1 {
+  margin: 80px 0 55px 0;
+  color: black;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+  text-transform: uppercase;
+  text-align: left;
+}
+.wrapper h2 {
+  color: black;
+}
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

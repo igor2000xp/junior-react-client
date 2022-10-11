@@ -1,0 +1,64 @@
+.wrapperWithHeader {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.wrapper {
+  margin: 80px 0 0 0;
+  display: flex;
+  flex-direction: row;
+}
+.leftBlock {
+  width: 79px;
+  min-height: 400px;
+  max-height: 511px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+.hidden {
+  visibility: hidden;
+}
+.smallImage {
+  margin: 0 0 40px 0;
+  width: 100%;
+  height: 80px;
+  cursor: pointer;
+}
+.smallImage img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.imageBlock {
+  margin: 0 0 0  40px;
+  width: 610px;
+  height: 511px;
+}
+.imageBlock img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+.rightBlock {
+  margin: 0 0 0 100px;
+  width: 292px;
+  height: 695px;
+  display: flex;
+  flex-direction: column;
+}
+.outStock {
+  position: relative;
+  transition: 1.5s;
+  opacity: 0.5;
+}
+.outStock::after {
+  position: absolute;
+  content: "OUT OF STOCK";
+  width: 100%;
+  text-align: center;
+  top: 50%;
+  left: 0;
+  font-size: 36px;
+  line-height: 160%;
+  color: #8D8F9A;
+}

@@ -1,24 +1,31 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import { Link } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import PdpCard from './UI/pages/product-cards/pdp-card/pdp-card';
+import MainCart from './UI/pages/product-cards/main-cart/main-cart';
+import MiniCart from './UI/pages/product-cards/minicart-pages/mini-cart';
+import NoMatch from './UI/pages/no-match/no-match';
+import MainPage from './UI/pages/main-page';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Bookkeeper</h1>
-        <nav
-          style={{
-            borderBottom: 'solid 1px',
-            paddingBottom: '1rem',
-          }}
-        >
-          <Link to="/invoices">Invoices</Link> |{' '}
-          <Link to="/expenses">Expenses</Link>
-        </nav>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Routes>
+          <Route path="category/:categoryId" element={<MainPage />} />
+          <Route path="/" element={<Navigate replace to="category/:all" />} />
+          <Route
+            path="junior-react-client"
+            element={<Navigate replace to="/category/:all" />}
+          />
+          <Route path="pdp/:productId" element={<PdpCard />} />
+          <Route path="cart" element={<MainCart />} />
+          <Route path="mini-cart" element={<MiniCart />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      </div>
+    );
+  }
 }
 
 export default App;

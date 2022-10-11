@@ -4,22 +4,38 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+#### Done: 2022-09-22
 
-### `npm start`
+I completed this assignment using:
+1. React classes
+2. TypeScript
+3. Apollo/GraphQL client
+4. Graphql-code-generator/typescript.
+
+I overrode some classes of Cart Mini-Cart and PDPage because they included very similar components like attributes, price block and etc by extending.
+
+I used a HOC function pattern and a Render Props pattern. Now I have a properly working application.
+
+#### Next step is Refactoring
+
+The assignment was not as easy as I supposed. And the code got challenging. I am going to refactor this code. I guess my code will become simpler after:
+
+1. Passing context to props down component chains.
+2. Changing to the Apollo server code to add mutations and store the Cart statement on the server instead of using localStorage.
+3. Using Props and Composition to inject business logic into components.
+
+### Now the app is working properly as far as I can see.
+
+I will be happy to receive feedback and get the position of Junior Trainee React Developer (to become a full-stack developer).
+
+### In the project directory, you can run:
+
+### `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
+### `yarn build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -28,16 +44,6 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
 ## Learn More
 

@@ -1,0 +1,5 @@
+export const LOCAL_CURRENT_CURRENCY = 'i45-currentCurrency';
+export const ACTIVE_PRODUCT_ATTRIBUTES = 'i45-activeProductAttributes';
+export const LOCAL_BASKET = 'i45-localBasket';
+export const VAT_RATE = 0.21;
+export const PRODUCT_LIST_FIRST_ID = 'productsListFirstId';

@@ -1,0 +1,10 @@
+.priceBlock {
+  margin: 0;
+}
+.priceBlock h5 {
+  margin: 0;
+  text-align: left;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 160%;
+}
