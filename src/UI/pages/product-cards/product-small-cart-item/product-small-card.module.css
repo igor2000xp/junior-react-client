@@ -76,6 +76,7 @@
   font-weight: 200;
   font-size: 18px;
   line-height: 160%;
+  text-transform: capitalize;
 }
 .priceBlock {
   margin: 0;
