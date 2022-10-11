@@ -10,6 +10,8 @@
 .leftBlock {
   width: 79px;
   min-height: 400px;
+  max-height: 511px;
+  overflow: auto;
   display: flex;
   flex-direction: column;
 }
