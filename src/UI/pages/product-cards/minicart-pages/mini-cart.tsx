@@ -52,13 +52,14 @@ class MiniCart extends MainCart {
       ? this.state.localBasket
       : [localBasketItemInit];
     const symbol = this.props.symbol ? this.props.symbol : this.state.currentCurrency;
+    const itemsTxt = this.state.totalItems === 1 ? 'item' : 'items';
     return (
       <article className={stylesCart.wrapper}>
         <div className={stylesCart.insideWrapper}>
           <section className={stylesCart.MiniCartHeader}>
             <h3>My Bag,</h3>
             <div>
-              <h4>{this.state.totalItems} items</h4>
+              <h4>{ `${this.state.totalItems} ${itemsTxt}` }</h4>
             </div>
           </section>
 
