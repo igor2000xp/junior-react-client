@@ -13,10 +13,13 @@ import {
   IAttributeColorSwatchState,
 } from './states-models';
 import { WithRouterProps } from '../with-router/with-router.model';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 export interface IHeaderProps {
   getCurrency: (label: Label, symbol: SymbolCurrency) => void;
   isNewBasketToggle?: boolean;
+  symbol: SymbolCurrency;
+  setCurrency: ActionCreatorWithPayload<SymbolCurrency, string>;
 }
 export interface ICommonAttributeSetProps {
   attributes: IProductAttribute[];

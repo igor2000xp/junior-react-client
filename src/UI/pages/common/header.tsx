@@ -22,9 +22,17 @@ import CartBadge from './cart-badge/cart-badge';
 import CartCountProvider from './cart-count-provider/cart-count-provider';
 import MiniCart from '../product-cards/minicart-pages/mini-cart';
 import { initFirstLocalCurrency } from '../main-page-helpers/main-page-helpers';
+import { connect } from 'react-redux';
+import { State } from '../../../store/store';
+import { setCurrency } from './headerCurrencySlice';
 
 type IState = Readonly<IHeaderState>;
 type IProps = Readonly<IHeaderProps>;
+
+const mapStateToProps = (state: State) => {
+  return { symbol: state.currency.symbol };
+};
+const mapDispatchToProps = { setCurrency };
 
 class Header extends Component<IProps, IState> {
   private currencies: ICurrency[];
@@ -117,6 +125,7 @@ class Header extends Component<IProps, IState> {
         symbol: currency.symbol,
       };
     });
+    this.props.setCurrency(currency.symbol);
     localStorage.setItem(LOCAL_CURRENT_CURRENCY, JSON.stringify(currency));
     return currency;
   }
@@ -136,6 +145,7 @@ class Header extends Component<IProps, IState> {
       <div className={stylesHeader.header}>
         <NavigateBlock />
         <div className={stylesHeader.logo} />
+        <h2>{this.props.symbol}</h2>
 
         <div className={stylesHeader.basketCorner}>
           <div
@@ -212,4 +222,5 @@ class Header extends Component<IProps, IState> {
   }
 }
 
-export default Header;
+// export  default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
