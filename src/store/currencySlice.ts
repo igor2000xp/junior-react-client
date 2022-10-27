@@ -1,4 +1,4 @@
-import { SymbolCurrency } from '../common-models';
+import { SymbolCurrency } from '../UI/pages/common-models';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { store } from '../../../store/store';
 
@@ -23,8 +23,8 @@ export const currencySlice = createSlice({
 });
 
 export const { actions, reducer } = currencySlice;
-export const { setCurrency } = actions;
-export default reducer;
+export const { setCurrency } = actions; //currencySlice.actions
+export default reducer; // currencySlice.reducer
 
 // export const { setCurrency } = currencySlice.actions;
 // export  default currencySlice.reducer;

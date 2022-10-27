@@ -8,6 +8,22 @@ import {
   ICategory,
   ICategoryWithActive,
 } from '../common-models';
+import { State } from '../../../store/store';
+import { setPage } from '../../../store/pagesSlice';
+import { connect } from 'react-redux';
+// import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+
+const mapStateToProps = (state:State) => {
+  return state.pages.page;
+};
+const  mapDispatchToProps = { setPage };
+
+// export interface INavigateBlockProps {
+//   page: string;
+//   setPage: ActionCreatorWithPayload<string, string>;
+// }
+
+// type IProps = Readonly<INavigateBlockProps>;
 
 class NavigateBlock extends Component {
   private categories = categoriesInit;
@@ -81,4 +97,6 @@ class NavigateBlock extends Component {
   }
 }
 
-export default NavigateBlock;
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavigateBlock);

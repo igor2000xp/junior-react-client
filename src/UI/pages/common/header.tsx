@@ -24,7 +24,7 @@ import MiniCart from '../product-cards/minicart-pages/mini-cart';
 import { initFirstLocalCurrency } from '../main-page-helpers/main-page-helpers';
 import { connect } from 'react-redux';
 import { State } from '../../../store/store';
-import { setCurrency } from './headerCurrencySlice';
+import { setCurrency } from '../../../store/currencySlice';
 
 type IState = Readonly<IHeaderState>;
 type IProps = Readonly<IHeaderProps>;
@@ -83,6 +83,7 @@ class Header extends Component<IProps, IState> {
       document.addEventListener('mousedown', this.handleClickOutsideCart);
       const { label, symbol } = await initFirstLocalCurrency();
       this.setState({ label, symbol });
+      this.props.setCurrency(symbol);
       const { data } = await client.query<GetAllCurrencyQuery>({
         query: GetAllCurrencyDocument,
       });
@@ -145,7 +146,6 @@ class Header extends Component<IProps, IState> {
       <div className={stylesHeader.header}>
         <NavigateBlock />
         <div className={stylesHeader.logo} />
-        <h2>{this.props.symbol}</h2>
 
         <div className={stylesHeader.basketCorner}>
           <div
@@ -153,7 +153,8 @@ class Header extends Component<IProps, IState> {
             onClick={() => this.toggleCurrencyMenu()}
           >
             <div className={stylesHeader.currencyLabel}>
-              {`${this.state.symbol}`}
+              {/*{`${this.state.symbol}`}*/}
+              {this.props.symbol}
             </div>
 
             <div className={stylesHeader.currencyArrow}>

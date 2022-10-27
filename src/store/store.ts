@@ -1,5 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import currencyReducer from '../UI/pages/common/headerCurrencySlice';
+import currencyReducer from './currencySlice';
+import cartReducer from './cartSlice';
+import pagesSlice from './pagesSlice';
 
 // export const store = configureStore({
 //   reducer: {
@@ -9,6 +11,8 @@ import currencyReducer from '../UI/pages/common/headerCurrencySlice';
 
 const reducer = combineReducers({
   currency: currencyReducer,
+  cart: cartReducer,
+  pages: pagesSlice,
 });
 
 export const store = configureStore({
