@@ -11,24 +11,24 @@ import {
 import { State } from '../../../store/store';
 import { setPage } from '../../../store/pagesSlice';
 import { connect } from 'react-redux';
-// import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 const mapStateToProps = (state:State) => {
-  return state.pages.page;
+  return { page: state.pages.page };
 };
 const  mapDispatchToProps = { setPage };
 
-// export interface INavigateBlockProps {
-//   page: string;
-//   setPage: ActionCreatorWithPayload<string, string>;
-// }
+export interface INavigateBlockProps {
+  page?: string;
+  setPage: ActionCreatorWithPayload<string, string>;
+}
 
-// type IProps = Readonly<INavigateBlockProps>;
+type IProps = Readonly<INavigateBlockProps>;
 
-class NavigateBlock extends Component {
+class NavigateBlock extends Component<IProps> {
   private categories = categoriesInit;
 
-  constructor(props: any) {
+  constructor(props: IProps) {
     super(props);
     this.chosenHandler = this.chosenHandler.bind(this);
   }
@@ -39,6 +39,9 @@ class NavigateBlock extends Component {
     this.categories = [...(await this.myQuery())];
     this.categories = this.categories.map((item) => {
       const isActive = item.name === urlString[1];
+      if (item.name === urlString[1]) {
+        this.props.setPage(urlString[1]);
+      }
       return { ...item, isActive };
     });
   }
@@ -55,6 +58,7 @@ class NavigateBlock extends Component {
   }
 
   categorySwitch(category: string) {
+    this.props.setPage(category);
     this.categories = this.categories.map((item) => {
       const isActive = item.name === category;
       return { ...item, isActive };
