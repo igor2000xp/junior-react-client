@@ -96,3 +96,7 @@ export interface ICartBadgeState {
 export interface ICartCountProviderState {
   count: number;
 }
+
+export interface INavigateBlockState {
+  currentCategory: string;
+}

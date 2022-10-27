@@ -38,7 +38,10 @@ export interface IBasicBlockProps {
 }
 
 export type IPropsMainPage = WithRouterProps<IParams>;
-
+export interface INavigateBlockProps {
+  page: string;
+  setPage: ActionCreatorWithPayload<string, string>;
+}
 export interface IAttributeColorSwatchProps {
   attribute: IProductAttribute;
   activeAttribute?: string;

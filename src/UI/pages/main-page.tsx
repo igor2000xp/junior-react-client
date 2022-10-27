@@ -24,11 +24,19 @@ import {
   zeroCurrencyInit,
 } from './common-models';
 import { getProductsList } from './main-page-helpers/main-page-helpers';
+import { State } from '../../store/store';
+import { setPage } from '../../store/pagesSlice';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state:State) => {
+  return { page: state.pages.page };
+};
+const mapDispatchToProps = { setPage };
 
 type IState = Readonly<IMainPageState>;
 type IProps = Readonly<IPropsMainPage>;
 
-class MainPage extends PureComponent<IProps, IState> {
+class MainPage extends PureComponent<any, IState> {
   private categoryId: string;
   private products: IProduct[] = [productInit];
   private currentCurrency = zeroCurrencyInit;
@@ -62,6 +70,7 @@ class MainPage extends PureComponent<IProps, IState> {
     }
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
+    this.props.setPage(this.categoryId);
     await this.getAndCheckQueryProductsData();
     this.productsListFirstId = this.products[0].id;
     localStorage.setItem(PRODUCT_LIST_FIRST_ID, this.productsListFirstId);
@@ -77,8 +86,7 @@ class MainPage extends PureComponent<IProps, IState> {
     prevProps: WithRouterProps<IParams>,
     prevState: IState,
   ) {
-    const { match } = this.props;
-    this.categoryId = match.params.categoryId.split(':')[1];
+    this.categoryId = this.props.page;
     if (!equal(prevProps.match.params.categoryId, `:${this.categoryId}`)) {
       await this.getAndCheckQueryProductsData();
     }
@@ -150,4 +158,7 @@ class MainPage extends PureComponent<IProps, IState> {
     );
   }
 }
-export default withRouter(MainPage);
+// export default withRouter(MainPage);
+// export default MainPage;
+// export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainPage));

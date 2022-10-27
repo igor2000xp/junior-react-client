@@ -1,8 +1,11 @@
 import { IAttrActive } from './states-models';
 import { ICommonAttributeSetProps } from './props-model';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 export interface IParams {
   categoryId: string;
+  page?: string;
+  setPage: ActionCreatorWithPayload<string, string>;
 }
 
 export interface IActiveAttrPdp {

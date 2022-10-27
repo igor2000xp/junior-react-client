@@ -6,42 +6,41 @@ import { GetAllCategoriesDocument } from '../../../graphql/generated';
 import {
   categoriesInit,
   ICategory,
-  ICategoryWithActive,
+  ICategoryWithActive, INavigateBlockProps, INavigateBlockState,
 } from '../common-models';
 import { State } from '../../../store/store';
 import { setPage } from '../../../store/pagesSlice';
 import { connect } from 'react-redux';
-import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 const mapStateToProps = (state:State) => {
   return { page: state.pages.page };
 };
 const  mapDispatchToProps = { setPage };
 
-export interface INavigateBlockProps {
-  page?: string;
-  setPage: ActionCreatorWithPayload<string, string>;
-}
-
 type IProps = Readonly<INavigateBlockProps>;
+type IState = Readonly<INavigateBlockState>;
 
-class NavigateBlock extends Component<IProps> {
+class NavigateBlock extends Component<IProps, IState> {
   private categories = categoriesInit;
+  private currentCategory = '';
 
   constructor(props: IProps) {
     super(props);
     this.chosenHandler = this.chosenHandler.bind(this);
+    this.state = { currentCategory: 'all' };
   }
 
   async componentDidMount() {
     const urlString = location.pathname.split(':');
     if (urlString[0] === '/category/') this.categorySwitch(urlString[1]);
     this.categories = [...(await this.myQuery())];
+    this.currentCategory = urlString[1];
+    await this.setState({
+      currentCategory: this.currentCategory,
+    });
+    this.props.setPage(this.currentCategory);
     this.categories = this.categories.map((item) => {
       const isActive = item.name === urlString[1];
-      if (item.name === urlString[1]) {
-        this.props.setPage(urlString[1]);
-      }
       return { ...item, isActive };
     });
   }
