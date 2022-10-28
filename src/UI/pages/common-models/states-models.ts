@@ -4,6 +4,7 @@ import {
   localBasketItemInit,
   SymbolCurrency,
 } from './common-models';
+import MainCart from '../product-cards/main-cart/main-cart';
 
 export interface IMainPageState {
   error: null;
@@ -61,7 +62,7 @@ export interface ICommonAttributeSet {
   prodId: string;
 }
 
-export interface IPlpCardState {
+export interface IMainCartState{
   productId: string;
   currentCurrency: SymbolCurrency;
   localBasket: ILocalBasket[];

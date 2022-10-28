@@ -14,6 +14,7 @@ import {
 } from './states-models';
 import { WithRouterProps } from '../with-router/with-router.model';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+import MainCart from '../product-cards/main-cart/main-cart';
 
 export interface IHeaderProps {
   getCurrency: (label: Label, symbol: SymbolCurrency) => void;
@@ -71,7 +72,9 @@ export interface ICartCountProviderProps {
   isChangedCurrencyOrCart: boolean;
 }
 
-export interface IPlpCardProps {
+export interface IMainCartProps{
   symbol?: SymbolCurrency;
   isNewBasketToggle?: boolean;
+  cartState?: ILocalBasket[];
+  // renewBasket?: () =>
 }

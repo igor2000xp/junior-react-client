@@ -5,15 +5,26 @@ import MiniButtonBlock from './mini-cart-blocks/mini-button-block';
 import MainCart from '../main-cart/main-cart';
 import {
   ICurrency,
-  IPlpCardProps,
+  IMainCartProps, IMainCartState,
   localBasketItemInit,
   SymbolCurrency,
 } from '../../common-models';
 import MiniTotalBlock from './mini-total-block/mini-total-block';
 import { LOCAL_BASKET } from '../../../../constants';
+import { State } from '../../../../store/store';
+import { renewBasket } from '../../../../store/cartSlice';
+import { connect, DispatchProp } from 'react-redux';
+import { AnyAction } from '@reduxjs/toolkit';
 
-type IProps = Readonly<IPlpCardProps>;
+const mapStateToProps = (state: State) => {
+  return { cart: state.cart };
+};
+const mapDispatchToPropsFactory = { renewBasket };
 
+type IProps = Readonly<IMainCartProps>;
+type IState = Readonly<IMainCartState>;
+
+// class MiniCart extends connect(mapStateToProps, mapDispatchToPropsFactory)(MainCart) {
 class MiniCart extends MainCart {
   constructor(props: IProps) {
     super(props);
@@ -99,4 +110,5 @@ class MiniCart extends MainCart {
   }
 }
 
-export default MiniCart;
+// export default MiniCart;
+export default connect(mapStateToProps, mapDispatchToPropsFactory)(MiniCart);

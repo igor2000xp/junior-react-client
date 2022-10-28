@@ -79,7 +79,10 @@ class ProductSmallCard extends Component<IProps, any> {
             <p>{name}</p>
           </div>
           <div className={styles.priceBlock}>
-            <PriceBlock id={id} symbolCurrency={this.props.symbolCurrency} />
+            <PriceBlock
+              id={id}
+              symbolCurrency={this.props.symbolCurrency}
+            />
           </div>
         </article>
       </section>

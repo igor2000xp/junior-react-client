@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
+import React, { Component, PureComponent } from 'react';
 import styles from './main-cart.module.css';
 import MainCartItem from './main-cart-item/main-cart-item';
 import MainCartTotalBlock from './main-cart-item/main-cart-total-block';
 import Header from '../../common/header';
 import {
   ICurrency,
-  IPlpCardProps,
-  IPlpCardState,
+  IMainCartProps,
+  IMainCartState,
   Label,
   localBasketItemInit,
   SymbolCurrency,
@@ -16,11 +16,19 @@ import {
   LOCAL_BASKET,
   LOCAL_CURRENT_CURRENCY,
 } from '../../../../constants';
+import { State } from '../../../../store/store';
+import { renewBasket } from '../../../../store/cartSlice';
+import { connect } from 'react-redux';
 
-type IProps = Readonly<IPlpCardProps>;
-type IState = Readonly<IPlpCardState>;
+const mapStateToProps = (state: State) => {
+  return { cart: state.cart };
+};
+const mapDispatchToPropsFactory = { renewBasket };
 
-class MainCart extends PureComponent<IProps, IState> {
+type IProps = Readonly<IMainCartProps>;
+type IState = Readonly<IMainCartState>;
+
+class MainCart extends Component<IProps, IState> {
   protected localBasket = [localBasketItemInit];
   protected currentCurrencyLabel = Label.Usd;
   protected isChangedPlusMinusButtons = false;
@@ -136,3 +144,4 @@ class MainCart extends PureComponent<IProps, IState> {
 }
 
 export default MainCart;
+// export default connect(mapStateToProps, mapDispatchToPropsFactory)(MainCart);
