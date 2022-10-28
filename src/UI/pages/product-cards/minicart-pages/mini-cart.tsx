@@ -2,7 +2,7 @@ import React from 'react';
 import stylesCart from './mini-cart.module.css';
 import MiniCartItem from './mini-cart-blocks/mini-cart-item';
 import MiniButtonBlock from './mini-cart-blocks/mini-button-block';
-import MainCart from '../main-cart/main-cart';
+// import MainCart from '../main-cart/main-cart';
 import {
   ICurrency,
   IMainCartProps, IMainCartState,
@@ -14,7 +14,8 @@ import { LOCAL_BASKET } from '../../../../constants';
 import { State } from '../../../../store/store';
 import { renewBasket } from '../../../../store/cartSlice';
 import { connect, DispatchProp } from 'react-redux';
-import { AnyAction } from '@reduxjs/toolkit';
+// import { AnyAction } from '@reduxjs/toolkit';
+import CartAbstractClass from '../main-cart/abstract-class/CartAbstractClass';
 
 const mapStateToProps = (state: State) => {
   return { cart: state.cart };
@@ -25,7 +26,7 @@ type IProps = Readonly<IMainCartProps>;
 type IState = Readonly<IMainCartState>;
 
 // class MiniCart extends connect(mapStateToProps, mapDispatchToPropsFactory)(MainCart) {
-class MiniCart extends MainCart {
+class MiniCart extends CartAbstractClass {
   constructor(props: IProps) {
     super(props);
     this.getTotalItemsQuality = this.getTotalItemsQuality.bind(this);
@@ -85,7 +86,7 @@ class MiniCart extends MainCart {
                 <MiniCartItem
                   basket={basket}
                   currency={currency}
-                  handlePlusMinusButtons={this.handlePlusMinusButtons}
+                  // handlePlusMinusButtons={this.handlePlusMinusButtons}
                   key={item.productId + index}
                 />
               );

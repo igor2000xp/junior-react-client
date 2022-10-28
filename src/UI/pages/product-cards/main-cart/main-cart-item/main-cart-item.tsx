@@ -92,7 +92,7 @@ class MainCartItem extends Component<IProps, IState> {
   }
 
   protected async plusHandle() {
-    this.props.handlePlusMinusButtons();
+    // this.props.handlePlusMinusButtons();
     await this.setState({
       quantityInBasket: this.state.quantityInBasket + 1,
     });
@@ -100,7 +100,7 @@ class MainCartItem extends Component<IProps, IState> {
       this.state.quantityInBasket,
       this.props.basket,
     );
-    this.props.handlePlusMinusButtons();
+    // this.props.handlePlusMinusButtons();
   }
   protected async minusHandle() {
     const minus =
@@ -113,7 +113,7 @@ class MainCartItem extends Component<IProps, IState> {
       this.props.basket,
     );
     await this.setState({ quantityInBasket: count });
-    this.props.handlePlusMinusButtons();
+    // this.props.handlePlusMinusButtons();
   }
 
   protected async getProductFromDB() {

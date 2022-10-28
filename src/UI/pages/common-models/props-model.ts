@@ -17,7 +17,7 @@ import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 import MainCart from '../product-cards/main-cart/main-cart';
 
 export interface IHeaderProps {
-  getCurrency: (label: Label, symbol: SymbolCurrency) => void;
+  getCurrency?: (label: Label, symbol: SymbolCurrency) => void;
   isNewBasketToggle?: boolean;
   symbol: SymbolCurrency;
   setCurrency: ActionCreatorWithPayload<SymbolCurrency, string>;
@@ -52,7 +52,7 @@ export interface IAttributeColorSwatchProps {
 export interface ICardItemProps {
   basket: ILocalBasket;
   currency: ICurrency;
-  handlePlusMinusButtons: () => void;
+  handlePlusMinusButtons?: () => void;
 }
 
 export interface ITotalBlockProps {
@@ -72,9 +72,9 @@ export interface ICartCountProviderProps {
   isChangedCurrencyOrCart: boolean;
 }
 
-export interface IMainCartProps{
+export interface IMainCartProps {
   symbol?: SymbolCurrency;
   isNewBasketToggle?: boolean;
   cartState?: ILocalBasket[];
-  // renewBasket?: () =>
+  renewBasket?: ActionCreatorWithPayload<ILocalBasket[], string>;
 }

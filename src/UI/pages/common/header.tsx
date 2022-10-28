@@ -118,7 +118,7 @@ class Header extends Component<IProps, IState> {
   }
 
   async handleCurrencyClick(currency: ICurrency): Promise<ICurrency> {
-    this.props.getCurrency(currency.label, currency.symbol);
+    // this.props.getCurrency(currency.label, currency.symbol);
     await this.setState(() => {
       return {
         isShownCurrency: false,

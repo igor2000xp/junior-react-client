@@ -19,6 +19,7 @@ import {
 import { State } from '../../../../store/store';
 import { renewBasket } from '../../../../store/cartSlice';
 import { connect } from 'react-redux';
+import CartAbstractClass from './abstract-class/CartAbstractClass';
 
 const mapStateToProps = (state: State) => {
   return { cart: state.cart };
@@ -28,80 +29,80 @@ const mapDispatchToPropsFactory = { renewBasket };
 type IProps = Readonly<IMainCartProps>;
 type IState = Readonly<IMainCartState>;
 
-class MainCart extends Component<IProps, IState> {
-  protected localBasket = [localBasketItemInit];
-  protected currentCurrencyLabel = Label.Usd;
-  protected isChangedPlusMinusButtons = false;
-  protected symbol = SymbolCurrency.SymbolUsd;
+class MainCart extends CartAbstractClass {
+  // protected localBasket = [localBasketItemInit];
+  // protected currentCurrencyLabel = Label.Usd;
+  // protected isChangedPlusMinusButtons = false;
+  // protected symbol = SymbolCurrency.SymbolUsd;
 
-  constructor(props: any) {
+  constructor(props: IProps) {
     super(props);
-    this.getCurrency = this.getCurrency.bind(this);
-    this.handlePlusMinusButtons = this.handlePlusMinusButtons.bind(this);
-    this.getTotalItemsQuality = this.getTotalItemsQuality.bind(this);
-    this.state = {
-      productId: 'xbox-series-s',
-      currentCurrency: SymbolCurrency.SymbolUsd,
-      localBasket: [localBasketItemInit],
-      isChanged: false,
-      isChangedPlusMinusButtons: false,
-      totalItems: 0,
-    };
+    // this.getCurrency = this.getCurrency.bind(this);
+    // this.handlePlusMinusButtons = this.handlePlusMinusButtons.bind(this);
+    // this.getTotalItemsQuality = this.getTotalItemsQuality.bind(this);
+    // this.state = {
+    //   productId: 'xbox-series-s',
+    //   currentCurrency: SymbolCurrency.SymbolUsd,
+    //   localBasket: [localBasketItemInit],
+    //   isChanged: false,
+    //   isChangedPlusMinusButtons: false,
+    //   totalItems: 0,
+    // };
   }
 
-  async componentDidMount() {
-    this.localBasket = JSON.parse(
-      (await localStorage.getItem(LOCAL_BASKET)) as string,
-    );
-    await this.setState(() => {
-      return {
-        localBasket: this.localBasket,
-      };
-    });
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-    const currency: ICurrency = JSON.parse(
-      (await localStorage.getItem(LOCAL_CURRENT_CURRENCY)) as string,
-    );
-    this.currentCurrencyLabel = currency.label;
-    this.setState({
-      currentCurrency: currency.symbol,
-      isChanged: true,
-    });
-  }
-
-  async componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-  ) {
-    this.localBasket = JSON.parse(
-      (await localStorage.getItem(LOCAL_BASKET)) as string,
-    );
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-  }
-
-  async componentWillUnmount() {
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-  }
-
-  async getCurrency(label: Label, symbol: SymbolCurrency) {
-    await this.setState({
-      currentCurrency: symbol,
-    });
-  }
-
-  handlePlusMinusButtons() {
-    const isToggle = !this.isChangedPlusMinusButtons;
-    this.isChangedPlusMinusButtons = isToggle;
-    const localBasket = JSON.parse(
-      localStorage.getItem(LOCAL_BASKET) as string,
-    );
-    this.setState({ localBasket });
-    this.setState({ isChangedPlusMinusButtons: isToggle });
-  }
-
-  protected getTotalItemsQuality(totalItems: number) {
-    this.setState({ totalItems });
-  }
+  // async componentDidMount() {
+  //   this.localBasket = JSON.parse(
+  //     (await localStorage.getItem(LOCAL_BASKET)) as string,
+  //   );
+  //   await this.setState(() => {
+  //     return {
+  //       localBasket: this.localBasket,
+  //     };
+  //   });
+  //   await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+  //   const currency: ICurrency = JSON.parse(
+  //     (await localStorage.getItem(LOCAL_CURRENT_CURRENCY)) as string,
+  //   );
+  //   this.currentCurrencyLabel = currency.label;
+  //   this.setState({
+  //     currentCurrency: currency.symbol,
+  //     isChanged: true,
+  //   });
+  // }
+  //
+  // async componentDidUpdate(
+  //   prevProps: Readonly<IProps>,
+  //   prevState: Readonly<IState>,
+  // ) {
+  //   this.localBasket = JSON.parse(
+  //     (await localStorage.getItem(LOCAL_BASKET)) as string,
+  //   );
+  //   await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+  // }
+  //
+  // async componentWillUnmount() {
+  //   await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+  // }
+  //
+  // async getCurrency(label: Label, symbol: SymbolCurrency) {
+  //   await this.setState({
+  //     currentCurrency: symbol,
+  //   });
+  // }
+  //
+  // handlePlusMinusButtons() {
+  //   const isToggle = !this.isChangedPlusMinusButtons;
+  //   this.isChangedPlusMinusButtons = isToggle;
+  //   const localBasket = JSON.parse(
+  //     localStorage.getItem(LOCAL_BASKET) as string,
+  //   );
+  //   this.setState({ localBasket });
+  //   this.setState({ isChangedPlusMinusButtons: isToggle });
+  // }
+  //
+  // protected getTotalItemsQuality(totalItems: number) {
+  //   this.setState({ totalItems });
+  // }
 
   render() {
     const localBasket = this.state.localBasket
@@ -109,7 +110,8 @@ class MainCart extends Component<IProps, IState> {
       : [localBasketItemInit];
     return (
       <article className={styles.cartWrapper}>
-        <Header getCurrency={this.getCurrency} />
+        {/*<Header getCurrency={this.getCurrency} />*/}
+        <Header />
         <article className={styles.wrapper}>
           <section className={styles.header}>
             <h1>Cart</h1>
@@ -126,7 +128,7 @@ class MainCart extends Component<IProps, IState> {
                 <MainCartItem
                   basket={basket}
                   currency={currency}
-                  handlePlusMinusButtons={this.handlePlusMinusButtons}
+                  // handlePlusMinusButtons={this.handlePlusMinusButtons}
                   key={item.productId + index}
                 />
               );
@@ -143,5 +145,5 @@ class MainCart extends Component<IProps, IState> {
   }
 }
 
-export default MainCart;
-// export default connect(mapStateToProps, mapDispatchToPropsFactory)(MainCart);
+// export default MainCart;
+export default connect(mapStateToProps, mapDispatchToPropsFactory)(MainCart);
