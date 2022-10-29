@@ -1,13 +1,25 @@
 import React from 'react';
 import stylesPriceBlock from './mini-price-block.module.css';
-// import PriceBlock from '../../../../../common/common-bloks/price-block/price-block';
 import PriceBlockAbstractClass from '../../../../main-cart/abstract-classes/PriceBlockAbstractClass';
+import { State } from '../../../../../../../store/store';
+import { setCurrency } from '../../../../../../../store/currencySlice';
+import { connect } from 'react-redux';
+import { IPriceBlockProps } from '../../../../../common-models';
+
+type IProps = Readonly<IPriceBlockProps>;
+
+const mapStateToProps = (state:State) => {
+  return { symbol: state.currency.symbol }
+};
+const mapDispatchToProps = { setCurrency };
 
 class MiniPriceBlock extends PriceBlockAbstractClass {
+  constructor(props: IProps) {
+    super(props);
+  }
   render() {
-    const currency = !this.props.isEmpty ? this.state.symbol : '';
-    const price: number = !this.props.isEmpty ? this.state.amount : 0;
-
+    const currency = this.state.symbol;
+    const price = this.state.amount;
     return (
       <>
         <div className={stylesPriceBlock.priceBlock}>
@@ -18,4 +30,5 @@ class MiniPriceBlock extends PriceBlockAbstractClass {
   }
 }
 
-export default MiniPriceBlock;
+// export default MiniPriceBlock;
+export default connect(mapStateToProps,  mapDispatchToProps)(MiniPriceBlock);

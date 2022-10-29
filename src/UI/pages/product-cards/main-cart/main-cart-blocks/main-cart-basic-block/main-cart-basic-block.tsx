@@ -10,9 +10,9 @@ class MainCartBasicBlock extends BasicBlock {
     const arrAttributes = this.props.product.attributes as IProductAttribute[];
     const productId =
       this.props.product.id === '' ? 'xbox-series-s' : this.props.product.id;
-    const symbolCurrency = this.props.currentCurrency;
     const isEmpty: boolean = this.props.product.id === '';
     const brand = isEmpty ? 'Your cart is empty' : this.props.product.brand;
+    const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [this.props.product.prices];
     return (
       <article className={styles.wrapper}>
         <section className={styles.brand}>
@@ -25,9 +25,8 @@ class MainCartBasicBlock extends BasicBlock {
 
         <section className={styles.priceBlock}>
           <PriceBlock
-            // id={productId}
-            // symbolCurrency={symbolCurrency}
-            isEmpty={isEmpty}
+            // isEmpty={isEmpty}
+            prices={prices}
           />
         </section>
 

@@ -2,7 +2,7 @@ import {
   ICurrency,
   ILocalBasket,
   IModifiedProducts,
-  IParams,
+  IParams, IPrice,
   IProduct,
   IProductAttribute,
   Label,
@@ -14,7 +14,6 @@ import {
 } from './states-models';
 import { WithRouterProps } from '../with-router/with-router.model';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-import MainCart from '../product-cards/main-cart/main-cart';
 
 export interface IHeaderProps {
   getCurrency?: (label: Label, symbol: SymbolCurrency) => void;
@@ -77,4 +76,9 @@ export interface IMainCartProps {
   isNewBasketToggle?: boolean;
   cartState?: ILocalBasket[];
   renewBasket?: ActionCreatorWithPayload<ILocalBasket[], string>;
+}
+export interface IPriceBlockProps {
+  prices?: IPrice[];
+  symbol?: SymbolCurrency;
+  isEmpty?: boolean;
 }

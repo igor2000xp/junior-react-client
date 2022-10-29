@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import styles from './basic-block.module.css';
 import PriceBlock from '../../../common/common-bloks/price-block/price-block';
 import CommonAttributeSet from '../../../common/common-bloks/common-attribute-set/common-attribute-set';
-import { IProductAttribute, IBasicBlockProps, priceInit } from '../../../common-models';
+import { IProductAttribute, IBasicBlockProps } from '../../../common-models';
 
 type IProps = Readonly<IBasicBlockProps>;
 
 class BasicBlock extends Component<IProps> {
   render() {
-    // console.log(this.props.product.prices);
     const arrAttributes = this.props.product.attributes as IProductAttribute[];
     const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [this.props.product.prices];
     return (
@@ -31,8 +30,6 @@ class BasicBlock extends Component<IProps> {
           <div>
             <PriceBlock
               prices={prices}
-              // id={this.props.product.id}
-              // symbolCurrency={this.props.currentCurrency}
             />
           </div>
         </div>
