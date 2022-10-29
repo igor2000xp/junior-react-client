@@ -20,7 +20,6 @@ abstract class CartAbstractClass extends Component<IProps, IState> {
 
   protected constructor(props: IProps) {
     super(props);
-    // this.getCurrency = this.getCurrency.bind(this);
     // this.handlePlusMinusButtons = this.handlePlusMinusButtons.bind(this);
     // this.getTotalItemsQuality = this.getTotalItemsQuality.bind(this);
     this.state = {
@@ -89,8 +88,7 @@ abstract class CartAbstractClass extends Component<IProps, IState> {
 
   render() {
     return (
-      <>
-      </>
+      <></>
     )
   }
 }
