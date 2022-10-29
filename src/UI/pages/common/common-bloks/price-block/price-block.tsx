@@ -1,87 +1,54 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import stylesPriceBlock from './price-block.module.css';
-import client from '../../../../../graphql/apollo';
-import { GetProductByIdDocument } from '../../../../../graphql/generated';
-import { IState, IProps, ISlimPrice, IPrice } from './price-block.model';
+import { IPriceBlockProps, IPriceBlockState } from './price-block.model';
 import { SymbolCurrency } from '../../../common-models';
-import { PRODUCT_LIST_FIRST_ID } from '../../../../../constants';
+import PriceBlockAbstractClass from '../../../product-cards/main-cart/abstract-classes/PriceBlockAbstractClass';
+// import { mapStateToPropsFactory } from 'react-redux/es/connect/mapStateToProps';
+import { State } from '../../../../../store/store';
+import { connect } from 'react-redux';
+import { setCurrency } from '../../../../../store/currencySlice';
 
-class PriceBlock extends PureComponent<IProps, IState> {
-  prices: ISlimPrice[] = [{ symbol: '', amount: 0 }];
-  private id = '';
-  private zeroProductId: string = '';
-  private isPdp = true;
-  private isCategory = true;
+type IProps = Readonly<IPriceBlockProps>;
+type IState = Readonly<IPriceBlockState>;
+
+const mapStateToProps = (state:State) => {
+  return { symbol: state.currency.symbol }
+};
+const mapDispatchToProps = { setCurrency };
+
+class PriceBlock extends PriceBlockAbstractClass {
+  private isPropsFirst = true;
   constructor(props: IProps) {
     super(props);
-    this.zeroProductId = localStorage.getItem(PRODUCT_LIST_FIRST_ID) as string;
-    this.state = {
-      symbol: '',
-      amount: 0,
-      prodId: '',
-    };
   }
-
   async componentDidMount() {
-    await this.setState({prodId: this.props.id});
-    const id = this.state.prodId ? this.state.prodId : this.zeroProductId;
-    await this.priceQuery(id);
+    const symbol = this.props.symbol ? this.props.symbol : SymbolCurrency.SymbolUsd;
+    const objAmount = this.props.prices?.find((item) => {
+      return item.currency.symbol === symbol ? item : 0;
+    });
+    const amount = objAmount ? objAmount.amount : 0;
+    this.setState({ symbol, amount });
+
   }
 
-  async componentDidUpdate(prevProps: Readonly<IProps>) {
-    if (prevProps.id !== this.props.id) {
-      await this.setState({prodId: this.props.id})
+  componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
+    const symbol = this.props.symbol ? this.props.symbol : SymbolCurrency.SymbolUsd;
+    const objAmount = this.props.prices?.find((item) => {
+      return item.currency.symbol === symbol ? item : 0;
+    });
+    const amount = objAmount ? objAmount.amount : 0;
+    if (typeof this.props.prices !== 'undefined' && this.props.prices[0].amount !== 0 && this.isPropsFirst) {
+      if (amount !== 0) this.isPropsFirst = false;
+      this.setState({ symbol, amount });
     }
-    if (
-      prevProps.id !== this.props.id ||
-      prevProps.symbolCurrency !== this.props.symbolCurrency
-    ) {
-      const id = this.state.prodId !== '' ? this.state.prodId : this.zeroProductId;
-      await this.priceQuery(id);
+    if (prevState.symbol !== symbol) {
+      this.setState({ symbol, amount });
     }
+
   }
-
-  async priceQuery(id: string) {
-    try {
-      const idFromAddress = location.pathname.split(':')[1];
-      const idCategory = location.pathname.split(':')[0];
-      this.isCategory = Boolean(idCategory === 'category');
-      this.isPdp = Boolean(idFromAddress);
-      this.id = this.isPdp && this.isCategory ? idFromAddress : this.props.id;
-
-      const { data } = await client.query({
-        query: GetProductByIdDocument,
-        variables: {
-          id
-        },
-        fetchPolicy: 'no-cache',
-      });
-
-      const prices: ISlimPrice[] = data.product.prices.map((item: IPrice) => {
-        return { symbol: item.currency.symbol, amount: item.amount };
-      });
-      this.prices = [...prices];
-
-      const price = prices.find((item: ISlimPrice) => {
-        if (item.symbol === this.props.symbolCurrency) {
-          return { symbol: item.symbol, amount: item.amount };
-        } else return;
-      });
-
-      await this.setState({
-        symbol: price ? price.symbol : SymbolCurrency.SymbolUsd,
-        amount: price ? price.amount : 0,
-        prodId: this.id,
-      });
-    } catch (err) {
-      console.log(`Error loading data from server ${err}`);
-    }
-  }
-
   render() {
-    const currency = !this.props.isEmpty ? this.state.symbol : '';
-    const price: number = !this.props.isEmpty ? this.state.amount : 0;
-
+    const currency = this.state.symbol;
+    const price = this.state.amount;
     return (
       <>
         <div className={stylesPriceBlock.priceBlock}>
@@ -92,4 +59,5 @@ class PriceBlock extends PureComponent<IProps, IState> {
   }
 }
 
-export default PriceBlock;
+// export default PriceBlock;
+export default connect(mapStateToProps, mapDispatchToProps)(PriceBlock);

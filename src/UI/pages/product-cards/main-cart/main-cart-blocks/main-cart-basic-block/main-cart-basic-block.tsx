@@ -25,8 +25,8 @@ class MainCartBasicBlock extends BasicBlock {
 
         <section className={styles.priceBlock}>
           <PriceBlock
-            id={productId}
-            symbolCurrency={symbolCurrency}
+            // id={productId}
+            // symbolCurrency={symbolCurrency}
             isEmpty={isEmpty}
           />
         </section>

@@ -15,7 +15,7 @@ import { State } from '../../../../store/store';
 import { renewBasket } from '../../../../store/cartSlice';
 import { connect, DispatchProp } from 'react-redux';
 // import { AnyAction } from '@reduxjs/toolkit';
-import CartAbstractClass from '../main-cart/abstract-class/CartAbstractClass';
+import CartAbstractClass from '../main-cart/abstract-classes/CartAbstractClass';
 
 const mapStateToProps = (state: State) => {
   return { cart: state.cart };

@@ -4,8 +4,11 @@ import MainCartBasicBlock from '../../main-cart/main-cart-blocks/main-cart-basic
 import { IProductAttribute } from '../../../common-models';
 import MiniCartCommonAttributes from '../mini-cart-common-attributes/mini-cart-common-attributes';
 import MiniPriceBlock from '../mini-cart-blocks/blocks/mini-price-block/mini-price-block';
+import PriceBlock from '../../../common/common-bloks/price-block/price-block';
+import PriceBlockAbstractClass from '../../main-cart/abstract-classes/PriceBlockAbstractClass';
+import BasicBlock from '../../pdp-card/pdp-card-blocks/basic-block';
 
-class MiniCartBasicBlock extends MainCartBasicBlock {
+class MiniCartBasicBlock extends BasicBlock {
   render() {
     const arrAttributes = this.props.product.attributes as IProductAttribute[];
     const productId =

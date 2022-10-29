@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styles from './product-small-card.module.css';
 import PriceBlock from '../../common/common-bloks/price-block/price-block';
-import { IProduct, SymbolCurrency, IPrice } from '../../common-models';
+import { IProduct, SymbolCurrency, IPrice, priceInit } from '../../common-models';
 import cartImage from '../../../../assets/images/Icon/CircleIcon.svg';
 import {
   getFirstProdAttrAsActiveAttr,
@@ -11,7 +11,7 @@ import { LOCAL_BASKET } from '../../../../constants';
 
 interface IProductSmallCardProps {
   item: IProduct;
-  symbolCurrency: SymbolCurrency;
+  symbolCurrency?: SymbolCurrency;
   handleGreenButtonFromSmallCart: () => void;
 }
 type IProps = Readonly<IProductSmallCardProps>;
@@ -55,7 +55,8 @@ class ProductSmallCard extends Component<IProps, any> {
       this.gallery = '';
     } else if (Array.isArray(firstGallery))
       this.gallery = firstGallery[0] ? firstGallery[0] : '';
-    const id = this.props.item.id;
+    // const id = this.props.item.id;
+    const prices = Array.isArray(this.props.item.prices) ? this.props.item.prices : [{...priceInit}];
     const greenButton = !this.props.item.inStock
       ? styles.outStore
       : styles.greenButtonCart;
@@ -80,8 +81,9 @@ class ProductSmallCard extends Component<IProps, any> {
           </div>
           <div className={styles.priceBlock}>
             <PriceBlock
-              id={id}
-              symbolCurrency={this.props.symbolCurrency}
+              prices={prices}
+              // id={id}
+              // symbolCurrency={this.props.symbolCurrency}
             />
           </div>
         </article>

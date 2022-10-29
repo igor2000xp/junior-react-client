@@ -19,7 +19,7 @@ import {
 import { State } from '../../../../store/store';
 import { renewBasket } from '../../../../store/cartSlice';
 import { connect } from 'react-redux';
-import CartAbstractClass from './abstract-class/CartAbstractClass';
+import CartAbstractClass from './abstract-classes/CartAbstractClass';
 
 const mapStateToProps = (state: State) => {
   return { cart: state.cart };

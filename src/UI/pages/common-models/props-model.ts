@@ -34,7 +34,7 @@ export const printToLocalStorageInit = {
 };
 export interface IBasicBlockProps {
   product: IProduct;
-  currentCurrency: SymbolCurrency;
+  currentCurrency?: SymbolCurrency;
   modifiedProducts?: IModifiedProducts[];
 }
 

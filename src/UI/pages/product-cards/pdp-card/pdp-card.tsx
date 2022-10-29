@@ -27,7 +27,7 @@ class PdpCard extends Component<any, IState> {
   constructor(props: any) {
     super(props);
     this.state = { ...IPdpCardStateInit };
-    this.getCurrencyFromHeader = this.getCurrencyFromHeader.bind(this);
+    // this.getCurrencyFromHeader = this.getCurrencyFromHeader.bind(this);
     this.switchImage = this.switchImage.bind(this);
     this.product = { ...productInit };
   }
@@ -82,13 +82,13 @@ class PdpCard extends Component<any, IState> {
     });
   }
 
-  async getCurrencyFromHeader(label: Label, symbol: SymbolCurrency) {
-    await this.setState(() => {
-      return {
-        currentCurrency: symbol,
-      };
-    });
-  }
+  // async getCurrencyFromHeader(label: Label, symbol: SymbolCurrency) {
+  //   await this.setState(() => {
+  //     return {
+  //       currentCurrency: symbol,
+  //     };
+  //   });
+  // }
 
   render() {
     const bigImage = this.state.bigImage;
@@ -96,7 +96,8 @@ class PdpCard extends Component<any, IState> {
     const hidden = this.product.gallery.length === 1 ? styles.hidden : '';
     return (
       <article className={styles.wrapperWithHeader}>
-        <Header getCurrency={this.getCurrencyFromHeader} />
+        {/*<Header getCurrency={this.getCurrencyFromHeader} />*/}
+        <Header />
 
         <div className={styles.wrapper}>
           <section className={`${styles.leftBlock} ${hidden}`}>
@@ -120,7 +121,7 @@ class PdpCard extends Component<any, IState> {
           <section className={styles.rightBlock}>
             <BasicBlock
               product={this.product}
-              currentCurrency={this.state.currentCurrency}
+              // currentCurrency={this.state.currentCurrency}
             />
             <ButtonBlock inStock={this.product.inStock} />
             <TextBlock text={this.product.description} />

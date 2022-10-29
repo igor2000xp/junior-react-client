@@ -142,7 +142,7 @@ class MainPage extends PureComponent<any, IState> {
                   <div onClick={() => this.handleGoToProductLink(item.id)}>
                     <ProductSmallCard
                       item={item}
-                      symbolCurrency={symbolCurrency}
+                      // symbolCurrency={symbolCurrency}
                       key={item.id}
                       handleGreenButtonFromSmallCart={
                         this.handleGreenButtonFromSmallCart

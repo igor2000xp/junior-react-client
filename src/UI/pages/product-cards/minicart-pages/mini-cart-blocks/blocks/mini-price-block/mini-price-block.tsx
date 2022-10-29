@@ -1,8 +1,9 @@
 import React from 'react';
 import stylesPriceBlock from './mini-price-block.module.css';
-import PriceBlock from '../../../../../common/common-bloks/price-block/price-block';
+// import PriceBlock from '../../../../../common/common-bloks/price-block/price-block';
+import PriceBlockAbstractClass from '../../../../main-cart/abstract-classes/PriceBlockAbstractClass';
 
-class MiniPriceBlock extends PriceBlock {
+class MiniPriceBlock extends PriceBlockAbstractClass {
   render() {
     const currency = !this.props.isEmpty ? this.state.symbol : '';
     const price: number = !this.props.isEmpty ? this.state.amount : 0;

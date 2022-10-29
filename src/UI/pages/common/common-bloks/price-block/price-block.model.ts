@@ -1,20 +1,18 @@
-import { SymbolCurrency } from '../../../common-models';
+import { IPrice, SymbolCurrency } from '../../../common-models';
 
-export interface IProps {
-  id: string;
-  symbolCurrency: SymbolCurrency;
+export interface IPriceBlockProps {
+  id?: string;
+  prices?: IPrice[];
+  symbolCurrency?: SymbolCurrency;
+  symbol?: SymbolCurrency;
   isEmpty?: boolean;
 }
-export interface IPrice {
-  currency: { label: string; symbol: string };
-  amount: number;
-}
 export interface ISlimPrice {
-  symbol: string;
+  symbol: SymbolCurrency;
   amount: number;
 }
-export interface IState {
+export interface IPriceBlockState {
   symbol: string;
   amount: number;
-  prodId: string;
+  // prodId: string;
 }

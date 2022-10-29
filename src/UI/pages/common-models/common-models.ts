@@ -131,29 +131,6 @@ export const categoriesInit = [
   { name: 'tech', isActive: false },
 ];
 
-export interface ILocalBasket {
-  productId: string;
-  quantity: number;
-  activeAttributes: IAttrActive[];
-}
-export const localBasketItemInit: ILocalBasket = {
-  productId: '',
-  quantity: 0,
-  activeAttributes: [{ ...localActiveAttributesPdpInit }],
-};
-export interface ILocalBasketForTotal {
-  productId: string;
-  quantity: number;
-  symbolPrice: SymbolCurrency;
-  amount: number;
-}
-export const localBasketForTotalInit: ILocalBasketForTotal = {
-  productId: '',
-  quantity: 0,
-  symbolPrice: SymbolCurrency.SymbolUsd,
-  amount: 0,
-};
-
 export interface IActiveBasketAttr {
   productId: string;
   activeAttributes: IAttrActive[];
@@ -183,7 +160,40 @@ export interface IPrice {
   amount: number;
   currency: ICurrency;
 }
+export const priceInit:IPrice = {
+  amount: 0,
+  currency: {
+    label: Label.Usd,
+    symbol: SymbolCurrency.SymbolUsd,
+  },
+}
 
+export interface ILocalBasket {
+  productId: string;
+  quantity: number;
+  activeAttributes: IAttrActive[];
+  attributes?: IProductAttribute[];
+  prices?: IPrice[];
+}
+export const localBasketItemInit: ILocalBasket = {
+  productId: '',
+  quantity: 0,
+  activeAttributes: [{ ...localActiveAttributesPdpInit }],
+  attributes: [{...productAttributeInit}],
+  prices: [{...priceInit}],
+};
+export interface ILocalBasketForTotal {
+  productId: string;
+  quantity: number;
+  symbolPrice: SymbolCurrency;
+  amount: number;
+}
+export const localBasketForTotalInit: ILocalBasketForTotal = {
+  productId: '',
+  quantity: 0,
+  symbolPrice: SymbolCurrency.SymbolUsd,
+  amount: 0,
+};
 export interface ILocalCurrency {
   label: Label;
   symbol: SymbolCurrency;
