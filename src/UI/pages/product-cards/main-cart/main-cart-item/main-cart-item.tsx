@@ -175,7 +175,7 @@ class MainCartItem extends Component<IProps, IState> {
           <MainCartBasicBlock
             product={product}
             modifiedProducts={modifiedProducts}
-            currentCurrency={this.props.currency.symbol}
+            // currentCurrency={this.props.currency.symbol}
           />
         </aside>
 

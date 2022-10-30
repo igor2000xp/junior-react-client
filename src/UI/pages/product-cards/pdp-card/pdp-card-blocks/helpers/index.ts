@@ -1,8 +1,8 @@
 import {
   IActiveAttrPdp,
   IAttrActive,
-  ILocalBasket,
-  IProduct,
+  ILocalBasket, IPrice,
+  IProduct, IProductAttribute,
   localActiveAttributesInit,
   localBasketItemInit,
 } from '../../../../common-models';
@@ -16,6 +16,8 @@ export const settleFullBasket = (
   localBaskets: ILocalBasket[],
   activeAttr: IActiveAttrPdp[],
   productId: string,
+  attributes: IProductAttribute[],
+  prices: IPrice[],
 ): ILocalBasket[] => {
   // Check for the same product id and set of attributes
   let isAttributes = false;
@@ -23,6 +25,8 @@ export const settleFullBasket = (
     productId,
     quantity: 1,
     activeAttributes: activeAttr,
+    attributes,
+    prices,
   };
   const isProduct = localBaskets.findIndex((item) => {
     return item.productId === productId;

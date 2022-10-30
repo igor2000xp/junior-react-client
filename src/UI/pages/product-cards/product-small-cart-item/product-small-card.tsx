@@ -39,10 +39,14 @@ class ProductSmallCard extends Component<IProps, any> {
       localStorage.getItem(LOCAL_BASKET) as string,
     );
     const attr = getFirstProdAttrAsActiveAttr(this.props.item);
+    const attributes = this.props.item.attributes;
+    const prices = Array.isArray(this.props.item.prices) ? this.props.item.prices : [this.props.item.prices];
     const newLocalBasket = settleFullBasket(
       localBasket,
       attr,
       this.props.item.id,
+      attributes,
+      prices,
     );
     localStorage.setItem(LOCAL_BASKET, JSON.stringify(newLocalBasket));
     this.props.handleGreenButtonFromSmallCart();

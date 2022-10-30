@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './button-block.module.css';
-import { IActiveAttrPdp, localBasketItemInit } from '../../../common-models';
+import { IActiveAttrPdp, IPrice, IProductAttribute, localBasketItemInit } from '../../../common-models';
 import {
   ACTIVE_PRODUCT_ATTRIBUTES,
   LOCAL_BASKET,
@@ -14,6 +14,8 @@ import {
 
 interface IProps {
   inStock: boolean;
+  attributes: IProductAttribute[];
+  prices: IPrice[];
 }
 
 class ButtonBlock extends Component<IProps> {
@@ -34,6 +36,8 @@ class ButtonBlock extends Component<IProps> {
     const activeAttr: IActiveAttrPdp[] = await getActiveAttrFromLocal();
     await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const productId = this.productId;
+    const attributes = this.props.attributes;
+    const prices = this.props.prices;
     this.localBaskets = await getFromLocalBasket();
     if (
       !this.localBaskets[0].productId &&
@@ -46,6 +50,8 @@ class ButtonBlock extends Component<IProps> {
           quantity: 1,
           productId,
           activeAttributes: activeAttr,
+          attributes,
+          prices,
         },
       ];
     }
@@ -54,6 +60,8 @@ class ButtonBlock extends Component<IProps> {
       this.localBaskets,
       activeAttr,
       this.productId,
+      attributes,
+      prices,
     );
     await localStorage.setItem(LOCAL_BASKET, JSON.stringify(this.localBaskets));
   }
