@@ -15,8 +15,16 @@ import {
   getFromLocalBasket,
   settleFullBasket,
 } from './helpers';
+import { State } from '../../../../../store/store';
+import { renewBasket } from '../../../../../store/cartSlice';
+import { connect } from 'react-redux';
 
-type IProps = Readonly<IButtonBlockProps>
+type IProps = Readonly<IButtonBlockProps>;
+
+const mapStateToProps = (state: State) => {
+  return { cart: state.cart.cart };
+};
+const mapDispatchToProps = { renewBasket };
 
 class ButtonBlock extends Component<IProps> {
   private localBaskets = [localBasketItemInit];
@@ -34,7 +42,6 @@ class ButtonBlock extends Component<IProps> {
 
   async goToBasket() {
     const activeAttributes: IActiveAttrPdp[] = await getActiveAttrFromLocal();
-    console.log(activeAttributes);
     const productId = this.productId;
     const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [priceInit];
     const product:IProduct = this.props.product;
@@ -69,6 +76,7 @@ class ButtonBlock extends Component<IProps> {
       product,
     );
     await localStorage.setItem(LOCAL_BASKET, JSON.stringify(this.localBaskets));
+    this.props.renewBasket(this.localBaskets);
   }
 
   async componentWillUnmount() {
@@ -90,4 +98,5 @@ class ButtonBlock extends Component<IProps> {
   }
 }
 
-export default ButtonBlock;
+// export default ButtonBlock;
+export default connect(mapStateToProps, mapDispatchToProps)(ButtonBlock);

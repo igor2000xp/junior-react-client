@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import styles from './product-small-card.module.css';
 import PriceBlock from '../../common/common-bloks/price-block/price-block';
-import { IProduct, SymbolCurrency, IPrice, priceInit } from '../../common-models';
+import { IProductSmallCardProps, IPrice, priceInit } from '../../common-models';
 import cartImage from '../../../../assets/images/Icon/CircleIcon.svg';
 import {
   getFirstProdAttrAsActiveAttr,
   settleFullBasket,
 } from '../pdp-card/pdp-card-blocks/helpers';
 import { LOCAL_BASKET } from '../../../../constants';
+import { State } from '../../../../store/store';
+import { renewBasket } from '../../../../store/cartSlice';
+import { connect } from 'react-redux';
 
-interface IProductSmallCardProps {
-  item: IProduct;
-  symbolCurrency?: SymbolCurrency;
-  handleGreenButtonFromSmallCart: () => void;
-}
+const mapStateToProps = (state:State) => {
+  return { cart: state.cart.cart }
+};
+const mapDispatchToProps = { renewBasket };
+
 type IProps = Readonly<IProductSmallCardProps>;
 // type IProps = WithRouterProps<IProductSmallCardProps>;
 
@@ -51,6 +54,7 @@ class ProductSmallCard extends Component<IProps, any> {
       product,
     );
     localStorage.setItem(LOCAL_BASKET, JSON.stringify(newLocalBasket));
+    this.props.renewBasket(newLocalBasket);
     this.props.handleGreenButtonFromSmallCart();
   }
 
@@ -99,4 +103,5 @@ class ProductSmallCard extends Component<IProps, any> {
 }
 
 // export default withRouter(ProductSmallCard);
-export default ProductSmallCard;
+// export default ProductSmallCard;
+export default connect(mapStateToProps, mapDispatchToProps)(ProductSmallCard);

@@ -85,4 +85,13 @@ export interface IPriceBlockProps {
 export interface IButtonBlockProps {
   inStock: boolean;
   product: IProduct;
+  cart: ILocalBasket[];
+  renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>
+}
+export interface IProductSmallCardProps {
+  item: IProduct;
+  symbolCurrency?: SymbolCurrency;
+  handleGreenButtonFromSmallCart: () => void;
+  cart?: ILocalBasket[],
+  renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>
 }
