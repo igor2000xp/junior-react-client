@@ -8,12 +8,12 @@ import {
   modifiedProductsInit,
   productInit,
 } from '../../../common-models';
-import MainCartItem from '../../main-cart/main-cart-item/main-cart-item';
+import CartItemBlockAbstractClass from '../../main-cart/abstract-classes/CartItemBlockAbstractClass';
 
 type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
 
-class MiniCartItem extends MainCartItem {
+class MiniCartItem extends CartItemBlockAbstractClass {
   constructor(props: IProps) {
     super(props);
   }
