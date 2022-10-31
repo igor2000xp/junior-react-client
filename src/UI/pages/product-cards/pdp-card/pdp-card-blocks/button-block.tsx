@@ -10,7 +10,6 @@ import {
   ACTIVE_PRODUCT_ATTRIBUTES,
   LOCAL_BASKET,
 } from '../../../../../constants';
-import { Link } from 'react-router-dom';
 import {
   getActiveAttrFromLocal,
   getFromLocalBasket,
@@ -34,10 +33,9 @@ class ButtonBlock extends Component<IProps> {
   }
 
   async goToBasket() {
-    const activeAttr: IActiveAttrPdp[] = await getActiveAttrFromLocal();
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+    const activeAttributes: IActiveAttrPdp[] = await getActiveAttrFromLocal();
+    console.log(activeAttributes);
     const productId = this.productId;
-    const attributes = this.props.product.attributes;
     const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [priceInit];
     const product:IProduct = this.props.product;
     this.localBaskets = await getFromLocalBasket();
@@ -51,8 +49,8 @@ class ButtonBlock extends Component<IProps> {
         {
           quantity: 1,
           productId,
-          activeAttributes: activeAttr,
-          attributes,
+          activeAttributes,
+          attributes: product.attributes,
           prices,
           id: product.id,
           name: product.name,
@@ -64,9 +62,9 @@ class ButtonBlock extends Component<IProps> {
     // Other cart checks
     this.localBaskets = settleFullBasket(
       this.localBaskets,
-      activeAttr,
+      activeAttributes,
       this.productId,
-      attributes,
+      product.attributes,
       prices,
       product,
     );
@@ -78,15 +76,15 @@ class ButtonBlock extends Component<IProps> {
   }
 
   render() {
-    const linkOut = this.props.inStock ? '/' : '';
+    // const linkOut = this.props.inStock ? '/' : '';
     const buttonOut = this.props.inStock ? '' : styles.notActive;
     return (
       <div onClick={this.clickToOut}>
-        <Link to={linkOut}>
+        {/*<Link to={linkOut}>*/}
           <button className={`${styles.wrapper} ${buttonOut}`}>
             <h2>ADD TO CART</h2>
           </button>
-        </Link>
+        {/*</Link>*/}
       </div>
     );
   }

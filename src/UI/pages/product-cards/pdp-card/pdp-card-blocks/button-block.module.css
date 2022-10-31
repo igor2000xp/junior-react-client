@@ -16,7 +16,19 @@
   font-size: 16px;
   line-height: 120%;
 }
+.wrapper:hover {
+  background-color: #42fa72;
+}
+.wrapper:active {
+  background-color: #ff0000;
+}
 .notActive {
- opacity: 0.5;
+  background-color: #5ece7b;
+  opacity: 0.5;
+  cursor: auto;
+}
+.notActive:hover {
+  background-color: #5ece7b;
+  opacity: 0.5;
   cursor: auto;
 }

@@ -80,27 +80,18 @@ class PdpCard extends Component<any, IState> {
     });
   }
 
-  // async getCurrencyFromHeader(label: Label, symbol: SymbolCurrency) {
-  //   await this.setState(() => {
-  //     return {
-  //       currentCurrency: symbol,
-  //     };
-  //   });
-  // }
-
   render() {
     const bigImage = this.state.bigImage;
-    const outStock = !this.product.inStock ? styles.outStock : '';
-    const hidden = this.product.gallery.length === 1 ? styles.hidden : '';
     const product = this.product;
+    const outStock = !product.inStock ? styles.outStock : '';
+    const hidden = product.gallery.length === 1 ? styles.hidden : '';
     return (
       <article className={styles.wrapperWithHeader}>
-        {/*<Header getCurrency={this.getCurrencyFromHeader} />*/}
         <Header />
 
         <div className={styles.wrapper}>
           <section className={`${styles.leftBlock} ${hidden}`}>
-            {this.product.gallery.map((item, index) => {
+            {product.gallery.map((item, index) => {
               return (
                 <div
                   className={styles.smallImage}
@@ -119,13 +110,13 @@ class PdpCard extends Component<any, IState> {
 
           <section className={styles.rightBlock}>
             <BasicBlock
-              product={this.product}
-            />
-            <ButtonBlock
-              inStock={this.product.inStock}
               product={product}
             />
-            <TextBlock text={this.product.description} />
+            <ButtonBlock
+              inStock={product.inStock}
+              product={product}
+            />
+            <TextBlock text={product.description} />
           </section>
         </div>
       </article>
