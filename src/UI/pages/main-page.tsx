@@ -15,7 +15,6 @@ import {
   IMainPageState,
   IParams,
   IProduct,
-  IPropsMainPage,
   Label,
   localBasketItemInit,
   mainPageStateInit,
@@ -34,7 +33,7 @@ const mapStateToProps = (state:State) => {
 const mapDispatchToProps = { setPage };
 
 type IState = Readonly<IMainPageState>;
-type IProps = Readonly<IPropsMainPage>;
+// type IProps = Readonly<IPropsMainPage>;
 
 class MainPage extends PureComponent<any, IState> {
   private categoryId: string;
@@ -119,7 +118,7 @@ class MainPage extends PureComponent<any, IState> {
 
   render() {
     const items = this.products;
-    const symbolCurrency = this.state.currentCurrency;
+    // const symbolCurrency = this.state.currentCurrency;
     if (!this.state.isLoaded) {
       return <h1>Loading...</h1>;
     }
@@ -142,7 +141,6 @@ class MainPage extends PureComponent<any, IState> {
                   <div onClick={() => this.handleGoToProductLink(item.id)}>
                     <ProductSmallCard
                       item={item}
-                      // symbolCurrency={symbolCurrency}
                       key={item.id}
                       handleGreenButtonFromSmallCart={
                         this.handleGreenButtonFromSmallCart

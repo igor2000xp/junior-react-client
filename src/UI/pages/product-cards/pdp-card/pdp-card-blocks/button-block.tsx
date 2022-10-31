@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import styles from './button-block.module.css';
-import { IActiveAttrPdp, IPrice, IProductAttribute, localBasketItemInit } from '../../../common-models';
+import {
+  IActiveAttrPdp, IButtonBlockProps,
+  IProduct,
+  localBasketItemInit,
+  priceInit
+} from '../../../common-models';
 import {
   ACTIVE_PRODUCT_ATTRIBUTES,
   LOCAL_BASKET,
@@ -12,11 +17,7 @@ import {
   settleFullBasket,
 } from './helpers';
 
-interface IProps {
-  inStock: boolean;
-  attributes: IProductAttribute[];
-  prices: IPrice[];
-}
+type IProps = Readonly<IButtonBlockProps>
 
 class ButtonBlock extends Component<IProps> {
   private localBaskets = [localBasketItemInit];
@@ -36,8 +37,9 @@ class ButtonBlock extends Component<IProps> {
     const activeAttr: IActiveAttrPdp[] = await getActiveAttrFromLocal();
     await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const productId = this.productId;
-    const attributes = this.props.attributes;
-    const prices = this.props.prices;
+    const attributes = this.props.product.attributes;
+    const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [priceInit];
+    const product:IProduct = this.props.product;
     this.localBaskets = await getFromLocalBasket();
     if (
       !this.localBaskets[0].productId &&
@@ -52,6 +54,10 @@ class ButtonBlock extends Component<IProps> {
           activeAttributes: activeAttr,
           attributes,
           prices,
+          id: product.id,
+          name: product.name,
+          brand: product.brand,
+          gallery: product.gallery,
         },
       ];
     }
@@ -62,6 +68,7 @@ class ButtonBlock extends Component<IProps> {
       this.productId,
       attributes,
       prices,
+      product,
     );
     await localStorage.setItem(LOCAL_BASKET, JSON.stringify(this.localBaskets));
   }

@@ -92,7 +92,7 @@ class PdpCard extends Component<any, IState> {
     const bigImage = this.state.bigImage;
     const outStock = !this.product.inStock ? styles.outStock : '';
     const hidden = this.product.gallery.length === 1 ? styles.hidden : '';
-    const prices = Array.isArray(this.product.prices) ? this.product.prices : [this.product.prices];
+    const product = this.product;
     return (
       <article className={styles.wrapperWithHeader}>
         {/*<Header getCurrency={this.getCurrencyFromHeader} />*/}
@@ -120,12 +120,10 @@ class PdpCard extends Component<any, IState> {
           <section className={styles.rightBlock}>
             <BasicBlock
               product={this.product}
-              // currentCurrency={this.state.currentCurrency}
             />
             <ButtonBlock
               inStock={this.product.inStock}
-              attributes={this.product.attributes}
-              prices={prices}
+              product={product}
             />
             <TextBlock text={this.product.description} />
           </section>

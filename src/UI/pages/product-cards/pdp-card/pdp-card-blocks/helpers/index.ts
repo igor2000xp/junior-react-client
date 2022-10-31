@@ -18,6 +18,7 @@ export const settleFullBasket = (
   productId: string,
   attributes: IProductAttribute[],
   prices: IPrice[],
+  product: IProduct,
 ): ILocalBasket[] => {
   // Check for the same product id and set of attributes
   let isAttributes = false;
@@ -25,6 +26,10 @@ export const settleFullBasket = (
     productId,
     quantity: 1,
     activeAttributes: activeAttr,
+    id: product.id,
+    name: product.name,
+    brand: product.name,
+    gallery: product.gallery,
     attributes,
     prices,
   };

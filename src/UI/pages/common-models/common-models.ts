@@ -104,7 +104,6 @@ export const productInit = {
   ],
   brand: '',
 };
-
 export interface IProductAttrForPrint extends ICommonAttributeSetProps {
   activeAttributes: IActiveAttrPdp[];
   quantity: number;
@@ -117,7 +116,6 @@ export const productAttrForPrintInit: IProductAttrForPrint = {
   quantity: 0,
   additionalId: '',
 };
-
 export interface ICategory {
   name: string;
 }
@@ -130,7 +128,6 @@ export const categoriesInit = [
   { name: 'clothes', isActive: false },
   { name: 'tech', isActive: false },
 ];
-
 export interface IActiveBasketAttr {
   productId: string;
   activeAttributes: IAttrActive[];
@@ -139,7 +136,6 @@ export const localActiveAttributesInit: IActiveBasketAttr = {
   productId: 'xbox-series-s',
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
 };
-
 export interface IModifiedProducts {
   productID: string;
   id: string;
@@ -167,18 +163,25 @@ export const priceInit:IPrice = {
     symbol: SymbolCurrency.SymbolUsd,
   },
 }
-
 export interface ILocalBasket {
   productId: string;
   quantity: number;
   activeAttributes: IAttrActive[];
-  attributes?: IProductAttribute[];
-  prices?: IPrice[];
+  name: string;
+  brand: string;
+  id: string;
+  gallery: string[];
+  attributes: IProductAttribute[];
+  prices: IPrice[];
 }
 export const localBasketItemInit: ILocalBasket = {
   productId: '',
   quantity: 0,
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
+  name: '',
+  brand: '',
+  id: '',
+  gallery: [''],
   attributes: [{...productAttributeInit}],
   prices: [{...priceInit}],
 };

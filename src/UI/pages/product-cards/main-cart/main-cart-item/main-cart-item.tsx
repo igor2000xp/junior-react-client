@@ -36,8 +36,8 @@ class MainCartItem extends Component<IProps, IState> {
       quantityInBasket: 1,
       mainImageIndex: 0,
     };
-    this.plusHandle = this.plusHandle.bind(this);
-    this.minusHandle = this.minusHandle.bind(this);
+    // this.plusHandle = this.plusHandle.bind(this);
+    // this.minusHandle = this.minusHandle.bind(this);
   }
 
   async componentDidMount() {

@@ -82,3 +82,7 @@ export interface IPriceBlockProps {
   symbol?: SymbolCurrency;
   isEmpty?: boolean;
 }
+export interface IButtonBlockProps {
+  inStock: boolean;
+  product: IProduct;
+}
