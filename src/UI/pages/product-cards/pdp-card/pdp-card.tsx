@@ -117,6 +117,7 @@ class PdpCard extends Component<any, IState> {
           <section className={styles.rightBlock}>
             <BasicBlock
               modifiedProduct={modifiedProduct}
+              id={''}
             />
             <ButtonBlock
               inStock={product.inStock}

@@ -4,9 +4,35 @@ import PriceBlock from '../../../common/common-bloks/price-block/price-block';
 import CommonAttributeSet from '../../../common/common-bloks/common-attribute-set/common-attribute-set';
 import { IProductAttribute, IBasicBlockProps } from '../../../common-models';
 
-type IProps = Readonly<IBasicBlockProps>;
+export interface IBasicBlockState {
+  id: string;
+}
 
-class BasicBlock extends Component<IProps> {
+type IProps = Readonly<IBasicBlockProps>;
+type IState = Readonly<IBasicBlockState>;
+
+class BasicBlock extends Component<IProps, IState> {
+  // protected isEmpty = false;
+  protected name = '';
+  protected brand = '';
+  constructor(props: IProps) {
+    super(props);
+    this.state = { id: '' };
+  }
+
+  componentDidMount() {
+    this.setState({
+      id: this.props.id,
+    })
+  }
+
+  // componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
+  //   console.log(this.props.modifiedProduct.id);
+  //   if (prevState.id !== this.state.id) {
+  //     this.setState({ id: this.props.modifiedProduct.id });
+  //   }
+  // }
+
   render() {
     // modifiedProduct: IModifiedProduct
     const arrAttributes = this.props.modifiedProduct.attributes as IProductAttribute[];
@@ -23,7 +49,7 @@ class BasicBlock extends Component<IProps> {
 
         <CommonAttributeSet
           attributes={arrAttributes}
-          productID={this.props.modifiedProduct.id}
+          // productID={this.props.modifiedProduct.id}
         />
 
         <div className={styles.priceBlock}>

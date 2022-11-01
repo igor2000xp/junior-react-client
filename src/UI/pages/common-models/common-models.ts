@@ -89,7 +89,7 @@ export interface IAttribute {
   value: string;
 }
 export const productInit = {
-  id: 'xbox-series-s',
+  id: '',
   name: '',
   inStock: true,
   gallery: [''],
@@ -117,7 +117,7 @@ export interface IProductAttrForPrint extends ICommonAttributeSetProps {
   additionalId: string;
 }
 export const productAttrForPrintInit: IProductAttrForPrint = {
-  productID: '',
+  // productID: '',
   attributes: [{ ...productAttributeInit }],
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
   quantity: 0,
@@ -143,7 +143,7 @@ export const localActiveAttributesInit: IActiveBasketAttr = {
   productId: 'xbox-series-s',
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
 };
-export interface IModifiedProducts {
+export interface IModifiedAttrProducts{
   productID: string;
   id: string;
   type: string; // text, color
@@ -151,7 +151,7 @@ export interface IModifiedProducts {
   items: IAttribute[];
   activeItem: string;
 }
-export const modifiedProductsInit: IModifiedProducts = {
+export const modifiedAttrProductsInit: IModifiedAttrProducts = {
   productID: '',
   id: '',
   type: '', // text, color

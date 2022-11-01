@@ -8,8 +8,8 @@ import BasicBlock from '../../pdp-card/pdp-card-blocks/basic-block';
 class MiniCartBasicBlock extends BasicBlock {
   render() {
     const arrAttributes = this.props.modifiedProduct.attributes as IProductAttribute[];
-    const productId =
-      this.props.modifiedProduct.id === '' ? 'xbox-series-s' : this.props.modifiedProduct.id;
+    // const productId =
+    //   this.props.modifiedProduct.id === '' ? 'xbox-series-s' : this.props.modifiedProduct.id;
     const prices = Array.isArray(this.props.modifiedProduct.prices) ? this.props.modifiedProduct.prices : [this.props.modifiedProduct.prices];
     const isEmpty: boolean = this.props.modifiedProduct.id === '';
     const brand = isEmpty ? 'Your cart is empty' : this.props.modifiedProduct.brand;
@@ -34,8 +34,8 @@ class MiniCartBasicBlock extends BasicBlock {
 
         <MiniCartCommonAttributes
           attributes={arrAttributes}
-          productID={productId}
-          modifiedProducts={this.props.modifiedProducts}
+          // productID={productId}
+          modifiedProducts={this.props.modifiedAttrProducts}
         />
       </article>
     );

@@ -28,7 +28,7 @@ export const settleFullBasket = (
     activeAttributes: activeAttr,
     id: product.id,
     name: product.name,
-    brand: product.name,
+    brand: product.brand,
     gallery: product.gallery,
     attributes,
     prices,

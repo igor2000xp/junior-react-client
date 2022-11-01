@@ -20,10 +20,8 @@ abstract class CartAbstractClass extends Component<IProps, IState> {
 
   protected constructor(props: IProps) {
     super(props);
-    // this.handlePlusMinusButtons = this.handlePlusMinusButtons.bind(this);
-    // this.getTotalItemsQuality = this.getTotalItemsQuality.bind(this);
     this.state = {
-      productId: 'xbox-series-s',
+      productId: '',
       currentCurrency: SymbolCurrency.SymbolUsd,
       localBasket: [localBasketItemInit],
       isChanged: false,
@@ -65,26 +63,6 @@ abstract class CartAbstractClass extends Component<IProps, IState> {
   async componentWillUnmount() {
     await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
-
-  // async getCurrency(label: Label, symbol: SymbolCurrency) {
-  //   await this.setState({
-  //     currentCurrency: symbol,
-  //   });
-  // }
-
-  // handlePlusMinusButtons() {
-  //   const isToggle = !this.isChangedPlusMinusButtons;
-  //   this.isChangedPlusMinusButtons = isToggle;
-  //   const localBasket = JSON.parse(
-  //     localStorage.getItem(LOCAL_BASKET) as string,
-  //   );
-  //   this.setState({ localBasket });
-  //   this.setState({ isChangedPlusMinusButtons: isToggle });
-  // }
-  //
-  // protected getTotalItemsQuality(totalItems: number) {
-  //   this.setState({ totalItems });
-  // }
 
   render() {
     return (

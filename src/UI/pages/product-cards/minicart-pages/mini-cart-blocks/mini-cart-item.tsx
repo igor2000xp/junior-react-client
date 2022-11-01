@@ -5,7 +5,7 @@ import {
   ICardItemProps,
   ICardItemState, IModifiedProduct,
   modifiedProductInit,
-  modifiedProductsInit,
+  modifiedAttrProductsInit,
 } from '../../../common-models';
 import CartItemBlockAbstractClass from '../../main-cart/abstract-classes/CartItemBlockAbstractClass';
 import { State } from '../../../../../store/store';
@@ -33,13 +33,13 @@ class MiniCartItem extends CartItemBlockAbstractClass {
   }
 
   render() {
-    const modifiedProducts =
+    const modifiedAttrProducts =
       this.state.quantityInBasket !== 0
-        ? this.modifiedProducts
-        : [modifiedProductsInit];
+        ? this.modifiedAttrProducts
+        : [modifiedAttrProductsInit];
     const prodGallery =
-      typeof this.product.gallery !== 'undefined'
-        ? this.product.gallery[this.state.mainImageIndex]
+      typeof this.props.basket.gallery !== 'undefined'
+        ? this.props.basket.gallery[this.state.mainImageIndex]
         : '';
     const isArrowButtons = false;
     let modifiedProduct: IModifiedProduct;
@@ -59,8 +59,9 @@ class MiniCartItem extends CartItemBlockAbstractClass {
         <section className={stylesMBlock.leftSide}>
           <MiniCartBasicBlock
             modifiedProduct={modifiedProduct}
-            modifiedProducts={modifiedProducts}
-            currentCurrency={this.props.currency.symbol}
+            id={this.props.basket.id}
+            modifiedAttrProducts={modifiedAttrProducts}
+            // currentCurrency={this.props.currency.symbol}
           />
         </section>
 

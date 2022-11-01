@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import CartAbstractClass from '../main-cart/abstract-classes/CartAbstractClass';
 
 const mapStateToProps = (state: State) => {
-  return { cart: state.cart };
+  return { cart: state.cart.cart };
 };
 const mapDispatchToPropsFactory = { renewBasket };
 
@@ -56,8 +56,8 @@ class MiniCart extends CartAbstractClass {
   }
 
   render() {
-    const localBasket = this.state.localBasket
-      ? this.state.localBasket
+    const localBasket = this.props.cart
+      ? this.props.cart
       : [localBasketItemInit];
     const symbol = this.props.symbol ? this.props.symbol : this.state.currentCurrency;
     const itemsTxt = this.state.totalItems === 1 ? 'item' : 'items';
@@ -82,6 +82,7 @@ class MiniCart extends CartAbstractClass {
                 <MiniCartItem
                   basket={basket}
                   currency={currency}
+                  basketId={basket.id}
                   // handlePlusMinusButtons={this.handlePlusMinusButtons}
                   key={item.productId + index}
                 />

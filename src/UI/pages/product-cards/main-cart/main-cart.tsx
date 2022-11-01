@@ -14,7 +14,7 @@ import { connect } from 'react-redux';
 import CartAbstractClass from './abstract-classes/CartAbstractClass';
 
 const mapStateToProps = (state: State) => {
-  return { cart: state.cart };
+  return { cart: state.cart.cart };
 };
 const mapDispatchToPropsFactory = { renewBasket };
 type IProps = Readonly<IMainCartProps>;
@@ -24,9 +24,13 @@ class MainCart extends CartAbstractClass {
     super(props);
   }
 
+  async componentDidMount(): Promise<void> {
+    return super.componentDidMount();
+  }
+
   render() {
-    const localBasket = this.state.localBasket
-      ? this.state.localBasket
+    const localBasket = this.props.cart
+      ? this.props.cart
       : [localBasketItemInit];
     return (
       <article className={styles.cartWrapper}>
@@ -46,8 +50,8 @@ class MainCart extends CartAbstractClass {
               return (
                 <MainCartItem
                   basket={basket}
+                  basketId={basket.id}
                   currency={currency}
-                  // handlePlusMinusButtons={this.handlePlusMinusButtons}
                   key={item.productId + index}
                 />
               );
@@ -64,5 +68,4 @@ class MainCart extends CartAbstractClass {
   }
 }
 
-// export default MainCart;
 export default connect(mapStateToProps, mapDispatchToPropsFactory)(MainCart);

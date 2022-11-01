@@ -1,7 +1,7 @@
 import {
   ICurrency,
   ILocalBasket, IModifiedProduct,
-  IModifiedProducts,
+  IModifiedAttrProducts,
   IParams, IPrice,
   IProduct,
   IProductAttribute,
@@ -23,8 +23,8 @@ export interface IHeaderProps {
 }
 export interface ICommonAttributeSetProps {
   attributes: IProductAttribute[];
-  productID: string;
-  modifiedProducts?: IModifiedProducts[];
+  // productID: string;
+  modifiedProducts?: IModifiedAttrProducts[];
 }
 
 export const printToLocalStorageInit = {
@@ -32,9 +32,10 @@ export const printToLocalStorageInit = {
   activeAttributes: [{ ...activeAttributesInit }],
 };
 export interface IBasicBlockProps {
-  modifiedProduct: IModifiedProduct
-  currentCurrency?: SymbolCurrency;
-  modifiedProducts?: IModifiedProducts[];
+  modifiedProduct: IModifiedProduct;
+  id: string;
+  // currentCurrency?: SymbolCurrency;
+  modifiedAttrProducts?: IModifiedAttrProducts[];
 }
 
 export type IPropsMainPage = WithRouterProps<IParams>;
@@ -50,6 +51,7 @@ export interface IAttributeColorSwatchProps {
 
 export interface ICardItemProps {
   basket: ILocalBasket;
+  basketId: string;
   currency: ICurrency;
   handlePlusMinusButtons?: () => void;
   cart: ILocalBasket[];
@@ -76,7 +78,7 @@ export interface ICartCountProviderProps {
 export interface IMainCartProps {
   symbol?: SymbolCurrency;
   isNewBasketToggle?: boolean;
-  cartState?: ILocalBasket[];
+  cart: ILocalBasket[];
   renewBasket?: ActionCreatorWithPayload<ILocalBasket[], string>;
 }
 export interface IPriceBlockProps {

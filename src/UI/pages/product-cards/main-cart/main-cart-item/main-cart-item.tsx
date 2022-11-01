@@ -1,9 +1,8 @@
 import React from 'react';
 import styles from './main-cart-item.module.css';
 import {
-  ICardItemProps, IModifiedProduct,
-  modifiedProductInit,
-  modifiedProductsInit,
+  ICardItemProps, ICardItemState, IModifiedProduct,
+  modifiedAttrProductsInit,
 } from '../../../common-models';
 import MainCartBasicBlock from '../main-cart-blocks/main-cart-basic-block/main-cart-basic-block';
 import CartItemBlockAbstractClass from '../abstract-classes/CartItemBlockAbstractClass';
@@ -12,6 +11,7 @@ import { renewBasket } from '../../../../../store/cartSlice';
 import { connect } from 'react-redux';
 
 type IProps = Readonly<ICardItemProps>;
+type IState = Readonly<ICardItemState>;
 
 const mapStateToProps = (state:State) => {
   return { cart: state.cart.cart };
@@ -27,36 +27,45 @@ class MainCartItem extends CartItemBlockAbstractClass {
     await super.componentDidMount();
   }
 
+  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>): Promise<void> {
+    return super.componentDidUpdate(prevProps, prevState);
+  }
+
   render() {
-    const modifiedProducts =
+    const modifiedAttrProducts =
       this.state.quantityInBasket !== 0
-        ? this.modifiedProducts
-        : [modifiedProductsInit];
+        ? this.modifiedAttrProducts
+        : [modifiedAttrProductsInit];
     const prodGallery =
-      typeof this.product.gallery !== 'undefined'
-        ? this.product.gallery[this.state.mainImageIndex]
+      typeof this.props.basket.gallery !== 'undefined'
+        ? this.props.basket.gallery[this.state.mainImageIndex]
         : ' ';
     const isArrowButtons = !(
-      prodGallery === ' ' || this.product.gallery.length === 1
+      prodGallery === ' ' || this.props.basket.gallery.length === 1
     );
-    let modifiedProduct: IModifiedProduct;
-    if (this.state.quantityInBasket === 0) {
-      modifiedProduct = modifiedProductInit;
-      modifiedProduct.id = '';
-    } else {
-      modifiedProduct = this.modifiedProduct;
-    }
     const quantity0 = this.props.cart.find((item) => {
       return item.id === this.state.id;
     });
     const quantity = quantity0? quantity0.quantity : 0;
+    const modifiedProduct: IModifiedProduct = this.modifiedProduct;
+    // if (quantity === 0) {
+    //   modifiedProduct = modifiedProductInit;
+    //   modifiedProduct.id = '';
+    // } else {
+    //   modifiedProduct = this.modifiedProduct;
+    // }
+    // modifiedProduct = this.modifiedProduct;
+
+    // console.log(this.product.id);
 
     return (
       <article className={styles.wrapper}>
         <aside className={styles.leftSide}>
           <MainCartBasicBlock
             modifiedProduct={modifiedProduct}
-            modifiedProducts={modifiedProducts}
+            id={this.props.basket.id}
+            // currentCurrency={this.props.currency.symbol}
+            modifiedAttrProducts={modifiedAttrProducts}
           />
         </aside>
 

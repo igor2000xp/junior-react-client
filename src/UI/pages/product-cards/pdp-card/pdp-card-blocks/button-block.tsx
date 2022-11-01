@@ -7,7 +7,6 @@ import {
   priceInit
 } from '../../../common-models';
 import {
-  ACTIVE_PRODUCT_ATTRIBUTES,
   LOCAL_BASKET,
 } from '../../../../../constants';
 import {
@@ -36,11 +35,11 @@ class ButtonBlock extends Component<IProps> {
 
   async clickToOut() {
     if (this.props.inStock) {
-      await this.goToBasket();
+      await this.AddIntoBasket();
     }
   }
 
-  async goToBasket() {
+  async AddIntoBasket() {
     const activeAttributes: IActiveAttrPdp[] = await getActiveAttrFromLocal();
     const productId = this.productId;
     const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [priceInit];
@@ -79,9 +78,9 @@ class ButtonBlock extends Component<IProps> {
     this.props.renewBasket(this.localBaskets);
   }
 
-  async componentWillUnmount() {
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-  }
+  // async componentWillUnmount() {
+  //   await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+  // }
 
   render() {
     // const linkOut = this.props.inStock ? '/' : '';
