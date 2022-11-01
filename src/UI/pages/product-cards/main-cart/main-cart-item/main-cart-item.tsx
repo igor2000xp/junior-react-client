@@ -1,15 +1,22 @@
 import React from 'react';
 import styles from './main-cart-item.module.css';
 import {
-  ICardItemProps,
-  IProduct,
+  ICardItemProps, IModifiedProduct,
+  modifiedProductInit,
   modifiedProductsInit,
-  productInit,
 } from '../../../common-models';
 import MainCartBasicBlock from '../main-cart-blocks/main-cart-basic-block/main-cart-basic-block';
 import CartItemBlockAbstractClass from '../abstract-classes/CartItemBlockAbstractClass';
+import { State } from '../../../../../store/store';
+import { renewBasket } from '../../../../../store/cartSlice';
+import { connect } from 'react-redux';
 
 type IProps = Readonly<ICardItemProps>;
+
+const mapStateToProps = (state:State) => {
+  return { cart: state.cart.cart };
+};
+const mapDispatchToProps = { renewBasket };
 
 class MainCartItem extends CartItemBlockAbstractClass {
   constructor(props: IProps) {
@@ -35,6 +42,11 @@ class MainCartItem extends CartItemBlockAbstractClass {
   //   // this.minusHandle = this.minusHandle.bind(this);
   // }
   //
+  async componentDidMount(): Promise<void> {
+    await super.componentDidMount();
+    // console.log(this.props.cart);
+  }
+
   // async componentDidMount() {
   //   this.activeAttr = await JSON.parse(
   //     localStorage.getItem(LOCAL_BASKET) as string,
@@ -156,19 +168,19 @@ class MainCartItem extends CartItemBlockAbstractClass {
     const isArrowButtons = !(
       prodGallery === ' ' || this.product.gallery.length === 1
     );
-    let product: IProduct;
+    let modifiedProduct: IModifiedProduct;
     if (this.state.quantityInBasket === 0) {
-      product = productInit;
-      product.id = '';
+      modifiedProduct = modifiedProductInit;
+      modifiedProduct.id = '';
     } else {
-      product = this.product;
+      modifiedProduct = this.modifiedProduct;
     }
 
     return (
       <article className={styles.wrapper}>
         <aside className={styles.leftSide}>
           <MainCartBasicBlock
-            product={product}
+            modifiedProduct={modifiedProduct}
             modifiedProducts={modifiedProducts}
             // currentCurrency={this.props.currency.symbol}
           />
@@ -221,4 +233,5 @@ class MainCartItem extends CartItemBlockAbstractClass {
   }
 }
 
-export default MainCartItem;
+// export default MainCartItem;
+export default connect(mapStateToProps, mapDispatchToProps)(MainCartItem);

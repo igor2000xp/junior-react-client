@@ -65,6 +65,13 @@ export interface IProductAttribute {
   type: string;
   items: IAttribute[];
 }
+export interface IModifiedProduct {
+  id: string;
+  name: string;
+  attributes: IProductAttribute[];
+  prices: IPrice[];
+  brand: string;
+}
 export const productAttributeItemInit: IAttribute = {
   id: '',
   displayValue: '',
@@ -205,3 +212,10 @@ export const localCurrencyInit: ILocalCurrency = {
   label: Label.Usd,
   symbol: SymbolCurrency.SymbolUsd,
 };
+export const modifiedProductInit: IModifiedProduct = {
+  id: '',
+  name: '',
+  attributes: [productAttributeInit],
+  prices: [{...priceInit}],
+  brand: '',
+}

@@ -14,7 +14,7 @@ import {
   IProduct,
   productInit,
   IPdpCardState,
-  IPdpCardStateInit,
+  IPdpCardStateInit, IModifiedProduct,
 } from '../../common-models';
 import { getFirstProdAttrAsActiveAttr } from './pdp-card-blocks/helpers';
 
@@ -83,6 +83,13 @@ class PdpCard extends Component<any, IState> {
   render() {
     const bigImage = this.state.bigImage;
     const product = this.product;
+    const modifiedProduct:IModifiedProduct = {
+      id: this.product.id,
+      name: this.product.name,
+      brand: this.product.brand,
+      prices: Array.isArray(this.product.prices) ? this.product.prices : [this.product.prices],
+      attributes: this.product.attributes,
+    };
     const outStock = !product.inStock ? styles.outStock : '';
     const hidden = product.gallery.length === 1 ? styles.hidden : '';
     return (
@@ -110,7 +117,7 @@ class PdpCard extends Component<any, IState> {
 
           <section className={styles.rightBlock}>
             <BasicBlock
-              product={product}
+              modifiedProduct={modifiedProduct}
             />
             <ButtonBlock
               inStock={product.inStock}

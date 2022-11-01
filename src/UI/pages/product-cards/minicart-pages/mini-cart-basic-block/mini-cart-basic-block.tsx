@@ -7,12 +7,12 @@ import BasicBlock from '../../pdp-card/pdp-card-blocks/basic-block';
 
 class MiniCartBasicBlock extends BasicBlock {
   render() {
-    const arrAttributes = this.props.product.attributes as IProductAttribute[];
+    const arrAttributes = this.props.modifiedProduct.attributes as IProductAttribute[];
     const productId =
-      this.props.product.id === '' ? 'xbox-series-s' : this.props.product.id;
-    const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [this.props.product.prices];
-    const isEmpty: boolean = this.props.product.id === '';
-    const brand = isEmpty ? 'Your cart is empty' : this.props.product.brand;
+      this.props.modifiedProduct.id === '' ? 'xbox-series-s' : this.props.modifiedProduct.id;
+    const prices = Array.isArray(this.props.modifiedProduct.prices) ? this.props.modifiedProduct.prices : [this.props.modifiedProduct.prices];
+    const isEmpty: boolean = this.props.modifiedProduct.id === '';
+    const brand = isEmpty ? 'Your cart is empty' : this.props.modifiedProduct.brand;
 
     return (
       <article>
@@ -20,7 +20,7 @@ class MiniCartBasicBlock extends BasicBlock {
           <h2>{brand}</h2>
         </div>
         <div className={styles.name}>
-          <h3>{this.props.product.name}</h3>
+          <h3>{this.props.modifiedProduct.name}</h3>
         </div>
 
         <div className={styles.priceBlock}>

@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import {
-  IActiveBasketAttr, ICardItemProps, ICardItemState,
+  IActiveBasketAttr, ICardItemProps, ICardItemState, ILocalBasket, IModifiedProduct,
   IModifiedProducts,
   IProduct,
-  localActiveAttributesInit, modifiedProductsInit,
+  localActiveAttributesInit, localBasketItemInit, modifiedProductInit, modifiedProductsInit,
   productInit, SymbolCurrency
 } from '../../../common-models';
 import { LOCAL_BASKET } from '../../../../../constants';
 import { changeQuantityInBasket } from '../helpers';
-import client from '../../../../../graphql/apollo';
-import { GetProductByIdDocument } from '../../../../../graphql/generated';
 
 type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
 
 class CartItemBlockAbstractClass extends Component<IProps, IState> {
   protected product: IProduct = productInit;
+  protected modifiedProduct: IModifiedProduct = modifiedProductInit;
   protected activeAttr: IActiveBasketAttr[] = [localActiveAttributesInit];
   protected activeAttrItem: IActiveBasketAttr = localActiveAttributesInit;
   protected modifiedProducts: IModifiedProducts[] = [modifiedProductsInit];
@@ -30,16 +29,19 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
         quantityInBasket: 1,
         mainImageIndex: 0,
       };
-      // this.plusHandle = this.plusHandle.bind(this);
-      // this.minusHandle = this.minusHandle.bind(this);
+      this.plusHandle = this.plusHandle.bind(this);
+      this.minusHandle = this.minusHandle.bind(this);
     }
 
     async componentDidMount()
     {
+      // this.props.renewBasket(this.props.basket);
+      const localBasket:ILocalBasket[] = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string) as ILocalBasket[];
+      this.props.renewBasket(localBasket);
       this.activeAttr = await JSON.parse(
         localStorage.getItem(LOCAL_BASKET) as string,
       );
-      await this.getProductFromDB();
+      await this.getProductItemsFromLocalBasket();
       await this.setState({
         quantityInBasket: this.props.basket.quantity,
       });
@@ -48,6 +50,17 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
           ? this.props.basket.productId
           : this.state.id;
       await this.setState({id: id});
+      const localBasketItem0 = localBasket.find((item) => {
+        return item.id === id;
+      });
+      const localBasketItem = typeof localBasketItem0 !== 'undefined' ? localBasketItem0 : localBasketItemInit;
+      this.modifiedProduct = {
+        id: localBasketItem.id,
+        name: localBasketItem.name,
+        brand: localBasketItem.brand,
+        prices: localBasketItem.prices,
+        attributes: localBasketItem.attributes,
+      };
     }
 
   async componentDidUpdate(
@@ -58,7 +71,7 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
       this.currencySymbol = this.props.currency.symbol;
     }
     if (prevProps.basket.productId !== this.state.id) {
-      await this.getProductFromDB();
+      await this.getProductItemsFromLocalBasket();
       this.activeAttrItem = this.activeAttr.find((item) => {
         return item.productId === this.product.id;
       }) as IActiveBasketAttr;
@@ -111,25 +124,29 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
     // this.props.handlePlusMinusButtons();
   }
 
-  protected async getProductFromDB() {
-    const id =
-      this.props.basket.productId && this.props.basket.productId !== ''
-        ? this.props.basket.productId
-        : this.state.id;
-    try {
-      if (id !== '') {
-        const { data } = await client.query({
-          query: GetProductByIdDocument,
-          variables: {
-            id: id,
-          },
-          fetchPolicy: 'no-cache',
-        });
-        this.product = { ...(data.product as IProduct), id };
-      }
-    } catch (err) {
-      console.log(`Error loading data from server ${err} ${id}`, id);
-    }
+  protected async getProductItemsFromLocalBasket() {
+    this.product.gallery = this.props.basket.gallery;
+    this.product.id = this.props.basket.id;
+    this.product.attributes = this.props.basket.attributes;
+    // this.product.gallery = this.props.cart.
+    // const id =
+    //   this.props.basket.productId && this.props.basket.productId !== ''
+    //     ? this.props.basket.productId
+    //     : this.state.id;
+    // try {
+    //   if (id !== '') {
+    //     const { data } = await client.query({
+    //       query: GetProductByIdDocument,
+    //       variables: {
+    //         id: id,
+    //       },
+    //       fetchPolicy: 'no-cache',
+    //     });
+    //     this.product = { ...(data.product as IProduct), id };
+    //   }
+    // } catch (err) {
+    //   console.log(`Error loading data from server ${err} ${id}`, id);
+    // }
   }
   async handleImagePrev() {
     const images = this.product.gallery;

@@ -1,6 +1,6 @@
 import {
   ICurrency,
-  ILocalBasket,
+  ILocalBasket, IModifiedProduct,
   IModifiedProducts,
   IParams, IPrice,
   IProduct,
@@ -14,6 +14,7 @@ import {
 } from './states-models';
 import { WithRouterProps } from '../with-router/with-router.model';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
+// import { renewBasket } from '../../../store/cartSlice';
 
 export interface IHeaderProps {
   getCurrency?: (label: Label, symbol: SymbolCurrency) => void;
@@ -32,7 +33,8 @@ export const printToLocalStorageInit = {
   activeAttributes: [{ ...activeAttributesInit }],
 };
 export interface IBasicBlockProps {
-  product: IProduct;
+  modifiedProduct: IModifiedProduct
+  // product: IProduct;
   currentCurrency?: SymbolCurrency;
   modifiedProducts?: IModifiedProducts[];
 }
@@ -52,6 +54,8 @@ export interface ICardItemProps {
   basket: ILocalBasket;
   currency: ICurrency;
   handlePlusMinusButtons?: () => void;
+  cart: ILocalBasket[];
+  renewBasket:  ActionCreatorWithPayload<ILocalBasket[], string>;
 }
 
 export interface ITotalBlockProps {

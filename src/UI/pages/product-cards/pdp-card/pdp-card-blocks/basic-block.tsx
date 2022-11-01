@@ -8,21 +8,22 @@ type IProps = Readonly<IBasicBlockProps>;
 
 class BasicBlock extends Component<IProps> {
   render() {
-    const arrAttributes = this.props.product.attributes as IProductAttribute[];
-    const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [this.props.product.prices];
+    // modifiedProduct: IModifiedProduct
+    const arrAttributes = this.props.modifiedProduct.attributes as IProductAttribute[];
+    const prices = Array.isArray(this.props.modifiedProduct.prices) ? this.props.modifiedProduct.prices : [this.props.modifiedProduct.prices];
     return (
       <article className={styles.wrapper}>
         <div className={styles.brand}>
-          <h2>{this.props.product.brand}</h2>
+          <h2>{this.props.modifiedProduct.brand}</h2>
         </div>
 
         <div className={styles.name}>
-          <h3>{this.props.product.name}</h3>
+          <h3>{this.props.modifiedProduct.name}</h3>
         </div>
 
         <CommonAttributeSet
           attributes={arrAttributes}
-          productID={this.props.product.id}
+          productID={this.props.modifiedProduct.id}
         />
 
         <div className={styles.priceBlock}>

@@ -3,15 +3,22 @@ import stylesMBlock from './mini-cart-item.module.css';
 import MiniCartBasicBlock from '../mini-cart-basic-block/mini-cart-basic-block';
 import {
   ICardItemProps,
-  ICardItemState,
-  IProduct,
+  ICardItemState, IModifiedProduct,
+  modifiedProductInit,
   modifiedProductsInit,
-  productInit,
 } from '../../../common-models';
 import CartItemBlockAbstractClass from '../../main-cart/abstract-classes/CartItemBlockAbstractClass';
+import { State } from '../../../../../store/store';
+import { renewBasket } from '../../../../../store/cartSlice';
+import { connect } from 'react-redux';
 
 type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
+
+const mapStateToProps = (state: State) => {
+  return { cart: state.cart.cart };
+};
+const mapDispatchToProps = { renewBasket };
 
 class MiniCartItem extends CartItemBlockAbstractClass {
   constructor(props: IProps) {
@@ -35,19 +42,19 @@ class MiniCartItem extends CartItemBlockAbstractClass {
         ? this.product.gallery[this.state.mainImageIndex]
         : '';
     const isArrowButtons = false;
-    let product: IProduct;
+    let modifiedProduct: IModifiedProduct;
     if (this.state.quantityInBasket === 0) {
-      product = productInit;
-      product.id = '';
+      modifiedProduct = modifiedProductInit;
+      modifiedProduct.id = '';
     } else {
-      product = this.product;
+      modifiedProduct = this.modifiedProduct;
     }
 
     return (
       <article className={stylesMBlock.wrapper}>
         <section className={stylesMBlock.leftSide}>
           <MiniCartBasicBlock
-            product={product}
+            modifiedProduct={modifiedProduct}
             modifiedProducts={modifiedProducts}
             currentCurrency={this.props.currency.symbol}
           />
@@ -107,4 +114,5 @@ class MiniCartItem extends CartItemBlockAbstractClass {
   }
 }
 
-export default MiniCartItem;
+// export default MiniCartItem;
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCartItem);
