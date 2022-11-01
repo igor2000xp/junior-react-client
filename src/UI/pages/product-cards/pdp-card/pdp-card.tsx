@@ -25,7 +25,6 @@ class PdpCard extends Component<any, IState> {
   constructor(props: any) {
     super(props);
     this.state = { ...IPdpCardStateInit };
-    // this.getCurrencyFromHeader = this.getCurrencyFromHeader.bind(this);
     this.switchImage = this.switchImage.bind(this);
     this.product = { ...productInit };
   }

@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import {
-  IActiveBasketAttr, ICardItemProps, ICardItemState, ILocalBasket, IModifiedProduct,
+  IActiveBasketAttr,
+  ICardItemProps,
+  ICardItemState,
+  ILocalBasket,
+  IModifiedProduct,
   IModifiedProducts,
   IProduct,
-  localActiveAttributesInit, localBasketItemInit, modifiedProductInit, modifiedProductsInit,
-  productInit, SymbolCurrency
+  localActiveAttributesInit,
+  localBasketItemInit,
+  modifiedProductInit,
+  modifiedProductsInit,
+  productInit,
+  SymbolCurrency
 } from '../../../common-models';
 import { LOCAL_BASKET } from '../../../../../constants';
 import { changeQuantityInBasket } from '../helpers';
@@ -35,7 +43,6 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
 
     async componentDidMount()
     {
-      // this.props.renewBasket(this.props.basket);
       const localBasket:ILocalBasket[] = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string) as ILocalBasket[];
       this.props.renewBasket(localBasket);
       this.activeAttr = await JSON.parse(
@@ -99,54 +106,43 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
     }
   }
 
-  protected async plusHandle() {
-    // this.props.handlePlusMinusButtons();
-    await this.setState({
-      quantityInBasket: this.state.quantityInBasket + 1,
+  protected getQuantityFromStore() {
+    const changedCart = this.props.cart;
+    const changedCartItem = changedCart.find((item) => {
+      return item.id === this.state.id;
     });
-    await changeQuantityInBasket(
-      this.state.quantityInBasket,
-      this.props.basket,
-    );
-    // this.props.handlePlusMinusButtons();
+    return typeof changedCartItem !== 'undefined' ? changedCartItem.quantity: 0;
+
   }
-  protected async minusHandle() {
-    const minus =
-      this.state.quantityInBasket === 0 ? 0 : this.state.quantityInBasket - 1;
+
+  protected async plusHandle() {
+    const plus = this.getQuantityFromStore();
     await this.setState({
-      quantityInBasket: minus,
+      quantityInBasket: plus + 1,
     });
-    const count = await changeQuantityInBasket(
-      this.state.quantityInBasket,
+    const newBasketForRecord = await changeQuantityInBasket(
+      plus + 1,
       this.props.basket,
     );
-    await this.setState({ quantityInBasket: count });
-    // this.props.handlePlusMinusButtons();
+    this.props.renewBasket(newBasketForRecord);
+  }
+
+  protected async minusHandle() {
+    const minus = this.getQuantityFromStore();
+    await this.setState({
+      quantityInBasket: minus - 1,
+    });
+    const newBasketForRecord = await changeQuantityInBasket(
+      minus - 1,
+      this.props.basket,
+    );
+    this.props.renewBasket(newBasketForRecord);
   }
 
   protected async getProductItemsFromLocalBasket() {
     this.product.gallery = this.props.basket.gallery;
     this.product.id = this.props.basket.id;
     this.product.attributes = this.props.basket.attributes;
-    // this.product.gallery = this.props.cart.
-    // const id =
-    //   this.props.basket.productId && this.props.basket.productId !== ''
-    //     ? this.props.basket.productId
-    //     : this.state.id;
-    // try {
-    //   if (id !== '') {
-    //     const { data } = await client.query({
-    //       query: GetProductByIdDocument,
-    //       variables: {
-    //         id: id,
-    //       },
-    //       fetchPolicy: 'no-cache',
-    //     });
-    //     this.product = { ...(data.product as IProduct), id };
-    //   }
-    // } catch (err) {
-    //   console.log(`Error loading data from server ${err} ${id}`, id);
-    // }
   }
   async handleImagePrev() {
     const images = this.product.gallery;

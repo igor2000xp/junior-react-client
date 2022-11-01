@@ -107,5 +107,4 @@ class MiniCart extends CartAbstractClass {
   }
 }
 
-// export default MiniCart;
 export default connect(mapStateToProps, mapDispatchToPropsFactory)(MiniCart);

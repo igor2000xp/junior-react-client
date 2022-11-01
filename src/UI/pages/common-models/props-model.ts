@@ -14,7 +14,6 @@ import {
 } from './states-models';
 import { WithRouterProps } from '../with-router/with-router.model';
 import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
-// import { renewBasket } from '../../../store/cartSlice';
 
 export interface IHeaderProps {
   getCurrency?: (label: Label, symbol: SymbolCurrency) => void;
@@ -34,7 +33,6 @@ export const printToLocalStorageInit = {
 };
 export interface IBasicBlockProps {
   modifiedProduct: IModifiedProduct
-  // product: IProduct;
   currentCurrency?: SymbolCurrency;
   modifiedProducts?: IModifiedProducts[];
 }

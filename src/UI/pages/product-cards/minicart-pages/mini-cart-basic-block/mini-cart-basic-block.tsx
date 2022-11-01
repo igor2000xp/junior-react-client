@@ -13,6 +13,7 @@ class MiniCartBasicBlock extends BasicBlock {
     const prices = Array.isArray(this.props.modifiedProduct.prices) ? this.props.modifiedProduct.prices : [this.props.modifiedProduct.prices];
     const isEmpty: boolean = this.props.modifiedProduct.id === '';
     const brand = isEmpty ? 'Your cart is empty' : this.props.modifiedProduct.brand;
+    const name = isEmpty ? '' : this.props.modifiedProduct.name;
 
     return (
       <article>
@@ -20,7 +21,7 @@ class MiniCartBasicBlock extends BasicBlock {
           <h2>{brand}</h2>
         </div>
         <div className={styles.name}>
-          <h3>{this.props.modifiedProduct.name}</h3>
+          <h3>{name}</h3>
         </div>
 
         <div className={styles.priceBlock}>

@@ -49,6 +49,10 @@ class MiniCartItem extends CartItemBlockAbstractClass {
     } else {
       modifiedProduct = this.modifiedProduct;
     }
+    const quantity0 = this.props.cart.find((item) => {
+      return item.id === this.state.id;
+    });
+    const quantity = quantity0? quantity0.quantity : 0;
 
     return (
       <article className={stylesMBlock.wrapper}>
@@ -70,7 +74,7 @@ class MiniCartItem extends CartItemBlockAbstractClass {
             </button>
 
             <div className={stylesMBlock.numberInBasket}>
-              {this.state.quantityInBasket}
+              {quantity}
             </div>
 
             <button
@@ -114,5 +118,4 @@ class MiniCartItem extends CartItemBlockAbstractClass {
   }
 }
 
-// export default MiniCartItem;
 export default connect(mapStateToProps, mapDispatchToProps)(MiniCartItem);
