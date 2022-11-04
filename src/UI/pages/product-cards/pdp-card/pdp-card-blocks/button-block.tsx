@@ -38,27 +38,28 @@ class ButtonBlock extends Component<IProps> {
       await this.AddIntoBasket();
     }
   }
+  async componentDidMount() {}
 
   async AddIntoBasket() {
     const activeAttributes: IActiveAttrPdp[] = await getActiveAttrFromLocal();
-    const productId = this.productId;
+    const productIdAttr = JSON.stringify(activeAttributes) + this.productId;
     const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [priceInit];
     const product:IProduct = this.props.product;
     this.localBaskets = await getFromLocalBasket();
     if (
-      !this.localBaskets[0].productId &&
-      this.localBaskets[0].productId !== '' &&
+      !this.localBaskets[0].productIdAttr &&
+      this.localBaskets[0].productIdAttr !== '' &&
       !this.localBaskets
     ) {
       // 'Check if the basket was empty then init it'
       this.localBaskets = [
         {
           quantity: 1,
-          productId,
+          id: product.id,
+          productIdAttr,
           activeAttributes,
           attributes: product.attributes,
           prices,
-          id: product.id,
           name: product.name,
           brand: product.brand,
           gallery: product.gallery,
@@ -68,8 +69,8 @@ class ButtonBlock extends Component<IProps> {
     // Other cart checks
     this.localBaskets = settleFullBasket(
       this.localBaskets,
+      product.id,
       activeAttributes,
-      this.productId,
       product.attributes,
       prices,
       product,
@@ -78,20 +79,13 @@ class ButtonBlock extends Component<IProps> {
     this.props.renewBasket(this.localBaskets);
   }
 
-  // async componentWillUnmount() {
-  //   await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-  // }
-
   render() {
-    // const linkOut = this.props.inStock ? '/' : '';
     const buttonOut = this.props.inStock ? '' : styles.notActive;
     return (
       <div onClick={this.clickToOut}>
-        {/*<Link to={linkOut}>*/}
           <button className={`${styles.wrapper} ${buttonOut}`}>
             <h2>ADD TO CART</h2>
           </button>
-        {/*</Link>*/}
       </div>
     );
   }

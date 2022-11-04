@@ -24,7 +24,11 @@ class AttributeColorSwatch extends Component<IProps, IState> {
 
   async componentDidMount() {
     await this.setFirstAttrActive();
-    this.props.getAttrState(this.state);
+  }
+  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
+    if (prevState.activeAttributes.attrID !== this.state.activeAttributes.attrID) {
+      await this.setFirstAttrActive();
+    }
   }
 
   async setFirstAttrActive() {
@@ -38,6 +42,7 @@ class AttributeColorSwatch extends Component<IProps, IState> {
       };
     });
   }
+
   async choiceHandle(item: IAttribute) {
     await this.setState(() => {
       return {

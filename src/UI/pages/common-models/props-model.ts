@@ -23,7 +23,6 @@ export interface IHeaderProps {
 }
 export interface ICommonAttributeSetProps {
   attributes: IProductAttribute[];
-  // productID: string;
   modifiedProducts?: IModifiedAttrProducts[];
 }
 
@@ -34,7 +33,6 @@ export const printToLocalStorageInit = {
 export interface IBasicBlockProps {
   modifiedProduct: IModifiedProduct;
   id: string;
-  // currentCurrency?: SymbolCurrency;
   modifiedAttrProducts?: IModifiedAttrProducts[];
 }
 

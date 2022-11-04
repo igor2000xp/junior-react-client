@@ -41,7 +41,6 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    // this.product = this
     const localBasket:ILocalBasket[] = await JSON.parse(localStorage.getItem(LOCAL_BASKET) as string) as ILocalBasket[];
     this.props.renewBasket(localBasket);
     this.activeAttr = await JSON.parse(
@@ -52,21 +51,10 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
       quantityInBasket: this.props.basket.quantity,
     });
     const id =
-      this.props.basket.productId && this.props.basket.productId !== ''
-        ? this.props.basket.productId
+      this.props.basket.productIdAttr && this.props.basket.productIdAttr !== ''
+        ? this.props.basket.productIdAttr
         : this.state.id;
     await this.setState({id: id});
-    // const localBasketItem0 = localBasket.find((item) => {
-    //   return item.id === id;
-    // });
-    // const localBasketItem = typeof localBasketItem0 !== 'undefined' ? localBasketItem0 : localBasketItemInit;
-    // this.modifiedProduct = {
-    //   // id: localBasketItem.id,
-    //   // name: localBasketItem.name,
-    //   // brand: localBasketItem.brand,
-    //   // prices: localBasketItem.prices,
-    //   // attributes: localBasketItem.attributes,
-    // };
   }
 
   async componentDidUpdate(
@@ -76,7 +64,7 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
     if (this.props.currency.symbol !== this.currencySymbol) {
       this.currencySymbol = this.props.currency.symbol;
     }
-    if (prevProps.basket.productId !== this.state.id) {
+    if (prevProps.basket.productIdAttr !== this.state.id) {
       this.activeAttrItem = this.activeAttr.find((item) => {
         return item.productId === this.product.id;
       }) as IActiveBasketAttr;
@@ -93,10 +81,13 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
   protected getQuantityFromStore() {
     const changedCart = this.props.cart;
     const changedCartItem = changedCart.find((item) => {
-      return item.id === this.state.id;
+      const complexId = JSON.stringify(this.props.basket.activeAttributes) + this.props.basket.id;
+      const complexIdItem = JSON.stringify(item.activeAttributes) + item.id;
+      return complexIdItem === complexId;
     });
-    return typeof changedCartItem !== 'undefined' ? changedCartItem.quantity: 0;
-
+    const quantityInBasket = typeof changedCartItem !== 'undefined' ? changedCartItem.quantity: 0;
+    this.setState({quantityInBasket})
+    return quantityInBasket;
   }
 
   protected async plusHandle() {
@@ -141,7 +132,7 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
         },
       );
       return {
-        productID: this.props.basket.productId,
+        productID: this.props.basket.productIdAttr,
         id: item.id,
         type: item.type, // text, color
         name: item.name, // "Shoe Size" === attrId

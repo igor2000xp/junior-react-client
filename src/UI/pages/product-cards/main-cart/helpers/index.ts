@@ -17,7 +17,7 @@ export const changeQuantityInBasket = async (
   newBasketItemChecked.quantity = quantityInBasketState;
   if (
     newBasketItemChecked.quantity === 0 &&
-    newBasketItemChecked.productId !== ''
+    newBasketItemChecked.productIdAttr !== ''
   ) {
     newBasketForRecord = newBasket.filter((item) => {
       return basketItemCurrentId !== getBasketItemID(item);
@@ -40,7 +40,7 @@ export const changeQuantityInBasket = async (
 export const getBasketItemID = (item: ILocalBasket) => {
   return item.activeAttributes.reduce((acc, attrItem) => {
     return `${acc}-${attrItem.id}`;
-  }, String(item.productId));
+  }, String(item.productIdAttr));
 };
 
 export const getLocalBasket = async () => {

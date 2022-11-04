@@ -84,7 +84,7 @@ class MiniCart extends CartAbstractClass {
                   currency={currency}
                   basketId={basket.id}
                   // handlePlusMinusButtons={this.handlePlusMinusButtons}
-                  key={item.productId + index}
+                  key={item.productIdAttr + index}
                 />
               );
             })}

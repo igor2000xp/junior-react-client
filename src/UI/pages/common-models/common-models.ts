@@ -171,7 +171,7 @@ export const priceInit:IPrice = {
   },
 }
 export interface ILocalBasket {
-  productId: string;
+  productIdAttr: string;
   quantity: number;
   activeAttributes: IAttrActive[];
   name: string;
@@ -182,7 +182,7 @@ export interface ILocalBasket {
   prices: IPrice[];
 }
 export const localBasketItemInit: ILocalBasket = {
-  productId: '',
+  productIdAttr: '',
   quantity: 0,
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
   name: '',

@@ -22,21 +22,18 @@ class CommonAttributeSet extends Component<IProps, IState> {
     this.state = { prodId: '' };
   }
 
-  async componentDidMount() {
-    localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
+  componentDidMount() {
   }
 
   protected handleAttributes(value: IAttributeColorSwatchState) {
     this.renewHandleAttributes(value);
-    localStorage.setItem(
-      ACTIVE_PRODUCT_ATTRIBUTES,
-      JSON.stringify(this.arrResultToStorage),
-    );
   }
   protected renewHandleAttributes(value: IAttributeColorSwatchState) {
     // This is a test to see if this is the initial step.
     if (this.arrResultToStorage[0].id === '') {
-      this.arrResultToStorage[0] = value.activeAttributes;
+      this.arrResultToStorage.shift();
+      const arrResultToStorage:IAttrActive[] = JSON.parse(localStorage.getItem(ACTIVE_PRODUCT_ATTRIBUTES) as string);
+      Array.prototype.push.apply(this.arrResultToStorage, arrResultToStorage);
     }
     // This is a test to see if there is an element in the array that looks like new.
     const isItemSame = this.arrResultToStorage.findIndex((item) => {
@@ -46,6 +43,7 @@ class CommonAttributeSet extends Component<IProps, IState> {
       this.arrResultToStorage.push(value.activeAttributes);
     } else if (isItemSame > -1) {
       this.arrResultToStorage[isItemSame] = { ...value.activeAttributes };
+      localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify(this.arrResultToStorage));
     }
   }
 
@@ -61,7 +59,7 @@ class CommonAttributeSet extends Component<IProps, IState> {
             return (
               <AttributeTextExtended
                 attribute={item}
-                activeAttribute={''}
+                activeAttribute={item.items[0].value}
                 key={item.id}
                 getAttrState={this.handleAttributes}
               />

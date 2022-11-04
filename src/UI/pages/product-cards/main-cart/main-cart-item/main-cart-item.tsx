@@ -48,15 +48,6 @@ class MainCartItem extends CartItemBlockAbstractClass {
     });
     const quantity = quantity0? quantity0.quantity : 0;
     const modifiedProduct: IModifiedProduct = this.modifiedProduct;
-    // if (quantity === 0) {
-    //   modifiedProduct = modifiedProductInit;
-    //   modifiedProduct.id = '';
-    // } else {
-    //   modifiedProduct = this.modifiedProduct;
-    // }
-    // modifiedProduct = this.modifiedProduct;
-
-    // console.log(this.product.id);
 
     return (
       <article className={styles.wrapper}>

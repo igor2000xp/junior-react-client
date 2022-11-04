@@ -12,7 +12,6 @@ type IProps = Readonly<IBasicBlockProps>;
 type IState = Readonly<IBasicBlockState>;
 
 class BasicBlock extends Component<IProps, IState> {
-  // protected isEmpty = false;
   protected name = '';
   protected brand = '';
   constructor(props: IProps) {
@@ -26,15 +25,7 @@ class BasicBlock extends Component<IProps, IState> {
     })
   }
 
-  // componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
-  //   console.log(this.props.modifiedProduct.id);
-  //   if (prevState.id !== this.state.id) {
-  //     this.setState({ id: this.props.modifiedProduct.id });
-  //   }
-  // }
-
   render() {
-    // modifiedProduct: IModifiedProduct
     const arrAttributes = this.props.modifiedProduct.attributes as IProductAttribute[];
     const prices = Array.isArray(this.props.modifiedProduct.prices) ? this.props.modifiedProduct.prices : [this.props.modifiedProduct.prices];
     return (
@@ -49,7 +40,6 @@ class BasicBlock extends Component<IProps, IState> {
 
         <CommonAttributeSet
           attributes={arrAttributes}
-          // productID={this.props.modifiedProduct.id}
         />
 
         <div className={styles.priceBlock}>

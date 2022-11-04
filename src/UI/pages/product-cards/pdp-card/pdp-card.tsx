@@ -30,10 +30,11 @@ class PdpCard extends Component<any, IState> {
   }
 
   async componentDidMount() {
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const id = location.pathname.split(':')[1];
     this.product = (await this.productQuery(id)) as IProduct;
     const activeAttrFromFirsts = getFirstProdAttrAsActiveAttr(this.product);
-    this.setState({ attrActive: [...activeAttrFromFirsts] });
+    this.setState({ attrActive: activeAttrFromFirsts });
     await localStorage.setItem(
       ACTIVE_PRODUCT_ATTRIBUTES,
       JSON.stringify(activeAttrFromFirsts),
@@ -50,10 +51,6 @@ class PdpCard extends Component<any, IState> {
         currentCurrency,
       };
     });
-  }
-
-  componentWillUnmount() {
-    localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 
   async productQuery(id: string): Promise<IProduct | undefined> {
@@ -91,6 +88,7 @@ class PdpCard extends Component<any, IState> {
     };
     const outStock = !product.inStock ? styles.outStock : '';
     const hidden = product.gallery.length === 1 ? styles.hidden : '';
+    // console.log(this.state.attrActive);
     return (
       <article className={styles.wrapperWithHeader}>
         <Header />

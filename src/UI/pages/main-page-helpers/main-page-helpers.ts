@@ -37,7 +37,7 @@ export const getProductsListFromBasket = async (
 
   return localBasket.map((item) => {
     const productItem = product.find((itemProduct) => {
-      return itemProduct.id === item.productId;
+      return itemProduct.id === item.productIdAttr;
     });
 
     const realProductItem = productItem ? productItem : productInit;
@@ -48,7 +48,7 @@ export const getProductsListFromBasket = async (
       return itemAmount.currency.symbol === currentCurrency;
     });
     return {
-      productId: item.productId,
+      productId: item.productIdAttr,
       amount: currentAmount ? currentAmount.amount : 0,
       quantity: item.quantity,
       symbolPrice: currentCurrency,

@@ -41,14 +41,15 @@ class ProductSmallCard extends Component<IProps, any> {
     const localBasket = await JSON.parse(
       localStorage.getItem(LOCAL_BASKET) as string,
     );
-    const attr = getFirstProdAttrAsActiveAttr(this.props.item);
+    const activeAttr = getFirstProdAttrAsActiveAttr(this.props.item);
+    // const
     const attributes = this.props.item.attributes;
     const prices = Array.isArray(this.props.item.prices) ? this.props.item.prices : [this.props.item.prices];
     const product = this.props.item;
     const newLocalBasket = settleFullBasket(
       localBasket,
-      attr,
-      this.props.item.id,
+      product.id,
+      activeAttr,
       attributes,
       prices,
       product,

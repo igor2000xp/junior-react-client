@@ -52,7 +52,7 @@ class MainCart extends CartAbstractClass {
                   basket={basket}
                   basketId={basket.id}
                   currency={currency}
-                  key={item.productId + index}
+                  key={item.productIdAttr + index}
                 />
               );
             })}

@@ -4,7 +4,6 @@ import {
   ICommonAttributeSetProps,
   IProductAttribute,
 } from '../../../../common-models';
-import { ACTIVE_PRODUCT_ATTRIBUTES } from '../../../../../../constants';
 import MainCartAttrColor from '../main-cart-attr-color/main-cart-attr-color';
 import MainCartAttrText from '../main-cart-attr-text-plp/main-cart-attr-text';
 
@@ -19,17 +18,13 @@ class MainCartCommonAttributeSet extends CommonAttributeSet {
     this.handleAttributes = this.handleAttributes.bind(this);
     this.state = { prodId: '' };
   }
-  protected handleAttributes() {
-    // console.log('handleAttributes');
-  }
+  protected handleAttributes() {}
 
   async componentDidMount(): Promise<void> {
     await super.componentDidMount();
   }
 
-  protected async renewHandleAttributes(value: any) {
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-  }
+  protected renewHandleAttributes(value: any) {}
 
   render() {
     const modProd = this.props.modifiedProducts;

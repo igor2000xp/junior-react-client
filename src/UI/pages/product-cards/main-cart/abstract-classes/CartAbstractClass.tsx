@@ -7,7 +7,7 @@ import {
   SymbolCurrency
 } from '../../../common-models';
 import { Component } from 'react';
-import { ACTIVE_PRODUCT_ATTRIBUTES, LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../../../constants';
+import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../../../constants';
 
 type IProps = Readonly<IMainCartProps>;
 type IState = Readonly<IMainCartState>;
@@ -39,7 +39,6 @@ abstract class CartAbstractClass extends Component<IProps, IState> {
         localBasket: this.localBasket,
       };
     });
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const currency: ICurrency = JSON.parse(
       (await localStorage.getItem(LOCAL_CURRENT_CURRENCY)) as string,
     );
@@ -57,11 +56,6 @@ abstract class CartAbstractClass extends Component<IProps, IState> {
     this.localBasket = JSON.parse(
       (await localStorage.getItem(LOCAL_BASKET)) as string,
     );
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-  }
-
-  async componentWillUnmount() {
-    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 
   render() {
