@@ -49,6 +49,7 @@ class CommonAttributeSet extends Component<IProps, IState> {
 
   render() {
     const attr = this.props.attributes;
+
     return (
       <>
         {attr.map((item) => {
@@ -59,7 +60,8 @@ class CommonAttributeSet extends Component<IProps, IState> {
             return (
               <AttributeTextExtended
                 attribute={item}
-                activeAttribute={item.items[0].value}
+                // activeAttribute={item.items[0].value}
+                activeAttribute={''}
                 key={item.id}
                 getAttrState={this.handleAttributes}
               />

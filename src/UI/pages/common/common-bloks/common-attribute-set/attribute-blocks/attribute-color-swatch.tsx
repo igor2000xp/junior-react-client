@@ -26,7 +26,7 @@ class AttributeColorSwatch extends Component<IProps, IState> {
     await this.setFirstAttrActive();
   }
   async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
-    if (prevState.activeAttributes.attrID !== this.state.activeAttributes.attrID) {
+    if (prevProps.attribute.items[0].id !== this.props.attribute.items[0].id) {
       await this.setFirstAttrActive();
     }
   }
