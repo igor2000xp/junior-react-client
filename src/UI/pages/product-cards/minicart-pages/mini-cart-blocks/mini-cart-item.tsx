@@ -49,10 +49,11 @@ class MiniCartItem extends CartItemBlockAbstractClass {
     } else {
       modifiedProduct = this.modifiedProduct;
     }
-    const quantity0 = this.props.cart.find((item) => {
-      return item.id === this.state.id;
+    const basketId = this.props.basket.productIdAttr;
+    const initQuantity = this.props.cart.find((item) => {
+      return item.productIdAttr === basketId;
     });
-    const quantity = quantity0? quantity0.quantity : 0;
+    const quantity = initQuantity ? initQuantity.quantity : 0;
 
     return (
       <article className={stylesMBlock.wrapper}>
@@ -61,7 +62,6 @@ class MiniCartItem extends CartItemBlockAbstractClass {
             modifiedProduct={modifiedProduct}
             id={this.props.basket.id}
             modifiedAttrProducts={modifiedAttrProducts}
-            // currentCurrency={this.props.currency.symbol}
           />
         </section>
 

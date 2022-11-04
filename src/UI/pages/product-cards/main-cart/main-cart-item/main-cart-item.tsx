@@ -43,11 +43,12 @@ class MainCartItem extends CartItemBlockAbstractClass {
     const isArrowButtons = !(
       prodGallery === ' ' || this.props.basket.gallery.length === 1
     );
-    const quantity0 = this.props.cart.find((item) => {
-      return item.id === this.state.id;
-    });
-    const quantity = quantity0? quantity0.quantity : 0;
     const modifiedProduct: IModifiedProduct = this.modifiedProduct;
+    const basketId = this.props.basket.productIdAttr;
+    const initQuantity = this.props.cart.find((item) => {
+      return item.productIdAttr === basketId;
+    });
+    const quantity = initQuantity ? initQuantity.quantity : 0;
 
     return (
       <article className={styles.wrapper}>
@@ -55,7 +56,6 @@ class MainCartItem extends CartItemBlockAbstractClass {
           <MainCartBasicBlock
             modifiedProduct={modifiedProduct}
             id={this.props.basket.id}
-            // currentCurrency={this.props.currency.symbol}
             modifiedAttrProducts={modifiedAttrProducts}
           />
         </aside>
