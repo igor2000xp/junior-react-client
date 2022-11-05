@@ -1,59 +1,16 @@
-import React, { Component } from 'react';
+import React  from 'react';
 import totalStyle from './main-cart-total-block.module.css';
 import {
-  ILocalBasket,
-  ILocalCurrency,
   ITotalBlockProps,
-  ITotalBlockState,
-  localBasketItemInit,
-  localCurrencyInit,
-  totalBlockStateInit,
 } from '../../../common-models';
-import {
-  getProductsListFromBasket,
-  getTotalItems,
-} from '../../../main-page-helpers/main-page-helpers';
-import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../../../constants';
 import { Link } from 'react-router-dom';
+import TotalBlockAbstractClass from '../abstract-classes/totalBlockAbstractClass';
 
-type IState = Readonly<ITotalBlockState>;
 type IProps = Readonly<ITotalBlockProps>;
 
-class MainCartTotalBlock<ITotalBlockProps, ITotalBlockState> extends Component<
-  IProps,
-  IState
-> {
-  private localCurrency: ILocalCurrency = localCurrencyInit;
-  private localBasket: ILocalBasket[] = [localBasketItemInit];
-
+class MainCartTotalBlock extends TotalBlockAbstractClass {
   constructor(props: IProps) {
     super(props);
-    this.state = totalBlockStateInit;
-  }
-
-  async componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-  ) {
-    this.localBasket = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
-    const localBasketForTotal = await getProductsListFromBasket(
-      this.localBasket,
-      this.props.currentCurrency,
-    );
-    const { sum, quantity, vat } = getTotalItems(localBasketForTotal);
-    const isChangedPlusMinusButtons = this.props.isChangedPlusMinusButtons;
-    if (
-      prevState.sum !== sum ||
-      prevProps.isChangedPlusMinusButtons !== isChangedPlusMinusButtons
-    ) {
-      this.setState({ sum, quantity, vat, isChangedPlusMinusButtons });
-    }
-  }
-
-  componentDidMount() {
-    this.localCurrency = JSON.parse(
-      localStorage.getItem(LOCAL_CURRENT_CURRENCY) as string,
-    );
   }
 
   render() {

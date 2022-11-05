@@ -1,18 +1,21 @@
 import React from 'react';
-import MainCartTotalBlock from '../../main-cart/main-cart-item/main-cart-total-block';
 import stylesCart from '../mini-cart.module.css';
 import { ITotalBlockProps, ITotalBlockState } from '../../../common-models';
+import TotalBlockAbstractClass from '../../main-cart/abstract-classes/totalBlockAbstractClass';
 
-class MiniTotalBlock extends MainCartTotalBlock<ITotalBlockProps, ITotalBlockState> {
-  constructor(props: ITotalBlockProps) {
+type IState = Readonly<ITotalBlockState>;
+type IProps = Readonly<ITotalBlockProps>;
+
+class MiniTotalBlock extends TotalBlockAbstractClass {
+  constructor(props: IProps) {
     super(props);
   }
 
-  async componentDidUpdate(prevProps: any, prevState: any) {
+  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>): Promise<void> {
     await super.componentDidUpdate(prevProps, prevState);
-    if (typeof this.props.getTotalItemsQuality !== 'undefined') {
-      this.props.getTotalItemsQuality(this.state.quantity);
-    }
+      if (typeof this.props.getTotalItemsQuality !== 'undefined') {
+        this.props.getTotalItemsQuality(this.state.quantity);
+      }
   }
 
   render() {
