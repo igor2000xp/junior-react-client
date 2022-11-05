@@ -1,13 +1,6 @@
 import client from '../../../graphql/apollo';
 import { GetProductsByCategoryDocument } from '../../../graphql/generated';
-import {
-  ILocalBasket,
-  ILocalBasketForTotal,
-  IProduct,
-  productInit,
-  SymbolCurrency,
-  zeroCurrencyInit,
-} from '../common-models';
+import { ILocalBasket, ILocalBasketForTotal, IProduct, SymbolCurrency, zeroCurrencyInit, } from '../common-models';
 import { LOCAL_CURRENT_CURRENCY, VAT_RATE } from '../../../constants';
 
 export const getProductsList = async (
@@ -28,31 +21,21 @@ export const getProductsList = async (
     console.log('Error loading data from server = ', err);
   }
 };
-export const getProductsListFromBasket = async (
+export const getProductsListFromBasket = (
   localBasket: ILocalBasket[],
   currentCurrency: SymbolCurrency,
-): Promise<ILocalBasketForTotal[]> => {
-  const productsAll: IProduct[] | undefined = await getProductsList('all');
-  const product: IProduct[] = productsAll ? productsAll : [productInit];
+): ILocalBasketForTotal[] => {
 
   return localBasket.map((item) => {
-    const productItem = product.find((itemProduct) => {
-      return itemProduct.id === item.productIdAttr;
-    });
-
-    const realProductItem = productItem ? productItem : productInit;
-    const arrayProductItem = Array.isArray(realProductItem.prices)
-      ? realProductItem.prices
-      : [realProductItem.prices];
-    const currentAmount = arrayProductItem.find((itemAmount) => {
-      return itemAmount.currency.symbol === currentCurrency;
+    const currencyPrice = item.prices.find((itemPrice) => {
+      return itemPrice.currency.symbol === currentCurrency;
     });
     return {
-      productId: item.productIdAttr,
-      amount: currentAmount ? currentAmount.amount : 0,
+      productId: item.id,
+      amount: currencyPrice ? currencyPrice.amount: 0,
       quantity: item.quantity,
       symbolPrice: currentCurrency,
-    };
+    }
   });
 };
 

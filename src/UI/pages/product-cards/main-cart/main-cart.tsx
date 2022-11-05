@@ -56,11 +56,7 @@ class MainCart extends CartAbstractClass {
                 />
               );
             })}
-            <MainCartTotalBlock
-              isChangedPlusMinusButtons={this.isChangedPlusMinusButtons}
-              localBasket={this.state.localBasket}
-              currentCurrency={this.state.currentCurrency}
-            />
+            <MainCartTotalBlock/>
           </section>
         </article>
       </article>

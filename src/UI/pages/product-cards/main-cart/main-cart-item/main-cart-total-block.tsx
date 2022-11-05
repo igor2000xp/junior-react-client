@@ -5,8 +5,17 @@ import {
 } from '../../../common-models';
 import { Link } from 'react-router-dom';
 import TotalBlockAbstractClass from '../abstract-classes/totalBlockAbstractClass';
+import { State } from '../../../../../store/store';
+import { connect } from 'react-redux';
 
 type IProps = Readonly<ITotalBlockProps>;
+
+const mapStateToProps = (state:State) => {
+  return {
+    cart: state.cart.cart,
+    currency: state.currency.symbol,
+  };
+};
 
 class MainCartTotalBlock extends TotalBlockAbstractClass {
   constructor(props: IProps) {
@@ -26,9 +35,9 @@ class MainCartTotalBlock extends TotalBlockAbstractClass {
               </div>
             </section>
             <section className={totalStyle.rightTotal}>
-              <p>{`${this.props.currentCurrency}${this.state.vat}`}</p>
+              <p>{`${this.props.currency}${this.state.vat.toFixed(2)}`}</p>
               <p>{this.state.quantity}</p>
-              <p>{`${this.props.currentCurrency}${this.state.sum}`}</p>
+              <p>{`${this.props.currency}${this.state.sum.toFixed(2)}`}</p>
             </section>
           </div>
           <Link to={'/'}>
@@ -42,4 +51,5 @@ class MainCartTotalBlock extends TotalBlockAbstractClass {
   }
 }
 
-export default MainCartTotalBlock;
+// export default MainCartTotalBlock;
+export default connect(mapStateToProps, null)(MainCartTotalBlock);

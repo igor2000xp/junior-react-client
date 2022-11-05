@@ -57,10 +57,8 @@ export interface ICardItemProps {
 }
 
 export interface ITotalBlockProps {
-  localBasket: ILocalBasket[];
-  currentCurrency: SymbolCurrency;
-  isChangedPlusMinusButtons: boolean;
-  getTotalItemsQuality?: (value: number) => void;
+  cart?: ILocalBasket[];
+  currency?: SymbolCurrency;
 }
 
 export interface ICartBadgeProps {
@@ -77,7 +75,7 @@ export interface IMainCartProps {
   symbol?: SymbolCurrency;
   isNewBasketToggle?: boolean;
   cart: ILocalBasket[];
-  renewBasket?: ActionCreatorWithPayload<ILocalBasket[], string>;
+  renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>;
 }
 export interface IPriceBlockProps {
   prices?: IPrice[];

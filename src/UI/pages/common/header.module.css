@@ -70,7 +70,7 @@
 }
 .miniCartBlock {
   position: absolute;
-  top: -1700px;
+  top: -1662px;
   right: -15px;
   transition: all 0.7s ease-out;
   z-index: 1000;

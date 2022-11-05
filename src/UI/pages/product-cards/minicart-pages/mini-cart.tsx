@@ -83,7 +83,6 @@ class MiniCart extends CartAbstractClass {
                   basket={basket}
                   currency={currency}
                   basketId={basket.id}
-                  // handlePlusMinusButtons={this.handlePlusMinusButtons}
                   key={item.productIdAttr + index}
                 />
               );
@@ -91,12 +90,7 @@ class MiniCart extends CartAbstractClass {
           </section>
 
           <section className={stylesCart.miniTotal}>
-            <MiniTotalBlock
-              localBasket={this.state.localBasket}
-              currentCurrency={this.state.currentCurrency}
-              isChangedPlusMinusButtons={this.isChangedPlusMinusButtons}
-              getTotalItemsQuality={this.getTotalItemsQuality}
-            />
+            <MiniTotalBlock/>
           </section>
 
           <section>

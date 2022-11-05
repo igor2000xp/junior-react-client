@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 import {
   ILocalBasket,
-  ILocalCurrency,
+  ILocalBasketForTotal,
   ITotalBlockProps,
-  ITotalBlockState, localBasketItemInit,
-  localCurrencyInit, totalBlockStateInit
+  ITotalBlockState,
+  localBasketItemInit,
+  SymbolCurrency,
+  totalBlockStateInit
 } from '../../../common-models';
-import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../../../constants';
 import { getProductsListFromBasket, getTotalItems } from '../../../main-page-helpers/main-page-helpers';
 
 type IState = Readonly<ITotalBlockState>;
 type IProps = Readonly<ITotalBlockProps>;
 
 class TotalBlockAbstractClass extends Component<IProps, IState> {
-  protected localCurrency: ILocalCurrency = localCurrencyInit;
   protected localBasket: ILocalBasket[] = [localBasketItemInit];
   constructor(props:IProps) {
     super(props);
@@ -21,36 +21,34 @@ class TotalBlockAbstractClass extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    this.localCurrency = JSON.parse(
-      localStorage.getItem(LOCAL_CURRENT_CURRENCY) as string,
-    );
-  }
-
-  async componentDidUpdate (
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-  ) {
-    this.localBasket = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
-    const localBasketForTotal = await getProductsListFromBasket(
-      this.localBasket,
-      this.props.currentCurrency,
+    const currency = this.props.currency ? this.props.currency : SymbolCurrency.SymbolUsd;
+    const basket = this.props.cart ? this.props.cart : [localBasketItemInit];
+    const localBasketForTotal:ILocalBasketForTotal[] = getProductsListFromBasket(
+      basket,
+      currency,
     );
     const { sum, quantity, vat } = getTotalItems(localBasketForTotal);
-    const isChangedPlusMinusButtons = this.props.isChangedPlusMinusButtons;
+    this.setState({ sum, quantity, vat });
+  }
+
+  async componentDidUpdate (prevProps: Readonly<IProps>, prevState: Readonly<IState>) {
+    const localBasket = this.props.cart;
+    this.localBasket = localBasket ? localBasket : [localBasketItemInit];
+    const currency = this.props.currency ? this.props.currency : SymbolCurrency.SymbolUsd;
+    const localBasketForTotal:ILocalBasketForTotal[] = getProductsListFromBasket(
+      this.localBasket,
+      currency,
+    );
+    const { sum, quantity, vat } = getTotalItems(localBasketForTotal);
     if (
-      prevState.sum !== sum ||
-      prevProps.isChangedPlusMinusButtons !== isChangedPlusMinusButtons
+      prevState.sum !== sum
+      || prevState.quantity !== quantity
     ) {
-      this.setState({ sum, quantity, vat, isChangedPlusMinusButtons });
+      this.setState({ sum, quantity, vat });
     }
   }
 
-
-  render() {
-    return (
-      <></>
-    );
-  }
+  render() { return (<></>) }
 }
 
 export default TotalBlockAbstractClass;
