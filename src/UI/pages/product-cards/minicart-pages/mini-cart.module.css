@@ -9,10 +9,11 @@
   background-color: white;
   z-index: 100;
 }
-.emptyStyle {
+.emptyStyleMini {
   height: 80px;
 }
-.emptyStyle h1 {
+.emptyStyleMini{
+  padding: 0;
   font-weight: 800;
   line-height: 80px;
 }

@@ -20,6 +20,8 @@ export interface IHeaderProps {
   isNewBasketToggle?: boolean;
   symbol: SymbolCurrency;
   setCurrency: ActionCreatorWithPayload<SymbolCurrency, string>;
+  cart: ILocalBasket[],
+  renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>;
 }
 export interface ICommonAttributeSetProps {
   attributes: IProductAttribute[];

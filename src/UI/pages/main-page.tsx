@@ -118,7 +118,6 @@ class MainPage extends PureComponent<any, IState> {
 
   render() {
     const items = this.products;
-    // const symbolCurrency = this.state.currentCurrency;
     if (!this.state.isLoaded) {
       return <h1>Loading...</h1>;
     }
@@ -157,6 +156,4 @@ class MainPage extends PureComponent<any, IState> {
   }
 }
 // export default withRouter(MainPage);
-// export default MainPage;
-// export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainPage));

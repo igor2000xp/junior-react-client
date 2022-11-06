@@ -64,9 +64,9 @@ class MainCart extends CartAbstractClass {
       );
     } else {
       return (
-        <article className={`${styles.cartWrapper} ${styles.emptyStyle}`}>
+        <article className={`${styles.cartWrapper}`}>
           <Header />
-          <h1>Your cart is empty</h1>
+          <h1 className={`${styles.emptyStyle}`}>Your cart is empty</h1>
         </article>
       )
     }

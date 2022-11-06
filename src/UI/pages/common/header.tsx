@@ -7,14 +7,14 @@ import {
   GetAllCurrencyQuery,
 } from '../../../graphql/generated';
 import CurrencyItem from './common-bloks/currency-item/currency-item';
-import { LOCAL_CURRENT_CURRENCY } from '../../../constants';
+import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../constants';
 import currencyArrowOpen from '../../../assets/images/Icon/currencyOpen.svg';
 import currencyArrowClose from '../../../assets/images/Icon/currencyClose.svg';
 import {
   currencyInit,
   ICurrency,
   IHeaderProps,
-  IHeaderState,
+  IHeaderState, ILocalBasket,
   Label,
   SymbolCurrency,
 } from '../common-models';
@@ -25,14 +25,18 @@ import { initFirstLocalCurrency } from '../main-page-helpers/main-page-helpers';
 import { connect } from 'react-redux';
 import { State } from '../../../store/store';
 import { setCurrency } from '../../../store/currencySlice';
+import { renewBasket } from '../../../store/cartSlice';
 
 type IState = Readonly<IHeaderState>;
 type IProps = Readonly<IHeaderProps>;
 
 const mapStateToProps = (state: State) => {
-  return { symbol: state.currency.symbol };
+  return {
+    symbol: state.currency.symbol,
+    cart: state.cart.cart,
+  };
 };
-const mapDispatchToProps = { setCurrency };
+const mapDispatchToProps = { setCurrency, renewBasket };
 
 class Header extends Component<IProps, IState> {
   private currencies: ICurrency[];
@@ -82,17 +86,23 @@ class Header extends Component<IProps, IState> {
     try {
       document.addEventListener('mousedown', this.handleClickOutsideCurrency);
       document.addEventListener('mousedown', this.handleClickOutsideCart);
-      const { label, symbol } = await initFirstLocalCurrency();
-      this.setState({ label, symbol });
-      this.props.setCurrency(symbol);
-      const { data } = await client.query<GetAllCurrencyQuery>({
-        query: GetAllCurrencyDocument,
-      });
-      this.currencies = data.currencies as ICurrency[];
+      await this.initStore();
     } catch (err) {
       console.log(`Error loading data from server ${err}`);
     }
   }
+  async initStore() {
+    const { label, symbol } = await initFirstLocalCurrency();
+    this.setState({ label, symbol });
+    this.props.setCurrency(symbol);
+    const { data } = await client.query<GetAllCurrencyQuery>({
+      query: GetAllCurrencyDocument,
+    });
+    this.currencies = data.currencies as ICurrency[];
+    const cart = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string) as ILocalBasket[];
+    this.props.renewBasket(cart);
+  }
+
   componentDidUpdate(
     prevProps: Readonly<IProps>,
     prevState: Readonly<IState>,
@@ -156,7 +166,6 @@ class Header extends Component<IProps, IState> {
             onClick={() => this.toggleCurrencyMenu()}
           >
             <div className={stylesHeader.currencyLabel}>
-              {/*{`${this.state.symbol}`}*/}
               {this.props.symbol}
             </div>
 

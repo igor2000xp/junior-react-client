@@ -103,12 +103,11 @@ class MiniCart extends CartAbstractClass {
       );
     } else {
       return (
-        <article className={`${stylesCart.wrapper} ${stylesCart.emptyStyle}`}>
-          <h1>Your cart is empty</h1>
+        <article className={`${stylesCart.wrapper}`}>
+          <span className={`${stylesCart.emptyStyleMini}`}>Your cart is empty</span>
         </article>
       )
     }
-
   }
 }
 
