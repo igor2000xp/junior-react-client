@@ -202,8 +202,6 @@ class Header extends Component<IProps, IState> {
             <div onClick={this.handleCartClick}>
               <CartCountProvider
                 renderCount={(count) => <CartBadge count={count} />}
-                isChangedQuantityToggle={this.state.isShownCart}
-                isChangedCurrencyOrCart={this.state.isNewBasketToggle}
               />
             </div>
 

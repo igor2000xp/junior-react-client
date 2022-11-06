@@ -11,7 +11,7 @@ class CartBadge extends Component<IProps, IState> {
     this.state = { count: 0 };
   }
 
-  async componentDidUpdate(
+  componentDidUpdate(
     prevProps: Readonly<IProps>,
     prevState: Readonly<IState>,
   ) {
