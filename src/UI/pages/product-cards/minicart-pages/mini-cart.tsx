@@ -69,42 +69,42 @@ class MiniCart extends CartAbstractClass {
 
     const itemsTxt = this.state.totalItems === 1 ? 'item' : 'items';
     return (
-      <article className={stylesCart.wrapper}>
-        <div className={stylesCart.insideWrapper}>
-          <section className={stylesCart.MiniCartHeader}>
-            <h3>My Bag,</h3>
-            <div>
-              <h4>{ `${this.getCount()} ${itemsTxt}` }</h4>
-            </div>
-          </section>
+        <article className={stylesCart.wrapper}>
+          <div className={stylesCart.insideWrapper}>
+            <section className={stylesCart.MiniCartHeader}>
+              <h3>My Bag,</h3>
+              <div>
+                <h4>{ `${this.getCount()} ${itemsTxt}` }</h4>
+              </div>
+            </section>
 
-          <section className={stylesCart.mainBlock}>
-            {localBasket.map((item, index) => {
-              const basket = item;
-              const currency: ICurrency = {
-                symbol,
-                label: this.currentCurrencyLabel,
-              };
-              return (
-                <MiniCartItem
-                  basket={basket}
-                  currency={currency}
-                  basketId={basket.id}
-                  key={item.productIdAttr + index}
-                />
-              );
-            })}
-          </section>
+            <section className={stylesCart.mainBlock}>
+              {localBasket.map((item, index) => {
+                const basket = item;
+                const currency: ICurrency = {
+                  symbol,
+                  label: this.currentCurrencyLabel,
+                };
+                return (
+                  <MiniCartItem
+                    basket={basket}
+                    currency={currency}
+                    basketId={basket.id}
+                    key={item.productIdAttr + index}
+                  />
+                );
+              })}
+            </section>
 
-          <section className={stylesCart.miniTotal}>
-            <MiniTotalBlock/>
-          </section>
+            <section className={stylesCart.miniTotal}>
+              <MiniTotalBlock/>
+            </section>
 
-          <section>
-            <MiniButtonBlock />
-          </section>
-        </div>
-      </article>
+            <section>
+              <MiniButtonBlock />
+            </section>
+          </div>
+        </article>
     );
   }
 }

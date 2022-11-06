@@ -3,6 +3,20 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.opacityBackground {
+  display: none;
+  width: 100vw;
+  height: 1700px;
+  position: absolute;
+  top: 83px;
+  left: 0;
+  opacity: 0.1;
+  background-color: black;
+  z-index: 2;
+}
+.activeBackground {
+  display: block;
+}
 .logo {
   margin: 24px 0 0 0;
   width: 41px;
@@ -70,7 +84,7 @@
 }
 .miniCartBlock {
   position: absolute;
-  top: -1662px;
+  top: -1641px;
   right: -15px;
   transition: all 0.7s ease-out;
   z-index: 1000;

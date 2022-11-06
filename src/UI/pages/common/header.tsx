@@ -37,6 +37,7 @@ const mapDispatchToProps = { setCurrency };
 class Header extends Component<IProps, IState> {
   private currencies: ICurrency[];
   private activeCart = '';
+  private activeBackground = '';
   protected wrapperCurrencyRef: RefObject<HTMLDivElement>;
   protected wrapperCartRef: RefObject<HTMLDivElement>;
 
@@ -134,10 +135,12 @@ class Header extends Component<IProps, IState> {
   handleCartClick() {
     const isShownCart = !this.state.isShownCart;
     this.activeCart = isShownCart ? stylesHeader.activeCart : '';
+    this.activeBackground = isShownCart ? stylesHeader.activeBackground : '';
     this.setState({ isShownCart });
   }
   closeCart() {
     this.activeCart = '';
+    this.activeBackground = '';
     this.setState({ isShownCart: false });
   }
 
@@ -216,6 +219,7 @@ class Header extends Component<IProps, IState> {
             </div>
           </section>
         </div>
+        <div className={`${stylesHeader.opacityBackground} ${this.activeBackground}`} />
       </div>
     );
   }
