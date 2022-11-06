@@ -32,35 +32,44 @@ class MainCart extends CartAbstractClass {
     const localBasket = this.props.cart
       ? this.props.cart
       : [localBasketItemInit];
-    return (
-      <article className={styles.cartWrapper}>
-        <Header />
-        <article className={styles.wrapper}>
-          <section className={styles.header}>
-            <h1>Cart</h1>
-          </section>
+    if (this.getCount() > 0) {
+      return (
+        <article className={styles.cartWrapper}>
+          <Header />
+          <article className={styles.wrapper}>
+            <section className={styles.header}>
+              <h1>Cart</h1>
+            </section>
 
-          <section className={styles.mainBlock}>
-            {localBasket.map((item, index) => {
-              const basket = item;
-              const currency: ICurrency = {
-                symbol: this.state.currentCurrency,
-                label: this.currentCurrencyLabel,
-              };
-              return (
-                <MainCartItem
-                  basket={basket}
-                  basketId={basket.id}
-                  currency={currency}
-                  key={item.productIdAttr + index}
-                />
-              );
-            })}
-            <MainCartTotalBlock/>
-          </section>
+            <section className={styles.mainBlock}>
+              {localBasket.map((item, index) => {
+                const basket = item;
+                const currency: ICurrency = {
+                  symbol: this.state.currentCurrency,
+                  label: this.currentCurrencyLabel,
+                };
+                return (
+                  <MainCartItem
+                    basket={basket}
+                    basketId={basket.id}
+                    currency={currency}
+                    key={item.productIdAttr + index}
+                  />
+                );
+              })}
+              <MainCartTotalBlock/>
+            </section>
+          </article>
         </article>
-      </article>
-    );
+      );
+    } else {
+      return (
+        <article className={`${styles.cartWrapper} ${styles.emptyStyle}`}>
+          <Header />
+          <h1>Your cart is empty</h1>
+        </article>
+      )
+    }
   }
 }
 

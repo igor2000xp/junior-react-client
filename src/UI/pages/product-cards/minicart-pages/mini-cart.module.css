@@ -9,6 +9,13 @@
   background-color: white;
   z-index: 100;
 }
+.emptyStyle {
+  height: 80px;
+}
+.emptyStyle h1 {
+  font-weight: 800;
+  line-height: 80px;
+}
 .mainBlock {
   display: flex;
   flex-direction: column;

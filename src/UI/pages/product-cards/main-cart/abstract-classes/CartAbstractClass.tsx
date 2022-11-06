@@ -58,6 +58,12 @@ abstract class CartAbstractClass extends Component<IProps, IState> {
     );
   }
 
+  getCount():number {
+    return this.props.cart.reduce((acc, item) => {
+      return acc + item.quantity;
+    }, 0);
+  }
+
   render() {
     return (
       <></>

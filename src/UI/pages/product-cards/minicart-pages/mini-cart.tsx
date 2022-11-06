@@ -55,12 +55,6 @@ class MiniCart extends CartAbstractClass {
     }
   }
 
-  getCount():number {
-    return this.props.cart.reduce((acc, item) => {
-      return acc + item.quantity;
-    }, 0);
-  }
-
   render() {
     const localBasket = this.props.cart
       ? this.props.cart
@@ -68,7 +62,8 @@ class MiniCart extends CartAbstractClass {
     const symbol = this.props.symbol ? this.props.symbol : this.state.currentCurrency;
 
     const itemsTxt = this.state.totalItems === 1 ? 'item' : 'items';
-    return (
+    if (this.getCount() > 0) {
+      return (
         <article className={stylesCart.wrapper}>
           <div className={stylesCart.insideWrapper}>
             <section className={stylesCart.MiniCartHeader}>
@@ -105,7 +100,15 @@ class MiniCart extends CartAbstractClass {
             </section>
           </div>
         </article>
-    );
+      );
+    } else {
+      return (
+        <article className={`${stylesCart.wrapper} ${stylesCart.emptyStyle}`}>
+          <h1>Your cart is empty</h1>
+        </article>
+      )
+    }
+
   }
 }
 
