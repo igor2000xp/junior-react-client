@@ -69,6 +69,8 @@ export interface ICartCountProviderProps {
   renderCount: (count: number) => void;
   isChangedQuantityToggle: boolean;
   isChangedCurrencyOrCart: boolean;
+  cart: ILocalBasket[];
+  renewBasket: ActionCreatorWithPayload<ILocalBasket[]>
 }
 
 export interface IMainCartProps {
