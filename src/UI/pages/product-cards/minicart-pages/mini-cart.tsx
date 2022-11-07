@@ -61,7 +61,7 @@ class MiniCart extends CartAbstractClass {
       : [localBasketItemInit];
     const symbol = this.props.symbol ? this.props.symbol : this.state.currentCurrency;
 
-    const itemsTxt = this.state.totalItems === 1 ? 'item' : 'items';
+    const itemsTxt = this.getCount() === 1 ? 'item' : 'items';
     if (this.getCount() > 0) {
       return (
         <article className={stylesCart.wrapper}>
