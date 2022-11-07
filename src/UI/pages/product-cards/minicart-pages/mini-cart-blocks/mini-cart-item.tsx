@@ -68,7 +68,7 @@ class MiniCartItem extends CartItemBlockAbstractClass {
         <aside className={stylesMBlock.rightSide}>
           <section className={stylesMBlock.buttonSide}>
             <button
-              className={`${stylesMBlock.buttonQuality}`}
+              className={`${stylesMBlock.buttonQuantity}`}
               onClick={this.plusHandle}
             >
               <p className={stylesMBlock.plus} />
@@ -79,7 +79,7 @@ class MiniCartItem extends CartItemBlockAbstractClass {
             </div>
 
             <button
-              className={stylesMBlock.buttonQuality}
+              className={stylesMBlock.buttonQuantity}
               onClick={this.minusHandle}
             >
               <p className={stylesMBlock.minus} />
