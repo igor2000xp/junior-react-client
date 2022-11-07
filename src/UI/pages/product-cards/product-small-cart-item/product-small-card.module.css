@@ -1,7 +1,9 @@
 .card {
   position: relative;
-  width: 386px;
-  height: 444px;
+  /*width: 386px;*/
+  /*height: 444px;*/
+  width: 100%;
+  height: auto;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -13,17 +15,17 @@
 .imageWrapper {
   position: relative;
   margin: 16px 0 0 0;
-  /*width: 354px;*/
-  width: 31%;
-  height: 330px;
+  max-width: 354px;
+  /*width: 31%;*/
+  max-height: 330px;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .bigImage {
-  width: 354px;
-  height: 330px;
+  max-width: 354px;
+  max-height: 330px;
 }
 .bigImage img {
   object-fit: contain;

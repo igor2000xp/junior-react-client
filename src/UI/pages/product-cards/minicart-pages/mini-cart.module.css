@@ -9,6 +9,11 @@
   background-color: white;
   z-index: 100;
 }
+@media screen and (max-width: 386px) {
+  .wrapper {
+    width: 92vw;
+  }
+}
 .emptyStyleMini {
   height: 80px;
 }
