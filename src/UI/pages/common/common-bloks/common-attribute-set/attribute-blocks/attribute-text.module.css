@@ -27,6 +27,20 @@
   justify-content: center;
   cursor: pointer;
 }
+
+@media (max-width: 900px) {
+  .sizeItem {
+    width: 5.7vw;
+    height: 5vw;
+  }
+  .sizeBlock {
+    margin: 3vw 0 0 0;
+    height: 13vw;
+  }
+  .sizeLine {
+    height: 6vw;
+  }
+}
 .active {
   background: black;
   color: white;

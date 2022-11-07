@@ -88,7 +88,6 @@ class PdpCard extends Component<any, IState> {
     };
     const outStock = !product.inStock ? styles.outStock : '';
     const hidden = product.gallery.length === 1 ? styles.hidden : '';
-    // console.log(this.state.attrActive);
     return (
       <article className={styles.wrapperWithHeader}>
         <Header />

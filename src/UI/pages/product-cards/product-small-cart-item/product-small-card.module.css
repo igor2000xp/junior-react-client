@@ -15,9 +15,9 @@
 .imageWrapper {
   position: relative;
   margin: 16px 0 0 0;
-  max-width: 354px;
+  /*max-width: 354px;*/
   /*width: 31%;*/
-  max-height: 330px;
+  /*max-height: 330px;*/
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -28,9 +28,17 @@
   max-height: 330px;
 }
 .bigImage img {
-  object-fit: contain;
+  /*object-fit: contain;*/
   width: auto;
   height: 100%;
+}
+
+@media (max-width: 400px) {
+  .bigImage img {
+    object-fit: contain;
+    width: 100%;
+    /*height: 100%;*/
+  }
 }
 .outStore {
   display: none;
@@ -62,7 +70,7 @@
   cursor: pointer;
 }
 .textBlock {
-  width: 354px;
+  width: 100%;
   height: 58px;
   margin: 24px;
 }
@@ -72,6 +80,7 @@
   margin: 0;
   text-align: left;
 }
+
 .nameBlock p {
   margin: 0;
   font-family: 'Raleway', serif;
