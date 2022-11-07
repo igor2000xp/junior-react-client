@@ -132,22 +132,41 @@ class MainPage extends PureComponent<any, IState> {
           <section className={stylesMain.mainProductSection}>
             {items.map((item) => {
               const outStock = item.inStock ? '' : `${stylesMain.outStock}`;
-              return (
-                <section
-                  className={`${stylesMain.itemBlock} ${outStock}`}
-                  key={item.id}
-                >
-                  <div onClick={() => this.handleGoToProductLink(item.id)}>
-                    <ProductSmallCard
-                      item={item}
-                      key={item.id}
-                      handleGreenButtonFromSmallCart={
-                        this.handleGreenButtonFromSmallCart
-                      }
-                    />
-                  </div>
-                </section>
-              );
+              if (item.inStock) {
+                return (
+                  <section
+                    className={`${stylesMain.itemBlock} ${outStock}`}
+                    key={item.id}
+                  >
+                    <div onClick={() => this.handleGoToProductLink(item.id)}>
+                      <ProductSmallCard
+                        item={item}
+                        key={item.id}
+                        handleGreenButtonFromSmallCart={
+                          this.handleGreenButtonFromSmallCart
+                        }
+                      />
+                    </div>
+                  </section>
+                );
+              } else {
+                return (
+                  <section
+                    className={`${stylesMain.itemBlock} ${outStock}`}
+                    key={item.id}
+                  >
+                    <div>
+                      <ProductSmallCard
+                        item={item}
+                        key={item.id}
+                        handleGreenButtonFromSmallCart={
+                          this.handleGreenButtonFromSmallCart
+                        }
+                      />
+                    </div>
+                  </section>
+                );
+              }
             })}
           </section>
         </article>
