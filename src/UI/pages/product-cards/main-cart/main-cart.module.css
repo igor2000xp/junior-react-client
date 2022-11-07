@@ -10,6 +10,12 @@
 .emptyStyle {
   height: 800px;
 }
+
+@media (max-width: 1280px) {
+  .cartWrapper {
+    padding: 1vw;
+  }
+}
 .emptyStyle {
   margin: 0 auto;
   font-weight: 800;

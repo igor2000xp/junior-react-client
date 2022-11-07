@@ -14,7 +14,7 @@
 .name {
   text-align: left;
 }
-.wrapper h3 {
+.name h3 {
   margin: 16px 0 0 0;
   font-weight: 400;
   font-size: 27px;
@@ -28,15 +28,25 @@
   line-height: 18px;
   text-transform: uppercase;
 }
+.attributes {
+  margin: 20px 0 10px 0;
+}
 .priceBlock {
   margin-top: 20px;
 }
-.wrapper p {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 18px;
-  text-transform: uppercase;
-}
-.attributes {
-  margin: 20px 0 10px 0;
+@media (max-width: 600px) {
+  .brand h2 {
+    font-size: 7vw;
+    line-height: 5.9vw;
+  }
+  .name h3 {
+    font-size: 7vw;
+    line-height: 5.9vw;
+  }
+  .attributes {
+    margin: 2vw 0 1vw 0;
+  }
+  .priceBlock {
+    margin-top: 2vw;
+  }
 }

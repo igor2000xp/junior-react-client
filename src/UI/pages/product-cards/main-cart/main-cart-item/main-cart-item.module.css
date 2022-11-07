@@ -24,7 +24,7 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.buttonQuality {
+.buttonQuantity {
   margin: 0 auto;
   width: 45px;
   height: 45px;
@@ -64,6 +64,26 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+@media (max-width: 600px) {
+  .leftSide {
+    width: 49%;
+  }
+  .rightSide {
+    width: 49%;
+  }
+  .buttonQuantity {
+    width: 7vw;
+    height: 10vw;
+  }
+  .imageBlock {
+    margin: 0 0 5vw 0;
+    width: 35vw;
+    height: 45vw;
+  }
+  .buttonSide {
+    height: 75vw;
+  }
 }
 .arrow {
   position: absolute;

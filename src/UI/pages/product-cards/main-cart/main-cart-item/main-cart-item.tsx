@@ -63,7 +63,7 @@ class MainCartItem extends CartItemBlockAbstractClass {
         <aside className={styles.rightSide}>
           <section className={styles.buttonSide}>
             <button
-              className={`${styles.buttonQuality}`}
+              className={`${styles.buttonQuantity}`}
               onClick={this.plusHandle}
             >
               <p className={styles.plus} />
@@ -71,7 +71,7 @@ class MainCartItem extends CartItemBlockAbstractClass {
             <div className={styles.numberInBasket}>
               {quantity}
             </div>
-            <button className={styles.buttonQuality} onClick={this.minusHandle}>
+            <button className={styles.buttonQuantity} onClick={this.minusHandle}>
               <p className={styles.minus} />
             </button>
           </section>
