@@ -6,8 +6,9 @@
 .opacityBackground {
   display: none;
   width: 100vw;
-  height: 1700px;
-  position: absolute;
+  /*height: 1700px;*/
+  height: 120%;
+  position: fixed;
   top: 83px;
   left: 0;
   opacity: 0.1;
@@ -83,12 +84,13 @@
   cursor: pointer;
 }
 .miniCartBlock {
-  position: absolute;
+  position: fixed;
   top: -1641px;
-  right: -15px;
+  right: 17vw;
   transition: all 0.7s ease-out;
   z-index: 1000;
 }
 .activeCart {
-  transform: translateY(1690px);
+  top: 83px;
+  /*transform: translateY(1690px);*/
 }

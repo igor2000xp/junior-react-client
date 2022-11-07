@@ -16,7 +16,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   row-gap: 10px;
-  justify-content: space-between;
+  justify-content: left;
 }
 .outStock {
   position: relative;
