@@ -1,5 +1,5 @@
 .colorBlock {
-  margin: 24px 0 0 0 ;
+  margin: 24px 0 0 0;
   height: 62px;
   display: flex;
   flex-direction: column;
@@ -25,4 +25,19 @@
 }
 .activeColor {
   border: 1px solid #5ECE7B;
+}
+@media (max-width: 900px) {
+  .colorBlock {
+    margin: 3vw 0 0 0;
+    height: 12vw;
+  }
+  .colorItem {
+    margin: 0 0.5vw 0 0;
+    width: 6vw;
+    height: 6vw;
+  }
+  .colorItemInside {
+    width: 5vw;
+    height: 5vw;
+  }
 }
