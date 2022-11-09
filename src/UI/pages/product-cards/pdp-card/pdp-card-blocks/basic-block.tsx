@@ -22,12 +22,15 @@ class BasicBlock extends Component<IProps, IState> {
   componentDidMount() {
     this.setState({
       id: this.props.id,
-    })
+    });
   }
 
   render() {
-    const arrAttributes = this.props.modifiedProduct.attributes as IProductAttribute[];
-    const prices = Array.isArray(this.props.modifiedProduct.prices) ? this.props.modifiedProduct.prices : [this.props.modifiedProduct.prices];
+    const arrAttributes = this.props.modifiedProduct
+      .attributes as IProductAttribute[];
+    const prices = Array.isArray(this.props.modifiedProduct.prices)
+      ? this.props.modifiedProduct.prices
+      : [this.props.modifiedProduct.prices];
     return (
       <article className={styles.wrapper}>
         <div className={styles.brand}>
@@ -38,16 +41,12 @@ class BasicBlock extends Component<IProps, IState> {
           <h3>{this.props.modifiedProduct.name}</h3>
         </div>
 
-        <CommonAttributeSet
-          attributes={arrAttributes}
-        />
+        <CommonAttributeSet attributes={arrAttributes} />
 
         <div className={styles.priceBlock}>
           <h4>PRICE:</h4>
           <div>
-            <PriceBlock
-              prices={prices}
-            />
+            <PriceBlock prices={prices} />
           </div>
         </div>
       </article>

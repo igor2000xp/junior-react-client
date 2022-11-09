@@ -4,7 +4,7 @@ import {
   IMainCartState,
   Label,
   localBasketItemInit,
-  SymbolCurrency
+  SymbolCurrency,
 } from '../../../common-models';
 import { Component } from 'react';
 import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../../../constants';
@@ -58,16 +58,14 @@ abstract class CartAbstractClass extends Component<IProps, IState> {
     );
   }
 
-  getCount():number {
+  getCount(): number {
     return this.props.cart.reduce((acc, item) => {
       return acc + item.quantity;
     }, 0);
   }
 
   render() {
-    return (
-      <></>
-    )
+    return <></>;
   }
 }
 

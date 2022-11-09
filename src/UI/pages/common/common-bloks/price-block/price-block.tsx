@@ -8,8 +8,8 @@ import { IPriceBlockProps } from '../../../common-models';
 
 type IProps = Readonly<IPriceBlockProps>;
 
-const mapStateToProps = (state:State) => {
-  return { symbol: state.currency.symbol }
+const mapStateToProps = (state: State) => {
+  return { symbol: state.currency.symbol };
 };
 const mapDispatchToProps = { setCurrency };
 

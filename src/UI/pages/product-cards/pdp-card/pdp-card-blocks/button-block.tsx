@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import styles from './button-block.module.css';
 import {
-  IActiveAttrPdp, IButtonBlockProps,
+  IActiveAttrPdp,
+  IButtonBlockProps,
   IProduct,
   localBasketItemInit,
-  priceInit
+  priceInit,
 } from '../../../common-models';
-import {
-  LOCAL_BASKET,
-} from '../../../../../constants';
+import { LOCAL_BASKET } from '../../../../../constants';
 import {
   getActiveAttrFromLocal,
   getFromLocalBasket,
@@ -43,8 +42,10 @@ class ButtonBlock extends Component<IProps> {
   async AddIntoBasket() {
     const activeAttributes: IActiveAttrPdp[] = await getActiveAttrFromLocal();
     const productIdAttr = JSON.stringify(activeAttributes) + this.productId;
-    const prices = Array.isArray(this.props.product.prices) ? this.props.product.prices : [priceInit];
-    const product:IProduct = this.props.product;
+    const prices = Array.isArray(this.props.product.prices)
+      ? this.props.product.prices
+      : [priceInit];
+    const product: IProduct = this.props.product;
     this.localBaskets = await getFromLocalBasket();
     if (
       !this.localBaskets[0].productIdAttr &&
@@ -83,9 +84,9 @@ class ButtonBlock extends Component<IProps> {
     const buttonOut = this.props.inStock ? '' : styles.notActive;
     return (
       <div onClick={this.clickToOut}>
-          <button className={`${styles.wrapper} ${buttonOut}`}>
-            <h2>ADD TO CART</h2>
-          </button>
+        <button className={`${styles.wrapper} ${buttonOut}`}>
+          <h2>ADD TO CART</h2>
+        </button>
       </div>
     );
   }

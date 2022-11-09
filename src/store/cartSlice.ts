@@ -2,9 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ILocalBasket, localBasketItemInit } from '../UI/pages/common-models';
 import { ICartState } from '../UI/pages/common-models/state-storage-models';
 
-
-
-const initialState:ICartState = {
+const initialState: ICartState = {
   cart: [localBasketItemInit],
 };
 

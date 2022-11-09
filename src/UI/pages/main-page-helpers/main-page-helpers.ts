@@ -1,6 +1,12 @@
 import client from '../../../graphql/apollo';
 import { GetProductsByCategoryDocument } from '../../../graphql/generated';
-import { ILocalBasket, ILocalBasketForTotal, IProduct, SymbolCurrency, zeroCurrencyInit, } from '../common-models';
+import {
+  ILocalBasket,
+  ILocalBasketForTotal,
+  IProduct,
+  SymbolCurrency,
+  zeroCurrencyInit,
+} from '../common-models';
 import { LOCAL_CURRENT_CURRENCY, VAT_RATE } from '../../../constants';
 
 export const getProductsList = async (
@@ -25,17 +31,16 @@ export const getProductsListFromBasket = (
   localBasket: ILocalBasket[],
   currentCurrency: SymbolCurrency,
 ): ILocalBasketForTotal[] => {
-
   return localBasket.map((item) => {
     const currencyPrice = item.prices.find((itemPrice) => {
       return itemPrice.currency.symbol === currentCurrency;
     });
     return {
       productId: item.id,
-      amount: currencyPrice ? currencyPrice.amount: 0,
+      amount: currencyPrice ? currencyPrice.amount : 0,
       quantity: item.quantity,
       symbolPrice: currentCurrency,
-    }
+    };
   });
 };
 

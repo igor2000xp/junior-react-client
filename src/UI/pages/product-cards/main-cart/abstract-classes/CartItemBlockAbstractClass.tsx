@@ -11,7 +11,7 @@ import {
   modifiedProductInit,
   modifiedAttrProductsInit,
   productInit,
-  SymbolCurrency
+  SymbolCurrency,
 } from '../../../common-models';
 import { LOCAL_BASKET } from '../../../../../constants';
 import { changeQuantityInBasket } from '../helpers';
@@ -24,7 +24,9 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
   protected modifiedProduct: IModifiedProduct = modifiedProductInit;
   protected activeAttr: IActiveBasketAttr[] = [localActiveAttributesInit];
   protected activeAttrItem: IActiveBasketAttr = localActiveAttributesInit;
-  protected modifiedAttrProducts: IModifiedAttrProducts[] = [modifiedAttrProductsInit];
+  protected modifiedAttrProducts: IModifiedAttrProducts[] = [
+    modifiedAttrProductsInit,
+  ];
   protected currencySymbol: SymbolCurrency = SymbolCurrency.SymbolUsd;
   protected imageIndex = 0;
 
@@ -41,7 +43,9 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const localBasket:ILocalBasket[] = await JSON.parse(localStorage.getItem(LOCAL_BASKET) as string) as ILocalBasket[];
+    const localBasket: ILocalBasket[] = (await JSON.parse(
+      localStorage.getItem(LOCAL_BASKET) as string,
+    )) as ILocalBasket[];
     this.props.renewBasket(localBasket);
     this.activeAttr = await JSON.parse(
       localStorage.getItem(LOCAL_BASKET) as string,
@@ -54,7 +58,7 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
       this.props.basket.productIdAttr && this.props.basket.productIdAttr !== ''
         ? this.props.basket.productIdAttr
         : this.state.id;
-    await this.setState({id: id});
+    await this.setState({ id: id });
   }
 
   async componentDidUpdate(
@@ -81,12 +85,15 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
   protected getQuantityFromStore() {
     const changedCart = this.props.cart;
     const changedCartItem = changedCart.find((item) => {
-      const complexId = JSON.stringify(this.props.basket.activeAttributes) + this.props.basket.id;
+      const complexId =
+        JSON.stringify(this.props.basket.activeAttributes) +
+        this.props.basket.id;
       const complexIdItem = JSON.stringify(item.activeAttributes) + item.id;
       return complexIdItem === complexId;
     });
-    const quantityInBasket = typeof changedCartItem !== 'undefined' ? changedCartItem.quantity: 0;
-    this.setState({quantityInBasket})
+    const quantityInBasket =
+      typeof changedCartItem !== 'undefined' ? changedCartItem.quantity : 0;
+    this.setState({ quantityInBasket });
     return quantityInBasket;
   }
 
@@ -154,7 +161,9 @@ class CartItemBlockAbstractClass extends Component<IProps, IState> {
     await this.setState({ mainImageIndex: this.imageIndex });
   }
 
-  render() { return (<></>); }
+  render() {
+    return <></>;
+  }
 }
 
 export default CartItemBlockAbstractClass;

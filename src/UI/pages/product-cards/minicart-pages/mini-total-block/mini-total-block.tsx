@@ -7,11 +7,11 @@ import { connect } from 'react-redux';
 
 type IProps = Readonly<ITotalBlockProps>;
 
-const mapStateToProps = (state:State) => {
+const mapStateToProps = (state: State) => {
   return {
     cart: state.cart.cart,
     currency: state.currency.symbol,
-  }
+  };
 };
 
 class MiniTotalBlock extends TotalBlockAbstractClass {

@@ -61,7 +61,7 @@ export interface ICommonAttributeSet {
   prodId: string;
 }
 
-export interface IMainCartState{
+export interface IMainCartState {
   productId: string;
   currentCurrency: SymbolCurrency;
   localBasket: ILocalBasket[];

@@ -12,8 +12,8 @@ import { State } from '../../../../store/store';
 import { renewBasket } from '../../../../store/cartSlice';
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state:State) => {
-  return { cart: state.cart.cart }
+const mapStateToProps = (state: State) => {
+  return { cart: state.cart.cart };
 };
 const mapDispatchToProps = { renewBasket };
 
@@ -44,7 +44,9 @@ class ProductSmallCard extends Component<IProps, any> {
     const activeAttr = getFirstProdAttrAsActiveAttr(this.props.item);
     // const
     const attributes = this.props.item.attributes;
-    const prices = Array.isArray(this.props.item.prices) ? this.props.item.prices : [this.props.item.prices];
+    const prices = Array.isArray(this.props.item.prices)
+      ? this.props.item.prices
+      : [this.props.item.prices];
     const product = this.props.item;
     const newLocalBasket = settleFullBasket(
       localBasket,
@@ -67,7 +69,9 @@ class ProductSmallCard extends Component<IProps, any> {
     } else if (Array.isArray(firstGallery))
       this.gallery = firstGallery[0] ? firstGallery[0] : '';
     // const id = this.props.item.id;
-    const prices = Array.isArray(this.props.item.prices) ? this.props.item.prices : [{...priceInit}];
+    const prices = Array.isArray(this.props.item.prices)
+      ? this.props.item.prices
+      : [{ ...priceInit }];
     const greenButton = !this.props.item.inStock
       ? styles.outStore
       : styles.greenButtonCart;

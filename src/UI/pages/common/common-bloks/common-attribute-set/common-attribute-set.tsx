@@ -22,8 +22,7 @@ class CommonAttributeSet extends Component<IProps, IState> {
     this.state = { prodId: '' };
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   protected handleAttributes(value: IAttributeColorSwatchState) {
     this.renewHandleAttributes(value);
@@ -32,7 +31,9 @@ class CommonAttributeSet extends Component<IProps, IState> {
     // This is a test to see if this is the initial step.
     if (this.arrResultToStorage[0].id === '') {
       this.arrResultToStorage.shift();
-      const arrResultToStorage:IAttrActive[] = JSON.parse(localStorage.getItem(ACTIVE_PRODUCT_ATTRIBUTES) as string);
+      const arrResultToStorage: IAttrActive[] = JSON.parse(
+        localStorage.getItem(ACTIVE_PRODUCT_ATTRIBUTES) as string,
+      );
       Array.prototype.push.apply(this.arrResultToStorage, arrResultToStorage);
     }
     // This is a test to see if there is an element in the array that looks like new.
@@ -43,7 +44,10 @@ class CommonAttributeSet extends Component<IProps, IState> {
       this.arrResultToStorage.push(value.activeAttributes);
     } else if (isItemSame > -1) {
       this.arrResultToStorage[isItemSame] = { ...value.activeAttributes };
-      localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify(this.arrResultToStorage));
+      localStorage.setItem(
+        ACTIVE_PRODUCT_ATTRIBUTES,
+        JSON.stringify(this.arrResultToStorage),
+      );
     }
   }
 

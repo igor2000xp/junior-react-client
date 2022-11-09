@@ -3,7 +3,8 @@ import stylesMBlock from './mini-cart-item.module.css';
 import MiniCartBasicBlock from '../mini-cart-basic-block/mini-cart-basic-block';
 import {
   ICardItemProps,
-  ICardItemState, IModifiedProduct,
+  ICardItemState,
+  IModifiedProduct,
   modifiedProductInit,
   modifiedAttrProductsInit,
 } from '../../../common-models';
@@ -74,9 +75,7 @@ class MiniCartItem extends CartItemBlockAbstractClass {
               <p className={stylesMBlock.plus} />
             </button>
 
-            <div className={stylesMBlock.numberInBasket}>
-              {quantity}
-            </div>
+            <div className={stylesMBlock.numberInBasket}>{quantity}</div>
 
             <button
               className={stylesMBlock.buttonQuantity}

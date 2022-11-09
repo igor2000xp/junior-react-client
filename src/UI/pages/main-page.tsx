@@ -8,7 +8,8 @@ import Header from './common/header';
 import {
   ACTIVE_PRODUCT_ATTRIBUTES,
   LOCAL_BASKET,
-  LOCAL_CURRENT_CURRENCY, PRODUCT_LIST_FIRST_ID,
+  LOCAL_CURRENT_CURRENCY,
+  PRODUCT_LIST_FIRST_ID,
 } from '../../constants';
 import {
   ILocalBasket,
@@ -27,7 +28,7 @@ import { State } from '../../store/store';
 import { setPage } from '../../store/pagesSlice';
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state:State) => {
+const mapStateToProps = (state: State) => {
   return { page: state.pages.page };
 };
 const mapDispatchToProps = { setPage };
@@ -40,7 +41,7 @@ class MainPage extends PureComponent<any, IState> {
   private products: IProduct[] = [productInit];
   private currentCurrency = zeroCurrencyInit;
   private localBaskets: ILocalBasket[] = [localBasketItemInit];
-  private productsListFirstId: string = '';
+  private productsListFirstId = '';
 
   constructor(props: any) {
     super(props);
@@ -156,4 +157,7 @@ class MainPage extends PureComponent<any, IState> {
   }
 }
 // export default withRouter(MainPage);
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(MainPage));
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRouter(MainPage));

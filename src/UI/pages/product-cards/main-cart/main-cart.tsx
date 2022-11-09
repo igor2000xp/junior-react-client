@@ -57,7 +57,7 @@ class MainCart extends CartAbstractClass {
                   />
                 );
               })}
-              <MainCartTotalBlock/>
+              <MainCartTotalBlock />
             </section>
           </article>
         </article>
@@ -68,7 +68,7 @@ class MainCart extends CartAbstractClass {
           <Header />
           <h1 className={`${styles.emptyStyle}`}>Your cart is empty</h1>
         </article>
-      )
+      );
     }
   }
 }

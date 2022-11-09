@@ -16,10 +16,10 @@ export const currencySlice = createSlice({
   name: 'currency',
   initialState,
   reducers: {
-     setCurrency: (state, action: PayloadAction<SymbolCurrency>) => {
-       state.symbol = action.payload;
-     },
-  }
+    setCurrency: (state, action: PayloadAction<SymbolCurrency>) => {
+      state.symbol = action.payload;
+    },
+  },
 });
 
 export const { actions, reducer } = currencySlice;

@@ -1,7 +1,9 @@
 import React from 'react';
 import styles from './main-cart-item.module.css';
 import {
-  ICardItemProps, ICardItemState, IModifiedProduct,
+  ICardItemProps,
+  ICardItemState,
+  IModifiedProduct,
   modifiedAttrProductsInit,
 } from '../../../common-models';
 import MainCartBasicBlock from '../main-cart-blocks/main-cart-basic-block/main-cart-basic-block';
@@ -13,7 +15,7 @@ import { connect } from 'react-redux';
 type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
 
-const mapStateToProps = (state:State) => {
+const mapStateToProps = (state: State) => {
   return { cart: state.cart.cart };
 };
 const mapDispatchToProps = { renewBasket };
@@ -27,7 +29,10 @@ class MainCartItem extends CartItemBlockAbstractClass {
     await super.componentDidMount();
   }
 
-  async componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>): Promise<void> {
+  async componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    prevState: Readonly<IState>,
+  ): Promise<void> {
     return super.componentDidUpdate(prevProps, prevState);
   }
 
@@ -68,10 +73,11 @@ class MainCartItem extends CartItemBlockAbstractClass {
             >
               <p className={styles.plus} />
             </button>
-            <div className={styles.numberInBasket}>
-              {quantity}
-            </div>
-            <button className={styles.buttonQuantity} onClick={this.minusHandle}>
+            <div className={styles.numberInBasket}>{quantity}</div>
+            <button
+              className={styles.buttonQuantity}
+              onClick={this.minusHandle}
+            >
               <p className={styles.minus} />
             </button>
           </section>

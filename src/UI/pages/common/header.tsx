@@ -14,7 +14,8 @@ import {
   currencyInit,
   ICurrency,
   IHeaderProps,
-  IHeaderState, ILocalBasket,
+  IHeaderState,
+  ILocalBasket,
   Label,
   SymbolCurrency,
 } from '../common-models';
@@ -99,7 +100,9 @@ class Header extends Component<IProps, IState> {
       query: GetAllCurrencyDocument,
     });
     this.currencies = data.currencies as ICurrency[];
-    const cart = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string) as ILocalBasket[];
+    const cart = JSON.parse(
+      localStorage.getItem(LOCAL_BASKET) as string,
+    ) as ILocalBasket[];
     this.props.renewBasket(cart);
   }
 
@@ -228,7 +231,9 @@ class Header extends Component<IProps, IState> {
             </div>
           </section>
         </div>
-        <div className={`${stylesHeader.opacityBackground} ${this.activeBackground}`} />
+        <div
+          className={`${stylesHeader.opacityBackground} ${this.activeBackground}`}
+        />
       </div>
     );
   }

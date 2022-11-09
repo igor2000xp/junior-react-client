@@ -8,11 +8,7 @@ interface IProps {
 class TextBlock extends Component<IProps> {
   render() {
     return (
-      <section
-        className={styles.wrapper}
-      >
-        { parse(this.props.text) }
-      </section>
+      <section className={styles.wrapper}>{parse(this.props.text)}</section>
     );
   }
 }

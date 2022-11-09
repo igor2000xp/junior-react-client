@@ -143,7 +143,7 @@ export const localActiveAttributesInit: IActiveBasketAttr = {
   productId: 'xbox-series-s',
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
 };
-export interface IModifiedAttrProducts{
+export interface IModifiedAttrProducts {
   productID: string;
   id: string;
   type: string; // text, color
@@ -163,13 +163,13 @@ export interface IPrice {
   amount: number;
   currency: ICurrency;
 }
-export const priceInit:IPrice = {
+export const priceInit: IPrice = {
   amount: 0,
   currency: {
     label: Label.Usd,
     symbol: SymbolCurrency.SymbolUsd,
   },
-}
+};
 export interface ILocalBasket {
   productIdAttr: string;
   quantity: number;
@@ -189,8 +189,8 @@ export const localBasketItemInit: ILocalBasket = {
   brand: '',
   id: '',
   gallery: [''],
-  attributes: [{...productAttributeInit}],
-  prices: [{...priceInit}],
+  attributes: [{ ...productAttributeInit }],
+  prices: [{ ...priceInit }],
 };
 export interface ILocalBasketForTotal {
   productId: string;
@@ -216,6 +216,6 @@ export const modifiedProductInit: IModifiedProduct = {
   id: '',
   name: '',
   attributes: [productAttributeInit],
-  prices: [{...priceInit}],
+  prices: [{ ...priceInit }],
   brand: '',
-}
+};

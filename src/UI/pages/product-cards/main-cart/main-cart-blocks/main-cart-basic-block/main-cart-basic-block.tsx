@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './main-cart-basic-block.module.css';
-import BasicBlock  from '../../../pdp-card/pdp-card-blocks/basic-block';
+import BasicBlock from '../../../pdp-card/pdp-card-blocks/basic-block';
 import { IBasicBlockProps, IProductAttribute } from '../../../../common-models';
 import PriceBlock from '../../../../common/common-bloks/price-block/price-block';
 import MainCartCommonAttributeSet from '../main-cart-common-atribute-set/main-cart-common-attribute-set';
@@ -8,18 +8,23 @@ import MainCartCommonAttributeSet from '../main-cart-common-atribute-set/main-ca
 type IProps = Readonly<IBasicBlockProps>;
 
 class MainCartBasicBlock extends BasicBlock {
-  constructor(props:IProps) {
+  constructor(props: IProps) {
     super(props);
   }
 
   render() {
-    const arrAttributes = this.props.modifiedProduct.attributes as IProductAttribute[];
+    const arrAttributes = this.props.modifiedProduct
+      .attributes as IProductAttribute[];
     // console.log('MainCartBasicBlock', this.id);
     // const productId =
     //   this.props.id === '' ? '' : this.props.modifiedProduct.id;
     const isEmpty: boolean = this.props.id === '';
-    const brand = isEmpty ? 'Your cart is empty' : this.props.modifiedProduct.brand;
-    const prices = Array.isArray(this.props.modifiedProduct.prices) ? this.props.modifiedProduct.prices : [this.props.modifiedProduct.prices];
+    const brand = isEmpty
+      ? 'Your cart is empty'
+      : this.props.modifiedProduct.brand;
+    const prices = Array.isArray(this.props.modifiedProduct.prices)
+      ? this.props.modifiedProduct.prices
+      : [this.props.modifiedProduct.prices];
     return (
       <article className={styles.wrapper}>
         <section className={styles.brand}>

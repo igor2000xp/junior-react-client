@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { IPriceBlockProps, IPriceBlockState, SymbolCurrency } from '../../../common-models';
+import {
+  IPriceBlockProps,
+  IPriceBlockState,
+  SymbolCurrency,
+} from '../../../common-models';
 
 type IProps = Readonly<IPriceBlockProps>;
 type IState = Readonly<IPriceBlockState>;
@@ -15,7 +19,9 @@ class PriceBlockAbstractClass extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    const symbol = this.props.symbol ? this.props.symbol : SymbolCurrency.SymbolUsd;
+    const symbol = this.props.symbol
+      ? this.props.symbol
+      : SymbolCurrency.SymbolUsd;
     const objAmount = this.props.prices?.find((item) => {
       return item.currency.symbol === symbol ? item : 0;
     });
@@ -23,13 +29,23 @@ class PriceBlockAbstractClass extends Component<IProps, IState> {
     this.setState({ symbol, amount });
   }
 
-  componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>, snapshot?: any) {
-    const symbol = this.props.symbol ? this.props.symbol : SymbolCurrency.SymbolUsd;
+  componentDidUpdate(
+    prevProps: Readonly<IProps>,
+    prevState: Readonly<IState>,
+    snapshot?: any,
+  ) {
+    const symbol = this.props.symbol
+      ? this.props.symbol
+      : SymbolCurrency.SymbolUsd;
     const objAmount = this.props.prices?.find((item) => {
       return item.currency.symbol === symbol ? item : 0;
     });
     const amount = objAmount ? objAmount.amount : 0;
-    if (typeof this.props.prices !== 'undefined' && this.props.prices[0].amount !== 0 && this.isPropsFirst) {
+    if (
+      typeof this.props.prices !== 'undefined' &&
+      this.props.prices[0].amount !== 0 &&
+      this.isPropsFirst
+    ) {
       if (amount !== 0) this.isPropsFirst = false;
       this.setState({ symbol, amount });
     }
@@ -39,9 +55,7 @@ class PriceBlockAbstractClass extends Component<IProps, IState> {
   }
 
   render() {
-    return (
-      <></>
-    );
+    return <></>;
   }
 }
 

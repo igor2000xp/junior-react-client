@@ -6,16 +6,18 @@ import { GetAllCategoriesDocument } from '../../../graphql/generated';
 import {
   categoriesInit,
   ICategory,
-  ICategoryWithActive, INavigateBlockProps, INavigateBlockState,
+  ICategoryWithActive,
+  INavigateBlockProps,
+  INavigateBlockState,
 } from '../common-models';
 import { State } from '../../../store/store';
 import { setPage } from '../../../store/pagesSlice';
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state:State) => {
+const mapStateToProps = (state: State) => {
   return { page: state.pages.page };
 };
-const  mapDispatchToProps = { setPage };
+const mapDispatchToProps = { setPage };
 
 type IProps = Readonly<INavigateBlockProps>;
 type IState = Readonly<INavigateBlockState>;
@@ -99,7 +101,5 @@ class NavigateBlock extends Component<IProps, IState> {
     );
   }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigateBlock);

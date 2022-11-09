@@ -1,8 +1,10 @@
 import {
   IActiveAttrPdp,
   IAttrActive,
-  ILocalBasket, IPrice,
-  IProduct, IProductAttribute,
+  ILocalBasket,
+  IPrice,
+  IProduct,
+  IProductAttribute,
   localActiveAttributesInit,
   localBasketItemInit,
 } from '../../../../common-models';
@@ -69,7 +71,7 @@ export const getActiveAttrFromLocal = async (): Promise<IActiveAttrPdp[]> => {
 };
 export const clearActiveAttrInLocal = async () => {
   await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
-}
+};
 
 export const getFirstProdAttrAsActiveAttr = (prod: IProduct): IAttrActive[] => {
   const attr = prod.attributes;

@@ -1,8 +1,6 @@
-import React  from 'react';
+import React from 'react';
 import totalStyle from './main-cart-total-block.module.css';
-import {
-  ITotalBlockProps,
-} from '../../../common-models';
+import { ITotalBlockProps } from '../../../common-models';
 import { Link } from 'react-router-dom';
 import TotalBlockAbstractClass from '../abstract-classes/totalBlockAbstractClass';
 import { State } from '../../../../../store/store';
@@ -10,7 +8,7 @@ import { connect } from 'react-redux';
 
 type IProps = Readonly<ITotalBlockProps>;
 
-const mapStateToProps = (state:State) => {
+const mapStateToProps = (state: State) => {
   return {
     cart: state.cart.cart,
     currency: state.currency.symbol,

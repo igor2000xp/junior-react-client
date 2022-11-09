@@ -1,8 +1,10 @@
 import {
   ICurrency,
-  ILocalBasket, IModifiedProduct,
+  ILocalBasket,
+  IModifiedProduct,
   IModifiedAttrProducts,
-  IParams, IPrice,
+  IParams,
+  IPrice,
   IProduct,
   IProductAttribute,
   Label,
@@ -20,7 +22,7 @@ export interface IHeaderProps {
   isNewBasketToggle?: boolean;
   symbol: SymbolCurrency;
   setCurrency: ActionCreatorWithPayload<SymbolCurrency, string>;
-  cart: ILocalBasket[],
+  cart: ILocalBasket[];
   renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>;
 }
 export interface ICommonAttributeSetProps {
@@ -55,7 +57,7 @@ export interface ICardItemProps {
   currency: ICurrency;
   handlePlusMinusButtons?: () => void;
   cart: ILocalBasket[];
-  renewBasket:  ActionCreatorWithPayload<ILocalBasket[], string>;
+  renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>;
 }
 
 export interface ITotalBlockProps {
@@ -70,7 +72,7 @@ export interface ICartBadgeProps {
 export interface ICartCountProviderProps {
   renderCount: (count: number) => void;
   cart: ILocalBasket[];
-  renewBasket: ActionCreatorWithPayload<ILocalBasket[]>
+  renewBasket: ActionCreatorWithPayload<ILocalBasket[]>;
 }
 
 export interface IMainCartProps {
@@ -88,12 +90,12 @@ export interface IButtonBlockProps {
   inStock: boolean;
   product: IProduct;
   cart: ILocalBasket[];
-  renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>
+  renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>;
 }
 export interface IProductSmallCardProps {
   item: IProduct;
   symbolCurrency?: SymbolCurrency;
   handleGreenButtonFromSmallCart: () => void;
-  cart?: ILocalBasket[],
-  renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>
+  cart?: ILocalBasket[];
+  renewBasket: ActionCreatorWithPayload<ILocalBasket[], string>;
 }

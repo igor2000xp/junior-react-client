@@ -5,7 +5,7 @@ interface IPagesState {
 }
 const initialState: IPagesState = {
   page: 'all',
-}
+};
 
 const pagesSlice = createSlice({
   name: 'pages',
@@ -13,8 +13,8 @@ const pagesSlice = createSlice({
   reducers: {
     setPage: (state, actions: PayloadAction<string>) => {
       state.page = actions.payload;
-    }
-  }
+    },
+  },
 });
 
 export const { actions, reducer } = pagesSlice;

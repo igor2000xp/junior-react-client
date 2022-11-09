@@ -12,7 +12,7 @@ import { renewBasket } from '../../../../store/cartSlice';
 type IProps = Readonly<ICartCountProviderProps>;
 type IState = Readonly<ICartCountProviderState>;
 
-const mapStateToProps = (state:State) => {
+const mapStateToProps = (state: State) => {
   return { cart: state.cart.cart };
 };
 const mapDispatchToProps = { renewBasket };
@@ -26,16 +26,11 @@ class CartCountProvider extends Component<IProps, IState> {
 
   async componentDidMount() {
     await this.getLocalBasket();
-    this.setState({ count: this.getCount()});
+    this.setState({ count: this.getCount() });
   }
 
-  componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-  ) {
-    if (
-      this.state.count !== this.getCount()
-    ) {
+  componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>) {
+    if (this.state.count !== this.getCount()) {
       this.getLocalBasket();
       this.setState({ count: this.getCount() });
     }
@@ -45,7 +40,7 @@ class CartCountProvider extends Component<IProps, IState> {
     this.localBasket = this.props.cart;
   }
 
-  getCount():number {
+  getCount(): number {
     return this.props.cart.reduce((acc, item) => {
       return acc + item.quantity;
     }, 0);
