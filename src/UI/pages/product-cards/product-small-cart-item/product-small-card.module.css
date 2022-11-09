@@ -60,6 +60,15 @@
   width: 64px;
   height: 64px;
   box-shadow: 3px 3px 8px rgba(63, 70, 59, 0.09);
+  /*background-color: red;*/
+}
+.greenButtonCart:active {
+  background-color: red;
+  width: 52px;
+  height: 52px;
+  border: rgba(176, 45, 45, 0.99) 4px solid;
+  transition: all 0.01s ease-out;
+  box-shadow: 3px 3px 8px rgba(70, 59, 59, 0.09);
 }
 .greenButtonCart img {
   border-radius: 50%;
