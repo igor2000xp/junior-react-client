@@ -57,7 +57,9 @@ class MainPage extends PureComponent<any, IState> {
     await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const currency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
     this.currentCurrency = JSON.parse(
-      currency ? currency : JSON.stringify(zeroCurrencyInit),
+      // currency ? currency : JSON.stringify(zeroCurrencyInit),
+      // currency || JSON.stringify(zeroCurrencyInit),
+      currency ? JSON.parse(currency) : zeroCurrencyInit,
     );
     const isInit = await localStorage.getItem(LOCAL_BASKET);
     if (!isInit) {
