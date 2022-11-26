@@ -1,22 +1,26 @@
 import React from 'react';
-import MainCartTotalBlock from '../../main-cart/main-cart-item/main-cart-total-block';
 import stylesCart from '../mini-cart.module.css';
-import { ITotalBlockProps, ITotalBlockState } from '../../../common-models';
+import { ITotalBlockProps } from '../../../common-models';
+import TotalBlockAbstractClass from '../../main-cart/abstract-classes/totalBlockAbstractClass';
+import { State } from '../../../../../store/store';
+import { connect } from 'react-redux';
 
-class MiniTotalBlock extends MainCartTotalBlock<ITotalBlockProps, ITotalBlockState> {
-  constructor(props: ITotalBlockProps) {
+type IProps = Readonly<ITotalBlockProps>;
+
+const mapStateToProps = (state: State) => {
+  return {
+    cart: state.cart.cart,
+    currency: state.currency.symbol,
+  };
+};
+
+class MiniTotalBlock extends TotalBlockAbstractClass {
+  constructor(props: IProps) {
     super(props);
   }
 
-  async componentDidUpdate(prevProps: any, prevState: any) {
-    await super.componentDidUpdate(prevProps, prevState);
-    if (typeof this.props.getTotalItemsQuality !== 'undefined') {
-      this.props.getTotalItemsQuality(this.state.quantity);
-    }
-  }
-
   render() {
-    const totalSum = `${this.props.currentCurrency}${this.state.sum}`;
+    const totalSum = `${this.props.currency}${this.state.sum.toFixed(2)}`;
     return (
       <>
         <div className={stylesCart.miniTotalLeft}>
@@ -30,4 +34,5 @@ class MiniTotalBlock extends MainCartTotalBlock<ITotalBlockProps, ITotalBlockSta
   }
 }
 
-export default MiniTotalBlock;
+// export default MiniTotalBlock;
+export default connect(mapStateToProps, null)(MiniTotalBlock);

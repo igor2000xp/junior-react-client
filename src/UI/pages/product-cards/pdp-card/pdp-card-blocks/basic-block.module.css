@@ -14,7 +14,7 @@
 .name {
   text-align: left;
 }
-.wrapper h3 {
+.name h3 {
   margin: 16px 0 0 0;
   font-weight: 400;
   font-size: 27px;
@@ -30,6 +30,19 @@
 }
 .priceBlock {
   margin: 36px 0 0 0;
+}
+@media (max-width: 900px) {
+  .brand h2 {
+    font-size: 3.4vw;
+    line-height: 3.2vw;
+  }
+  .name h3 {
+    font-size: 3.2vw;
+    line-height: 3.0vw;
+  }
+  .priceBlock {
+    margin: 6vw 0 0 0;
+  }
 }
 p {
   font-weight: 400;

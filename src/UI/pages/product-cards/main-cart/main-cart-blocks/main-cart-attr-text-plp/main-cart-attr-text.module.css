@@ -26,13 +26,31 @@
   align-items: center;
   justify-content: center;
 }
-.active {
-  background: black;
-  color: white;
-}
 .sizeItem p {
   font-weight: 400;
   font-size: 16px;
   line-height: 18px;
   text-transform: uppercase;
+}
+@media (max-width: 600px) {
+  .sizeBlock {
+    margin: 0 0 2vw 0;
+    height: 19vw;
+  }
+  .sizeItem {
+    margin: 0 1vw 0 0 ;
+    width: 14vw;
+    height: 6vw;
+  }
+  .sizeItem > p {
+    font-size: 4vw;
+    line-height: 4vw;
+  }
+  .sizeLine {
+    margin: 0.5vw 0 0 0;
+  }
+}
+.active {
+  background: black;
+  color: white;
 }

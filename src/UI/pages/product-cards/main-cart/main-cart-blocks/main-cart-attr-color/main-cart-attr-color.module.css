@@ -22,6 +22,21 @@
   width: 31px;
   border: rgba(43, 43, 43, 0.24) 1px solid;
 }
+@media (max-width: 600px) {
+  .colorItem {
+    margin: 0 1vw 0 0;
+    height: 8vw;
+    width: 8vw;
+  }
+  .colorItemInside {
+    height: 7vw;
+    width: 7vw;
+  }
+  .colorBlock {
+    margin: 0;
+    height: 16vw;
+  }
+}
 .activeColor {
   border: 1px solid #5ECE7B;
 }

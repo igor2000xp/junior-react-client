@@ -2,19 +2,27 @@ import React from 'react';
 import stylesCart from './mini-cart.module.css';
 import MiniCartItem from './mini-cart-blocks/mini-cart-item';
 import MiniButtonBlock from './mini-cart-blocks/mini-button-block';
-import MainCart from '../main-cart/main-cart';
 import {
   ICurrency,
-  IPlpCardProps,
+  IMainCartProps,
   localBasketItemInit,
   SymbolCurrency,
 } from '../../common-models';
 import MiniTotalBlock from './mini-total-block/mini-total-block';
 import { LOCAL_BASKET } from '../../../../constants';
+import { State } from '../../../../store/store';
+import { renewBasket } from '../../../../store/cartSlice';
+import { connect } from 'react-redux';
+import CartAbstractClass from '../main-cart/abstract-classes/CartAbstractClass';
 
-type IProps = Readonly<IPlpCardProps>;
+const mapStateToProps = (state: State) => {
+  return { cart: state.cart.cart };
+};
+const mapDispatchToPropsFactory = { renewBasket };
 
-class MiniCart extends MainCart {
+type IProps = Readonly<IMainCartProps>;
+
+class MiniCart extends CartAbstractClass {
   constructor(props: IProps) {
     super(props);
     this.getTotalItemsQuality = this.getTotalItemsQuality.bind(this);
@@ -48,55 +56,63 @@ class MiniCart extends MainCart {
   }
 
   render() {
-    const localBasket = this.state.localBasket
-      ? this.state.localBasket
+    const localBasket = this.props.cart
+      ? this.props.cart
       : [localBasketItemInit];
-    const symbol = this.props.symbol ? this.props.symbol : this.state.currentCurrency;
-    const itemsTxt = this.state.totalItems === 1 ? 'item' : 'items';
-    return (
-      <article className={stylesCart.wrapper}>
-        <div className={stylesCart.insideWrapper}>
-          <section className={stylesCart.MiniCartHeader}>
-            <h3>My Bag,</h3>
-            <div>
-              <h4>{ `${this.state.totalItems} ${itemsTxt}` }</h4>
-            </div>
-          </section>
+    const symbol = this.props.symbol
+      ? this.props.symbol
+      : this.state.currentCurrency;
 
-          <section className={stylesCart.mainBlock}>
-            {localBasket.map((item, index) => {
-              const basket = item;
-              const currency: ICurrency = {
-                symbol,
-                label: this.currentCurrencyLabel,
-              };
-              return (
-                <MiniCartItem
-                  basket={basket}
-                  currency={currency}
-                  handlePlusMinusButtons={this.handlePlusMinusButtons}
-                  key={item.productId + index}
-                />
-              );
-            })}
-          </section>
+    const itemsTxt = this.getCount() === 1 ? 'item' : 'items';
+    if (this.getCount() > 0) {
+      return (
+        <article className={stylesCart.wrapper}>
+          <div className={stylesCart.insideWrapper}>
+            <section className={stylesCart.MiniCartHeader}>
+              <h3>My Bag,</h3>
+              <div>
+                <h4>{`${this.getCount()} ${itemsTxt}`}</h4>
+              </div>
+            </section>
 
-          <section className={stylesCart.miniTotal}>
-            <MiniTotalBlock
-              localBasket={this.state.localBasket}
-              currentCurrency={this.state.currentCurrency}
-              isChangedPlusMinusButtons={this.isChangedPlusMinusButtons}
-              getTotalItemsQuality={this.getTotalItemsQuality}
-            />
-          </section>
+            <section className={stylesCart.mainBlock}>
+              {localBasket.map((item, index) => {
+                const basket = item;
+                const currency: ICurrency = {
+                  symbol,
+                  label: this.currentCurrencyLabel,
+                };
+                return (
+                  <MiniCartItem
+                    basket={basket}
+                    currency={currency}
+                    basketId={basket.id}
+                    key={item.productIdAttr + index}
+                  />
+                );
+              })}
+            </section>
 
-          <section>
-            <MiniButtonBlock />
-          </section>
-        </div>
-      </article>
-    );
+            <section className={stylesCart.miniTotal}>
+              <MiniTotalBlock />
+            </section>
+
+            <section>
+              <MiniButtonBlock />
+            </section>
+          </div>
+        </article>
+      );
+    } else {
+      return (
+        <article className={`${stylesCart.wrapper}`}>
+          <span className={`${stylesCart.emptyStyleMini}`}>
+            Your cart is empty
+          </span>
+        </article>
+      );
+    }
   }
 }
 
-export default MiniCart;
+export default connect(mapStateToProps, mapDispatchToPropsFactory)(MiniCart);

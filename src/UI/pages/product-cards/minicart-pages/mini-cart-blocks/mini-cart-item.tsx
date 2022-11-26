@@ -4,16 +4,24 @@ import MiniCartBasicBlock from '../mini-cart-basic-block/mini-cart-basic-block';
 import {
   ICardItemProps,
   ICardItemState,
-  IProduct,
-  modifiedProductsInit,
-  productInit,
+  IModifiedProduct,
+  modifiedProductInit,
+  modifiedAttrProductsInit,
 } from '../../../common-models';
-import MainCartItem from '../../main-cart/main-cart-item/main-cart-item';
+import CartItemBlockAbstractClass from '../../main-cart/abstract-classes/CartItemBlockAbstractClass';
+import { State } from '../../../../../store/store';
+import { renewBasket } from '../../../../../store/cartSlice';
+import { connect } from 'react-redux';
 
 type IProps = Readonly<ICardItemProps>;
 type IState = Readonly<ICardItemState>;
 
-class MiniCartItem extends MainCartItem {
+const mapStateToProps = (state: State) => {
+  return { cart: state.cart.cart };
+};
+const mapDispatchToProps = { renewBasket };
+
+class MiniCartItem extends CartItemBlockAbstractClass {
   constructor(props: IProps) {
     super(props);
   }
@@ -26,48 +34,51 @@ class MiniCartItem extends MainCartItem {
   }
 
   render() {
-    const modifiedProducts =
+    const modifiedAttrProducts =
       this.state.quantityInBasket !== 0
-        ? this.modifiedProducts
-        : [modifiedProductsInit];
+        ? this.modifiedAttrProducts
+        : [modifiedAttrProductsInit];
     const prodGallery =
-      typeof this.product.gallery !== 'undefined'
-        ? this.product.gallery[this.state.mainImageIndex]
+      typeof this.props.basket.gallery !== 'undefined'
+        ? this.props.basket.gallery[this.state.mainImageIndex]
         : '';
     const isArrowButtons = false;
-    let product: IProduct;
+    let modifiedProduct: IModifiedProduct;
     if (this.state.quantityInBasket === 0) {
-      product = productInit;
-      product.id = '';
+      modifiedProduct = modifiedProductInit;
+      modifiedProduct.id = '';
     } else {
-      product = this.product;
+      modifiedProduct = this.modifiedProduct;
     }
+    const basketId = this.props.basket.productIdAttr;
+    const initQuantity = this.props.cart.find((item) => {
+      return item.productIdAttr === basketId;
+    });
+    const quantity = initQuantity ? initQuantity.quantity : 0;
 
     return (
       <article className={stylesMBlock.wrapper}>
         <section className={stylesMBlock.leftSide}>
           <MiniCartBasicBlock
-            product={product}
-            modifiedProducts={modifiedProducts}
-            currentCurrency={this.props.currency.symbol}
+            modifiedProduct={modifiedProduct}
+            id={this.props.basket.id}
+            modifiedAttrProducts={modifiedAttrProducts}
           />
         </section>
 
         <aside className={stylesMBlock.rightSide}>
           <section className={stylesMBlock.buttonSide}>
             <button
-              className={`${stylesMBlock.buttonQuality}`}
+              className={`${stylesMBlock.buttonQuantity}`}
               onClick={this.plusHandle}
             >
               <p className={stylesMBlock.plus} />
             </button>
 
-            <div className={stylesMBlock.numberInBasket}>
-              {this.state.quantityInBasket}
-            </div>
+            <div className={stylesMBlock.numberInBasket}>{quantity}</div>
 
             <button
-              className={stylesMBlock.buttonQuality}
+              className={stylesMBlock.buttonQuantity}
               onClick={this.minusHandle}
             >
               <p className={stylesMBlock.minus} />
@@ -107,4 +118,4 @@ class MiniCartItem extends MainCartItem {
   }
 }
 
-export default MiniCartItem;
+export default connect(mapStateToProps, mapDispatchToProps)(MiniCartItem);

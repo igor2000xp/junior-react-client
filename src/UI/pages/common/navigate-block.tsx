@@ -7,20 +7,40 @@ import {
   categoriesInit,
   ICategory,
   ICategoryWithActive,
+  INavigateBlockProps,
+  INavigateBlockState,
 } from '../common-models';
+import { State } from '../../../store/store';
+import { setPage } from '../../../store/pagesSlice';
+import { connect } from 'react-redux';
 
-class NavigateBlock extends Component {
+const mapStateToProps = (state: State) => {
+  return { page: state.pages.page };
+};
+const mapDispatchToProps = { setPage };
+
+type IProps = Readonly<INavigateBlockProps>;
+type IState = Readonly<INavigateBlockState>;
+
+class NavigateBlock extends Component<IProps, IState> {
   private categories = categoriesInit;
+  private currentCategory = '';
 
-  constructor(props: any) {
+  constructor(props: IProps) {
     super(props);
     this.chosenHandler = this.chosenHandler.bind(this);
+    this.state = { currentCategory: 'all' };
   }
 
   async componentDidMount() {
     const urlString = location.pathname.split(':');
     if (urlString[0] === '/category/') this.categorySwitch(urlString[1]);
     this.categories = [...(await this.myQuery())];
+    this.currentCategory = urlString[1];
+    await this.setState({
+      currentCategory: this.currentCategory,
+    });
+    this.props.setPage(this.currentCategory);
     this.categories = this.categories.map((item) => {
       const isActive = item.name === urlString[1];
       return { ...item, isActive };
@@ -39,6 +59,7 @@ class NavigateBlock extends Component {
   }
 
   categorySwitch(category: string) {
+    this.props.setPage(category);
     this.categories = this.categories.map((item) => {
       const isActive = item.name === category;
       return { ...item, isActive };
@@ -81,4 +102,4 @@ class NavigateBlock extends Component {
   }
 }
 
-export default NavigateBlock;
+export default connect(mapStateToProps, mapDispatchToProps)(NavigateBlock);

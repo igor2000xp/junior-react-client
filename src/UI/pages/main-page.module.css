@@ -2,6 +2,11 @@
   max-width: 1240px;
   margin: 0 auto;
 }
+@media screen and (max-width: 1280px) {
+  .mainWrapper {
+    padding: 0 10px;
+  }
+}
 .mainWrapper h1 {
   margin: 80px 0 101px 0;
   text-align: left;
@@ -16,7 +21,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   row-gap: 10px;
-  justify-content: space-between;
+  justify-content: left;
 }
 .outStock {
   position: relative;
@@ -24,6 +29,18 @@
 }
 .itemBlock {
   position: relative;
+  width: 33.33%;
+}
+
+@media screen and (max-width: 1070px) {
+  .itemBlock {
+    width: 49.9%;
+  }
+}
+@media screen and (max-width: 725px) {
+  .itemBlock {
+    width: 100%;
+  }
 }
 
 .outStock::after {

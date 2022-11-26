@@ -7,7 +7,7 @@ import {
   GetAllCurrencyQuery,
 } from '../../../graphql/generated';
 import CurrencyItem from './common-bloks/currency-item/currency-item';
-import { LOCAL_CURRENT_CURRENCY } from '../../../constants';
+import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../constants';
 import currencyArrowOpen from '../../../assets/images/Icon/currencyOpen.svg';
 import currencyArrowClose from '../../../assets/images/Icon/currencyClose.svg';
 import {
@@ -15,6 +15,7 @@ import {
   ICurrency,
   IHeaderProps,
   IHeaderState,
+  ILocalBasket,
   Label,
   SymbolCurrency,
 } from '../common-models';
@@ -22,13 +23,26 @@ import CartBadge from './cart-badge/cart-badge';
 import CartCountProvider from './cart-count-provider/cart-count-provider';
 import MiniCart from '../product-cards/minicart-pages/mini-cart';
 import { initFirstLocalCurrency } from '../main-page-helpers/main-page-helpers';
+import { connect } from 'react-redux';
+import { State } from '../../../store/store';
+import { setCurrency } from '../../../store/currencySlice';
+import { renewBasket } from '../../../store/cartSlice';
 
 type IState = Readonly<IHeaderState>;
 type IProps = Readonly<IHeaderProps>;
 
+const mapStateToProps = (state: State) => {
+  return {
+    symbol: state.currency.symbol,
+    cart: state.cart.cart,
+  };
+};
+const mapDispatchToProps = { setCurrency, renewBasket };
+
 class Header extends Component<IProps, IState> {
   private currencies: ICurrency[];
   private activeCart = '';
+  private activeBackground = '';
   protected wrapperCurrencyRef: RefObject<HTMLDivElement>;
   protected wrapperCartRef: RefObject<HTMLDivElement>;
 
@@ -73,16 +87,25 @@ class Header extends Component<IProps, IState> {
     try {
       document.addEventListener('mousedown', this.handleClickOutsideCurrency);
       document.addEventListener('mousedown', this.handleClickOutsideCart);
-      const { label, symbol } = await initFirstLocalCurrency();
-      this.setState({ label, symbol });
-      const { data } = await client.query<GetAllCurrencyQuery>({
-        query: GetAllCurrencyDocument,
-      });
-      this.currencies = data.currencies as ICurrency[];
+      await this.initStore();
     } catch (err) {
       console.log(`Error loading data from server ${err}`);
     }
   }
+  async initStore() {
+    const { label, symbol } = await initFirstLocalCurrency();
+    this.setState({ label, symbol });
+    this.props.setCurrency(symbol);
+    const { data } = await client.query<GetAllCurrencyQuery>({
+      query: GetAllCurrencyDocument,
+    });
+    this.currencies = data.currencies as ICurrency[];
+    const cart = JSON.parse(
+      localStorage.getItem(LOCAL_BASKET) as string,
+    ) as ILocalBasket[];
+    this.props.renewBasket(cart);
+  }
+
   componentDidUpdate(
     prevProps: Readonly<IProps>,
     prevState: Readonly<IState>,
@@ -109,7 +132,7 @@ class Header extends Component<IProps, IState> {
   }
 
   async handleCurrencyClick(currency: ICurrency): Promise<ICurrency> {
-    this.props.getCurrency(currency.label, currency.symbol);
+    // this.props.getCurrency(currency.label, currency.symbol);
     await this.setState(() => {
       return {
         isShownCurrency: false,
@@ -117,6 +140,7 @@ class Header extends Component<IProps, IState> {
         symbol: currency.symbol,
       };
     });
+    this.props.setCurrency(currency.symbol);
     localStorage.setItem(LOCAL_CURRENT_CURRENCY, JSON.stringify(currency));
     return currency;
   }
@@ -124,10 +148,12 @@ class Header extends Component<IProps, IState> {
   handleCartClick() {
     const isShownCart = !this.state.isShownCart;
     this.activeCart = isShownCart ? stylesHeader.activeCart : '';
+    this.activeBackground = isShownCart ? stylesHeader.activeBackground : '';
     this.setState({ isShownCart });
   }
   closeCart() {
     this.activeCart = '';
+    this.activeBackground = '';
     this.setState({ isShownCart: false });
   }
 
@@ -143,7 +169,7 @@ class Header extends Component<IProps, IState> {
             onClick={() => this.toggleCurrencyMenu()}
           >
             <div className={stylesHeader.currencyLabel}>
-              {`${this.state.symbol}`}
+              {this.props.symbol}
             </div>
 
             <div className={stylesHeader.currencyArrow}>
@@ -191,8 +217,6 @@ class Header extends Component<IProps, IState> {
             <div onClick={this.handleCartClick}>
               <CartCountProvider
                 renderCount={(count) => <CartBadge count={count} />}
-                isChangedQuantityToggle={this.state.isShownCart}
-                isChangedCurrencyOrCart={this.state.isNewBasketToggle}
               />
             </div>
 
@@ -207,9 +231,13 @@ class Header extends Component<IProps, IState> {
             </div>
           </section>
         </div>
+        <div
+          className={`${stylesHeader.opacityBackground} ${this.activeBackground}`}
+        />
       </div>
     );
   }
 }
 
-export default Header;
+// export  default Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

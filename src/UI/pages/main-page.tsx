@@ -8,14 +8,14 @@ import Header from './common/header';
 import {
   ACTIVE_PRODUCT_ATTRIBUTES,
   LOCAL_BASKET,
-  LOCAL_CURRENT_CURRENCY, PRODUCT_LIST_FIRST_ID,
+  LOCAL_CURRENT_CURRENCY,
+  PRODUCT_LIST_FIRST_ID,
 } from '../../constants';
 import {
   ILocalBasket,
   IMainPageState,
   IParams,
   IProduct,
-  IPropsMainPage,
   Label,
   localBasketItemInit,
   mainPageStateInit,
@@ -24,16 +24,24 @@ import {
   zeroCurrencyInit,
 } from './common-models';
 import { getProductsList } from './main-page-helpers/main-page-helpers';
+import { State } from '../../store/store';
+import { setPage } from '../../store/pagesSlice';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state: State) => {
+  return { page: state.pages.page };
+};
+const mapDispatchToProps = { setPage };
 
 type IState = Readonly<IMainPageState>;
-type IProps = Readonly<IPropsMainPage>;
+// type IProps = Readonly<IPropsMainPage>;
 
-class MainPage extends PureComponent<IProps, IState> {
+class MainPage extends PureComponent<any, IState> {
   private categoryId: string;
   private products: IProduct[] = [productInit];
   private currentCurrency = zeroCurrencyInit;
   private localBaskets: ILocalBasket[] = [localBasketItemInit];
-  private productsListFirstId: string = '';
+  private productsListFirstId = '';
 
   constructor(props: any) {
     super(props);
@@ -49,7 +57,9 @@ class MainPage extends PureComponent<IProps, IState> {
     await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const currency = localStorage.getItem(LOCAL_CURRENT_CURRENCY);
     this.currentCurrency = JSON.parse(
-      currency ? currency : JSON.stringify(zeroCurrencyInit),
+      // currency ? currency : JSON.stringify(zeroCurrencyInit),
+      // currency || JSON.stringify(zeroCurrencyInit),
+      currency ? JSON.parse(currency) : zeroCurrencyInit,
     );
     const isInit = await localStorage.getItem(LOCAL_BASKET);
     if (!isInit) {
@@ -62,6 +72,7 @@ class MainPage extends PureComponent<IProps, IState> {
     }
     const { match } = this.props;
     this.categoryId = match.params.categoryId.split(':')[1];
+    this.props.setPage(this.categoryId);
     await this.getAndCheckQueryProductsData();
     this.productsListFirstId = this.products[0].id;
     localStorage.setItem(PRODUCT_LIST_FIRST_ID, this.productsListFirstId);
@@ -77,8 +88,7 @@ class MainPage extends PureComponent<IProps, IState> {
     prevProps: WithRouterProps<IParams>,
     prevState: IState,
   ) {
-    const { match } = this.props;
-    this.categoryId = match.params.categoryId.split(':')[1];
+    this.categoryId = this.props.page;
     if (!equal(prevProps.match.params.categoryId, `:${this.categoryId}`)) {
       await this.getAndCheckQueryProductsData();
     }
@@ -111,7 +121,6 @@ class MainPage extends PureComponent<IProps, IState> {
 
   render() {
     const items = this.products;
-    const symbolCurrency = this.state.currentCurrency;
     if (!this.state.isLoaded) {
       return <h1>Loading...</h1>;
     }
@@ -134,7 +143,6 @@ class MainPage extends PureComponent<IProps, IState> {
                   <div onClick={() => this.handleGoToProductLink(item.id)}>
                     <ProductSmallCard
                       item={item}
-                      symbolCurrency={symbolCurrency}
                       key={item.id}
                       handleGreenButtonFromSmallCart={
                         this.handleGreenButtonFromSmallCart
@@ -150,4 +158,8 @@ class MainPage extends PureComponent<IProps, IState> {
     );
   }
 }
-export default withRouter(MainPage);
+// export default withRouter(MainPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withRouter(MainPage));

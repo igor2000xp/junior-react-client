@@ -5,10 +5,17 @@ import {
   ILocalBasket,
   localBasketItemInit,
 } from '../../common-models';
-import { LOCAL_BASKET } from '../../../../constants';
+import { State } from '../../../../store/store';
+import { connect } from 'react-redux';
+import { renewBasket } from '../../../../store/cartSlice';
 
 type IProps = Readonly<ICartCountProviderProps>;
 type IState = Readonly<ICartCountProviderState>;
+
+const mapStateToProps = (state: State) => {
+  return { cart: state.cart.cart };
+};
+const mapDispatchToProps = { renewBasket };
 
 class CartCountProvider extends Component<IProps, IState> {
   protected localBasket: ILocalBasket[] = [localBasketItemInit];
@@ -17,33 +24,26 @@ class CartCountProvider extends Component<IProps, IState> {
     this.state = { count: 0 };
   }
 
-  async getLocalBasket() {
-    this.localBasket = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
-  }
   async componentDidMount() {
     await this.getLocalBasket();
-    await this.getCount();
+    this.setState({ count: this.getCount() });
   }
 
-  async componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-  ) {
-    if (
-      prevProps.isChangedCurrencyOrCart !==
-        this.props.isChangedCurrencyOrCart ||
-      prevProps.isChangedQuantityToggle !== this.props.isChangedQuantityToggle
-    ) {
-      await this.getLocalBasket();
-      await this.getCount();
+  componentDidUpdate(prevProps: Readonly<IProps>, prevState: Readonly<IState>) {
+    if (this.state.count !== this.getCount()) {
+      this.getLocalBasket();
+      this.setState({ count: this.getCount() });
     }
   }
 
-  async getCount() {
-    const count = this.localBasket.reduce((acc, item) => {
+  getLocalBasket() {
+    this.localBasket = this.props.cart;
+  }
+
+  getCount(): number {
+    return this.props.cart.reduce((acc, item) => {
       return acc + item.quantity;
     }, 0);
-    await this.setState({ count });
   }
 
   render() {
@@ -52,4 +52,5 @@ class CartCountProvider extends Component<IProps, IState> {
   }
 }
 
-export default CartCountProvider;
+// export default CartCountProvider;
+export default connect(mapStateToProps, mapDispatchToProps)(CartCountProvider);

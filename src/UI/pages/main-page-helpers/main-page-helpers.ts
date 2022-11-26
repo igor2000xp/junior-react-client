@@ -4,7 +4,6 @@ import {
   ILocalBasket,
   ILocalBasketForTotal,
   IProduct,
-  productInit,
   SymbolCurrency,
   zeroCurrencyInit,
 } from '../common-models';
@@ -28,28 +27,17 @@ export const getProductsList = async (
     console.log('Error loading data from server = ', err);
   }
 };
-export const getProductsListFromBasket = async (
+export const getProductsListFromBasket = (
   localBasket: ILocalBasket[],
   currentCurrency: SymbolCurrency,
-): Promise<ILocalBasketForTotal[]> => {
-  const productsAll: IProduct[] | undefined = await getProductsList('all');
-  const product: IProduct[] = productsAll ? productsAll : [productInit];
-
+): ILocalBasketForTotal[] => {
   return localBasket.map((item) => {
-    const productItem = product.find((itemProduct) => {
-      return itemProduct.id === item.productId;
-    });
-
-    const realProductItem = productItem ? productItem : productInit;
-    const arrayProductItem = Array.isArray(realProductItem.prices)
-      ? realProductItem.prices
-      : [realProductItem.prices];
-    const currentAmount = arrayProductItem.find((itemAmount) => {
-      return itemAmount.currency.symbol === currentCurrency;
+    const currencyPrice = item.prices.find((itemPrice) => {
+      return itemPrice.currency.symbol === currentCurrency;
     });
     return {
-      productId: item.productId,
-      amount: currentAmount ? currentAmount.amount : 0,
+      productId: item.id,
+      amount: currencyPrice ? currencyPrice.amount : 0,
       quantity: item.quantity,
       symbolPrice: currentCurrency,
     };

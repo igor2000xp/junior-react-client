@@ -4,33 +4,49 @@ import PriceBlock from '../../../common/common-bloks/price-block/price-block';
 import CommonAttributeSet from '../../../common/common-bloks/common-attribute-set/common-attribute-set';
 import { IProductAttribute, IBasicBlockProps } from '../../../common-models';
 
-type IProps = Readonly<IBasicBlockProps>;
+export interface IBasicBlockState {
+  id: string;
+}
 
-class BasicBlock extends Component<IProps> {
+type IProps = Readonly<IBasicBlockProps>;
+type IState = Readonly<IBasicBlockState>;
+
+class BasicBlock extends Component<IProps, IState> {
+  protected name = '';
+  protected brand = '';
+  constructor(props: IProps) {
+    super(props);
+    this.state = { id: '' };
+  }
+
+  componentDidMount() {
+    this.setState({
+      id: this.props.id,
+    });
+  }
+
   render() {
-    const arrAttributes = this.props.product.attributes as IProductAttribute[];
+    const arrAttributes = this.props.modifiedProduct
+      .attributes as IProductAttribute[];
+    const prices = Array.isArray(this.props.modifiedProduct.prices)
+      ? this.props.modifiedProduct.prices
+      : [this.props.modifiedProduct.prices];
     return (
       <article className={styles.wrapper}>
         <div className={styles.brand}>
-          <h2>{this.props.product.brand}</h2>
+          <h2>{this.props.modifiedProduct.brand}</h2>
         </div>
 
         <div className={styles.name}>
-          <h3>{this.props.product.name}</h3>
+          <h3>{this.props.modifiedProduct.name}</h3>
         </div>
 
-        <CommonAttributeSet
-          attributes={arrAttributes}
-          productID={this.props.product.id}
-        />
+        <CommonAttributeSet attributes={arrAttributes} />
 
         <div className={styles.priceBlock}>
           <h4>PRICE:</h4>
           <div>
-            <PriceBlock
-              id={this.props.product.id}
-              symbolCurrency={this.props.currentCurrency}
-            />
+            <PriceBlock prices={prices} />
           </div>
         </div>
       </article>

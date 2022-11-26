@@ -12,11 +12,10 @@ import {
 } from '../../../../constants';
 import {
   IProduct,
-  Label,
   productInit,
-  SymbolCurrency,
   IPdpCardState,
   IPdpCardStateInit,
+  IModifiedProduct,
 } from '../../common-models';
 import { getFirstProdAttrAsActiveAttr } from './pdp-card-blocks/helpers';
 
@@ -27,16 +26,16 @@ class PdpCard extends Component<any, IState> {
   constructor(props: any) {
     super(props);
     this.state = { ...IPdpCardStateInit };
-    this.getCurrencyFromHeader = this.getCurrencyFromHeader.bind(this);
     this.switchImage = this.switchImage.bind(this);
     this.product = { ...productInit };
   }
 
   async componentDidMount() {
+    await localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
     const id = location.pathname.split(':')[1];
     this.product = (await this.productQuery(id)) as IProduct;
     const activeAttrFromFirsts = getFirstProdAttrAsActiveAttr(this.product);
-    this.setState({ attrActive: [...activeAttrFromFirsts] });
+    this.setState({ attrActive: activeAttrFromFirsts });
     await localStorage.setItem(
       ACTIVE_PRODUCT_ATTRIBUTES,
       JSON.stringify(activeAttrFromFirsts),
@@ -53,10 +52,6 @@ class PdpCard extends Component<any, IState> {
         currentCurrency,
       };
     });
-  }
-
-  componentWillUnmount() {
-    localStorage.setItem(ACTIVE_PRODUCT_ATTRIBUTES, JSON.stringify([]));
   }
 
   async productQuery(id: string): Promise<IProduct | undefined> {
@@ -82,25 +77,27 @@ class PdpCard extends Component<any, IState> {
     });
   }
 
-  async getCurrencyFromHeader(label: Label, symbol: SymbolCurrency) {
-    await this.setState(() => {
-      return {
-        currentCurrency: symbol,
-      };
-    });
-  }
-
   render() {
     const bigImage = this.state.bigImage;
-    const outStock = !this.product.inStock ? styles.outStock : '';
-    const hidden = this.product.gallery.length === 1 ? styles.hidden : '';
+    const product = this.product;
+    const modifiedProduct: IModifiedProduct = {
+      id: this.product.id,
+      name: this.product.name,
+      brand: this.product.brand,
+      prices: Array.isArray(this.product.prices)
+        ? this.product.prices
+        : [this.product.prices],
+      attributes: this.product.attributes,
+    };
+    const outStock = !product.inStock ? styles.outStock : '';
+    const hidden = product.gallery.length === 1 ? styles.hidden : '';
     return (
       <article className={styles.wrapperWithHeader}>
-        <Header getCurrency={this.getCurrencyFromHeader} />
+        <Header />
 
         <div className={styles.wrapper}>
           <section className={`${styles.leftBlock} ${hidden}`}>
-            {this.product.gallery.map((item, index) => {
+            {product.gallery.map((item, index) => {
               return (
                 <div
                   className={styles.smallImage}
@@ -118,12 +115,9 @@ class PdpCard extends Component<any, IState> {
           </section>
 
           <section className={styles.rightBlock}>
-            <BasicBlock
-              product={this.product}
-              currentCurrency={this.state.currentCurrency}
-            />
-            <ButtonBlock inStock={this.product.inStock} />
-            <TextBlock text={this.product.description} />
+            <BasicBlock modifiedProduct={modifiedProduct} id={''} />
+            <ButtonBlock inStock={product.inStock} product={product} />
+            <TextBlock text={product.description} />
           </section>
         </div>
       </article>

@@ -1,59 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import totalStyle from './main-cart-total-block.module.css';
-import {
-  ILocalBasket,
-  ILocalCurrency,
-  ITotalBlockProps,
-  ITotalBlockState,
-  localBasketItemInit,
-  localCurrencyInit,
-  totalBlockStateInit,
-} from '../../../common-models';
-import {
-  getProductsListFromBasket,
-  getTotalItems,
-} from '../../../main-page-helpers/main-page-helpers';
-import { LOCAL_BASKET, LOCAL_CURRENT_CURRENCY } from '../../../../../constants';
+import { ITotalBlockProps } from '../../../common-models';
 import { Link } from 'react-router-dom';
+import TotalBlockAbstractClass from '../abstract-classes/totalBlockAbstractClass';
+import { State } from '../../../../../store/store';
+import { connect } from 'react-redux';
 
-type IState = Readonly<ITotalBlockState>;
 type IProps = Readonly<ITotalBlockProps>;
 
-class MainCartTotalBlock<ITotalBlockProps, ITotalBlockState> extends Component<
-  IProps,
-  IState
-> {
-  private localCurrency: ILocalCurrency = localCurrencyInit;
-  private localBasket: ILocalBasket[] = [localBasketItemInit];
+const mapStateToProps = (state: State) => {
+  return {
+    cart: state.cart.cart,
+    currency: state.currency.symbol,
+  };
+};
 
+class MainCartTotalBlock extends TotalBlockAbstractClass {
   constructor(props: IProps) {
     super(props);
-    this.state = totalBlockStateInit;
-  }
-
-  async componentDidUpdate(
-    prevProps: Readonly<IProps>,
-    prevState: Readonly<IState>,
-  ) {
-    this.localBasket = JSON.parse(localStorage.getItem(LOCAL_BASKET) as string);
-    const localBasketForTotal = await getProductsListFromBasket(
-      this.localBasket,
-      this.props.currentCurrency,
-    );
-    const { sum, quantity, vat } = getTotalItems(localBasketForTotal);
-    const isChangedPlusMinusButtons = this.props.isChangedPlusMinusButtons;
-    if (
-      prevState.sum !== sum ||
-      prevProps.isChangedPlusMinusButtons !== isChangedPlusMinusButtons
-    ) {
-      this.setState({ sum, quantity, vat, isChangedPlusMinusButtons });
-    }
-  }
-
-  componentDidMount() {
-    this.localCurrency = JSON.parse(
-      localStorage.getItem(LOCAL_CURRENT_CURRENCY) as string,
-    );
   }
 
   render() {
@@ -69,9 +33,9 @@ class MainCartTotalBlock<ITotalBlockProps, ITotalBlockState> extends Component<
               </div>
             </section>
             <section className={totalStyle.rightTotal}>
-              <p>{`${this.props.currentCurrency}${this.state.vat}`}</p>
+              <p>{`${this.props.currency}${this.state.vat.toFixed(2)}`}</p>
               <p>{this.state.quantity}</p>
-              <p>{`${this.props.currentCurrency}${this.state.sum}`}</p>
+              <p>{`${this.props.currency}${this.state.sum.toFixed(2)}`}</p>
             </section>
           </div>
           <Link to={'/'}>
@@ -85,4 +49,5 @@ class MainCartTotalBlock<ITotalBlockProps, ITotalBlockState> extends Component<
   }
 }
 
-export default MainCartTotalBlock;
+// export default MainCartTotalBlock;
+export default connect(mapStateToProps, null)(MainCartTotalBlock);

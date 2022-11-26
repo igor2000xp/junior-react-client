@@ -1,8 +1,11 @@
 import { IAttrActive } from './states-models';
 import { ICommonAttributeSetProps } from './props-model';
+import { ActionCreatorWithPayload } from '@reduxjs/toolkit';
 
 export interface IParams {
   categoryId: string;
+  page?: string;
+  setPage: ActionCreatorWithPayload<string, string>;
 }
 
 export interface IActiveAttrPdp {
@@ -62,6 +65,13 @@ export interface IProductAttribute {
   type: string;
   items: IAttribute[];
 }
+export interface IModifiedProduct {
+  id: string;
+  name: string;
+  attributes: IProductAttribute[];
+  prices: IPrice[];
+  brand: string;
+}
 export const productAttributeItemInit: IAttribute = {
   id: '',
   displayValue: '',
@@ -79,7 +89,7 @@ export interface IAttribute {
   value: string;
 }
 export const productInit = {
-  id: 'xbox-series-s',
+  id: '',
   name: '',
   inStock: true,
   gallery: [''],
@@ -101,20 +111,18 @@ export const productInit = {
   ],
   brand: '',
 };
-
 export interface IProductAttrForPrint extends ICommonAttributeSetProps {
   activeAttributes: IActiveAttrPdp[];
   quantity: number;
   additionalId: string;
 }
 export const productAttrForPrintInit: IProductAttrForPrint = {
-  productID: '',
+  // productID: '',
   attributes: [{ ...productAttributeInit }],
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
   quantity: 0,
   additionalId: '',
 };
-
 export interface ICategory {
   name: string;
 }
@@ -127,16 +135,62 @@ export const categoriesInit = [
   { name: 'clothes', isActive: false },
   { name: 'tech', isActive: false },
 ];
-
-export interface ILocalBasket {
+export interface IActiveBasketAttr {
   productId: string;
-  quantity: number;
   activeAttributes: IAttrActive[];
 }
+export const localActiveAttributesInit: IActiveBasketAttr = {
+  productId: 'xbox-series-s',
+  activeAttributes: [{ ...localActiveAttributesPdpInit }],
+};
+export interface IModifiedAttrProducts {
+  productID: string;
+  id: string;
+  type: string; // text, color
+  name: string; // "Shoe Size" === attrId
+  items: IAttribute[];
+  activeItem: string;
+}
+export const modifiedAttrProductsInit: IModifiedAttrProducts = {
+  productID: '',
+  id: '',
+  type: '', // text, color
+  name: '', // "Shoe Size" === attrId
+  items: [productAttributeItemInit],
+  activeItem: '',
+};
+export interface IPrice {
+  amount: number;
+  currency: ICurrency;
+}
+export const priceInit: IPrice = {
+  amount: 0,
+  currency: {
+    label: Label.Usd,
+    symbol: SymbolCurrency.SymbolUsd,
+  },
+};
+export interface ILocalBasket {
+  productIdAttr: string;
+  quantity: number;
+  activeAttributes: IAttrActive[];
+  name: string;
+  brand: string;
+  id: string;
+  gallery: string[];
+  attributes: IProductAttribute[];
+  prices: IPrice[];
+}
 export const localBasketItemInit: ILocalBasket = {
-  productId: '',
+  productIdAttr: '',
   quantity: 0,
   activeAttributes: [{ ...localActiveAttributesPdpInit }],
+  name: '',
+  brand: '',
+  id: '',
+  gallery: [''],
+  attributes: [{ ...productAttributeInit }],
+  prices: [{ ...priceInit }],
 };
 export interface ILocalBasketForTotal {
   productId: string;
@@ -150,37 +204,6 @@ export const localBasketForTotalInit: ILocalBasketForTotal = {
   symbolPrice: SymbolCurrency.SymbolUsd,
   amount: 0,
 };
-
-export interface IActiveBasketAttr {
-  productId: string;
-  activeAttributes: IAttrActive[];
-}
-export const localActiveAttributesInit: IActiveBasketAttr = {
-  productId: 'xbox-series-s',
-  activeAttributes: [{ ...localActiveAttributesPdpInit }],
-};
-
-export interface IModifiedProducts {
-  productID: string;
-  id: string;
-  type: string; // text, color
-  name: string; // "Shoe Size" === attrId
-  items: IAttribute[];
-  activeItem: string;
-}
-export const modifiedProductsInit: IModifiedProducts = {
-  productID: '',
-  id: '',
-  type: '', // text, color
-  name: '', // "Shoe Size" === attrId
-  items: [productAttributeItemInit],
-  activeItem: '',
-};
-export interface IPrice {
-  amount: number;
-  currency: ICurrency;
-}
-
 export interface ILocalCurrency {
   label: Label;
   symbol: SymbolCurrency;
@@ -188,4 +211,11 @@ export interface ILocalCurrency {
 export const localCurrencyInit: ILocalCurrency = {
   label: Label.Usd,
   symbol: SymbolCurrency.SymbolUsd,
+};
+export const modifiedProductInit: IModifiedProduct = {
+  id: '',
+  name: '',
+  attributes: [productAttributeInit],
+  prices: [{ ...priceInit }],
+  brand: '',
 };

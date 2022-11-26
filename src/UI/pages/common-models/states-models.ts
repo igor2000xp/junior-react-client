@@ -61,7 +61,7 @@ export interface ICommonAttributeSet {
   prodId: string;
 }
 
-export interface IPlpCardState {
+export interface IMainCartState {
   productId: string;
   currentCurrency: SymbolCurrency;
   localBasket: ILocalBasket[];
@@ -95,4 +95,12 @@ export interface ICartBadgeState {
 
 export interface ICartCountProviderState {
   count: number;
+}
+
+export interface INavigateBlockState {
+  currentCategory: string;
+}
+export interface IPriceBlockState {
+  symbol: string;
+  amount: number;
 }

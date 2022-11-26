@@ -1,18 +1,24 @@
 import React from 'react';
 import styles from './mini-cart-basic-block.module.css';
-import MainCartBasicBlock from '../../main-cart/main-cart-blocks/main-cart-basic-block/main-cart-basic-block';
 import { IProductAttribute } from '../../../common-models';
 import MiniCartCommonAttributes from '../mini-cart-common-attributes/mini-cart-common-attributes';
 import MiniPriceBlock from '../mini-cart-blocks/blocks/mini-price-block/mini-price-block';
+import BasicBlock from '../../pdp-card/pdp-card-blocks/basic-block';
 
-class MiniCartBasicBlock extends MainCartBasicBlock {
+class MiniCartBasicBlock extends BasicBlock {
   render() {
-    const arrAttributes = this.props.product.attributes as IProductAttribute[];
-    const productId =
-      this.props.product.id === '' ? 'xbox-series-s' : this.props.product.id;
-    const symbolCurrency = this.props.currentCurrency;
-    const isEmpty: boolean = this.props.product.id === '';
-    const brand = isEmpty ? 'Your cart is empty' : this.props.product.brand;
+    const arrAttributes = this.props.modifiedProduct
+      .attributes as IProductAttribute[];
+    // const productId =
+    //   this.props.modifiedProduct.id === '' ? 'xbox-series-s' : this.props.modifiedProduct.id;
+    const prices = Array.isArray(this.props.modifiedProduct.prices)
+      ? this.props.modifiedProduct.prices
+      : [this.props.modifiedProduct.prices];
+    const isEmpty: boolean = this.props.modifiedProduct.id === '';
+    const brand = isEmpty
+      ? 'Your cart is empty'
+      : this.props.modifiedProduct.brand;
+    const name = isEmpty ? '' : this.props.modifiedProduct.name;
 
     return (
       <article>
@@ -20,23 +26,19 @@ class MiniCartBasicBlock extends MainCartBasicBlock {
           <h2>{brand}</h2>
         </div>
         <div className={styles.name}>
-          <h3>{this.props.product.name}</h3>
+          <h3>{name}</h3>
         </div>
 
         <div className={styles.priceBlock}>
           <div>
-            <MiniPriceBlock
-              id={productId}
-              symbolCurrency={symbolCurrency}
-              isEmpty={isEmpty}
-            />
+            <MiniPriceBlock prices={prices} />
           </div>
         </div>
 
         <MiniCartCommonAttributes
           attributes={arrAttributes}
-          productID={productId}
-          modifiedProducts={this.props.modifiedProducts}
+          // productID={productId}
+          modifiedProducts={this.props.modifiedAttrProducts}
         />
       </article>
     );

@@ -37,3 +37,20 @@
   line-height: 18px;
   text-transform: uppercase;
 }
+@media (max-width: 900px) {
+  .sizeItem {
+    width: 5.7vw;
+    height: 5vw;
+  }
+  .sizeBlock {
+    margin: 3vw 0 0 0;
+    height: 13vw;
+  }
+  .sizeLine {
+    height: 6vw;
+  }
+  .sizeItem p {
+    font-size: 2.5vw;
+    line-height: 3vw;
+  }
+}
